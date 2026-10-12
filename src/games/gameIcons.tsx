@@ -200,3 +200,14 @@ export const IconBackfire: React.FC<GameIconProps> = (props) => (
     <circle cx="8.2" cy="19" r="1.5" />
   </svg>
 );
+
+/** 星舰回收：竖直着陆星舰（机身 + 机头锥 + 舷窗 + 尾翼 + 上下左右四个喷口） */
+export const IconRocket: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    <path d="M12 3.4 L14.8 9 L19.6 10.4 L14.8 11.8 L12 17.6 L9.2 11.8 L4.4 10.4 L9.2 9 Z" />
+    <path d="M12 6.8 V16.4" strokeWidth={1.2} />
+    <circle cx="12" cy="9.4" r="1.7" />
+    <path d="M10.4 17.6 V20.4 M13.6 17.6 V20.4 M12 20.4 V21.6" />
+    <path d="M7.4 10.4 L4.6 9.2 M16.6 10.4 L19.4 9.2" />
+  </svg>
+);

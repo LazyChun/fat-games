@@ -23,6 +23,7 @@ import {
   IconThunder,
   IconTank,
   IconBackfire,
+  IconRocket,
   IconScores,
 } from "./gameIcons";
 
@@ -39,6 +40,7 @@ import PingPongGame from "./PingPongGame";
 import ThunderFighterGame from "./ThunderFighterGame";
 import TankBattleGame from "./TankBattleGame";
 import BackfireBomberGame from "./BackfireBomberGame";
+import RocketLandingGame from "./RocketLandingGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -205,6 +207,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.casual",
     icon: IconBackfire,
     component: BackfireBomberGame,
+  },
+  {
+    id: "starship",
+    title: "星舰回收",
+    desc: "反推点火，让星舰轻柔降落在着陆点",
+    category: "休闲",
+    titleKey: "game.starship.title",
+    descKey: "game.starship.desc",
+    categoryKey: "category.casual",
+    icon: IconRocket,
+    component: RocketLandingGame,
   },
   {
     id: "scores",

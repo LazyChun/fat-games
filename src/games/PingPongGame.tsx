@@ -104,9 +104,10 @@ function hit(s: Sim, paddleY: number, dirRight: boolean): void {
   const vx = Math.sqrt(Math.max(0, s.speed * s.speed - vy * vy));
   s.bvx = (dirRight ? 1 : -1) * vx;
   s.bvy = vy;
+  // 击球后球紧贴被击球拍的面，并朝反弹方向飞出（左拍→贴左拍右侧，右拍→贴右拍左侧）
   s.bx = dirRight
-    ? W - 30 - PADDLE_W / 2 - BALL_R
-    : 30 + PADDLE_W / 2 + BALL_R;
+    ? s.lx + PADDLE_W / 2 + BALL_R
+    : W - s.lx - PADDLE_W / 2 - BALL_R;
   s.hitFlash = 0.12;
 }
 

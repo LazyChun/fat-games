@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>星舰回收 · 独立预览（fat-games 插件内同款）</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 20px 10px;
+    font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: radial-gradient(120% 140% at 20% 0%, #fdfbf7 0%, #f5f1ea 45%, #ede6da 100%);
+    color: rgba(0,0,0,0.85);
+  }
+  .frame {
+    width: 560px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgba(120,100,70,0.18);
+    box-shadow: 0 10px 30px rgba(90,70,40,0.14);
+  }
+  .bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .bar .emoji { font-size: 22px; }
+  .bar .title { font-size: 16px; font-weight: 800; }
+  .bar .spacer { flex: 1; }
+  .bar button {
+    border: 1px solid rgba(0,0,0,0.18); background: rgba(255,255,255,0.9);
+    color: rgba(0,0,0,0.75); border-radius: 20px; padding: 6px 16px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  .stats {
+    display: flex; flex-wrap: wrap; gap: 10px; padding: 12px 16px 0;
+  }
+  .chip {
+    min-width: 88px; padding: 7px 14px; border-radius: 14px;
+    display: flex; flex-direction: column; gap: 1px; line-height: 1.25;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.14);
+  }
+  .chip .lbl { font-size: 11px; }
+  .chip .val { font-size: 19px; font-weight: 800; }
+  .stage {
+    position: relative; margin: 16px;
+    width: 560px; height: 760px;
+    border-radius: 14px; overflow: hidden;
+    border: 2px solid rgba(120,150,180,0.35);
+    box-shadow: 0 10px 30px rgba(5,8,20,0.45);
+  }
+  canvas { display: block; }
+  .overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; gap: 10px;
+    align-items: center; justify-content: center;
+    text-align: center; pointer-events: none;
+  }
+  .overlay .big { font-size: 30px; font-weight: 900; }
+  .overlay .mid { font-size: 16px; font-weight: 800; }
+  .overlay .sub { font-size: 14px; opacity: 0.9; }
+  .overlay button {
+    pointer-events: auto; cursor: pointer; border: none;
+    background: linear-gradient(135deg, #4facfe 0%, #1677ff 100%);
+    color: #fff; border-radius: 20px; padding: 8px 22px;
+    font-size: 14px; font-weight: 700;
+    box-shadow: 0 3px 10px rgba(22,119,255,0.28);
+  }
+  .idle-bg { background: rgba(5,8,20,0.35); color: #fff; }
+  .landed-bg { background: rgba(18,34,22,0.62); color: #d8f7e2; }
+  .crashed-bg { background: rgba(40,8,8,0.55); color: #ffe3dd; }
+  .pad {
+    margin-top: 12px; display: grid;
+    grid-template-columns: repeat(3, 84px);
+    grid-template-rows: repeat(2, 58px);
+    gap: 8px; justify-items: center;
+  }
+  .pad button {
+    width: 84px; height: 58px; border-radius: 14px; cursor: pointer;
+    border: 2px solid rgba(128,128,128,0.35);
+    background: rgba(128,128,128,0.10);
+    color: rgba(0,0,0,0.72);
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 1px; user-select: none; touch-action: none;
+    transition: all 0.1s ease;
+  }
+  .pad button.on {
+    border-color: #4facfe;
+    background: linear-gradient(135deg, #4facfe 0%, #1677ff 100%);
+    color: #fff; box-shadow: 0 4px 12px rgba(22,119,255,0.4);
+  }
+  .pad .arrow { font-size: 19px; font-weight: 900; line-height: 1; }
+  .pad .sub { font-size: 11px; font-weight: 700; line-height: 1.1; }
+  .pad .nozzle { font-size: 9.5px; opacity: 0.6; line-height: 1.1; }
+  .pad .hint {
+    display: flex; align-items: center; font-size: 11px;
+    color: rgba(128,128,128,0.75);
+  }
+  .help {
+    max-width: 560px; font-size: 12px; color: rgba(0,0,0,0.5);
+    text-align: center; line-height: 1.6; padding: 0 12px 8px;
+  }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="bar">
+      <span class="emoji">🚀</span>
+      <span class="title">星舰回收</span>
+      <div class="spacer"></div>
+      <button id="restartBtn">重新开始</button>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="stage">
+      <canvas id="cv" width="560" height="760"></canvas>
+      <div class="overlay idle-bg" id="ovIdle">
+        <div class="big">点击「开始降落」或按空格，星舰将从外太空返回</div>
+        <button id="startBtn">开始降落</button>
+      </div>
+      <div class="overlay landed-bg" id="ovLanded" style="display:none">
+        <div class="big">✅ 着陆成功</div>
+        <div class="mid" id="ovPoints"></div>
+        <div class="sub" id="ovNext"></div>
+      </div>
+      <div class="overlay crashed-bg" id="ovCrashed" style="display:none">
+        <div class="big">💥 星舰坠毁</div>
+        <div class="mid" id="ovDetail"></div>
+        <button id="againBtn" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.35);color:#fff">再来一局</button>
+      </div>
+    </div>
+    <div class="pad">
+      <div></div>
+      <button id="btnUp" data-engine="up"><span class="arrow">▲</span><span class="sub">下压</span><span class="nozzle">上喷口</span></button>
+      <div></div>
+      <button id="btnLeft" data-engine="left"><span class="arrow">◀</span><span class="sub">右转</span><span class="nozzle">左喷口</span></button>
+      <div class="hint">按住点火</div>
+      <button id="btnRight" data-engine="right"><span class="arrow">▶</span><span class="sub">左转</span><span class="nozzle">右喷口</span></button>
+      <div></div>
+      <button id="btnDown" data-engine="down"><span class="arrow">▼</span><span class="sub">减速</span><span class="nozzle">下喷口</span></button>
+      <div></div>
+    </div>
+  </div>
+  <div class="help">
+    操作（按哪个方向键，就点火哪一侧的喷口）：↓/S 点火下喷口（尾喷口）向下喷气、反推星舰向上刹车减速；↑/W 点火上喷口（顶喷口）向上喷气、把星舰向下压；←/A 点火左喷口、喷气反作用使机头向右摆（顺时针）；→/D 点火右喷口、使机头向左摆（逆时针）。点火会消耗燃料。机头略向目标倾斜时点火下喷口即可横向平移。让星舰机尾朝下、在着陆点内以低速轻柔着陆，速度过快、姿态倾斜或落点偏离都会坠毁。每成功回收一发，下一发初始下落更快、可用燃料更少！
+  </div>
+
+<script>
+"use strict";
+/* ============ 纯逻辑（与插件 src/games/rocketLogic.ts 同源） ============ */
+const WORLD = { width: 560, height: 760, groundY: 700, padX: 280, padHalfWidth: 70 };
+const P = {
+  gravity: 240, thrustDown: 400, thrustUp: 280, thrustSide: 0, torqueSide: 1.3,
+  spinDamping: 0.5, burnDown: 0.145, burnUp: 0.1, burnSide: 0.05,
+  halfLen: 34, halfWid: 13, maxLandingSpeed: 140, maxTilt: 0.45, maxSpin: 0.5,
+};
+const NO_ENGINES = { up: false, down: false, left: false, right: false };
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+function normalizeAngle(a) {
+  let x = a % (Math.PI * 2);
+  if (x > Math.PI) x -= Math.PI * 2;
+  if (x < -Math.PI) x += Math.PI * 2;
+  return x;
+}
+function waveParams(wave) {
+  return {
+    vy0: Math.min(260, 35 + (wave - 1) * 32),
+    fuel: Math.max(0.3, 1 - (wave - 1) * 0.085),
+  };
+}
+function spawnRocket(wave, rand) {
+  const { vy0, fuel } = waveParams(wave);
+  return {
+    x: WORLD.padX + (rand() * 2 - 1) * WORLD.width * 0.1,
+    y: 120, vx: (rand() * 2 - 1) * 25, vy: vy0,
+    angle: (rand() * 2 - 1) * 0.2, spin: (rand() * 2 - 1) * 0.3, fuel,
+  };
+}
+function tailWorld(s) {
+  return { x: s.x - P.halfLen * Math.sin(s.angle), y: s.y + P.halfLen * Math.cos(s.angle) };
+}
+function noseWorld(s) {
+  return { x: s.x + P.halfLen * Math.sin(s.angle), y: s.y - P.halfLen * Math.cos(s.angle) };
+}
+function tailSpeed(s) {
+  const vx = s.vx - s.spin * P.halfLen * Math.cos(s.angle);
+  const vy = s.vy - s.spin * P.halfLen * Math.sin(s.angle);
+  return Math.hypot(vx, vy);
+}
+function applyWorldBounds(s) {
+  const left = s.x - P.halfWid * Math.cos(s.angle);
+  const right = s.x + P.halfWid * Math.cos(s.angle);
+  if (left < 0) { s.x += 0 - left; if (s.vx < 0) s.vx = -s.vx * 0.5; }
+  else if (right > WORLD.width) { s.x -= right - WORLD.width; if (s.vx > 0) s.vx = -s.vx * 0.5; }
+  const noseY = s.y - P.halfLen * Math.cos(s.angle);
+  if (noseY < 10) { s.y += 10 - noseY; if (s.vy < 0) s.vy = 0; }
+}
+function stepRocket(s, engines, dt) {
+  let active = engines;
+  if (s.fuel > 0) {
+    const burn =
+      (active.down ? P.burnDown : 0) + (active.up ? P.burnUp : 0) +
+      (active.left ? P.burnSide : 0) + (active.right ? P.burnSide : 0);
+    s.fuel = Math.max(0, s.fuel - burn * dt);
+    if (s.fuel <= 0) active = NO_ENGINES;
+  } else {
+    active = NO_ENGINES;
+  }
+  const sinA = Math.sin(s.angle), cosA = Math.cos(s.angle);
+  const ux = sinA, uy = -cosA, rx = cosA, ry = sinA;
+  let ax = 0, ay = P.gravity, aspin = 0;
+  if (active.down) { ax += P.thrustDown * ux; ay += P.thrustDown * uy; }
+  if (active.up) { ax -= P.thrustUp * ux; ay -= P.thrustUp * uy; }
+  if (active.left) { ax += P.thrustSide * rx; ay += P.thrustSide * ry; aspin += P.torqueSide; }
+  if (active.right) { ax -= P.thrustSide * rx; ay -= P.thrustSide * ry; aspin -= P.torqueSide; }
+  s.vx += ax * dt; s.vy += ay * dt;
+  s.spin += aspin * dt; s.spin -= s.spin * P.spinDamping * dt;
+  s.x += s.vx * dt; s.y += s.vy * dt; s.angle += s.spin * dt;
+  applyWorldBounds(s);
+}
+function evaluateLanding(s) {
+  const pts = [
+    { id: "nose", y: noseWorld(s).y },
+    { id: "left", y: s.y - P.halfWid * Math.sin(s.angle) },
+    { id: "right", y: s.y + P.halfWid * Math.sin(s.angle) },
+    { id: "tail", y: tailWorld(s).y },
+  ];
+  let deepest = pts[0];
+  for (const p of pts) if (p.y > deepest.y) deepest = p;
+  if (deepest.y < WORLD.groundY) return { result: "air" };
+  if (deepest.id !== "tail") return { result: "crashed", reason: "wrong-part" };
+  const impactSpeed = tailSpeed(s);
+  const tilt = Math.abs(normalizeAngle(s.angle));
+  const onPad = Math.abs(tailWorld(s).x - WORLD.padX) <= WORLD.padHalfWidth;
+  if (!onPad) return { result: "crashed", reason: "off-pad", impactSpeed, tilt, onPad };
+  if (impactSpeed > P.maxLandingSpeed) return { result: "crashed", reason: "fast", impactSpeed, tilt, onPad };
+  if (tilt > P.maxTilt) return { result: "crashed", reason: "tilt", impactSpeed, tilt, onPad };
+  if (Math.abs(s.spin) > P.maxSpin) return { result: "crashed", reason: "spin", impactSpeed, tilt, onPad };
+  return { result: "landed", impactSpeed, tilt, onPad };
+}
+function landingScore(fuelLeft, impactSpeed, tailX) {
+  const base = 100;
+  const fuelBonus = Math.round(fuelLeft * 100);
+  const distRatio = Math.min(1, Math.abs(tailX - WORLD.padX) / WORLD.padHalfWidth);
+  const precisionBonus = Math.round(60 * (1 - distRatio));
+  const speedRatio = Math.min(1, impactSpeed / P.maxLandingSpeed);
+  const speedBonus = Math.round(40 * (1 - speedRatio));
+  return base + fuelBonus + precisionBonus + speedBonus;
+}
+
+/* ============ 绘制（与插件 RocketLandingGame.tsx 同源） ============ */
+const STARS = [];
+(function () {
+  for (let i = 0; i < 70; i++) {
+    STARS.push({ x: Math.random() * 560, y: Math.random() * 380, r: 0.6 + Math.random() * 1.4, tw: 0.4 + Math.random() * 0.5, ph: Math.random() * Math.PI * 2 });
+  }
+})();
+function roundRect(ctx, x, y, w, h, r) {
+  const rr = Math.min(r, w / 2, h / 2);
+  ctx.beginPath();
+  ctx.moveTo(x + rr, y);
+  ctx.arcTo(x + w, y, x + w, y + h, rr);
+  ctx.arcTo(x + w, y + h, x, y + h, rr);
+  ctx.arcTo(x, y + h, x, y, rr);
+  ctx.arcTo(x, y, x + w, y, rr);
+  ctx.closePath();
+}
+function drawSky(ctx, time) {
+  const g = ctx.createLinearGradient(0, 0, 0, WORLD.groundY);
+  g.addColorStop(0, "#05070f"); g.addColorStop(0.45, "#0b1630");
+  g.addColorStop(0.8, "#1d3a5c"); g.addColorStop(1, "#37618a");
+  ctx.fillStyle = g; ctx.fillRect(0, 0, 560, WORLD.groundY);
+  for (const s of STARS) {
+    const alpha = s.tw * (0.55 + 0.45 * Math.sin(time * 2 + s.ph));
+    ctx.fillStyle = "rgba(255,255,255," + alpha.toFixed(3) + ")";
+    ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2); ctx.fill();
+  }
+  const px = 560 - 84, py = 108;
+  const pg = ctx.createRadialGradient(px - 4, py - 4, 2, px, py, 20);
+  pg.addColorStop(0, "#f7e7c8"); pg.addColorStop(1, "#c99b5a");
+  ctx.fillStyle = pg; ctx.beginPath(); ctx.arc(px, py, 20, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = "rgba(255,255,255,0.35)"; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.ellipse(px, py, 26, 7, -0.35, 0, Math.PI * 2); ctx.stroke();
+  const haze = ctx.createLinearGradient(0, WORLD.groundY - 90, 0, WORLD.groundY);
+  haze.addColorStop(0, "rgba(120,180,230,0)"); haze.addColorStop(1, "rgba(140,200,240,0.35)");
+  ctx.fillStyle = haze; ctx.fillRect(0, WORLD.groundY - 90, 560, 90);
+}
+function drawGround(ctx, time) {
+  const g = ctx.createLinearGradient(0, WORLD.groundY, 0, 760);
+  g.addColorStop(0, "#4a3b2c"); g.addColorStop(0.4, "#33281e"); g.addColorStop(1, "#1d150e");
+  ctx.fillStyle = g; ctx.fillRect(0, WORLD.groundY, 560, 760 - WORLD.groundY);
+  ctx.fillStyle = "rgba(255,210,150,0.18)"; ctx.fillRect(0, WORLD.groundY, 560, 2);
+  const px = WORLD.padX, pw = WORLD.padHalfWidth * 2, topY = WORLD.groundY;
+  const platG = ctx.createLinearGradient(0, topY, 0, topY + 18);
+  platG.addColorStop(0, "#aeb9c8"); platG.addColorStop(0.5, "#7f8b9c"); platG.addColorStop(1, "#56616f");
+  ctx.fillStyle = platG;
+  roundRect(ctx, px - pw / 2 - 6, topY - 4, pw + 12, 22, 4); ctx.fill();
+  ctx.fillStyle = "rgba(255,255,255,0.25)"; ctx.fillRect(px - pw / 2 - 6, topY - 4, pw + 12, 3);
+  const blink = Math.sin(time * 3) > 0;
+  for (const side of [-1, 1]) {
+    const lx = px + side * (pw / 2 - 4);
+    ctx.fillStyle = blink ? "#4ade80" : "#16a34a";
+    ctx.shadowColor = "#4ade80"; ctx.shadowBlur = 8;
+    ctx.beginPath(); ctx.arc(lx, topY - 1, 3.2, 0, Math.PI * 2); ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+  const guideAlpha = 0.16 + 0.14 * Math.sin(time * 2.4);
+  ctx.setLineDash([8, 8]);
+  ctx.strokeStyle = "rgba(120,230,160," + guideAlpha.toFixed(3) + ")";
+  ctx.lineWidth = 2;
+  for (const side of [-1, 1]) {
+    const gx = px + side * (pw / 2 + 2);
+    ctx.beginPath(); ctx.moveTo(gx, topY - 170); ctx.lineTo(gx, topY); ctx.stroke();
+  }
+  ctx.setLineDash([]);
+  ctx.strokeStyle = "rgba(20,30,40,0.65)"; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(px - 12, topY - 12); ctx.lineTo(px, topY - 4); ctx.lineTo(px + 12, topY - 12); ctx.stroke();
+}
+function flame(ctx, sx, sy, dx, dy, len, half) {
+  const ex = sx + dx * len, ey = sy + dy * len;
+  const px = -dy, py = dx;
+  const g = ctx.createLinearGradient(sx, sy, ex, ey);
+  g.addColorStop(0, "rgba(255,180,70,0.95)");
+  g.addColorStop(0.5, "rgba(255,120,40,0.75)");
+  g.addColorStop(1, "rgba(255,210,120,0)");
+  ctx.fillStyle = g;
+  ctx.beginPath();
+  ctx.moveTo(sx + px * half, sy + py * half);
+  ctx.lineTo(ex, ey);
+  ctx.lineTo(sx - px * half, sy - py * half);
+  ctx.closePath(); ctx.fill();
+}
+function drawRocket(ctx, s, engines, firing, time) {
+  const L = P.halfLen, Wd = P.halfWid;
+  ctx.save();
+  ctx.translate(s.x, s.y);
+  ctx.rotate(s.angle);
+  const flick = (speed, seed) => 1 + 0.18 * Math.sin(time * speed + seed) + 0.12 * Math.sin(time * (speed * 1.7) + seed * 2.3);
+  if (firing) {
+    if (engines.down) { const len = 30 * flick(21, 1); flame(ctx, 0, L - 2, 0, 1, len, 6.5); flame(ctx, 0, L - 2, 0, 1, len * 0.55, 4); }
+    if (engines.up) { const len = 13 * flick(19, 3); flame(ctx, 0, -L - 5, 0, -1, len, 3.6); }
+    if (engines.left) { const len = 12 * flick(17, 5); flame(ctx, -Wd - 4, -L * 0.58, -1, 0, len, 3); }
+    if (engines.right) { const len = 12 * flick(17, 7); flame(ctx, Wd + 4, -L * 0.58, 1, 0, len, 3); }
+  }
+  ctx.fillStyle = "#d23c3e";
+  ctx.beginPath(); ctx.moveTo(-Wd, L * 0.28); ctx.lineTo(-Wd * 1.9, L * 0.88); ctx.lineTo(-Wd * 0.5, L * 0.92); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(Wd, L * 0.28); ctx.lineTo(Wd * 1.9, L * 0.88); ctx.lineTo(Wd * 0.5, L * 0.92); ctx.closePath(); ctx.fill();
+  const bodyG = ctx.createLinearGradient(-Wd, 0, Wd, 0);
+  bodyG.addColorStop(0, "#c3ccd8"); bodyG.addColorStop(0.5, "#eef2f7"); bodyG.addColorStop(1, "#93a0b0");
+  ctx.fillStyle = bodyG;
+  roundRect(ctx, -Wd, -L * 0.5, Wd * 2, L * 1.22, 6); ctx.fill();
+  const noseG = ctx.createLinearGradient(-Wd, 0, Wd, 0);
+  noseG.addColorStop(0, "#c03436"); noseG.addColorStop(0.5, "#ef5753"); noseG.addColorStop(1, "#9d2628");
+  ctx.fillStyle = noseG;
+  ctx.beginPath(); ctx.moveTo(-Wd, -L * 0.5); ctx.lineTo(0, -L); ctx.lineTo(Wd, -L * 0.5); ctx.closePath(); ctx.fill();
+  const winG = ctx.createRadialGradient(-1.4, -L * 0.2 - 1.6, 0.8, 0, -L * 0.2, 5);
+  winG.addColorStop(0, "#eafcff"); winG.addColorStop(0.6, "#5cc8f0"); winG.addColorStop(1, "#1f7fb8");
+  ctx.fillStyle = winG;
+  ctx.beginPath(); ctx.arc(0, -L * 0.18, 5, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = "#6b7280";
+  ctx.beginPath(); ctx.moveTo(-5, L * 0.7); ctx.lineTo(-7, L); ctx.lineTo(7, L); ctx.lineTo(5, L * 0.7); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = "#374151"; ctx.fillRect(-7, L - 2.5, 14, 2.5);
+  ctx.fillStyle = "#6b7280";
+  ctx.beginPath(); ctx.moveTo(-3, -L - 1); ctx.lineTo(-4, -L - 6); ctx.lineTo(4, -L - 6); ctx.lineTo(3, -L - 1); ctx.closePath(); ctx.fill();
+  for (const side of [-1, 1]) {
+    ctx.fillStyle = "#5b6470";
+    roundRect(ctx, side * Wd - (side > 0 ? 2 : 3), -L * 0.66, 5, 9, 2); ctx.fill();
+  }
+  ctx.restore();
+}
+function drawParticles(ctx, particles) {
+  for (const pt of particles) {
+    const t = clamp(pt.age / pt.life, 0, 1);
+    ctx.globalAlpha = (1 - t) * 0.9;
+    ctx.fillStyle = pt.color;
+    ctx.beginPath(); ctx.arc(pt.x, pt.y, pt.size * (1 - t * 0.6), 0, Math.PI * 2); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+}
+function drawHUD(ctx, s, sim) {
+  ctx.save(); ctx.textBaseline = "middle";
+  const bw = 168, bh = 13, bx = 14, by = 14;
+  roundRect(ctx, bx, by, bw, bh, 7); ctx.fillStyle = "rgba(4,8,16,0.55)"; ctx.fill();
+  const fg = ctx.createLinearGradient(bx, 0, bx + bw, 0);
+  fg.addColorStop(0, "#4ade80"); fg.addColorStop(0.55, "#facc15"); fg.addColorStop(1, "#ef4444");
+  ctx.fillStyle = fg;
+  roundRect(ctx, bx + 2, by + 2, Math.max(4, (bw - 4) * s.fuel), bh - 4, 5); ctx.fill();
+  ctx.fillStyle = "#ffffff"; ctx.font = "bold 11px sans-serif"; ctx.textAlign = "left";
+  ctx.fillText("燃料 " + Math.round(s.fuel * 100) + "%", bx + 6, by + bh / 2 + 0.5);
+  ctx.textAlign = "right"; ctx.font = "bold 15px sans-serif";
+  ctx.fillStyle = "rgba(255,255,255,0.92)"; ctx.shadowColor = "rgba(0,0,0,0.6)"; ctx.shadowBlur = 4;
+  ctx.fillText("波次 " + sim.wave, 560 - 14, 22);
+  ctx.font = "bold 20px sans-serif"; ctx.fillStyle = "#ffd86b";
+  ctx.fillText(String(sim.score), 560 - 14, 46);
+  ctx.shadowBlur = 0; ctx.textAlign = "left";
+  const tail = tailWorld(s);
+  const alt = Math.max(0, WORLD.groundY - tail.y);
+  const speed = Math.hypot(s.vx, s.vy) / 10;
+  const tiltDeg = Math.round((Math.abs(normalizeAngle(s.angle)) * 180) / Math.PI);
+  const speedOk = speed * 10 <= P.maxLandingSpeed;
+  roundRect(ctx, 14, WORLD.groundY - 54, 232, 40, 9);
+  ctx.fillStyle = "rgba(4,8,16,0.5)"; ctx.fill();
+  ctx.font = "bold 12px sans-serif"; ctx.fillStyle = "rgba(255,255,255,0.85)";
+  ctx.fillText("高度 " + Math.round(alt / 10) + "m", 24, WORLD.groundY - 42);
+  ctx.fillStyle = speedOk ? "#7ee8a2" : "#ff7a70";
+  ctx.fillText("速度 " + speed.toFixed(1) + "m/s" + (speedOk ? "" : " !"), 24, WORLD.groundY - 27);
+  ctx.fillStyle = Math.abs(normalizeAngle(s.angle)) <= P.maxTilt ? "#7ee8a2" : "#ff7a70";
+  ctx.fillText("倾角 " + tiltDeg + "°", 24, WORLD.groundY - 12);
+  ctx.restore();
+}
+
+/* ============ 游戏状态与主循环 ============ */
+const cv = document.getElementById("cv");
+const ctx = cv.getContext("2d");
+const $ = (id) => document.getElementById(id);
+const chips = [
+  { el: null, lbl: "得分", colors: ["linear-gradient(135deg, #ffd86b 0%, #f6a821 100%)", "rgba(90,55,0,0.75)", "#5a3400"] },
+  { el: null, lbl: "波次", colors: ["linear-gradient(135deg, #6bb6ff 0%, #2b7de9 100%)", "rgba(255,255,255,0.85)", "#ffffff"] },
+  { el: null, lbl: "燃料", colors: ["linear-gradient(135deg, #7ee8a2 0%, #2e9e5b 100%)", "rgba(255,255,255,0.85)", "#ffffff"] },
+  { el: null, lbl: "最高分", colors: ["linear-gradient(135deg, #b48bff 0%, #7b3ff2 100%)", "rgba(255,255,255,0.85)", "#ffffff"] },
+];
+const statsEl = $("stats");
+chips.forEach((c, i) => {
+  const div = document.createElement("div");
+  div.className = "chip";
+  div.innerHTML = '<span class="lbl">' + c.lbl + '</span><span class="val" id="chipv' + i + '">0</span>';
+  div.style.background = c.colors[0];
+  div.querySelector(".lbl").style.color = c.colors[1];
+  div.querySelector(".val").style.color = c.colors[2];
+  statsEl.appendChild(div);
+});
+const chipv = [0, 1, 2, 3].map((i) => $("chipv" + i));
+
+let sim = {
+  rocket: spawnRocket(1, Math.random),
+  wave: 1, score: 0, landings: 0,
+  phase: "idle", landedAt: 0, lastTs: 0, lastScore: 0,
+  particles: [], debris: [], shake: 0, time: 0, recorded: false,
+};
+let best = Number(localStorage.getItem("starship-best") || 0);
+chipv[3].textContent = best;
+const inputs = { up: false, down: false, left: false, right: false };
+
+function updateChips() {
+  chipv[0].textContent = sim.score;
+  chipv[1].textContent = sim.wave;
+  chipv[2].textContent = Math.round(sim.rocket.fuel * 100) + "%";
+  const fuelEl = statsEl.children[2];
+  if (sim.rocket.fuel <= 0.3) {
+    fuelEl.style.background = "linear-gradient(135deg, #ff9a8b 0%, #f2554a 100%)";
+  } else if (fuelEl.style.background !== "linear-gradient(135deg, #7ee8a2 0%, #2e9e5b 100%)") {
+    fuelEl.style.background = "linear-gradient(135deg, #7ee8a2 0%, #2e9e5b 100%)";
+  }
+}
+function syncOverlays() {
+  $("ovIdle").style.display = sim.phase === "idle" ? "flex" : "none";
+  $("ovLanded").style.display = sim.phase === "landed" ? "flex" : "none";
+  $("ovCrashed").style.display = sim.phase === "crashed" ? "flex" : "none";
+}
+function burst(x, y, kind, power) {
+  const colors = kind === "explosion"
+    ? ["#ffd86b", "#ff9d2f", "#ef4444", "#f8fafc"]
+    : ["#c8b49a", "#e8d9c2", "#f5efe4"];
+  const n = kind === "explosion" ? 26 : 12;
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const spd = (0.3 + Math.random() * 0.9) * power;
+    sim.particles.push({
+      x, y,
+      vx: Math.cos(a) * spd,
+      vy: Math.sin(a) * spd - (kind === "explosion" ? 60 : 30),
+      age: 0, life: 0.5 + Math.random() * (kind === "explosion" ? 0.7 : 0.4),
+      size: 3 + Math.random() * (kind === "explosion" ? 5 : 3.5),
+      color: colors[Math.floor(Math.random() * colors.length)],
+    });
+  }
+}
+function rocketPoints(s) {
+  const a = s.angle;
+  return [
+    { x: s.x + P.halfLen * Math.sin(a), y: s.y - P.halfLen * Math.cos(a) },
+    { x: s.x - P.halfWid * Math.cos(a), y: s.y - P.halfWid * Math.sin(a) },
+    { x: s.x + P.halfWid * Math.cos(a), y: s.y + P.halfWid * Math.sin(a) },
+    { x: s.x - P.halfLen * Math.sin(a), y: s.y + P.halfLen * Math.cos(a) },
+  ];
+}
+function spawnDebris(rocket) {
+  const a = rocket.angle, cos = Math.cos(a), sin = Math.sin(a);
+  const local = (lx, ly) => ({
+    x: rocket.x + lx * cos - ly * sin,
+    y: rocket.y + lx * sin + ly * cos,
+  });
+  const frags = [
+    { lx: 0, ly: -P.halfLen * 0.78, kind: "nose", size: 1 },
+    { lx: 0, ly: -P.halfLen * 0.18, kind: "body", size: 0.95 },
+    { lx: 0, ly: P.halfLen * 0.12, kind: "window", size: 0.85 },
+    { lx: 0, ly: P.halfLen * 0.55, kind: "body", size: 0.75 },
+    { lx: -P.halfWid * 1.9, ly: P.halfLen * 0.62, kind: "fin", size: 0.9 },
+    { lx: P.halfWid * 1.9, ly: P.halfLen * 0.62, kind: "fin", size: 0.9 },
+    { lx: 0, ly: P.halfLen * 0.92, kind: "fin", size: 0.7 },
+  ];
+  for (const f of frags) {
+    const pos = local(f.lx, f.ly);
+    const dir = Math.random() * Math.PI * 2;
+    const spd = 80 + Math.random() * 270;
+    sim.debris.push({
+      x: pos.x, y: pos.y,
+      vx: rocket.vx * 0.5 + Math.cos(dir) * spd,
+      vy: rocket.vy * 0.5 + Math.sin(dir) * spd - 70,
+      angle: rocket.angle + (Math.random() - 0.5) * 0.9,
+      spin: (Math.random() - 0.5) * 9,
+      kind: f.kind, size: f.size,
+      age: 0, life: 1.6 + Math.random() * 0.9,
+    });
+  }
+}
+function drawDebris(ctx) {
+  for (const d of sim.debris) {
+    const t = Math.min(1, Math.max(0, d.age / d.life));
+    ctx.save();
+    ctx.globalAlpha = (1 - t) * 0.95;
+    ctx.translate(d.x, d.y);
+    ctx.rotate(d.angle);
+    if (d.kind === "nose") {
+      ctx.fillStyle = "#d23c3e";
+      ctx.beginPath();
+      ctx.moveTo(0, -11 * d.size);
+      ctx.lineTo(-6.5 * d.size, 2 * d.size);
+      ctx.lineTo(6.5 * d.size, 2 * d.size);
+      ctx.closePath();
+      ctx.fill();
+    } else if (d.kind === "window") {
+      ctx.fillStyle = "#aee4ff";
+      ctx.beginPath();
+      ctx.arc(0, 0, 4.2 * d.size, 0, Math.PI * 2);
+      ctx.fill();
+    } else if (d.kind === "fin") {
+      ctx.fillStyle = "#d23c3e";
+      ctx.beginPath();
+      ctx.moveTo(0, -3 * d.size);
+      ctx.lineTo(-8.5 * d.size, 9 * d.size);
+      ctx.lineTo(0, 3.5 * d.size);
+      ctx.closePath();
+      ctx.fill();
+    } else {
+      ctx.fillStyle = "#f4f7fb";
+      ctx.fillRect(-5 * d.size, -7 * d.size, 10 * d.size, 14 * d.size);
+      ctx.strokeStyle = "rgba(160,170,185,0.5)";
+      ctx.lineWidth = 1;
+      ctx.strokeRect(-5 * d.size, -7 * d.size, 10 * d.size, 14 * d.size);
+    }
+    ctx.restore();
+  }
+  ctx.globalAlpha = 1;
+}
+function reset() {
+  sim = {
+    rocket: spawnRocket(1, Math.random),
+    wave: 1, score: 0, landings: 0,
+    phase: "idle", landedAt: 0, lastTs: 0, lastScore: 0,
+    particles: [], debris: [], shake: 0, time: 0, recorded: false,
+  };
+  Object.assign(inputs, NO_ENGINES);
+  syncOverlays(); updateChips();
+}
+function start() {
+  if (sim.phase === "idle") sim.phase = "flying";
+  else if (sim.phase === "crashed") { reset(); sim.phase = "flying"; }
+}
+function spawnNext() {
+  sim.wave += 1;
+  sim.rocket = spawnRocket(sim.wave, Math.random);
+  sim.phase = "flying"; sim.landedAt = 0; sim.lastTs = 0; sim.particles = []; sim.debris = [];
+  Object.assign(inputs, NO_ENGINES);
+}
+
+let lastFrame = 0;
+function loop(ts) {
+  requestAnimationFrame(loop);
+  if (!lastFrame) lastFrame = ts;
+  let dt = Math.min(0.05, (ts - lastFrame) / 1000);
+  lastFrame = ts;
+  if (dt <= 0) dt = 0.016;
+  sim.time += dt;
+
+  if (sim.phase === "flying") {
+    stepRocket(sim.rocket, inputs, dt);
+    const v = evaluateLanding(sim.rocket);
+    if (v.result === "landed") {
+      const tail = tailWorld(sim.rocket);
+      sim.rocket.y = WORLD.groundY - P.halfLen * Math.cos(sim.rocket.angle);
+      sim.rocket.x = tail.x;
+      sim.rocket.vx = 0; sim.rocket.vy = 0; sim.rocket.spin = 0;
+      const pts = landingScore(sim.rocket.fuel, v.impactSpeed ?? 0, tail.x);
+      sim.score += pts; sim.lastScore = pts; sim.landings += 1;
+      sim.phase = "landed"; sim.landedAt = ts;
+      if (sim.score > best) { best = sim.score; localStorage.setItem("starship-best", String(best)); chipv[3].textContent = best; }
+      burst(tail.x, WORLD.groundY - 6, "dust", 150);
+      sim.shake = 3;
+      $("ovPoints").textContent = "着陆成功 +" + pts + " 分";
+      $("ovNext").textContent = "第 " + (sim.wave + 1) + " 发星舰即将降落…";
+    } else if (v.result === "crashed") {
+      const pts = rocketPoints(sim.rocket);
+      let hit = pts[0];
+      for (const p of pts) if (p.y > hit.y) hit = p;
+      sim.phase = "crashed"; sim.landedAt = ts;
+      spawnDebris(sim.rocket);
+      burst(hit.x, hit.y, "explosion", 320);
+      sim.shake = 16;
+      if (!sim.recorded) {
+        sim.recorded = true;
+        if (sim.score > best) { best = sim.score; localStorage.setItem("starship-best", String(best)); chipv[3].textContent = best; }
+        $("ovDetail").textContent = "总分 " + sim.score + " · 成功回收 " + (sim.wave - 1) + " 发";
+      }
+    }
+  } else if (sim.phase === "landed") {
+    if (ts - sim.landedAt >= 1400) spawnNext();
+  }
+
+  for (const pt of sim.particles) {
+    pt.age += dt;
+    pt.x += pt.vx * dt; pt.y += pt.vy * dt;
+    pt.vy += (pt.color === "#ffd86b" || pt.color === "#ff9d2f" || pt.color === "#ef4444" ? 420 : 60) * dt;
+  }
+  sim.particles = sim.particles.filter((p) => p.age < p.life);
+  for (const d of sim.debris) {
+    d.age += dt;
+    d.x += d.vx * dt; d.y += d.vy * dt;
+    d.vy += 300 * dt;
+    d.vx *= 1 - 0.5 * dt;
+    d.vy *= 1 - 0.5 * dt;
+    d.angle += d.spin * dt;
+    d.spin *= 1 - 0.4 * dt;
+  }
+  sim.debris = sim.debris.filter((d) => d.age < d.life);
+  if (sim.shake > 0) sim.shake = Math.max(0, sim.shake - 60 * dt);
+
+  ctx.clearRect(0, 0, 560, 760);
+  ctx.save();
+  if (sim.shake > 0.5) ctx.translate((Math.random() - 0.5) * sim.shake, (Math.random() - 0.5) * sim.shake);
+  drawSky(ctx, sim.time);
+  drawGround(ctx, sim.time);
+  const firing = sim.phase === "flying";
+  if (sim.phase === "idle") {
+    const bob = Math.sin(sim.time * 1.6) * 6;
+    drawRocket(ctx, { ...sim.rocket, y: 150 + bob }, NO_ENGINES, false, sim.time);
+  } else if (sim.phase === "crashed") {
+    drawDebris(ctx);
+  } else {
+    drawRocket(ctx, sim.rocket, inputs, firing, sim.time);
+  }
+  drawParticles(ctx, sim.particles);
+  drawHUD(ctx, sim.rocket, sim);
+  ctx.restore();
+  updateChips();
+  syncOverlays();
+  // 控制面板高亮
+  ["down", "right", "left", "up"].forEach((id) => {
+    $("btn" + id[0].toUpperCase() + id.slice(1)).classList.toggle("on", !!inputs[id]);
+  });
+}
+requestAnimationFrame(loop);
+
+/* ============ 输入 ============ */
+window.addEventListener("keydown", (e) => {
+  const k = e.key.toLowerCase();
+  if (["arrowup", "arrowdown", "arrowleft", "arrowright", " "].includes(k)) e.preventDefault();
+  if (k === " ") { start(); return; }
+  const map = { arrowup: "up", w: "up", arrowdown: "down", s: "down", arrowleft: "left", a: "left", arrowright: "right", d: "right" };
+  if (map[k]) inputs[map[k]] = true;
+});
+window.addEventListener("keyup", (e) => {
+  const k = e.key.toLowerCase();
+  const map = { arrowup: "up", w: "up", arrowdown: "down", s: "down", arrowleft: "left", a: "left", arrowright: "right", d: "right" };
+  if (map[k]) inputs[map[k]] = false;
+});
+document.querySelectorAll(".pad button[data-engine]").forEach((btn) => {
+  const eng = btn.dataset.engine;
+  btn.addEventListener("pointerdown", (e) => { e.preventDefault(); btn.setPointerCapture(e.pointerId); inputs[eng] = true; });
+  const off = () => { inputs[eng] = false; };
+  btn.addEventListener("pointerup", off);
+  btn.addEventListener("pointercancel", off);
+  btn.addEventListener("pointerleave", off);
+  btn.addEventListener("contextmenu", (e) => e.preventDefault());
+});
+$("startBtn").addEventListener("click", start);
+$("againBtn").addEventListener("click", start);
+$("restartBtn").addEventListener("click", reset);
+updateChips();
+syncOverlays();
+</script>
+</body>
+</html>
