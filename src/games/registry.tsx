@@ -8,16 +8,21 @@
  *     useI18n().text(key) 取本地化文本
  */
 import React from "react";
+
 import {
-  AppstoreOutlined,
-  BlockOutlined,
-  BorderOutlined,
-  FireOutlined,
-  HeartOutlined,
-  StarOutlined,
-  ThunderboltOutlined,
-  TrophyOutlined,
-} from "@ant-design/icons";
+  Icon2048,
+  IconTetris,
+  IconSnake,
+  IconMinesweeper,
+  IconMemory,
+  IconWhack,
+  IconGomoku,
+  IconRubik,
+  IconGoldMiner,
+  IconPingPong,
+  IconThunder,
+  IconScores,
+} from "./gameIcons";
 
 import Game2048 from "./Game2048";
 import SnakeGame from "./SnakeGame";
@@ -26,6 +31,10 @@ import TetrisGame from "./TetrisGame";
 import MemoryGame from "./MemoryGame";
 import WhackGame from "./WhackGame";
 import GomokuGame from "./GomokuGame";
+import RubikCubeGame from "./RubikCubeGame";
+import GoldMinerGame from "./GoldMinerGame";
+import PingPongGame from "./PingPongGame";
+import ThunderFighterGame from "./ThunderFighterGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -58,7 +67,7 @@ export const GAMES: GameDef[] = [
     titleKey: "game.2048.title",
     descKey: "game.2048.desc",
     categoryKey: "category.puzzle",
-    icon: AppstoreOutlined,
+    icon: Icon2048,
     component: Game2048,
   },
   {
@@ -69,7 +78,7 @@ export const GAMES: GameDef[] = [
     titleKey: "game.tetris.title",
     descKey: "game.tetris.desc",
     categoryKey: "category.casual",
-    icon: BlockOutlined,
+    icon: IconTetris,
     component: TetrisGame,
   },
   {
@@ -80,7 +89,7 @@ export const GAMES: GameDef[] = [
     titleKey: "game.snake.title",
     descKey: "game.snake.desc",
     categoryKey: "category.casual",
-    icon: ThunderboltOutlined,
+    icon: IconSnake,
     component: SnakeGame,
   },
   {
@@ -91,7 +100,7 @@ export const GAMES: GameDef[] = [
     titleKey: "game.minesweeper.title",
     descKey: "game.minesweeper.desc",
     categoryKey: "category.puzzle",
-    icon: BorderOutlined,
+    icon: IconMinesweeper,
     component: MinesweeperGame,
   },
   {
@@ -102,7 +111,7 @@ export const GAMES: GameDef[] = [
     titleKey: "game.memory.title",
     descKey: "game.memory.desc",
     categoryKey: "category.puzzle",
-    icon: HeartOutlined,
+    icon: IconMemory,
     component: MemoryGame,
   },
   {
@@ -113,7 +122,7 @@ export const GAMES: GameDef[] = [
     titleKey: "game.whack.title",
     descKey: "game.whack.desc",
     categoryKey: "category.casual",
-    icon: FireOutlined,
+    icon: IconWhack,
     component: WhackGame,
   },
   {
@@ -124,8 +133,52 @@ export const GAMES: GameDef[] = [
     titleKey: "game.gomoku.title",
     descKey: "game.gomoku.desc",
     categoryKey: "category.puzzle",
-    icon: StarOutlined,
+    icon: IconGomoku,
     component: GomokuGame,
+  },
+  {
+    id: "rubik",
+    title: "3D 魔方",
+    desc: "拖动视角，转动层块还原六面",
+    category: "益智",
+    titleKey: "game.rubik.title",
+    descKey: "game.rubik.desc",
+    categoryKey: "category.puzzle",
+    icon: IconRubik,
+    component: RubikCubeGame,
+  },
+  {
+    id: "goldminer",
+    title: "黄金矿工",
+    desc: "放爪抓金块，限时凑够目标",
+    category: "休闲",
+    titleKey: "game.goldminer.title",
+    descKey: "game.goldminer.desc",
+    categoryKey: "category.casual",
+    icon: IconGoldMiner,
+    component: GoldMinerGame,
+  },
+  {
+    id: "pingpong",
+    title: "乒乓",
+    desc: "左右击球，先得 7 分获胜",
+    category: "休闲",
+    titleKey: "game.pingpong.title",
+    descKey: "game.pingpong.desc",
+    categoryKey: "category.casual",
+    icon: IconPingPong,
+    component: PingPongGame,
+  },
+  {
+    id: "thunder",
+    title: "战鹰雷霆",
+    desc: "驾驶战机，击落来袭敌机",
+    category: "休闲",
+    titleKey: "game.thunder.title",
+    descKey: "game.thunder.desc",
+    categoryKey: "category.casual",
+    icon: IconThunder,
+    component: ThunderFighterGame,
   },
   {
     id: "scores",
@@ -135,7 +188,7 @@ export const GAMES: GameDef[] = [
     titleKey: "game.scores.title",
     descKey: "game.scores.desc",
     categoryKey: "category.record",
-    icon: TrophyOutlined,
+    icon: IconScores,
     component: ScoresView,
   },
 ];
