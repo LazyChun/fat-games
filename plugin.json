@@ -1,0 +1,30 @@
+{
+  "id": "acaa56b8-0ce8-4a44-b473-1d93d9532742",
+  "name": "fat-games",
+  "version": "0.1.0",
+  "description": "A FatNotes bespoke plugin.",
+  "entry": "remoteEntry.js",
+  "mfName": "plugin_acaa56b8_0ce8_4a44_b473_1d93d9532742",
+  "container": "plugin_acaa56b8_0ce8_4a44_b473_1d93d9532742",
+  "exposed": "./plugin",
+  "contributions": {
+    "activityBar": true,
+    "primarySidebar": true,
+    "panel": false,
+    "footer": true,
+    "routes": true,
+    "widgetTypes": true
+  },
+  "permissions": [
+    "auth:read",
+    "dataSource:read",
+    "query:execute",
+    "mutation:execute"
+  ],
+  "backend": {
+    "enabled": true,
+    "entry": "backend/main.py",
+    "requirements": "backend/requirements.txt",
+    "depsStrategy": "vendor"
+  }
+}
