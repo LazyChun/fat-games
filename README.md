@@ -57,15 +57,19 @@ If names don't match you will see:
 - `types/fat-notes-sdk.d.ts` — SDK type declarations (mirror of host).
 - `webpack.config.js` — Module Federation build (`exposes ./plugin`).
 
-## 内置游戏（4 个，纯前端实现）
+## 内置游戏（8 个，纯前端实现）
 
 菜单按分类展示，点击卡片 → `sdk.router.navigate("/games/<gameId>")`。
 
 | 分类 | 游戏 |
 | --- | --- |
-| 益智 | 2048、扫雷 |
-| 休闲 | 贪吃蛇 |
+| 益智 | 2048、扫雷、记忆翻牌、五子棋 |
+| 休闲 | 贪吃蛇、俄罗斯方块、打地鼠 |
 | 记录 | 排行榜 |
+
+所有游戏使用统一的「游戏厅」视觉外壳（`src/games/GameFrame.tsx` +
+`gameTheme.ts` + `gameAnimations.less`）：渐变舞台、统计胶囊、入场/
+合并/翻转等动画，并自动适配宿主明暗主题。
 
 > 新增游戏只需在 `src/games/registry.tsx` 加一条记录，
 > 纯计算逻辑收敛到 `src/utils.ts`（不依赖 DOM，便于 `vitest` 单测）。

@@ -1,23 +1,21 @@
 /*
- * SnakeGame：贪吃蛇
+ * SnakeGame：贪吃蛇（视觉升级版）
  *
  * 20x20 网格 Canvas，方向键控制方向；吃到食物得分，撞墙或撞自己
- * 结束。蛇身越长速度越快。游戏结束时记录成绩。
+ * 结束。蛇身越长速度越快。渲染升级：棋盘格背景、圆角渐变蛇身 +
+ * 蛇眼、带辉光的食物、悬浮脉冲。游戏结束时记录成绩。
  */
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Button, Card, Space, Statistic } from "antd";
-import {
-  PauseCircleOutlined,
-  PlayCircleOutlined,
-  ReloadOutlined,
-} from "@ant-design/icons";
+import { PauseCircleOutlined, PlayCircleOutlined, ReloadOutlined } from "@ant-design/icons";
 import type { FatNotesPluginSDK } from "fat-notes-sdk";
 import { recordScore } from "../scoreClient";
 import { useI18n } from "../hooks";
+import GameFrame, { GhostBtn, CHIP_GREEN, CHIP_GOLD } from "./GameFrame";
+import "./gameAnimations.less";
 
 const COLS = 20;
 const ROWS = 20;
-const CELL = 20; // px
+const CELL = 22; // px
 const BASE_INTERVAL = 160; // ms / step
 const MIN_INTERVAL = 70;
 
@@ -54,6 +52,58 @@ function initialSnake(): Pt[] {
   ];
 }
 
+/** 圆角矩形路径 */
+function roundRectPath(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  r: number,
+): void {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.arcTo(x + w, y, x + w, y + r, r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+  ctx.lineTo(x + r, y + h);
+  ctx.arcTo(x, y + h, x, y + h - r, r);
+  ctx.lineTo(x, y + r);
+  ctx.arcTo(x, y, x + r, y, r);
+  ctx.closePath();
+}
+
+/** 蛇头眼睛：根据方向画两个眼睛 */
+function drawEyes(
+  ctx: CanvasRenderingContext2D,
+  head: Pt,
+  dir: Dir,
+): void {
+  const cx = head.x * CELL + CELL / 2;
+  const cy = head.y * CELL + CELL / 2;
+  // 朝向向量与垂直向量
+  const dv: Pt = DIR_DELTA[dir];
+  const perp: Pt = { x: -dv.y, y: dv.x }; // 顺时针垂直
+  const eyeR = CELL * 0.16;
+  const pupilR = eyeR * 0.5;
+  const offset = CELL * 0.18; // 眼距中心距离
+  const fwd = CELL * 0.16; // 眼睛前移量
+
+  for (const s of [1, -1]) {
+    const ex = cx + perp.x * offset * s + dv.x * fwd;
+    const ey = cy + perp.y * offset * s + dv.y * fwd;
+    ctx.fillStyle = "#ffffff";
+    ctx.beginPath();
+    ctx.arc(ex, ey, eyeR, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "#1d2b20";
+    ctx.beginPath();
+    ctx.arc(ex + dv.x * eyeR * 0.42, ey + dv.y * eyeR * 0.42, pupilR, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
 const SnakeGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
   const i18n = useI18n();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -65,6 +115,7 @@ const SnakeGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
   const [running, setRunning] = useState(false);
   const [over, setOver] = useState(false);
   const [recorded, setRecorded] = useState(false);
+  const [pulse, setPulse] = useState(0); // 食物脉冲动画
 
   // 把方向放入 ref，避免 useEffect 闭包旧值
   const dirRef = useRef(dir);
@@ -112,6 +163,13 @@ const SnakeGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
     return () => window.clearInterval(id);
   }, [running, over, snake.length, step]);
 
+  // 食物脉冲
+  useEffect(() => {
+    if (!running || over) return;
+    const id = window.setInterval(() => setPulse((p) => p + 1), 120);
+    return () => window.clearInterval(id);
+  }, [running, over]);
+
   // 游戏结束时记录成绩
   useEffect(() => {
     if (over && !recorded) {
@@ -132,44 +190,99 @@ const SnakeGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // 背景
-    ctx.fillStyle = "#f7f3ea";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // 棋盘格背景
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        ctx.fillStyle = (r + c) % 2 === 0 ? "#eef3e9" : "#e3ebdc";
+        ctx.fillRect(c * CELL, r * CELL, CELL, CELL);
+      }
+    }
 
-    // 网格线
-    ctx.strokeStyle = "rgba(0,0,0,0.05)";
+    // 柔和网格线
+    ctx.strokeStyle = "rgba(80,110,70,0.10)";
     ctx.lineWidth = 1;
     for (let x = 0; x <= COLS; x++) {
       ctx.beginPath();
-      ctx.moveTo(x * CELL, 0);
-      ctx.lineTo(x * CELL, ROWS * CELL);
+      ctx.moveTo(x * CELL + 0.5, 0);
+      ctx.lineTo(x * CELL + 0.5, ROWS * CELL);
       ctx.stroke();
     }
     for (let y = 0; y <= ROWS; y++) {
       ctx.beginPath();
-      ctx.moveTo(0, y * CELL);
-      ctx.lineTo(COLS * CELL, y * CELL);
+      ctx.moveTo(0, y * CELL + 0.5);
+      ctx.lineTo(COLS * CELL, y * CELL + 0.5);
       ctx.stroke();
     }
 
-    // 食物
-    ctx.fillStyle = "#ff5b5b";
+    // 食物：红苹果 + 辉光 + 白色高光
+    const fc = food.x * CELL + CELL / 2;
+    const fcy = food.y * CELL + CELL / 2;
+    const foodR = CELL / 2 - 2 + Math.sin(pulse * 0.45) * 1.2;
+    // 辉光
+    const glow = ctx.createRadialGradient(fc, fcy, 1, fc, fcy, foodR + 6);
+    glow.addColorStop(0, "rgba(255,99,71,0.55)");
+    glow.addColorStop(1, "rgba(255,99,71,0)");
+    ctx.fillStyle = glow;
     ctx.beginPath();
-    ctx.arc(
-      food.x * CELL + CELL / 2,
-      food.y * CELL + CELL / 2,
-      CELL / 2 - 2,
-      0,
-      Math.PI * 2,
+    ctx.arc(fc, fcy, foodR + 6, 0, Math.PI * 2);
+    ctx.fill();
+    // 果体
+    const body = ctx.createRadialGradient(
+      fc - foodR * 0.35,
+      fcy - foodR * 0.4,
+      1,
+      fc,
+      fcy,
+      foodR,
     );
+    body.addColorStop(0, "#ff8a6b");
+    body.addColorStop(1, "#e2332b");
+    ctx.fillStyle = body;
+    ctx.beginPath();
+    ctx.arc(fc, fcy, foodR, 0, Math.PI * 2);
+    ctx.fill();
+    // 高光
+    ctx.fillStyle = "rgba(255,255,255,0.75)";
+    ctx.beginPath();
+    ctx.arc(fc - foodR * 0.32, fcy - foodR * 0.38, foodR * 0.22, 0, Math.PI * 2);
     ctx.fill();
 
-    // 蛇
+    // 蛇：头部亮绿，向尾部渐深，圆角 + 投影
+    const len = snake.length;
     snake.forEach((seg, idx) => {
-      ctx.fillStyle = idx === 0 ? "#1f7a3a" : "#2e8b57";
-      ctx.fillRect(seg.x * CELL + 1, seg.y * CELL + 1, CELL - 2, CELL - 2);
+      const t = len === 1 ? 0 : idx / (len - 1);
+      const isHead = idx === 0;
+      // 头部：#43e97b → #22b14c；越往后越深 #2e8b57 → #1a5c34
+      let color: string;
+      if (isHead) {
+        color = "#2fd06b";
+      } else {
+        const light = 0x2e8b57;
+        const dark = 0x1a5c34;
+        const lerp = (a: number, b: number) =>
+          Math.round(a + (b - a) * t);
+        const [lr, lg, lb] = [(light >> 16) & 255, (light >> 8) & 255, light & 255];
+        const [dr, dg, db] = [(dark >> 16) & 255, (dark >> 8) & 255, dark & 255];
+        color = `rgb(${lerp(lr, dr)},${lerp(lg, dg)},${lerp(lb, db)})`;
+      }
+      const x = seg.x * CELL + 1;
+      const y = seg.y * CELL + 1;
+      const w = CELL - 2;
+      const h = CELL - 2;
+      ctx.save();
+      ctx.shadowColor = "rgba(30,90,50,0.35)";
+      ctx.shadowBlur = isHead ? 7 : 3;
+      ctx.fillStyle = color;
+      roundRectPath(ctx, x, y, w, h, isHead ? 8 : 6);
+      ctx.fill();
+      ctx.restore();
     });
-  }, [snake, food]);
+
+    // 蛇头眼睛
+    if (snake.length > 0) {
+      drawEyes(ctx, snake[0], dirRef.current);
+    }
+  }, [snake, food, pulse]);
 
   /** 启动/暂停切换 */
   const toggle = useCallback(() => {
@@ -214,45 +327,45 @@ const SnakeGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
   }, [running, over]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-      <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-        <Card size="small" style={{ minWidth: 120 }}>
-          <Statistic title={i18n.text("game.snake.score")} value={score} />
-        </Card>
-        <Card size="small" style={{ minWidth: 120 }}>
-          <Statistic
-            title={i18n.text("game.snake.length")}
-            value={snake.length}
-          />
-        </Card>
-        <Space>
-          <Button
-            type="primary"
-            icon={running ? <PauseCircleOutlined /> : <PlayCircleOutlined />}
-            onClick={toggle}
-            disabled={over}
-          >
-            {running
-              ? i18n.text("game.snake.pause")
-              : over
-                ? i18n.text("game.snake.over")
+    <GameFrame
+      emoji="🐍"
+      title={i18n.text("game.snake.title")}
+      stats={[
+        { label: i18n.text("game.snake.score"), value: score, colors: CHIP_GOLD },
+        {
+          label: i18n.text("game.snake.length"),
+          value: snake.length,
+          colors: CHIP_GREEN,
+        },
+      ]}
+      headerExtra={
+        <>
+          <GhostBtn onClick={toggle} disabled={over}>
+            {running ? <PauseCircleOutlined /> : <PlayCircleOutlined />}
+            {over
+              ? i18n.text("game.snake.over")
+              : running
+                ? i18n.text("game.snake.pause")
                 : i18n.text("game.snake.start")}
-          </Button>
-          <Button icon={<ReloadOutlined />} onClick={restart}>
+          </GhostBtn>
+          <GhostBtn onClick={restart}>
+            <ReloadOutlined />
             {i18n.text("game.snake.restart")}
-          </Button>
-        </Space>
-      </div>
-
+          </GhostBtn>
+        </>
+      }
+      help={i18n.text("game.snake.help")}
+      maxWidth={480}
+    >
       <div
         style={{
           position: "relative",
           width: COLS * CELL,
           height: ROWS * CELL,
-          borderRadius: 8,
+          borderRadius: 14,
           overflow: "hidden",
-          boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
-          alignSelf: "flex-start",
+          boxShadow: "0 8px 24px rgba(60,110,70,0.25)",
+          border: "3px solid rgba(120,150,110,0.5)",
         }}
       >
         <canvas
@@ -263,10 +376,11 @@ const SnakeGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
         />
         {over && (
           <div
+            className="gs-win-in"
             style={{
               position: "absolute",
               inset: 0,
-              background: "rgba(255,255,255,0.78)",
+              background: "rgba(240,248,238,0.82)",
               display: "flex",
               flexDirection: "column",
               gap: 10,
@@ -275,40 +389,39 @@ const SnakeGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
               color: "#1f7a3a",
             }}
           >
-            <div style={{ fontSize: 26, fontWeight: 800 }}>
+            <div style={{ fontSize: 28, fontWeight: 900 }}>
               {i18n.text("game.snake.over.title")}
             </div>
-            <div style={{ fontSize: 14 }}>
+            <div style={{ fontSize: 14, opacity: 0.8 }}>
               {i18n.text("game.snake.over.score", { score })}
             </div>
-            <Button type="primary" icon={<ReloadOutlined />} onClick={restart}>
+            <GhostBtn onClick={restart}>
+              <ReloadOutlined />
               {i18n.text("game.snake.again")}
-            </Button>
+            </GhostBtn>
           </div>
         )}
         {!over && !running && (
           <div
+            className="gs-pulse"
             style={{
               position: "absolute",
               inset: 0,
-              background: "rgba(255,255,255,0.55)",
+              background: "rgba(240,248,238,0.5)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               color: "#1f7a3a",
               fontSize: 16,
-              fontWeight: 600,
+              fontWeight: 700,
+              pointerEvents: "none",
             }}
           >
             {i18n.text("game.snake.idle")}
           </div>
         )}
       </div>
-
-      <div style={{ color: "rgba(0,0,0,0.55)", fontSize: 12 }}>
-        {i18n.text("game.snake.help")}
-      </div>
-    </div>
+    </GameFrame>
   );
 };
 

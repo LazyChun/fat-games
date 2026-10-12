@@ -34,6 +34,14 @@ export default {
   "game.snake.desc": "Control the snake to eat food, longer is harder",
   "game.minesweeper.title": "Minesweeper",
   "game.minesweeper.desc": "Flag mines, reveal all safe cells",
+  "game.tetris.title": "Tetris",
+  "game.tetris.desc": "Clear lines, climb the levels",
+  "game.memory.title": "Memory Match",
+  "game.memory.desc": "Flip cards and find all pairs",
+  "game.whack.title": "Whack-a-Mole",
+  "game.whack.desc": "A speed challenge: how many in 30s",
+  "game.gomoku.title": "Gomoku",
+  "game.gomoku.desc": "Play black first against the AI",
   "game.scores.title": "Leaderboard",
   "game.scores.desc": "View game scores and statistics",
 
@@ -68,6 +76,50 @@ export default {
   "game.minesweeper.again": "Play Again",
   "game.minesweeper.help":
     "Controls: Left-click to reveal; right-click to flag; empty cells auto-expand. 9x9 / 10 mines.",
+
+  "game.tetris.score": "Score",
+  "game.tetris.lines": "Lines",
+  "game.tetris.level": "Level",
+  "game.tetris.next": "Next",
+  "game.tetris.start": "Start",
+  "game.tetris.pause": "Pause",
+  "game.tetris.over": "Game Over",
+  "game.tetris.restart": "Restart",
+  "game.tetris.again": "Play Again",
+  "game.tetris.idle": "Click \"Start\" to play",
+  "game.tetris.finalScore": "Score: {score}",
+  "game.tetris.help":
+    "Controls: ←/→ or A/D move, ↑/W rotate, ↓/S soft drop, Space hard drop, P pause. More lines → higher level → faster fall.",
+
+  "game.memory.moves": "Moves",
+  "game.memory.time": "Time (s)",
+  "game.memory.pairs": "Pairs",
+  "game.memory.restart": "Restart",
+  "game.memory.win": "All pairs matched!",
+  "game.memory.again": "Play Again",
+  "game.memory.help":
+    "Controls: Click cards to flip and match identical pairs; fewer moves and less time mean a higher score.",
+
+  "game.whack.score": "Score",
+  "game.whack.hits": "Hits",
+  "game.whack.time": "Time Left",
+  "game.whack.start": "Start",
+  "game.whack.restart": "Restart",
+  "game.whack.again": "Play Again",
+  "game.whack.idle": "Moles appear after you click \"Start\"",
+  "game.whack.help":
+    "Controls: Click moles while they pop up, +10 per hit; as many as possible in 30s — moles vanish faster later on.",
+
+  "game.gomoku.turn": "Turn",
+  "game.gomoku.myMoves": "My Moves",
+  "game.gomoku.restart": "Restart",
+  "game.gomoku.yourTurn": "Your turn (black)",
+  "game.gomoku.aiTurn": "AI thinking…",
+  "game.gomoku.playerWin": "You win!",
+  "game.gomoku.aiWin": "AI wins",
+  "game.gomoku.again": "Play Again",
+  "game.gomoku.help":
+    "Controls: Click an intersection to place a black stone; first to connect five wins. The AI attacks and blocks your open threes and fours.",
 
   "game.scores.total": "Total Records",
   "game.scores.games": "Game Types",

@@ -3,6 +3,10 @@
  *
  * 点击卡片 → sdk.router.navigate("/games/<gameId>")，
  * 真正的游戏界面由工作台页 WorkPageView 在右侧工作区渲染。
+ *
+ * 注意：本组件被宿主直接渲染，父级没有 IntlProvider；
+ * 因此外层只负责包 ThemeShell，业务与 i18n 调用全部下沉到 MenuContent，
+ * 确保 useI18n() 在 IntlProvider 内部执行。
  */
 import React, {
   useCallback,
@@ -14,6 +18,7 @@ import React, {
 import type { FatNotesPluginSDK } from "fat-notes-sdk";
 import { Empty, Input, Tag } from "antd";
 import { GAMES, type GameDef } from "./games/registry";
+import { CATEGORY_GRADIENTS } from "./games/gameTheme";
 import { pathToGameId, gameIdToPath } from "./routes";
 import { getPreferredGameId, setPreferredGameId } from "./preferences";
 import { matchPinyin } from "./utils";
@@ -26,6 +31,15 @@ interface Props {
 }
 
 const MenuView: React.FC<Props> = ({ sdk }) => {
+  return (
+    <ThemeShell sdk={sdk} padding={10}>
+      <MenuContent sdk={sdk} />
+    </ThemeShell>
+  );
+};
+
+/** 菜单主体（运行在 ThemeShell / IntlProvider 内部） */
+const MenuContent: React.FC<Props> = ({ sdk }) => {
   const i18n = useI18n();
   const [query, setQuery] = useState("");
   const [, forceUpdate] = useReducer((x: number) => x + 1, 0);
@@ -66,60 +80,58 @@ const MenuView: React.FC<Props> = ({ sdk }) => {
   const emptyText = i18n.text("games.empty");
 
   return (
-    <ThemeShell sdk={sdk} padding={10}>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          minHeight: 0,
-        }}
-      >
-        <div style={{ marginBottom: 8 }}>
-          <Input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder={placeholder}
-            allowClear
-            size="small"
-            className={styles.menuSearch}
-          />
-          <div className={styles.searchMeta}>{countText}</div>
-        </div>
-
-        <div style={{ flex: 1, overflow: "auto", minHeight: 0 }}>
-          {filtered.length === 0 ? (
-            <Empty
-              description={emptyText}
-              image={Empty.PRESENTED_IMAGE_SIMPLE}
-            />
-          ) : (
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
-                gap: 8,
-                alignContent: "start",
-                paddingBottom: 8,
-              }}
-            >
-              {filtered.map((game) => (
-                <GameCard
-                  key={game.id}
-                  game={game}
-                  active={game.id === currentGameId}
-                  onOpen={() => openGame(game.id)}
-                />
-              ))}
-            </div>
-          )}
-        </div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        minHeight: 0,
+      }}
+    >
+      <div style={{ marginBottom: 8 }}>
+        <Input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={placeholder}
+          allowClear
+          size="small"
+          className={styles.menuSearch}
+        />
+        <div className={styles.searchMeta}>{countText}</div>
       </div>
-    </ThemeShell>
+
+      <div style={{ flex: 1, overflow: "auto", minHeight: 0 }}>
+        {filtered.length === 0 ? (
+          <Empty
+            description={emptyText}
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+          />
+        ) : (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
+              gap: 8,
+              alignContent: "start",
+              paddingBottom: 8,
+            }}
+          >
+            {filtered.map((game) => (
+              <GameCard
+                key={game.id}
+                game={game}
+                active={game.id === currentGameId}
+                onOpen={() => openGame(game.id)}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 
-/** 游戏卡片（选中态蓝框高亮） */
+/** 游戏卡片（选中态高亮 + 悬停上浮） */
 const GameCard: React.FC<{
   game: GameDef;
   active: boolean;
@@ -130,38 +142,55 @@ const GameCard: React.FC<{
   const title = i18n.text(game.titleKey) || game.title;
   const desc = i18n.text(game.descKey) || game.desc;
   const category = i18n.text(game.categoryKey) || game.category;
+  const iconBg = CATEGORY_GRADIENTS[category] || CATEGORY_GRADIENTS["休闲"];
   return (
     <div
       onClick={onOpen}
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: 6,
+        gap: 7,
         padding: "12px 12px 10px",
-        borderRadius: 10,
-        border: `1px solid ${active ? "rgba(22,119,255,0.65)" : "rgba(128,128,128,0.25)"}`,
+        borderRadius: 12,
+        border: `1px solid ${active ? "rgba(22,119,255,0.65)" : "rgba(128,128,128,0.22)"}`,
         background: active ? "rgba(22,119,255,0.08)" : "rgba(128,128,128,0.05)",
         cursor: "pointer",
         userSelect: "none",
-        boxShadow: active ? "0 2px 10px rgba(22,119,255,0.18)" : "none",
+        boxShadow: active ? "0 4px 14px rgba(22,119,255,0.2)" : "0 1px 3px rgba(0,0,0,0.05)",
         transition:
-          "transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease",
+          "transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease",
       }}
       onMouseEnter={(e) => {
         if (!active) {
+          e.currentTarget.style.transform = "translateY(-2px)";
           e.currentTarget.style.borderColor = "rgba(22,119,255,0.55)";
-          e.currentTarget.style.boxShadow = "0 2px 10px rgba(22,119,255,0.18)";
+          e.currentTarget.style.boxShadow = "0 6px 16px rgba(22,119,255,0.2)";
         }
       }}
       onMouseLeave={(e) => {
         if (!active) {
-          e.currentTarget.style.borderColor = "rgba(128,128,128,0.25)";
-          e.currentTarget.style.boxShadow = "none";
+          e.currentTarget.style.transform = "translateY(0)";
+          e.currentTarget.style.borderColor = "rgba(128,128,128,0.22)";
+          e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.05)";
         }
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        <Icon style={{ fontSize: 18, color: "#1677ff" }} />
+        <span
+          style={{
+            width: 30,
+            height: 30,
+            borderRadius: 9,
+            background: iconBg,
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.16)",
+            flexShrink: 0,
+          }}
+        >
+          <Icon style={{ fontSize: 16, color: "#fff" }} />
+        </span>
         <span style={{ fontWeight: 600, fontSize: 13 }}>{title}</span>
       </div>
       <span
@@ -178,11 +207,13 @@ const GameCard: React.FC<{
         {desc}
       </span>
       <Tag
+        color={active ? "blue" : undefined}
         style={{
           alignSelf: "flex-start",
           margin: 0,
           fontSize: 11,
           lineHeight: "16px",
+          borderRadius: 8,
         }}
       >
         {category}

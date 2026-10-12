@@ -5,13 +5,9 @@
  */
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
-  Button,
-  Card,
   Empty,
   Popconfirm,
   Select,
-  Space,
-  Statistic,
   Table,
   Tag,
   Tooltip,
@@ -26,6 +22,7 @@ import {
   type ScoreStats,
 } from "../scoreClient";
 import { useI18n } from "../hooks";
+import GameFrame, { GhostBtn, StatChip, CHIP_GOLD, CHIP_BLUE } from "./GameFrame";
 
 interface Option {
   label: string;
@@ -141,70 +138,74 @@ const ScoresView: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
   const gameCount = stats?.items.length ?? 0;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-        <Card size="small" style={{ minWidth: 140 }}>
-          <Statistic
-            title={i18n.text("game.scores.total")}
-            value={totalRecords}
+    <GameFrame
+      emoji="🏆"
+      title={i18n.text("game.scores.title2")}
+      stats={[
+        { label: i18n.text("game.scores.total"), value: totalRecords, colors: CHIP_GOLD },
+        { label: i18n.text("game.scores.games"), value: gameCount, colors: CHIP_BLUE },
+      ]}
+      headerExtra={
+        <>
+          <Select
+            value={filter}
+            onChange={setFilter}
+            style={{ width: 140 }}
+            options={options}
           />
-        </Card>
-        <Card size="small" style={{ minWidth: 140 }}>
-          <Statistic title={i18n.text("game.scores.games")} value={gameCount} />
-        </Card>
-        {stats?.items.map((it) => (
-          <Card key={it.gameId} size="small" style={{ minWidth: 140 }}>
-            <Statistic
-              title={it.gameTitle}
-              value={it.count}
-              suffix={i18n.text("game.scores.recordsSuffix")}
-            />
-          </Card>
-        ))}
-      </div>
-
-      <Card
-        size="small"
-        title={i18n.text("game.scores.title2")}
-        extra={
-          <Space>
-            <Select
-              value={filter}
-              onChange={setFilter}
-              style={{ width: 160 }}
-              options={options}
-            />
-            <Button
-              icon={<ReloadOutlined />}
-              onClick={() => void reload()}
-              loading={loading}
-            >
-              {i18n.text("game.scores.refresh")}
-            </Button>
-            <Popconfirm
-              title={i18n.text("game.scores.confirmTitle")}
-              description={
-                filter === "all"
-                  ? i18n.text("game.scores.confirmClearAll")
-                  : i18n.text("game.scores.confirmClearFiltered")
-              }
-              okText={i18n.text("common.clear")}
-              cancelText={i18n.text("common.cancel")}
-              okButtonProps={{ danger: true }}
-              onConfirm={() => void handleClear()}
-            >
-              <Button danger icon={<ClearOutlined />}>
-                {i18n.text("common.clear")}
-              </Button>
-            </Popconfirm>
-          </Space>
-        }
-      >
+          <GhostBtn onClick={() => void reload()} disabled={loading}>
+            <ReloadOutlined />
+            {i18n.text("game.scores.refresh")}
+          </GhostBtn>
+          <Popconfirm
+            title={i18n.text("game.scores.confirmTitle")}
+            description={
+              filter === "all"
+                ? i18n.text("game.scores.confirmClearAll")
+                : i18n.text("game.scores.confirmClearFiltered")
+            }
+            okText={i18n.text("common.clear")}
+            cancelText={i18n.text("common.cancel")}
+            okButtonProps={{ danger: true }}
+            onConfirm={() => void handleClear()}
+          >
+            <GhostBtn onClick={() => undefined}>
+              <ClearOutlined />
+              {i18n.text("common.clear")}
+            </GhostBtn>
+          </Popconfirm>
+        </>
+      }
+      help={i18n.text("game.scores.help")}
+      maxWidth={860}
+      padded={false}
+    >
+      <div style={{ width: "100%" }}>
+        {stats && stats.items.length > 0 && (
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 10,
+              marginBottom: 12,
+            }}
+          >
+            {stats.items.map((it) => (
+              <StatChip
+                key={it.gameId}
+                label={it.gameTitle}
+                value={it.count}
+              />
+            ))}
+          </div>
+        )}
         {items.length === 0 ? (
-          <Empty
-            image={Empty.PRESENTED_IMAGE_SIMPLE}
-            description={i18n.text("game.scores.empty")}
-          />
+          <div style={{ padding: "30px 0" }}>
+            <Empty
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description={i18n.text("game.scores.empty")}
+            />
+          </div>
         ) : (
           <Table
             rowKey={(r) => String(r.id)}
@@ -215,12 +216,8 @@ const ScoresView: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
             pagination={{ pageSize: 10, showSizeChanger: false }}
           />
         )}
-      </Card>
-
-      <div style={{ color: "rgba(0,0,0,0.45)", fontSize: 12 }}>
-        {i18n.text("game.scores.help")}
       </div>
-    </div>
+    </GameFrame>
   );
 };
 

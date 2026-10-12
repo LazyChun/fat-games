@@ -32,6 +32,14 @@ const LANG_MAP: Record<string, Record<string, string>> = {
   en_US: en,
 };
 
+/** 主题模式上下文：供游戏组件自行读取明暗，决定自定义配色 */
+export const ThemeModeContext = React.createContext<"light" | "dark">("light");
+
+/** 读取当前明暗主题 */
+export function useThemeMode(): "light" | "dark" {
+  return React.useContext(ThemeModeContext);
+}
+
 const ThemeShell: React.FC<Props> = ({ sdk, padding = 12, children }) => {
   const [theme, setTheme] = useState<string>(() => {
     try {
@@ -90,18 +98,20 @@ const ThemeShell: React.FC<Props> = ({ sdk, padding = 12, children }) => {
   return (
     <ConfigProvider theme={themeConfig}>
       <IntlProvider locale={locale.replace("_", "-")} messages={messages}>
-        <div
-          style={{
-            height: "100%",
-            minHeight: 0,
-            padding,
-            boxSizing: "border-box",
-            overflow: "auto",
-            color: isDark ? "rgba(255,255,255,0.88)" : "rgba(0,0,0,0.88)",
-          }}
-        >
-          {children}
-        </div>
+        <ThemeModeContext.Provider value={isDark ? "dark" : "light"}>
+          <div
+            style={{
+              height: "100%",
+              minHeight: 0,
+              padding,
+              boxSizing: "border-box",
+              overflow: "auto",
+              color: isDark ? "rgba(255,255,255,0.88)" : "rgba(0,0,0,0.88)",
+            }}
+          >
+            {children}
+          </div>
+        </ThemeModeContext.Provider>
       </IntlProvider>
     </ConfigProvider>
   );

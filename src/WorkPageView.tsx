@@ -3,6 +3,10 @@
  *
  * 通过 registerWorkbenchPage 注册（id 与活动栏项 id 一致），
  * 根据 sdk.router.getCurrent().path 渲染对应游戏的完整界面。
+ *
+ * 注意：本组件被宿主直接渲染，父级没有 IntlProvider；
+ * 外层只负责包 ThemeShell，业务与 i18n 调用下沉到 WorkPageContent，
+ * 确保 useI18n() 在 IntlProvider 内部执行。
  */
 import React, { useEffect, useMemo, useReducer } from "react";
 import type { FatNotesPluginSDK } from "fat-notes-sdk";
@@ -18,6 +22,15 @@ interface Props {
 }
 
 const WorkPageView: React.FC<Props> = ({ sdk }) => {
+  return (
+    <ThemeShell sdk={sdk} padding={16}>
+      <WorkPageContent sdk={sdk} />
+    </ThemeShell>
+  );
+};
+
+/** 工作台主体（运行在 ThemeShell / IntlProvider 内部） */
+const WorkPageContent: React.FC<Props> = ({ sdk }) => {
   const i18n = useI18n();
   const [, forceUpdate] = useReducer((x: number) => x + 1, 0);
 
@@ -43,22 +56,15 @@ const WorkPageView: React.FC<Props> = ({ sdk }) => {
 
   if (!game) {
     return (
-      <ThemeShell sdk={sdk} padding={24}>
-        <Empty
-          image={Empty.PRESENTED_IMAGE_SIMPLE}
-          description={i18n.text("games.loading")}
-        />
-      </ThemeShell>
+      <Empty
+        image={Empty.PRESENTED_IMAGE_SIMPLE}
+        description={i18n.text("games.loading")}
+      />
     );
   }
 
   const Active = game.component;
-
-  return (
-    <ThemeShell sdk={sdk} padding={16}>
-      <Active sdk={sdk} />
-    </ThemeShell>
-  );
+  return <Active sdk={sdk} />;
 };
 
 export default WorkPageView;

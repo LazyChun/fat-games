@@ -10,7 +10,11 @@
 import React from "react";
 import {
   AppstoreOutlined,
+  BlockOutlined,
   BorderOutlined,
+  FireOutlined,
+  HeartOutlined,
+  StarOutlined,
   ThunderboltOutlined,
   TrophyOutlined,
 } from "@ant-design/icons";
@@ -18,6 +22,10 @@ import {
 import Game2048 from "./Game2048";
 import SnakeGame from "./SnakeGame";
 import MinesweeperGame from "./MinesweeperGame";
+import TetrisGame from "./TetrisGame";
+import MemoryGame from "./MemoryGame";
+import WhackGame from "./WhackGame";
+import GomokuGame from "./GomokuGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -54,6 +62,17 @@ export const GAMES: GameDef[] = [
     component: Game2048,
   },
   {
+    id: "tetris",
+    title: "俄罗斯方块",
+    desc: "消除横条，挑战更高等级",
+    category: "休闲",
+    titleKey: "game.tetris.title",
+    descKey: "game.tetris.desc",
+    categoryKey: "category.casual",
+    icon: BlockOutlined,
+    component: TetrisGame,
+  },
+  {
     id: "snake",
     title: "贪吃蛇",
     desc: "控制蛇身吃食物，越长越难",
@@ -74,6 +93,39 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.puzzle",
     icon: BorderOutlined,
     component: MinesweeperGame,
+  },
+  {
+    id: "memory",
+    title: "记忆翻牌",
+    desc: "翻开卡片，找出所有配对",
+    category: "益智",
+    titleKey: "game.memory.title",
+    descKey: "game.memory.desc",
+    categoryKey: "category.puzzle",
+    icon: HeartOutlined,
+    component: MemoryGame,
+  },
+  {
+    id: "whack",
+    title: "打地鼠",
+    desc: "手速挑战，30 秒能打多少只",
+    category: "休闲",
+    titleKey: "game.whack.title",
+    descKey: "game.whack.desc",
+    categoryKey: "category.casual",
+    icon: FireOutlined,
+    component: WhackGame,
+  },
+  {
+    id: "gomoku",
+    title: "五子棋",
+    desc: "执黑先手，与 AI 对弈五连",
+    category: "益智",
+    titleKey: "game.gomoku.title",
+    descKey: "game.gomoku.desc",
+    categoryKey: "category.puzzle",
+    icon: StarOutlined,
+    component: GomokuGame,
   },
   {
     id: "scores",

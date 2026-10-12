@@ -33,6 +33,14 @@ export default {
   "game.snake.desc": "控制蛇身吃食物，越长越难",
   "game.minesweeper.title": "扫雷",
   "game.minesweeper.desc": "标记地雷，揭开所有安全格",
+  "game.tetris.title": "俄罗斯方块",
+  "game.tetris.desc": "消除横条，挑战更高等级",
+  "game.memory.title": "记忆翻牌",
+  "game.memory.desc": "翻开卡片，找出所有配对",
+  "game.whack.title": "打地鼠",
+  "game.whack.desc": "手速挑战，30 秒能打多少只",
+  "game.gomoku.title": "五子棋",
+  "game.gomoku.desc": "执黑先手，与 AI 对弈五连",
   "game.scores.title": "排行榜",
   "game.scores.desc": "查看各游戏成绩记录与统计",
 
@@ -67,6 +75,50 @@ export default {
   "game.minesweeper.again": "再来一局",
   "game.minesweeper.help":
     "操作：左键揭开；右键插旗；空白格自动展开。9x9 / 10 雷。",
+
+  "game.tetris.score": "得分",
+  "game.tetris.lines": "消除行",
+  "game.tetris.level": "等级",
+  "game.tetris.next": "下一个",
+  "game.tetris.start": "开始",
+  "game.tetris.pause": "暂停",
+  "game.tetris.over": "游戏结束",
+  "game.tetris.restart": "重新开始",
+  "game.tetris.again": "再来一局",
+  "game.tetris.idle": "点击「开始」开玩",
+  "game.tetris.finalScore": "得分：{score}",
+  "game.tetris.help":
+    "操作：←/→ 或 A/D 移动，↑/W 旋转，↓/S 加速下落，空格硬降，P 暂停。消除行数越多等级越高、下落越快。",
+
+  "game.memory.moves": "步数",
+  "game.memory.time": "用时(秒)",
+  "game.memory.pairs": "配对",
+  "game.memory.restart": "重新开始",
+  "game.memory.win": "全部配对完成！",
+  "game.memory.again": "再来一局",
+  "game.memory.help":
+    "操作：点击翻开卡片，找出所有相同的配对；步数越少、用时越短得分越高。",
+
+  "game.whack.score": "得分",
+  "game.whack.hits": "击中",
+  "game.whack.time": "剩余时间",
+  "game.whack.start": "开始",
+  "game.whack.restart": "重新开始",
+  "game.whack.again": "再来一局",
+  "game.whack.idle": "点击「开始」后地鼠才会出现",
+  "game.whack.help":
+    "操作：地鼠冒出时点击击打，击中 +10 分；30 秒内打得越多越好，越到后面地鼠消失越快。",
+
+  "game.gomoku.turn": "当前",
+  "game.gomoku.myMoves": "我的手数",
+  "game.gomoku.restart": "重新开始",
+  "game.gomoku.yourTurn": "轮到你（黑棋）",
+  "game.gomoku.aiTurn": "AI 思考中…",
+  "game.gomoku.playerWin": "你赢了",
+  "game.gomoku.aiWin": "AI 获胜",
+  "game.gomoku.again": "再来一局",
+  "game.gomoku.help":
+    "操作：点击交叉点落黑子，先连成五子者胜；AI 会主动进攻并堵你的活三/冲四。",
 
   "game.scores.total": "总记录数",
   "game.scores.games": "游戏种类",

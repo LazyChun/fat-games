@@ -1,8 +1,8 @@
 /*
- * MinesweeperGame：扫雷（初学者难度 9x9 / 10 雷）
+ * MinesweeperGame：扫雷（初学者难度 9x9 / 10 雷，视觉升级版）
  *
  * 左键揭开，右键插旗；空格 flood-fill 展开；揭开所有非雷格胜利，
- * 踩雷失败。计时秒数作为成绩记录。
+ * 踩雷失败。方块为 3D 凸起/凹陷样式，数字配色精致；计时秒数作为成绩。
  */
 import React, {
   useCallback,
@@ -11,11 +11,12 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Button, Card, Space, Statistic } from "antd";
 import { ReloadOutlined, FlagOutlined } from "@ant-design/icons";
 import type { FatNotesPluginSDK } from "fat-notes-sdk";
 import { recordScore } from "../scoreClient";
 import { useI18n } from "../hooks";
+import GameFrame, { GhostBtn, CHIP_RED, CHIP_BLUE } from "./GameFrame";
+import "./gameAnimations.less";
 
 const ROWS = 9;
 const COLS = 9;
@@ -131,14 +132,32 @@ function cloneBoard(board: Board): Board {
 }
 
 const NUMBER_COLORS: Record<number, string> = {
-  1: "#1976d2",
-  2: "#388e3c",
-  3: "#d32f2f",
-  4: "#7b1fa2",
-  5: "#ee5722",
-  6: "#0097a7",
-  7: "#424242",
-  8: "#9e9e9e",
+  1: "#1e6fd9",
+  2: "#2e9e44",
+  3: "#e5484d",
+  4: "#7b3ff2",
+  5: "#ef6a1f",
+  6: "#0fa3a3",
+  7: "#4a4458",
+  8: "#8d8d93",
+};
+
+/** 未揭开方块的 3D 凸起样式 */
+const HIDDEN_STYLE: React.CSSProperties = {
+  background:
+    "linear-gradient(145deg, #e8e9ec 0%, #c9ccd4 100%)",
+  borderTop: "2px solid rgba(255,255,255,0.9)",
+  borderLeft: "2px solid rgba(255,255,255,0.75)",
+  borderBottom: "2px solid rgba(90,95,110,0.45)",
+  borderRight: "2px solid rgba(90,95,110,0.4)",
+  boxShadow: "0 2px 4px rgba(0,0,0,0.15)",
+};
+
+/** 已揭开方块的凹陷样式 */
+const REVEALED_STYLE: React.CSSProperties = {
+  background: "linear-gradient(145deg, #e6e2d8 0%, #efece4 100%)",
+  border: "1px solid rgba(120,110,90,0.25)",
+  boxShadow: "inset 0 1px 3px rgba(0,0,0,0.12)",
 };
 
 const MinesweeperGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
@@ -270,43 +289,48 @@ const MinesweeperGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
   const minesLeft = useMemo(() => MINES - flags, [flags]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-      <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-        <Card size="small" style={{ minWidth: 120 }}>
-          <Statistic
-            title={i18n.text("game.minesweeper.minesLeft")}
-            value={minesLeft}
-            prefix={<FlagOutlined />}
-          />
-        </Card>
-        <Card size="small" style={{ minWidth: 120 }}>
-          <Statistic
-            title={i18n.text("game.minesweeper.time")}
-            value={seconds}
-          />
-        </Card>
-        <Space>
-          <Button type="primary" icon={<ReloadOutlined />} onClick={restart}>
-            {i18n.text("game.minesweeper.restart")}
-          </Button>
-        </Space>
-      </div>
-
+    <GameFrame
+      emoji="💣"
+      title={i18n.text("game.minesweeper.title")}
+      stats={[
+        {
+          label: i18n.text("game.minesweeper.minesLeft"),
+          value: minesLeft,
+          colors: CHIP_RED,
+        },
+        {
+          label: i18n.text("game.minesweeper.time"),
+          value: seconds,
+          colors: CHIP_BLUE,
+        },
+      ]}
+      headerExtra={
+        <GhostBtn onClick={restart}>
+          <ReloadOutlined />
+          {i18n.text("game.minesweeper.restart")}
+        </GhostBtn>
+      }
+      help={i18n.text("game.minesweeper.help")}
+      maxWidth={400}
+    >
       <div
+        className={over && !won ? "gs-shake" : undefined}
         style={{
-          padding: 8,
-          background: "rgba(0,0,0,0.05)",
-          borderRadius: 8,
-          alignSelf: "flex-start",
+          padding: 10,
+          background:
+            "linear-gradient(145deg, #9fa6b5 0%, #7f8798 100%)",
+          borderRadius: 12,
+          boxShadow:
+            "inset 0 2px 6px rgba(0,0,0,0.3), 0 6px 18px rgba(60,70,90,0.25)",
           position: "relative",
         }}
       >
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: `repeat(${COLS}, 30px)`,
-            gridTemplateRows: `repeat(${ROWS}, 30px)`,
-            gap: 2,
+            gridTemplateColumns: `repeat(${COLS}, 32px)`,
+            gridTemplateRows: `repeat(${ROWS}, 32px)`,
+            gap: 3,
           }}
           onContextMenu={(e) => e.preventDefault()}
         >
@@ -321,38 +345,50 @@ const MinesweeperGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
                   onClick={() => handleReveal(r, c)}
                   onContextMenu={(e) => handleFlag(r, c, e)}
                   style={{
-                    width: 30,
-                    height: 30,
+                    width: 32,
+                    height: 32,
                     padding: 0,
-                    border: "1px solid rgba(0,0,0,0.15)",
-                    borderRadius: 3,
-                    background: revealed
-                      ? cell.mine
-                        ? "#d32f2f"
-                        : "#fff"
-                      : "#bdbdbd",
+                    borderRadius: 5,
+                    ...(revealed ? REVEALED_STYLE : HIDDEN_STYLE),
                     color:
                       cell.mine && revealed
                         ? "#fff"
-                        : NUMBER_COLORS[cell.adjacent] || "#000",
-                    fontSize: 14,
-                    fontWeight: 700,
+                        : NUMBER_COLORS[cell.adjacent] || "#5a5448",
+                    fontSize: 15,
+                    fontWeight: 800,
                     cursor: over ? "default" : "pointer",
                     userSelect: "none",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                    transition: "transform 0.08s ease",
+                  }}
+                  onMouseDown={(e) => {
+                    if (!revealed && !over)
+                      e.currentTarget.style.transform = "translateY(1px)";
+                  }}
+                  onMouseUp={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
                   }}
                 >
-                  {revealed
-                    ? cell.mine
-                      ? "💣"
-                      : cell.adjacent > 0
-                        ? String(cell.adjacent)
-                        : ""
-                    : flagged
-                      ? "🚩"
-                      : ""}
+                  {revealed ? (
+                    cell.mine ? (
+                      <span style={{ fontSize: 17, lineHeight: 1 }}>
+                        💣
+                      </span>
+                    ) : cell.adjacent > 0 ? (
+                      String(cell.adjacent)
+                    ) : (
+                      ""
+                    )
+                  ) : flagged ? (
+                    <span style={{ fontSize: 15, lineHeight: 1 }}>🚩</span>
+                  ) : (
+                    ""
+                  )}
                 </button>
               );
             }),
@@ -361,38 +397,36 @@ const MinesweeperGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
 
         {over && (
           <div
+            className="gs-win-in"
             style={{
               position: "absolute",
               inset: 0,
-              background: "rgba(255,255,255,0.78)",
-              borderRadius: 8,
+              background: "rgba(250,248,244,0.82)",
+              borderRadius: 12,
               display: "flex",
               flexDirection: "column",
               gap: 8,
               alignItems: "center",
               justifyContent: "center",
-              color: won ? "#388e3c" : "#d32f2f",
+              color: won ? "#2e9e44" : "#e5484d",
             }}
           >
-            <div style={{ fontSize: 24, fontWeight: 800 }}>
+            <div style={{ fontSize: 26, fontWeight: 900 }}>
               {won
                 ? i18n.text("game.minesweeper.win")
                 : i18n.text("game.minesweeper.lose")}
             </div>
-            <div style={{ fontSize: 14 }}>
+            <div style={{ fontSize: 14, opacity: 0.8 }}>
               {i18n.text("game.minesweeper.usedSeconds", { seconds })}
             </div>
-            <Button type="primary" icon={<ReloadOutlined />} onClick={restart}>
+            <GhostBtn onClick={restart}>
+              <ReloadOutlined />
               {i18n.text("game.minesweeper.again")}
-            </Button>
+            </GhostBtn>
           </div>
         )}
       </div>
-
-      <div style={{ color: "rgba(0,0,0,0.55)", fontSize: 12 }}>
-        {i18n.text("game.minesweeper.help")}
-      </div>
-    </div>
+    </GameFrame>
   );
 };
 
