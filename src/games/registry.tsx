@@ -24,6 +24,7 @@ import {
   IconTank,
   IconBackfire,
   IconRocket,
+  IconSlingshot,
   IconScores,
 } from "./gameIcons";
 
@@ -41,6 +42,7 @@ import ThunderFighterGame from "./ThunderFighterGame";
 import TankBattleGame from "./TankBattleGame";
 import BackfireBomberGame from "./BackfireBomberGame";
 import RocketLandingGame from "./RocketLandingGame";
+import SlingshotGame from "./SlingshotGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -218,6 +220,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.casual",
     icon: IconRocket,
     component: RocketLandingGame,
+  },
+  {
+    id: "slingshot",
+    title: "引力弹弓",
+    desc: "借行星引力弹弓，在星系间穿梭",
+    category: "休闲",
+    titleKey: "game.slingshot.title",
+    descKey: "game.slingshot.desc",
+    categoryKey: "category.casual",
+    icon: IconSlingshot,
+    component: SlingshotGame,
   },
   {
     id: "scores",

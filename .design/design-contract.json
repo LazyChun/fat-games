@@ -1,0 +1,569 @@
+{
+  "schema_version": "6.0",
+  "task": {
+    "title": "引力弹弓 2D 小游戏",
+    "source_text": "做一个 引力弹弓 的2d小游戏。要求航天在宇宙航行，通过行星的引力弹弓效应来进行星际穿梭。玩家可通过控制飞行器喷口控制飞行器方向，让其切入行星的引力带，利用行星加入飞入下一个目的地。玩家能源是有限的，在基地行星（部分人类已占领的行星）附近可以补给能源。玩家在飞行过程中也要躲避陨石撞击干扰。玩家能源耗尽时航线终止（游戏结束），按玩家此时航行的距离算分。请完成这个游戏",
+    "readiness_target": "prototype",
+    "flags": {
+      "capacity": false,
+      "handoff": true,
+      "html": true,
+      "lifecycle": true,
+      "numbers": true,
+      "persistence": false,
+      "probability": false,
+      "production": true,
+      "resources": true,
+      "scope_constraints": false
+    }
+  },
+  "authority": {
+    "allowed_changes": [],
+    "forbidden_changes": [],
+    "proposed_changes": []
+  },
+  "assumptions": [
+    {
+      "id": "ASM-SCORE",
+      "statement": "得分 = 航行距离（1px = 1km），抵达补给站只补能延续航线、不直接加分。",
+      "impact": "high",
+      "status": "confirmed",
+      "validation": "用户原文「按玩家此时航行的距离算分」"
+    },
+    {
+      "id": "ASM-METEOR",
+      "statement": "陨石撞击不直接坠毁，而是损失能源 + 击退 + 短暂无敌，与「能源耗尽结束」主规则一致。",
+      "impact": "high",
+      "status": "confirmed",
+      "validation": "用户原文「躲避陨石撞击干扰」+「能源耗尽时航线终止」"
+    },
+    {
+      "id": "ASM-CONTROL",
+      "statement": "控制采用主引擎 / 减速 / RCS 转向三种喷口点火，与插件内星舰回收操作习惯一致。",
+      "impact": "low",
+      "status": "test_value",
+      "validation": "原型试玩后校准手感"
+    },
+    {
+      "id": "ASM-DEST",
+      "statement": "「下一个目的地」= 距当前所在补给站最远的另一座人类基地行星；抵达即切换。",
+      "impact": "low",
+      "status": "test_value",
+      "validation": "原型试玩后确认路线节奏"
+    }
+  ],
+  "rules": [
+    {
+      "id": "RULE-GRAVITY",
+      "title": "行星引力场",
+      "definition": "每颗行星对飞船施加 a = GM/r²、方向指向行星中心的加速度；飞船视为零质量，不反作用行星。",
+      "priority": "P0",
+      "parameter_ids": ["PAR-GM-GIANT", "PAR-GM-SMALL"],
+      "state_machine_ids": ["SM-RUN"],
+      "fields": ["planet.gravity"]
+    },
+    {
+      "id": "RULE-THRUST",
+      "title": "喷口点火",
+      "definition": "主引擎（机头方向）、减速引擎（机头反方向）、RCS（左右转向）点火时按参数消耗能源并施加加速度/角加速度；能源为 0 时全部熄火。",
+      "priority": "P0",
+      "parameter_ids": ["PAR-THRUST-MAIN", "PAR-THRUST-RETRO", "PAR-TURN-RATE", "PAR-BURN-MAIN", "PAR-BURN-RETRO", "PAR-BURN-RCS"],
+      "state_machine_ids": ["SM-RUN"],
+      "fields": ["ship.thrust", "ship.energy_burn"]
+    },
+    {
+      "id": "RULE-ENERGY",
+      "title": "能源",
+      "definition": "能源范围 [0,1]；点火、行星大气层、陨石撞击与核心反弹会减少；补给站半径内按速率回升。能源归零即终局。",
+      "priority": "P0",
+      "parameter_ids": ["PAR-ENERGY-START", "PAR-ATMO-DRAIN", "PAR-METEOR-HIT-LOSS", "PAR-REFUEL-RATE"],
+      "state_machine_ids": ["SM-RUN"],
+      "fields": ["ship.energy", "run.energy_zero"]
+    },
+    {
+      "id": "RULE-METEOR",
+      "title": "陨石",
+      "definition": "陨石在世界坐标随机漂移、随航行时间加速生成（上限 60）；与飞船相撞时 -0.30 能源、击退、1.5s 无敌并移除该陨石。",
+      "priority": "P0",
+      "parameter_ids": ["PAR-METEOR-HIT-LOSS", "PAR-INVULN", "PAR-METEOR-INTERVAL0", "PAR-METEOR-INTERVAL-MIN", "PAR-METEOR-CAP"],
+      "state_machine_ids": ["SM-RUN"],
+      "fields": ["meteor.spawn", "meteor.collision"]
+    },
+    {
+      "id": "RULE-REFUEL",
+      "title": "基地补给",
+      "definition": "飞船进入人类基地行星补给半径后能源 +0.33/s 并封顶 1.0；进入瞬间计一次「抵达」并切换下一站目的地。",
+      "priority": "P0",
+      "parameter_ids": ["PAR-REFUEL-RATE"],
+      "state_machine_ids": ["SM-RUN"],
+      "fields": ["base.refuel", "run.base_reached"]
+    },
+    {
+      "id": "RULE-DEST",
+      "title": "下一站",
+      "definition": "下一站 = 距当前所在基地最远且非本基地的人类基地行星；每次抵达后重新计算并标记路线。",
+      "priority": "P1",
+      "parameter_ids": [],
+      "state_machine_ids": ["SM-RUN"],
+      "fields": ["run.destination"]
+    },
+    {
+      "id": "RULE-SCORE",
+      "title": "得分",
+      "definition": "得分 = 累计航行距离（px，1px = 1km），随飞行实时累积；能源耗尽终局时记录成绩。",
+      "priority": "P0",
+      "parameter_ids": [],
+      "state_machine_ids": ["SM-RUN"],
+      "fields": ["run.distance", "run.score"]
+    },
+    {
+      "id": "RULE-ATMO",
+      "title": "大气层",
+      "definition": "进入行星大气层半径（核心半径 ×1.24）内持续消耗能源 0.16/s 并显示高温告警，离开后停止；触及核心半径弹性反弹并 -0.30 能源（无敌期内不触发）。",
+      "priority": "P0",
+      "parameter_ids": ["PAR-ATMO-DRAIN", "PAR-METEOR-HIT-LOSS", "PAR-INVULN"],
+      "state_machine_ids": ["SM-RUN"],
+      "fields": ["planet.atmosphere", "planet.core_bounce"]
+    },
+    {
+      "id": "RULE-SLING",
+      "title": "弹弓转向判定",
+      "definition": "飞船在行星引力带（wellR）内完成一次显著转向：出带航向相对入带偏转 ≥25° 计一次弹弓转向（仅反馈与统计，不加分）；引力井为保守力，静态行星只改向不增能，速度飙升起源于井内势能转化。",
+      "priority": "P1",
+      "parameter_ids": ["PAR-SLING-TURN"],
+      "state_machine_ids": ["SM-RUN"],
+      "fields": ["run.slingshots"]
+    }
+  ],
+  "parameters": [
+    { "id": "PAR-WORLD-W", "name": "world_width", "value": 5200, "unit": "px", "source": "design_initial", "min": 3000, "max": 8000 },
+    { "id": "PAR-WORLD-H", "name": "world_height", "value": 3600, "unit": "px", "source": "design_initial", "min": 2000, "max": 5000 },
+    { "id": "PAR-CANVAS-W", "name": "canvas_width", "value": 760, "unit": "px", "source": "design_initial", "min": 600, "max": 1000 },
+    { "id": "PAR-CANVAS-H", "name": "canvas_height", "value": 540, "unit": "px", "source": "design_initial", "min": 400, "max": 800 },
+    { "id": "PAR-THRUST-MAIN", "name": "thrust_main", "value": 280, "unit": "px/s^2", "source": "design_initial", "min": 150, "max": 500 },
+    { "id": "PAR-THRUST-RETRO", "name": "thrust_retro", "value": 220, "unit": "px/s^2", "source": "design_initial", "min": 100, "max": 400 },
+    { "id": "PAR-TURN-RATE", "name": "turn_rate", "value": 2.6, "unit": "rad/s^2", "source": "design_initial", "min": 1.5, "max": 4 },
+    { "id": "PAR-SPIN-DAMP", "name": "spin_damping", "value": 0.6, "unit": "1/s", "source": "design_initial", "min": 0.2, "max": 1.5 },
+    { "id": "PAR-BURN-MAIN", "name": "burn_main", "value": 0.075, "unit": "energy/s", "source": "design_initial", "min": 0.03, "max": 0.2 },
+    { "id": "PAR-BURN-RETRO", "name": "burn_retro", "value": 0.095, "unit": "energy/s", "source": "design_initial", "min": 0.04, "max": 0.25 },
+    { "id": "PAR-BURN-RCS", "name": "burn_rcs", "value": 0.018, "unit": "energy/s", "source": "design_initial", "min": 0.005, "max": 0.06 },
+    { "id": "PAR-ENERGY-START", "name": "energy_start", "value": 1.0, "unit": "energy", "source": "design_initial", "min": 0.5, "max": 1.0 },
+    { "id": "PAR-ATMO-DRAIN", "name": "atmo_drain", "value": 0.16, "unit": "energy/s", "source": "design_initial", "min": 0.05, "max": 0.4 },
+    { "id": "PAR-METEOR-HIT-LOSS", "name": "meteor_hit_loss", "value": 0.3, "unit": "energy", "source": "design_initial", "min": 0.1, "max": 0.5 },
+    { "id": "PAR-REFUEL-RATE", "name": "refuel_rate", "value": 0.33, "unit": "energy/s", "source": "design_initial", "min": 0.15, "max": 0.6 },
+    { "id": "PAR-GM-GIANT", "name": "gm_giant", "value": 24000000, "unit": "px^3/s^2", "source": "design_initial", "min": 10000000, "max": 40000000 },
+    { "id": "PAR-GM-SMALL", "name": "gm_small", "value": 7000000, "unit": "px^3/s^2", "source": "design_initial", "min": 3000000, "max": 15000000 },
+    { "id": "PAR-PASS-DIST", "name": "slingshot_clearance", "value": 90, "unit": "px", "source": "design_initial", "min": 60, "max": 200 },
+    { "id": "PAR-CRUISE-V", "name": "cruise_speed", "value": 800, "unit": "px/s", "source": "design_initial", "min": 500, "max": 1200 },
+    { "id": "PAR-LEG-BURN-SEC", "name": "leg_main_burn_seconds", "value": 3.5, "unit": "s", "source": "design_initial", "min": 1, "max": 8 },
+    { "id": "PAR-LEG-RCS-SEC", "name": "leg_rcs_seconds", "value": 2, "unit": "s", "source": "design_initial", "min": 0, "max": 6 },
+    { "id": "PAR-LEG-ENERGY-BUDGET", "name": "leg_energy_budget", "value": 0.4, "unit": "energy", "source": "design_initial", "min": 0.2, "max": 0.8 },
+    { "id": "PAR-REFILL-TARGET", "name": "refill_target", "value": 0.3, "unit": "energy", "source": "design_initial", "min": 0.1, "max": 0.6 },
+    { "id": "PAR-SLING-TURN", "name": "slingshot_turn_threshold", "value": 25, "unit": "deg", "source": "design_initial", "min": 10, "max": 60 },
+    { "id": "PAR-METEOR-INTERVAL0", "name": "meteor_interval_0", "value": 1.4, "unit": "s", "source": "design_initial", "min": 0.6, "max": 3 },
+    { "id": "PAR-METEOR-INTERVAL-MIN", "name": "meteor_interval_min", "value": 0.5, "unit": "s", "source": "design_initial", "min": 0.2, "max": 1.2 },
+    { "id": "PAR-METEOR-CAP", "name": "meteor_cap", "value": 60, "unit": "count", "source": "design_initial", "min": 20, "max": 120 },
+    { "id": "PAR-INVULN", "name": "invulnerability", "value": 1.5, "unit": "s", "source": "design_initial", "min": 0.5, "max": 3 }
+  ],
+  "numeric_requirements": [
+    {
+      "id": "NUMREQ-SLING",
+      "statement": "以约 800px/s 巡航速度从 90px 净距掠过巨行星，出弯航向偏转应不小于 45°（0.785 rad），使引力弹弓成为跨星际的主要转向手段。",
+      "source": "design_goal",
+      "assertion_ids": ["ASSERT-SLING-DEFLECT"]
+    },
+    {
+      "id": "NUMREQ-ENERGY-LEG",
+      "statement": "一次常规基地→基地航行（3.5s 主引擎 + 2s 转向）消耗的能源不超过满能源的 40%，保证熟练玩家可持续循环。",
+      "source": "design_goal",
+      "assertion_ids": ["ASSERT-ENERGY-LEG"]
+    },
+    {
+      "id": "NUMREQ-REFUEL",
+      "statement": "补给站充能速度应在 3 秒内补回一次常规航行消耗（0.3 能源）。",
+      "source": "design_goal",
+      "assertion_ids": ["ASSERT-REFUEL"]
+    },
+    {
+      "id": "NUMREQ-METEOR-THREAT",
+      "statement": "满能源可承受 3 次陨石撞击（每次 -0.3），连续两次撞击不至直接终结航线。",
+      "source": "design_goal",
+      "assertion_ids": ["ASSERT-METEOR-3"]
+    },
+    {
+      "id": "NUMREQ-ATMO-THREAT",
+      "statement": "满能源在大气层中可坚持 4~10 秒，深潜引力带有明显代价但非瞬死。",
+      "source": "design_goal",
+      "assertion_ids": ["ASSERT-ATMO-TIME"]
+    }
+  ],
+  "numerical_assertions": [
+    {
+      "id": "ASSERT-SLING-DEFLECT",
+      "scenario": "normal",
+      "expression": "2 * GM / (r * v * v)",
+      "inputs": { "GM": "PAR-GM-GIANT", "r": "PAR-PASS-DIST", "v": "PAR-CRUISE-V" },
+      "declared_value": 0.8333,
+      "unit": "rad",
+      "tolerance": 0.01,
+      "acceptance": { "operator": ">=", "value": 0.785 }
+    },
+    {
+      "id": "ASSERT-ENERGY-LEG",
+      "scenario": "normal",
+      "expression": "burnMain * tBurn + burnRCS * tRCS",
+      "inputs": { "burnMain": "PAR-BURN-MAIN", "tBurn": "PAR-LEG-BURN-SEC", "burnRCS": "PAR-BURN-RCS", "tRCS": "PAR-LEG-RCS-SEC" },
+      "declared_value": 0.2985,
+      "unit": "energy",
+      "tolerance": 0.0001,
+      "acceptance": { "operator": "<=", "value": 0.4 }
+    },
+    {
+      "id": "ASSERT-REFUEL",
+      "scenario": "normal",
+      "expression": "target / rate",
+      "inputs": { "target": "PAR-REFILL-TARGET", "rate": "PAR-REFUEL-RATE" },
+      "declared_value": 0.9091,
+      "unit": "s",
+      "tolerance": 0.01,
+      "acceptance": { "operator": "<=", "value": 3 }
+    },
+    {
+      "id": "ASSERT-METEOR-3",
+      "scenario": "boundary",
+      "expression": "3 * loss",
+      "inputs": { "loss": "PAR-METEOR-HIT-LOSS" },
+      "declared_value": 0.9,
+      "unit": "energy",
+      "tolerance": 0.01,
+      "acceptance": { "operator": "<=", "value": 1 }
+    },
+    {
+      "id": "ASSERT-ATMO-TIME",
+      "scenario": "boundary",
+      "expression": "1 / drain",
+      "inputs": { "drain": "PAR-ATMO-DRAIN" },
+      "declared_value": 6.25,
+      "unit": "s",
+      "tolerance": 0.01,
+      "acceptance": { "operator": "between", "min": 4, "max": 10 }
+    }
+  ],
+  "state_machines": [
+    {
+      "id": "SM-RUN",
+      "initial_state": "IDLE",
+      "states": [
+        { "id": "IDLE", "entry": "生成世界与飞船，展示星系预览", "exit": "开始飞行" },
+        { "id": "FLYING", "entry": "推进主循环（物理/生成/结算）", "exit": "暂停或终局" },
+        { "id": "PAUSED", "entry": "冻结推进与时间", "exit": "继续飞行" },
+        { "id": "OVER", "entry": "能源钳制为 0，结算并记录成绩", "exit": "再来一局" }
+      ],
+      "event_order": ["thrust", "gravity", "atmo_drain", "refuel", "meteor", "bounce", "distance", "energy_zero", "outcome"],
+      "transitions": [
+        {
+          "id": "TR-START",
+          "from": "IDLE",
+          "event": "玩家点击开始 / 按空格",
+          "to": "FLYING",
+          "effect": "保持当前世界与飞船进入飞行",
+          "repeat_policy": "仅 IDLE 可触发",
+          "cleanup": "清空待机粒子"
+        },
+        {
+          "id": "TR-PAUSE",
+          "from": "FLYING",
+          "event": "按 P 或点击暂停",
+          "to": "PAUSED",
+          "effect": "冻结推进与时间",
+          "repeat_policy": "仅 FLYING 可触发",
+          "cleanup": "清空按键状态"
+        },
+        {
+          "id": "TR-RESUME",
+          "from": "PAUSED",
+          "event": "按 P 或点击继续",
+          "to": "FLYING",
+          "effect": "恢复推进",
+          "repeat_policy": "仅 PAUSED 可触发",
+          "cleanup": "无"
+        },
+        {
+          "id": "TR-ENERGY-ZERO",
+          "from": "FLYING",
+          "event": "能源降至 0",
+          "to": "OVER",
+          "effect": "能源钳制为 0、停止推进、记录成绩",
+          "repeat_policy": "同一帧只结算一次（energyZeroFired 标记）",
+          "cleanup": "记录终局标记"
+        },
+        {
+          "id": "TR-RESTART",
+          "from": "OVER",
+          "event": "玩家点击再来一局 / 按空格",
+          "to": "FLYING",
+          "effect": "重建世界与飞船、清零距离与统计",
+          "repeat_policy": "仅 OVER 可触发",
+          "cleanup": "清空粒子与陨石"
+        },
+        {
+          "id": "TR-RESET-IDLE",
+          "from": "IDLE",
+          "event": "玩家点击重新开始",
+          "to": "IDLE",
+          "effect": "重建初始预览世界",
+          "repeat_policy": "仅 IDLE 可触发",
+          "cleanup": "清空全部运行时状态"
+        },
+        {
+          "id": "TR-RESET-FLYING",
+          "from": "FLYING",
+          "event": "玩家点击重新开始",
+          "to": "IDLE",
+          "effect": "重建初始预览世界",
+          "repeat_policy": "仅 FLYING 可触发",
+          "cleanup": "清空全部运行时状态与按键"
+        },
+        {
+          "id": "TR-RESET-PAUSED",
+          "from": "PAUSED",
+          "event": "玩家点击重新开始",
+          "to": "IDLE",
+          "effect": "重建初始预览世界",
+          "repeat_policy": "仅 PAUSED 可触发",
+          "cleanup": "清空全部运行时状态与按键"
+        },
+        {
+          "id": "TR-RESET-OVER",
+          "from": "OVER",
+          "event": "玩家点击重新开始",
+          "to": "IDLE",
+          "effect": "重建初始预览世界",
+          "repeat_policy": "仅 OVER 可触发",
+          "cleanup": "清空全部运行时状态与按键"
+        }
+      ]
+    }
+  ],
+  "ledgers": {
+    "probability_pools": [],
+    "resources": [
+      {
+        "id": "RES-ENERGY",
+        "starting": 1,
+        "allow_negative": false,
+        "transactions": [
+          { "id": "LEG-BURN", "order": 1, "amount": -0.2985 },
+          { "id": "REFUEL", "order": 2, "amount": 0.2985 }
+        ],
+        "expected_final": 1
+      }
+    ],
+    "capacity": []
+  },
+  "tests": [
+    {
+      "id": "TEST-GRAVITY",
+      "type": "normal",
+      "rule_ids": ["RULE-GRAVITY"],
+      "precondition": "飞船静止于行星旁 100px",
+      "action": "推进一帧 0.1s",
+      "expected": "速度增量方向指向行星中心，幅值 ≈ GM/r²×0.1",
+      "status": "passed"
+    },
+    {
+      "id": "TEST-SLING-DEFLECT",
+      "type": "normal",
+      "rule_ids": ["RULE-GRAVITY", "RULE-SLING"],
+      "precondition": "飞船以 600px/s 从 140px 距离掠过巨行星",
+      "action": "积分若干帧至飞出引力带",
+      "expected": "出弯航向偏转 ≥45°，计数弹弓转向；井内速度明显飙升",
+      "status": "passed"
+    },
+    {
+      "id": "TEST-ENERGY",
+      "type": "normal",
+      "rule_ids": ["RULE-THRUST", "RULE-ENERGY"],
+      "precondition": "满能源飞船",
+      "action": "点火主引擎 1s 后滑行 1s",
+      "expected": "点火段能源按 burn 减少，滑行段不变",
+      "status": "passed"
+    },
+    {
+      "id": "TEST-ATMO",
+      "type": "boundary",
+      "rule_ids": ["RULE-ATMO"],
+      "precondition": "飞船在大气层半径内",
+      "action": "推进 1s",
+      "expected": "能源减少 ≈0.16，离开大气层后停止",
+      "status": "passed"
+    },
+    {
+      "id": "TEST-REFUEL",
+      "type": "normal",
+      "rule_ids": ["RULE-REFUEL"],
+      "precondition": "飞船在补给半径内且能源 0.5",
+      "action": "推进 2s",
+      "expected": "能源回升至 ≈0.5+0.66 且封顶 1.0；半径外不回升",
+      "status": "passed"
+    },
+    {
+      "id": "TEST-METEOR",
+      "type": "normal",
+      "rule_ids": ["RULE-METEOR"],
+      "precondition": "陨石与飞船重叠",
+      "action": "推进一帧",
+      "expected": "能源 -0.30、陨石移除、飞船进入 1.5s 无敌",
+      "status": "passed"
+    },
+    {
+      "id": "TEST-METEOR-INVULN",
+      "type": "boundary",
+      "rule_ids": ["RULE-METEOR"],
+      "precondition": "飞船处于无敌窗口",
+      "action": "与陨石重叠推进一帧",
+      "expected": "不扣能源、不重复击退",
+      "status": "passed"
+    },
+    {
+      "id": "TEST-OVER",
+      "type": "boundary",
+      "rule_ids": ["RULE-ENERGY"],
+      "precondition": "能源 0.01，持续点火",
+      "action": "推进至能源归零",
+      "expected": "相位转为 OVER 且只结算一次",
+      "status": "passed"
+    },
+    {
+      "id": "TEST-DEST",
+      "type": "normal",
+      "rule_ids": ["RULE-DEST"],
+      "precondition": "位于基地 A，基地 B/C 未抵达",
+      "action": "查询下一站；随后抵达某基地",
+      "expected": "下一站 = 距 A 最远基地；抵达后切换为距新基地最远的另一基地",
+      "status": "passed"
+    },
+    {
+      "id": "TEST-DISTANCE",
+      "type": "normal",
+      "rule_ids": ["RULE-SCORE"],
+      "precondition": "飞船匀速 600px/s",
+      "action": "推进 2s",
+      "expected": "distance += 1200px，score = 1200km",
+      "status": "passed"
+    },
+    {
+      "id": "TEST-RESTART",
+      "type": "recovery",
+      "rule_ids": ["RULE-SCORE"],
+      "precondition": "OVER 状态",
+      "action": "触发再来一局",
+      "expected": "重建世界，距离/能源/统计清零，可继续飞行",
+      "status": "passed"
+    }
+  ],
+  "production_risks": [
+    {
+      "id": "RISK-PERF",
+      "surface": "performance",
+      "trigger": "长时间飞行陨石与粒子累积",
+      "impact": "掉帧",
+      "detection": "连续游玩 10 分钟观察帧率",
+      "mitigation": "陨石上限 60、粒子上限 200、轨迹采样 38",
+      "fallback": "进一步降低上限",
+      "owner": "program"
+    },
+    {
+      "id": "RISK-INPUT",
+      "surface": "ui_input",
+      "trigger": "方向键/空格未拦截或失焦后按键卡住",
+      "impact": "页面滚动或飞船持续点火",
+      "detection": "键盘焦点测试与失焦回归",
+      "mitigation": "preventDefault + keyup/blur 清空按键状态",
+      "fallback": "窗口失焦自动暂停",
+      "owner": "program"
+    },
+    {
+      "id": "RISK-STATE",
+      "surface": "state_data",
+      "trigger": "成绩落库 gameId 冲突或后端不可用",
+      "impact": "排行榜数据错乱或丢失",
+      "detection": "recordScore 调用与排行榜回读",
+      "mitigation": "复用 scoreClient，gameId=slingshot，后端不可用降级 localStorage",
+      "fallback": "localStorage 保留最近 200 条",
+      "owner": "program and qa"
+    },
+    {
+      "id": "RISK-INTEGRATION",
+      "surface": "integration_qa",
+      "trigger": "新增注册表条目/图标/i18n 与宿主路由集成",
+      "impact": "菜单缺失或文案缺失",
+      "detection": "typecheck + 构建 + 路由走查",
+      "mitigation": "registry/routes 自动遍历 GAMES，补充中英文案",
+      "fallback": "中文兜底文案",
+      "owner": "program and qa"
+    }
+  ],
+  "prototype": {
+    "required": true,
+    "path": "slingshot-preview.html",
+    "ruleset_id": "slingshot-v1",
+    "config_source": "src/games/slingshotLogic.ts（SLINGSHOT_PARAMS 与 createWorld 预设）",
+    "checks": {
+      "load": "passed",
+      "input": "passed",
+      "main_loop": "passed",
+      "outcome": "passed",
+      "restart": "passed"
+    },
+    "journeys": [
+      {
+        "id": "J-STANDARD",
+        "type": "standard",
+        "name": "常规航线：发射→弹弓→补给",
+        "steps": ["打开预览页无阻断错误", "点击开始后飞船可推进", "主引擎加速后切入巨行星引力带，航向偏转并加速", "抵达绿色补给站后能源回升", "下一站标记切换"],
+        "expected": "飞船借弹弓偏转 ≥45° 并加速；补给站内能源回升至 100%；下一站切换到另一基地",
+        "evidence": "浏览器实测（Chrome，1569×1254 视口，file:///D:/works/myworks/fat-games/slingshot-preview.html）：加载无控制台错误、首帧画面完整；点「开始飞行」后飞船推进、按住主引擎 3s 能源下降、距离持续累计；受控切向进入泰坦引力带（d=217, v=800px/s）出带后航向偏转计次 8→9，自由飞行累计 6+ 次弹弓；飞船移至曙光站补给半径内能源 0.3→回升、HUD 显示「补给中」、触发「抵达曙光站」并切换下一站 base-b。",
+        "status": "passed"
+      },
+      {
+        "id": "J-FAILURE",
+        "type": "failure",
+        "name": "能源耗尽终局",
+        "steps": ["持续点火耗尽能源", "能源归零出现结算界面", "显示航行距离", "点击再来一局可重开"],
+        "expected": "能源归零后相位转为 OVER 且只结算一次；结算显示距离；可重开继续飞行",
+        "evidence": "浏览器实测：自由飞行中飞船被泰坦引力井捕获、经大气层/陨石/反弹耗能后能源归零 → 相位 over、结算覆盖层显示「能源耗尽 · 航线终止」与距离 14,472 km、统计「抵达 0 座·弹弓 2 次·最高航速 890 km/s」；recordScore 写入 localStorage（fat-games.scores 出现 2 条 slingshot 记录，fat-games.slingshot.best=14472）；点「再来一局」相位回 flying、距离清零；点「重新开始」回 idle。",
+        "status": "passed"
+      },
+      {
+        "id": "J-HIGHRISK",
+        "type": "boundary",
+        "name": "高风险路径：大气层与陨石",
+        "steps": ["深潜行星大气层观察能源骤降与高温告警", "连续被陨石撞击观察能源损失与无敌闪烁", "确认不出现软锁"],
+        "expected": "大气层内能源按 0.16/s 下降并告警；陨石撞击 -0.3 且无敌窗口内不重复扣能；无软锁",
+        "evidence": "浏览器实测：飞船入曙光站大气层时 HUD 顶部显示「⚠ 大气层！能源快速消耗」横幅；注入陨石于飞船旁 0.4s 内能源 0.9→0.6（-0.3）、无敌 1.5s、陨石移除、击退生效；无敌窗口内再碰撞不重复扣能（单测 TEST-METEOR-INVULN 佐证）；终局后按 P 暂停/继续均正常，无软锁。",
+        "status": "passed"
+      }
+    ]
+  },
+  "claims": [
+    {
+      "id": "CLAIM-SLING",
+      "text": "巨行星弹弓可提供 ≥45° 航向偏转（静态引力井中的自由转向），是跨星际的主要转向手段；井内速度飙升来自势能转化。",
+      "strength": "calculated",
+      "evidence_ids": ["ASSERT-SLING-DEFLECT"]
+    },
+    {
+      "id": "CLAIM-ENERGY",
+      "text": "常规每段航行耗能 ≤40% 满能源，熟练玩家可依靠补给站循环。",
+      "strength": "calculated",
+      "evidence_ids": ["ASSERT-ENERGY-LEG"]
+    },
+    {
+      "id": "CLAIM-METEOR",
+      "text": "三次陨石撞击（-0.3/次）合计 0.9，满能源可承受但威胁明显。",
+      "strength": "calculated",
+      "evidence_ids": ["ASSERT-METEOR-3"]
+    }
+  ]
+}

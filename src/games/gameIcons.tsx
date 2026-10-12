@@ -211,3 +211,15 @@ export const IconRocket: React.FC<GameIconProps> = (props) => (
     <path d="M7.4 10.4 L4.6 9.2 M16.6 10.4 L19.4 9.2" />
   </svg>
 );
+
+/** 引力弹弓：探测器飞掠行星引力井，弯曲航线（行星 + 椭圆轨道弧 + 探测器） */
+export const IconSlingshot: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    <circle cx="9" cy="14.5" r="3.4" />
+    <path d="M9 17.9 V21" />
+    <path d="M6.8 19.6 H11.2" />
+    <path d="M18.6 7.4 Q10.6 3.6 7.4 11.2" strokeDasharray="2.4 2.2" />
+    <path d="M14.8 12.4 L18.4 6.6 L19.8 12" />
+    <circle cx="18.8" cy="6.4" r="1.5" fill="currentColor" stroke="none" />
+  </svg>
+);
