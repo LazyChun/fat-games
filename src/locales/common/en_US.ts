@@ -50,6 +50,8 @@ export default {
   "game.pingpong.desc": "Rally the ball, first to 7 wins",
   "game.thunder.title": "Air Fighter",
   "game.thunder.desc": "Pilot your fighter and shoot down enemies",
+  "game.tankbattle.title": "Tank Battle",
+  "game.tankbattle.desc": "Drive a tank on a 3D battlefield and destroy all enemies",
   "game.scores.title": "Leaderboard",
   "game.scores.desc": "View game scores and statistics",
 
@@ -201,6 +203,22 @@ export default {
   "game.thunder.idle": "Click \"Start\" to take off",
   "game.thunder.help":
     "Controls: Arrow keys or W/A/S/D to move; your fighter fires automatically. Dodge enemies and bullets, shoot them down for points. Game over when lives run out.",
+
+  "game.tankbattle.hp": "HP",
+  "game.tankbattle.kills": "Kills",
+  "game.tankbattle.left": "Enemies",
+  "game.tankbattle.start": "Start",
+  "game.tankbattle.pause": "Pause",
+  "game.tankbattle.resume": "Resume",
+  "game.tankbattle.restart": "Restart",
+  "game.tankbattle.win": "All enemies destroyed — victory!",
+  "game.tankbattle.lose": "Your tank was destroyed",
+  "game.tankbattle.result": "{kills} destroyed · {hp} HP left",
+  "game.tankbattle.again": "Play Again",
+  "game.tankbattle.idle": "Click \"Start\" or press Space to enter the battlefield",
+  "game.tankbattle.paused": "Paused",
+  "game.tankbattle.help":
+    "Controls: W/S or ↑/↓ drive forward/backward, A/D or ←/→ rotate the hull; move the mouse to aim the turret, Left-click or Space to fire. Destroy all enemy tanks to win — water and trees are impassable, walls provide cover.",
 
   "game.scores.total": "Total Records",
   "game.scores.games": "Game Types",

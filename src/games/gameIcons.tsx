@@ -176,3 +176,14 @@ export const IconScores: React.FC<GameIconProps> = (props) => (
     <path d="M8.6 16 H15.4 V18.4 H8.6 Z" />
   </svg>
 );
+
+/** 坦克对决：俯视坦克（履带车身 + 炮塔 + 炮管） */
+export const IconTank: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    <rect x="3.2" y="7.6" width="17.6" height="8.8" rx="3.4" />
+    <path d="M6.8 7.6 V5.4 M17.2 7.6 V5.4 M6.8 18.6 V16.4 M17.2 18.6 V16.4" />
+    <circle cx="12" cy="12" r="4.8" />
+    <path d="M16 12 H20.8" strokeWidth={2.2} />
+    <circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none" />
+  </svg>
+);

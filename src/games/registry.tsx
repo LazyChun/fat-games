@@ -21,6 +21,7 @@ import {
   IconGoldMiner,
   IconPingPong,
   IconThunder,
+  IconTank,
   IconScores,
 } from "./gameIcons";
 
@@ -35,6 +36,7 @@ import RubikCubeGame from "./RubikCubeGame";
 import GoldMinerGame from "./GoldMinerGame";
 import PingPongGame from "./PingPongGame";
 import ThunderFighterGame from "./ThunderFighterGame";
+import TankBattleGame from "./TankBattleGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -179,6 +181,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.casual",
     icon: IconThunder,
     component: ThunderFighterGame,
+  },
+  {
+    id: "tankbattle",
+    title: "坦克对决",
+    desc: "3D 战场驾驶坦克，击毁全部敌军",
+    category: "休闲",
+    titleKey: "game.tankbattle.title",
+    descKey: "game.tankbattle.desc",
+    categoryKey: "category.casual",
+    icon: IconTank,
+    component: TankBattleGame,
   },
   {
     id: "scores",

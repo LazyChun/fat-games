@@ -49,6 +49,8 @@ export default {
   "game.pingpong.desc": "左右击球，先得 7 分获胜",
   "game.thunder.title": "战鹰雷霆",
   "game.thunder.desc": "驾驶战机，击落来袭敌机",
+  "game.tankbattle.title": "坦克对决",
+  "game.tankbattle.desc": "3D 战场驾驶坦克，击毁全部敌军",
   "game.scores.title": "排行榜",
   "game.scores.desc": "查看各游戏成绩记录与统计",
 
@@ -200,6 +202,22 @@ export default {
   "game.thunder.idle": "点击「开始」起飞",
   "game.thunder.help":
     "操作：方向键 或 W/A/S/D 移动，战机会自动开火；躲避敌机与子弹，击落敌机得分，生命耗尽游戏结束。",
+
+  "game.tankbattle.hp": "生命",
+  "game.tankbattle.kills": "击毁",
+  "game.tankbattle.left": "敌军",
+  "game.tankbattle.start": "开始",
+  "game.tankbattle.pause": "暂停",
+  "game.tankbattle.resume": "继续",
+  "game.tankbattle.restart": "重新开始",
+  "game.tankbattle.win": "全歼敌军，胜利！",
+  "game.tankbattle.lose": "你的坦克被击毁了",
+  "game.tankbattle.result": "击毁 {kills} 辆 · 剩余生命 {hp}",
+  "game.tankbattle.again": "再来一局",
+  "game.tankbattle.idle": "点击「开始」或按空格进入战场",
+  "game.tankbattle.paused": "已暂停",
+  "game.tankbattle.help":
+    "操作：W/S 或 ↑/↓ 前进后退，A/D 或 ←/→ 转向车身；鼠标移动瞄准炮塔，左键或空格开火。击毁全部敌军坦克获胜——水塘与树林无法通行，墙体可作掩体。",
 
   "game.scores.total": "总记录数",
   "game.scores.games": "游戏种类",
