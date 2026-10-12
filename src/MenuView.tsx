@@ -17,6 +17,7 @@ import { GAMES, type GameDef } from "./games/registry";
 import { pathToGameId, gameIdToPath } from "./routes";
 import { getPreferredGameId, setPreferredGameId } from "./preferences";
 import { matchPinyin } from "./utils";
+import { useI18n } from "./hooks";
 import ThemeShell from "./ThemeShell";
 import styles from "./MenuView.less";
 
@@ -25,6 +26,7 @@ interface Props {
 }
 
 const MenuView: React.FC<Props> = ({ sdk }) => {
+  const i18n = useI18n();
   const [query, setQuery] = useState("");
   const [, forceUpdate] = useReducer((x: number) => x + 1, 0);
 
@@ -59,6 +61,10 @@ const MenuView: React.FC<Props> = ({ sdk }) => {
     );
   }, [query]);
 
+  const placeholder = i18n.text("games.search.placeholder");
+  const countText = i18n.text("games.search.count", { count: GAMES.length });
+  const emptyText = i18n.text("games.empty");
+
   return (
     <ThemeShell sdk={sdk} padding={10}>
       <div
@@ -73,18 +79,18 @@ const MenuView: React.FC<Props> = ({ sdk }) => {
           <Input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="搜索游戏..."
+            placeholder={placeholder}
             allowClear
             size="small"
             className={styles.menuSearch}
           />
-          <div className={styles.searchMeta}>共 {GAMES.length} 个游戏</div>
+          <div className={styles.searchMeta}>{countText}</div>
         </div>
 
         <div style={{ flex: 1, overflow: "auto", minHeight: 0 }}>
           {filtered.length === 0 ? (
             <Empty
-              description="没有匹配的游戏"
+              description={emptyText}
               image={Empty.PRESENTED_IMAGE_SIMPLE}
             />
           ) : (
@@ -119,7 +125,11 @@ const GameCard: React.FC<{
   active: boolean;
   onOpen: () => void;
 }> = ({ game, active, onOpen }) => {
+  const i18n = useI18n();
   const Icon = game.icon;
+  const title = i18n.text(game.titleKey) || game.title;
+  const desc = i18n.text(game.descKey) || game.desc;
+  const category = i18n.text(game.categoryKey) || game.category;
   return (
     <div
       onClick={onOpen}
@@ -152,7 +162,7 @@ const GameCard: React.FC<{
     >
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
         <Icon style={{ fontSize: 18, color: "#1677ff" }} />
-        <span style={{ fontWeight: 600, fontSize: 13 }}>{game.title}</span>
+        <span style={{ fontWeight: 600, fontSize: 13 }}>{title}</span>
       </div>
       <span
         style={{
@@ -165,7 +175,7 @@ const GameCard: React.FC<{
           overflow: "hidden",
         }}
       >
-        {game.desc}
+        {desc}
       </span>
       <Tag
         style={{
@@ -175,7 +185,7 @@ const GameCard: React.FC<{
           lineHeight: "16px",
         }}
       >
-        {game.category}
+        {category}
       </Tag>
     </div>
   );

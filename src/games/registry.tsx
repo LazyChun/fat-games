@@ -1,5 +1,11 @@
 /*
  * 游戏注册表：所有游戏在此集中登记（id、标题、描述、图标、组件、分类）
+ *
+ * 每个游戏同时提供：
+ *   - title/desc/category：中文兜底文本（用于在 IntlProvider 外偶发渲染、
+ *     命令行 toast、scoreClient 落库 gameTitle 等不需要 i18n 的场景）
+ *   - titleKey/descKey/categoryKey：i18n key，组件在 IntlProvider 内通过
+ *     useI18n().text(key) 取本地化文本
  */
 import React from "react";
 import {
@@ -18,11 +24,21 @@ export type GameCategory = "休闲" | "益智" | "记录";
 
 export interface GameDef {
   id: string;
+  /** 中文兜底标题 */
   title: string;
+  /** 中文兜底描述 */
   desc: string;
-  icon: React.ComponentType<{ style?: React.CSSProperties }>;
   category: GameCategory;
-  component: React.ComponentType<{ sdk: import("fat-notes-sdk").FatNotesPluginSDK }>;
+  /** i18n key，e.g. "game.2048.title" */
+  titleKey: string;
+  /** i18n key，e.g. "game.2048.desc" */
+  descKey: string;
+  /** i18n key，e.g. "category.puzzle" */
+  categoryKey: string;
+  icon: React.ComponentType<{ style?: React.CSSProperties }>;
+  component: React.ComponentType<{
+    sdk: import("fat-notes-sdk").FatNotesPluginSDK;
+  }>;
 }
 
 export const GAMES: GameDef[] = [
@@ -30,32 +46,44 @@ export const GAMES: GameDef[] = [
     id: "2048",
     title: "2048",
     desc: "合并数字方块，目标 2048",
-    icon: AppstoreOutlined,
     category: "益智",
+    titleKey: "game.2048.title",
+    descKey: "game.2048.desc",
+    categoryKey: "category.puzzle",
+    icon: AppstoreOutlined,
     component: Game2048,
   },
   {
     id: "snake",
     title: "贪吃蛇",
     desc: "控制蛇身吃食物，越长越难",
-    icon: ThunderboltOutlined,
     category: "休闲",
+    titleKey: "game.snake.title",
+    descKey: "game.snake.desc",
+    categoryKey: "category.casual",
+    icon: ThunderboltOutlined,
     component: SnakeGame,
   },
   {
     id: "minesweeper",
     title: "扫雷",
     desc: "标记地雷，揭开所有安全格",
-    icon: BorderOutlined,
     category: "益智",
+    titleKey: "game.minesweeper.title",
+    descKey: "game.minesweeper.desc",
+    categoryKey: "category.puzzle",
+    icon: BorderOutlined,
     component: MinesweeperGame,
   },
   {
     id: "scores",
     title: "排行榜",
     desc: "查看各游戏成绩记录与统计",
-    icon: TrophyOutlined,
     category: "记录",
+    titleKey: "game.scores.title",
+    descKey: "game.scores.desc",
+    categoryKey: "category.record",
+    icon: TrophyOutlined,
     component: ScoresView,
   },
 ];

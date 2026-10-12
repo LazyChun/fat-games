@@ -1,0 +1,96 @@
+export default {
+  "common.ok": "OK",
+  "common.cancel": "Cancel",
+  "common.save": "Save",
+  "common.delete": "Delete",
+  "common.refresh": "Refresh",
+  "common.close": "Close",
+  "common.back": "Back",
+  "common.confirm": "Confirm",
+  "common.clear": "Clear",
+  "common.all": "All",
+  "common.empty.default": "No data",
+  "common.i18n.empty": "Empty",
+
+  "games.title": "Game Box",
+  "games.search.placeholder": "Search games...",
+  "games.search.count": "{count} games total",
+  "games.empty": "No matching games",
+  "games.loading": "Opening game…",
+  "games.footer.ready": "ready",
+  "games.settings.title": "fat-games Game Box",
+  "games.settings.desc":
+    "{count} casual games built in. Pick a game from the left menu and start playing; scores are automatically recorded to the leaderboard.",
+  "games.settings.tip":
+    "Tip: Use the command fat-games.openGame (parameter is game id) to quickly open a specific game from anywhere.",
+  "games.settings.route": "Route",
+  "games.command.pong":
+    "[fat-games] pong (host {version}, {count} games)",
+  "games.command.unknown": "[fat-games] Unknown game id: {id}",
+
+  "game.2048.title": "2048",
+  "game.2048.desc": "Merge number tiles, target 2048",
+  "game.snake.title": "Snake",
+  "game.snake.desc": "Control the snake to eat food, longer is harder",
+  "game.minesweeper.title": "Minesweeper",
+  "game.minesweeper.desc": "Flag mines, reveal all safe cells",
+  "game.scores.title": "Leaderboard",
+  "game.scores.desc": "View game scores and statistics",
+
+  "game.2048.score": "Score",
+  "game.2048.best": "Best",
+  "game.2048.bestTile": "Best Tile",
+  "game.2048.restart": "Restart",
+  "game.2048.over": "Game Over",
+  "game.2048.again": "Play Again",
+  "game.2048.help":
+    "Controls: Arrow keys or W/A/S/D to move tiles; same numbers merge; target 2048.",
+
+  "game.snake.score": "Score",
+  "game.snake.length": "Length",
+  "game.snake.start": "Start",
+  "game.snake.pause": "Pause",
+  "game.snake.over": "Ended",
+  "game.snake.restart": "Restart",
+  "game.snake.over.title": "Game Over",
+  "game.snake.over.score": "Score: {score}",
+  "game.snake.again": "Play Again",
+  "game.snake.idle": "Press arrow key or click \"Start\"",
+  "game.snake.help":
+    "Controls: Arrow keys or W/A/S/D to steer; eat food for +1 point; longer means faster.",
+
+  "game.minesweeper.minesLeft": "Mines Left",
+  "game.minesweeper.time": "Time (s)",
+  "game.minesweeper.restart": "Restart",
+  "game.minesweeper.win": "You Win",
+  "game.minesweeper.lose": "Boom",
+  "game.minesweeper.usedSeconds": "Time {seconds} s",
+  "game.minesweeper.again": "Play Again",
+  "game.minesweeper.help":
+    "Controls: Left-click to reveal; right-click to flag; empty cells auto-expand. 9x9 / 10 mines.",
+
+  "game.scores.total": "Total Records",
+  "game.scores.games": "Game Types",
+  "game.scores.recordsSuffix": "",
+  "game.scores.title2": "Leaderboard",
+  "game.scores.refresh": "Refresh",
+  "game.scores.clear": "Clear",
+  "game.scores.confirmClearAll":
+    "This will clear ALL game score records. Continue?",
+  "game.scores.confirmClearFiltered":
+    "This will clear the filtered game score records. Continue?",
+  "game.scores.confirmTitle": "Clear Scores",
+  "game.scores.empty": "No score records yet — play a game!",
+  "game.scores.filterAll": "All Games",
+  "game.scores.col.game": "Game",
+  "game.scores.col.player": "Player",
+  "game.scores.col.score": "Score",
+  "game.scores.col.detail": "Detail",
+  "game.scores.col.time": "Time",
+  "game.scores.help":
+    "Tip: Scores are sorted by time descending; click column headers to sort by score. Falls back to localStorage (max 200 records) when backend unavailable.",
+
+  "category.casual": "Casual",
+  "category.puzzle": "Puzzle",
+  "category.record": "Records",
+};

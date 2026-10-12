@@ -10,6 +10,7 @@ import { Empty } from "antd";
 import { GAMES } from "./games/registry";
 import { getDefaultRoute, pathToGameId, gameIdToPath } from "./routes";
 import { getPreferredGameId } from "./preferences";
+import { useI18n } from "./hooks";
 import ThemeShell from "./ThemeShell";
 
 interface Props {
@@ -17,6 +18,7 @@ interface Props {
 }
 
 const WorkPageView: React.FC<Props> = ({ sdk }) => {
+  const i18n = useI18n();
   const [, forceUpdate] = useReducer((x: number) => x + 1, 0);
 
   useEffect(() => {
@@ -26,7 +28,10 @@ const WorkPageView: React.FC<Props> = ({ sdk }) => {
 
   const { path } = sdk.router.getCurrent();
   const gameId = pathToGameId(path);
-  const game = useMemo(() => GAMES.find((g) => g.id === gameId) || null, [gameId]);
+  const game = useMemo(
+    () => GAMES.find((g) => g.id === gameId) || null,
+    [gameId],
+  );
 
   // 当前路由不属于本插件时，兜底导航到记忆的游戏
   useEffect(() => {
@@ -41,7 +46,7 @@ const WorkPageView: React.FC<Props> = ({ sdk }) => {
       <ThemeShell sdk={sdk} padding={24}>
         <Empty
           image={Empty.PRESENTED_IMAGE_SIMPLE}
-          description="正在打开游戏…"
+          description={i18n.text("games.loading")}
         />
       </ThemeShell>
     );
