@@ -52,6 +52,8 @@ export default {
   "game.thunder.desc": "Pilot your fighter and shoot down enemies",
   "game.tankbattle.title": "Tank Battle",
   "game.tankbattle.desc": "Drive a tank on a 3D battlefield and destroy all enemies",
+  "game.backfire.title": "Backfire Bomber",
+  "game.backfire.desc": "Bomb ground targets from your bomber",
   "game.scores.title": "Leaderboard",
   "game.scores.desc": "View game scores and statistics",
 
@@ -219,6 +221,21 @@ export default {
   "game.tankbattle.paused": "Paused",
   "game.tankbattle.help":
     "Controls: W/S or ↑/↓ drive forward/backward, A/D or ←/→ rotate the hull; move the mouse to aim the turret, Left-click or Space to fire. Destroy all enemy tanks to win — water and trees are impassable, walls provide cover.",
+
+  "game.backfire.score": "Score",
+  "game.backfire.hp": "HP",
+  "game.backfire.targets": "Targets",
+  "game.backfire.level": "Level",
+  "game.backfire.start": "Start",
+  "game.backfire.pause": "Pause",
+  "game.backfire.restart": "Restart",
+  "game.backfire.over.title": "Bomber Down",
+  "game.backfire.over.score": "Score {score}",
+  "game.backfire.over.targets": "{targets} targets destroyed",
+  "game.backfire.again": "Play Again",
+  "game.backfire.idle": "Click \"Start\" or press Space to take off",
+  "game.backfire.help":
+    "Controls: Arrow keys or W/A/S/D to move the bomber, Space to drop bombs; bombs explode on impact and damage targets in the blast radius. Destroy radars, AA vehicles, buildings and RPG soldiers for points; destroy the medic truck to heal and the vault for a big bonus. Enemies get fiercer over time!",
 
   "game.scores.total": "Total Records",
   "game.scores.games": "Game Types",

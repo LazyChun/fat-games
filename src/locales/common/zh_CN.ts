@@ -51,6 +51,8 @@ export default {
   "game.thunder.desc": "驾驶战机，击落来袭敌机",
   "game.tankbattle.title": "坦克对决",
   "game.tankbattle.desc": "3D 战场驾驶坦克，击毁全部敌军",
+  "game.backfire.title": "逆火战轰",
+  "game.backfire.desc": "驾驶轰炸机，投弹摧毁地面目标",
   "game.scores.title": "排行榜",
   "game.scores.desc": "查看各游戏成绩记录与统计",
 
@@ -218,6 +220,21 @@ export default {
   "game.tankbattle.paused": "已暂停",
   "game.tankbattle.help":
     "操作：W/S 或 ↑/↓ 前进后退，A/D 或 ←/→ 转向车身；鼠标移动瞄准炮塔，左键或空格开火。击毁全部敌军坦克获胜——水塘与树林无法通行，墙体可作掩体。",
+
+  "game.backfire.score": "得分",
+  "game.backfire.hp": "生命",
+  "game.backfire.targets": "摧毁",
+  "game.backfire.level": "关卡",
+  "game.backfire.start": "开始",
+  "game.backfire.pause": "暂停",
+  "game.backfire.restart": "重新开始",
+  "game.backfire.over.title": "轰炸机被击落",
+  "game.backfire.over.score": "得分 {score}",
+  "game.backfire.over.targets": "摧毁目标 {targets} 个",
+  "game.backfire.again": "再来一局",
+  "game.backfire.idle": "点击「开始」或按空格起飞",
+  "game.backfire.help":
+    "操作：方向键或 W/A/S/D 移动轰炸机，空格投弹；炸弹落地爆炸杀伤范围内目标。摧毁防空雷达、防空车、建筑与 RPG 敌人得分，击毁救护车回血、金库高分。敌人随时间越来越凶残！",
 
   "game.scores.total": "总记录数",
   "game.scores.games": "游戏种类",

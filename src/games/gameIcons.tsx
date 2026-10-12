@@ -187,3 +187,16 @@ export const IconTank: React.FC<GameIconProps> = (props) => (
     <circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none" />
   </svg>
 );
+
+/** 逆火战轰：侧视轰炸机（机身 + 座舱 + 后掠翼 + 尾翼）+ 投放的炸弹 */
+export const IconBackfire: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    <path d="M3.8 12.4 H16.6 Q20 12.4 20.8 13 Q20 13.6 16.6 13.6 H3.8 Q2.6 13.6 2.6 13 Q2.6 12.4 3.8 12.4 Z" />
+    <path d="M8 12.4 Q8.4 10.2 10.4 10.2 Q12.2 10.2 12.2 12.4" />
+    <path d="M12.8 13.6 L11.4 17.4 H14.8 L16 13.6" />
+    <path d="M16.2 12.4 L17.4 8.6 L18.8 12.4" />
+    <path d="M8.2 16.9 V17.6" />
+    <path d="M7.1 17.6 H9.3" />
+    <circle cx="8.2" cy="19" r="1.5" />
+  </svg>
+);

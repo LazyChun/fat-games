@@ -22,6 +22,7 @@ import {
   IconPingPong,
   IconThunder,
   IconTank,
+  IconBackfire,
   IconScores,
 } from "./gameIcons";
 
@@ -37,6 +38,7 @@ import GoldMinerGame from "./GoldMinerGame";
 import PingPongGame from "./PingPongGame";
 import ThunderFighterGame from "./ThunderFighterGame";
 import TankBattleGame from "./TankBattleGame";
+import BackfireBomberGame from "./BackfireBomberGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -192,6 +194,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.casual",
     icon: IconTank,
     component: TankBattleGame,
+  },
+  {
+    id: "backfire",
+    title: "逆火战轰",
+    desc: "驾驶轰炸机，投弹摧毁地面目标",
+    category: "休闲",
+    titleKey: "game.backfire.title",
+    descKey: "game.backfire.desc",
+    categoryKey: "category.casual",
+    icon: IconBackfire,
+    component: BackfireBomberGame,
   },
   {
     id: "scores",

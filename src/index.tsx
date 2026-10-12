@@ -23,6 +23,9 @@ import { GAMES } from "./games/registry";
 import { ROUTE_PREFIX, getDefaultRoute, gameIdToPath } from "./routes";
 import { getPreferredGameId, setPreferredGameId } from "./preferences";
 import { initScoreClient } from "./scoreClient";
+import GameSwitcherBlock from "./GameSwitcherBlock";
+import GameSwitcherDisplayConfig from "./GameSwitcherDisplayConfig";
+import { GAME_BLOCK_ICON_URL } from "./assets/gameBlockIcon";
 
 const disposables: Disposable[] = [];
 
@@ -159,6 +162,47 @@ export async function activate(sdk: FatNotesPluginSDK): Promise<void> {
             "提示：可通过命令 fat-games.openGame（参数为游戏 id）从任意位置快速打开指定游戏。",
           ),
         ),
+    }),
+  );
+
+  // 8.5 仪表盘组件：「游戏」卡片（参考 fat-chess「棋游」的 blockType 注册方式）。
+  //     挂在「其他(other)」分类下，卡片内可在多个休闲游戏间切换并直接游玩：
+  //     参与切换的游戏 / 默认游戏 / 切换按钮显隐 / 按钮组或下拉框 / 顶或底，
+  //     均由右侧「显示配置」面板（registerBlockDisplayConfig）配置。
+  //     index=101 紧跟「棋游」(100) 之后。
+  safeRegister("blockType:game", () =>
+    sdk.contributions.registerBlockType({
+      type: "fat-games.game",
+      title: "游戏",
+      iconUrl: GAME_BLOCK_ICON_URL,
+      category: "other",
+      index: 101,
+      defaultSize: { w: 6, h: 30, minW: 4, minH: 16 },
+      // 新建卡片写入 options 的默认值（宿主会深拷贝）
+      defaultOptions: {
+        gameSwitcher: {
+          games: GAMES.filter((g) => g.id !== "scores").map((g) => g.id),
+          defaultGame: "2048",
+          showSwitch: true,
+          switchStyle: "segmented",
+          switchPosition: "top",
+        },
+      },
+      render: (props) =>
+        React.createElement(GameSwitcherBlock, {
+          config: props.config,
+          inConfig: props.inConfig,
+          sdk,
+        }),
+    }),
+  );
+
+  // 8.6 「游戏」卡片的显示配置面板（组件配置抽屉 > 显示配置）
+  safeRegister("blockDisplayConfig:game", () =>
+    sdk.contributions.registerBlockDisplayConfig({
+      id: "fat-games.game.config",
+      blockType: "fat-games.game",
+      render: () => React.createElement(GameSwitcherDisplayConfig, { sdk }),
     }),
   );
 
