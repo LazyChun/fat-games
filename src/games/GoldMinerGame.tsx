@@ -12,6 +12,7 @@ import type { FatNotesPluginSDK } from "fat-notes-sdk";
 import { recordScore } from "../scoreClient";
 import { useI18n } from "../hooks";
 import GameFrame, { GhostBtn, CHIP_GOLD, CHIP_GREEN, CHIP_RED, CHIP_BLUE } from "./GameFrame";
+import { sfxDrop, sfxGrab, sfxHurt, sfxCoin, sfxLevelUp, sfxLose } from "./sound";
 import "./gameAnimations.less";
 
 const W = 520;
@@ -387,6 +388,7 @@ const GoldMinerGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
     s.phase = "drop";
     s.dropAngle = s.angle;
     s.dropCount += 1;
+    sfxDrop();
   }, []);
 
   const restart = useCallback(() => {
@@ -444,9 +446,11 @@ const GoldMinerGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
                 if (it.weight <= MAX_WEIGHT) {
                   s.carried = it;
                   s.phase = "retract";
+                  sfxGrab();
                 } else {
                   s.phase = "broken";
                   s.brokenAt = ts;
+                  sfxHurt();
                   s.toast = { text: i18n.text("game.goldminer.ropeBroken"), until: ts + 1200, color: "#e5484d" };
                 }
                 break;
@@ -461,6 +465,7 @@ const GoldMinerGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
               s.money += s.carried.value;
               s.items = s.items.filter((it) => it.id !== s.carried!.id);
               s.carried = null;
+              sfxCoin();
               if (s.money >= s.target) {
                 s.level += 1;
                 const spec = levelSpec(s.level);
@@ -468,6 +473,7 @@ const GoldMinerGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
                 s.items = genItems(s.level, s.lastId);
                 s.lastId += spec.count + 5;
                 s.timeLeft = LEVEL_TIME;
+                sfxLevelUp();
                 s.toast = {
                   text: i18n.text("game.goldminer.levelUp", { level: s.level }),
                   until: ts + 1400,
@@ -487,6 +493,7 @@ const GoldMinerGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
         if (s.timeLeft <= 0) {
           s.timeLeft = 0;
           s.over = true;
+          sfxLose();
           if (!s.recorded) {
             s.recorded = true;
             recordScore({

@@ -11,6 +11,7 @@ import type { FatNotesPluginSDK } from "fat-notes-sdk";
 import { recordScore } from "../scoreClient";
 import { useI18n } from "../hooks";
 import GameFrame, { GhostBtn, CHIP_GREEN, CHIP_GOLD } from "./GameFrame";
+import { sfxMove, sfxEat, sfxLose } from "./sound";
 import "./gameAnimations.less";
 
 const COLS = 20;
@@ -131,6 +132,7 @@ const SnakeGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
       if (head.x < 0 || head.x >= COLS || head.y < 0 || head.y >= ROWS) {
         setOver(true);
         setRunning(false);
+        sfxLose();
         return prev;
       }
       // 撞自己（不包含尾部，因为尾部会移走）
@@ -138,6 +140,7 @@ const SnakeGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
         if (samePt(prev[i], head)) {
           setOver(true);
           setRunning(false);
+          sfxLose();
           return prev;
         }
       }
@@ -147,6 +150,7 @@ const SnakeGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
         // 吃到食物：尾部不移除
         setScore((s) => s + 1);
         setFood(randomFood(next));
+        sfxEat();
       } else {
         next.pop();
       }
@@ -318,6 +322,7 @@ const SnakeGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
         next = "right";
       if (!next) return;
       e.preventDefault();
+      sfxMove();
       setDir(next);
       // 按方向键自动启动
       if (!running && !over) setRunning(true);

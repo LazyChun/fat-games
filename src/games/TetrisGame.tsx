@@ -11,6 +11,7 @@ import type { FatNotesPluginSDK } from "fat-notes-sdk";
 import { recordScore } from "../scoreClient";
 import { useI18n } from "../hooks";
 import GameFrame, { GhostBtn, CHIP_GOLD, CHIP_BLUE, CHIP_PURPLE } from "./GameFrame";
+import { sfxMove, sfxRotate, sfxDrop, sfxClear, sfxLose } from "./sound";
 import "./gameAnimations.less";
 
 const COLS = 10;
@@ -170,7 +171,9 @@ const TetrisGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
         }
       }
       const [cleared, n] = clearLines(nb);
+      sfxDrop();
       if (n > 0) {
+        sfxClear();
         setScore((s) => s + LINE_SCORES[n] * level);
         setLines((l) => {
           const nl = l + n;
@@ -186,6 +189,7 @@ const TetrisGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
       if (!spawn) {
         setOver(true);
         setRunning(false);
+        sfxLose();
         return cleared;
       }
       setPiece(spawn);
@@ -371,6 +375,7 @@ const TetrisGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
         for (const k of [0, -1, 1, -2, 2]) {
           if (!collides(b, rotated, p.x + k, p.y)) {
             setPiece({ ...p, cells: rotated, x: p.x + k });
+            sfxRotate();
             return;
           }
         }
@@ -378,6 +383,7 @@ const TetrisGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
       }
       if (!collides(b, p.cells, p.x + dx, p.y + dy)) {
         setPiece({ ...p, x: p.x + dx, y: p.y + dy });
+        if (dx !== 0) sfxMove();
       } else if (dy > 0) {
         lock();
       }

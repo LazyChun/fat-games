@@ -25,6 +25,7 @@ import GameFrame, {
   CHIP_RED,
   CHIP_PURPLE,
 } from "./GameFrame";
+import { sfxShoot, sfxLand, sfxScore, sfxBoom, sfxLose } from "./sound";
 import "./gameAnimations.less";
 import {
   defaultWorld,
@@ -697,6 +698,7 @@ const RocketLandingGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
 
   const setEngine = useCallback((id: EngineId, on: boolean) => {
     inputsRef.current[id] = on;
+    if (on) sfxShoot();
   }, []);
 
   // 主循环
@@ -745,6 +747,8 @@ const RocketLandingGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
           s.phase = "landed";
           s.landedAt = ts;
           updateBest(s.score);
+          sfxLand();
+          sfxScore();
           burst(s, tail.x, world.groundY - 6, "dust", 150);
           s.shake = 3;
         } else if (verdict.result === "crashed") {
@@ -755,6 +759,8 @@ const RocketLandingGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
           s.landedAt = ts;
           spawnDebris(s, s.rocket);
           burst(s, hit.x, hit.y, "explosion", 320);
+          sfxBoom();
+          sfxLose();
           s.shake = 16;
           if (!s.recorded) {
             s.recorded = true;

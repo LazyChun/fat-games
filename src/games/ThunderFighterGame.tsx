@@ -20,6 +20,7 @@ import GameFrame, {
   CHIP_RED,
   CHIP_GREEN,
 } from "./GameFrame";
+import { sfxShoot, sfxHit, sfxBoom, sfxHurt, sfxLose } from "./sound";
 import "./gameAnimations.less";
 
 const W = 480;
@@ -225,10 +226,12 @@ function hitPlayer(s: Sim): void {
   s.lives -= 1;
   s.invincible = INVINCIBLE;
   addBoom(s, s.px, s.py, false);
+  sfxHurt();
   if (s.lives <= 0) {
     s.lives = 0;
     s.over = true;
     s.running = false;
+    sfxLose();
   }
 }
 
@@ -502,6 +505,7 @@ const ThunderFighterGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
         s.fireCd -= dt;
         if (s.fireCd <= 0) {
           s.fireCd = FIRE_INTERVAL;
+          sfxShoot();
           s.bullets.push({
             x: s.px,
             y: s.py - PLAYER_R - 10,
@@ -566,9 +570,11 @@ const ThunderFighterGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
               consumed = true;
               e.hp -= 1;
               addBoom(s, b.x, b.y, false);
+              sfxHit();
               if (e.hp <= 0) {
                 s.score += e.value;
                 s.kills += 1;
+                sfxBoom();
                 s.floats.push({
                   x: e.x,
                   y: e.y - e.r,

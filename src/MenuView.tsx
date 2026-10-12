@@ -16,9 +16,10 @@ import React, {
   useState,
 } from "react";
 import type { FatNotesPluginSDK } from "fat-notes-sdk";
-import { Empty, Input, Tag } from "antd";
+import { Empty, Input, Switch, Tag } from "antd";
 import { GAMES, type GameDef } from "./games/registry";
 import { CATEGORY_GRADIENTS } from "./games/gameTheme";
+import { isSoundEnabled, setSoundEnabled, sfxClick } from "./games/sound";
 import { pathToGameId, gameIdToPath } from "./routes";
 import { getPreferredGameId, setPreferredGameId } from "./preferences";
 import { matchPinyin } from "./utils";
@@ -42,6 +43,7 @@ const MenuView: React.FC<Props> = ({ sdk }) => {
 const MenuContent: React.FC<Props> = ({ sdk }) => {
   const i18n = useI18n();
   const [query, setQuery] = useState("");
+  const [soundOn, setSoundOn] = useState(isSoundEnabled());
   const [, forceUpdate] = useReducer((x: number) => x + 1, 0);
 
   // 订阅路由变化：卡片高亮跟随右侧工作区当前页
@@ -78,6 +80,14 @@ const MenuContent: React.FC<Props> = ({ sdk }) => {
   const placeholder = i18n.text("games.search.placeholder");
   const countText = i18n.text("games.search.count", { count: GAMES.length });
   const emptyText = i18n.text("games.empty");
+  const soundLabel = i18n.text("games.sound.label");
+  const soundHint = i18n.text("games.sound.hint");
+
+  const toggleSound = (on: boolean) => {
+    setSoundEnabled(on);
+    setSoundOn(on);
+    if (on) sfxClick();
+  };
 
   return (
     <div
@@ -126,6 +136,36 @@ const MenuContent: React.FC<Props> = ({ sdk }) => {
             ))}
           </div>
         )}
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 8,
+          padding: "9px 6px 4px",
+          borderTop: "1px solid rgba(128,128,128,0.16)",
+          marginTop: 6,
+          userSelect: "none",
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: 1, minWidth: 0 }}>
+          <span style={{ fontSize: 12, fontWeight: 600, lineHeight: 1.3 }}>
+            {soundLabel}
+          </span>
+          <span
+            style={{ fontSize: 10.5, opacity: 0.55, lineHeight: 1.3 }}
+          >
+            {soundHint}
+          </span>
+        </div>
+        <Switch
+          size="small"
+          checked={soundOn}
+          onChange={toggleSound}
+          aria-label={soundLabel}
+        />
       </div>
     </div>
   );

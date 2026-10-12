@@ -23,6 +23,8 @@ export default {
     "{count} casual games built in. Pick a game from the left menu and start playing; scores are automatically recorded to the leaderboard.",
   "games.settings.tip":
     "Tip: Use the command fat-games.openGame (parameter is game id) to quickly open a specific game from anywhere.",
+  "games.sound.label": "Game sound",
+  "games.sound.hint": "Play sound effects for actions, scoring and win/lose",
   "games.settings.route": "Route",
   "games.command.pong":
     "[fat-games] pong (host {version}, {count} games)",

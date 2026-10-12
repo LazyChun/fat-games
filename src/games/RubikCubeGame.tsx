@@ -44,6 +44,7 @@ import {
   type Dir,
   type Vec3,
 } from "./rubikLogic";
+import { sfxRotate, sfxWin } from "./sound";
 import "./gameAnimations.less";
 
 /* ------------------------------------------------------------------ */
@@ -163,12 +164,14 @@ const RubikCubeGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
       commitCube(next);
 
       if (count) {
+        sfxRotate();
         const m = movesRef.current + 1;
         movesRef.current = m;
         setMoves(m);
         if (isSolved(next) && !recordedRef.current) {
           recordedRef.current = true;
           setOverlay(true);
+          sfxWin();
           const prev = Number(window.localStorage.getItem(LS_BEST) || 0);
           const nb = prev > 0 ? Math.min(prev, m) : m;
           window.localStorage.setItem(LS_BEST, String(nb));

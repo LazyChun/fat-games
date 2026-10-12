@@ -11,6 +11,7 @@ import type { FatNotesPluginSDK } from "fat-notes-sdk";
 import { recordScore } from "../scoreClient";
 import { useI18n } from "../hooks";
 import GameFrame, { GhostBtn, CHIP_GOLD, CHIP_BLUE, CHIP_GREEN } from "./GameFrame";
+import { sfxFlip, sfxMatch, sfxMismatch, sfxWin } from "./sound";
 import { useThemeMode } from "../ThemeShell";
 import "./gameAnimations.less";
 
@@ -58,6 +59,7 @@ const MemoryGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
   useEffect(() => {
     if (matched.size === cards.length && cards.length > 0) {
       setWon(true);
+      sfxWin();
       if (!recorded) {
         setRecorded(true);
         const s = Math.max(50, 1000 - moves * 8 - seconds * 3);
@@ -81,11 +83,13 @@ const MemoryGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
       setStarted(true);
       const nextFlipped = [...flipped, idx];
       setFlipped(nextFlipped);
+      sfxFlip();
       if (nextFlipped.length === 2) {
         setMoves((m) => m + 1);
         const [a, b] = nextFlipped;
         if (cards[a].emoji === cards[b].emoji) {
           // 配对成功
+          sfxMatch();
           setMatched((prev) => {
             const next = new Set(prev);
             next.add(a);
@@ -95,6 +99,7 @@ const MemoryGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
           setFlipped([]);
         } else {
           // 配对失败，稍后翻回
+          sfxMismatch();
           lockRef.current = true;
           window.setTimeout(() => {
             setFlipped([]);

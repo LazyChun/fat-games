@@ -18,6 +18,7 @@ import {
   type ChipColors,
 } from "./gameTheme";
 import { useThemeMode } from "../ThemeShell";
+import { sfxClick } from "./sound";
 import "./gameAnimations.less";
 
 // 供各游戏直接使用：统计胶囊配色
@@ -115,7 +116,10 @@ export function PrimaryBtn({
   return (
     <button
       type="button"
-      onClick={onClick}
+      onClick={() => {
+        sfxClick();
+        onClick();
+      }}
       disabled={disabled}
       style={{
         background: bg,
@@ -163,7 +167,10 @@ export function GhostBtn({
   return (
     <button
       type="button"
-      onClick={onClick}
+      onClick={() => {
+        sfxClick();
+        onClick();
+      }}
       disabled={disabled}
       style={{
         background: isDark ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.9)",

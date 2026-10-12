@@ -12,6 +12,7 @@ import type { FatNotesPluginSDK } from "fat-notes-sdk";
 import { recordScore } from "../scoreClient";
 import { useI18n } from "../hooks";
 import GameFrame, { GhostBtn, CHIP_GOLD, CHIP_GREEN, CHIP_BLUE } from "./GameFrame";
+import { sfxBounce, sfxScore, sfxWin, sfxLose } from "./sound";
 import "./gameAnimations.less";
 
 const W = 540;
@@ -109,6 +110,7 @@ function hit(s: Sim, paddleY: number, dirRight: boolean): void {
     ? s.lx + PADDLE_W / 2 + BALL_R
     : W - s.lx - PADDLE_W / 2 - BALL_R;
   s.hitFlash = 0.12;
+  sfxBounce();
 }
 
 function drawScene(ctx: CanvasRenderingContext2D, s: Sim): void {
@@ -247,6 +249,11 @@ const PingPongGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
       if (s.p1 >= WIN_SCORE || s.p2 >= WIN_SCORE) {
         s.over = true;
         s.running = false;
+        if (s.mode === "solo" && s.p1 >= WIN_SCORE) {
+          sfxWin();
+        } else {
+          sfxLose();
+        }
         if (!s.recorded) {
           s.recorded = true;
           const playerWin = s.p1 >= WIN_SCORE;
@@ -347,10 +354,12 @@ const PingPongGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
           if (s.bx < -24) {
             s.p2 += 1;
             s.lastScorer = 2;
+            sfxScore();
             finishPoint(s, ts);
           } else if (s.bx > W + 24) {
             s.p1 += 1;
             s.lastScorer = 1;
+            sfxScore();
             finishPoint(s, ts);
           }
         }

@@ -23,6 +23,7 @@ import GameFrame, {
   CHIP_GREEN,
   CHIP_BLUE,
 } from "./GameFrame";
+import { sfxDrop, sfxBoom, sfxScore, sfxHurt, sfxLose } from "./sound";
 import "./gameAnimations.less";
 
 const W = 760;
@@ -325,6 +326,7 @@ function addBlast(s: Sim, x: number, y: number, r: number): void {
 function explodeBomb(s: Sim, x: number, y: number, ts: number): void {
   addBlast(s, x, y, 26);
   addBoom(s, x, y, true);
+  sfxBoom();
   s.shake = Math.min(12, s.shake + 5);
   for (const t of s.targets) {
     const p = TARGET_PROPS[t.kind];
@@ -341,6 +343,7 @@ function destroyTarget(s: Sim, t: Target, ts: number): void {
   const p = TARGET_PROPS[t.kind];
   s.kills += 1;
   s.score += p.value;
+  sfxScore();
   const cy = GROUND_Y - p.h / 2;
   s.floats.push({
     x: t.x,
@@ -370,10 +373,12 @@ function hitPlane(s: Sim): void {
   s.invincible = INVINCIBLE;
   s.shake = Math.min(15, s.shake + 9);
   addBoom(s, s.px, s.py, false);
+  sfxHurt();
   if (s.hp <= 0) {
     s.hp = 0;
     s.over = true;
     s.running = false;
+    sfxLose();
   }
 }
 
@@ -937,6 +942,7 @@ const BackfireBomberGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
         s.bombCd -= dt;
         if (keys.has(" ") && s.bombCd <= 0) {
           s.bombCd = Math.max(0.32, BOMB_CD - s.elapsed * 0.002);
+          sfxDrop();
           s.bombs.push({ x: s.px, y: s.py + 18, vy: 40 });
         }
 

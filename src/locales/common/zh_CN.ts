@@ -23,6 +23,8 @@ export default {
     "共内置 {count} 个休闲游戏。左侧菜单选择游戏，右侧工作区开始游玩；游戏成绩会自动记录到排行榜。",
   "games.settings.tip":
     "提示：可通过命令 fat-games.openGame（参数为游戏 id）从任意位置快速打开指定游戏。",
+  "games.sound.label": "游戏音效",
+  "games.sound.hint": "开启后游戏内会播放操作、得分与胜负音效",
   "games.settings.route": "路由",
   "games.command.pong": "[fat-games] pong（宿主 {version}，游戏数 {count}）",
   "games.command.unknown": "[fat-games] 未知游戏 id：{id}",

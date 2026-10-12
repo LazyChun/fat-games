@@ -25,6 +25,7 @@ import GameFrame, {
   CHIP_RED,
   CHIP_PURPLE,
 } from "./GameFrame";
+import { sfxRefuel, sfxSlingshot, sfxHurt, sfxBounce, sfxAlarm, sfxLose, sfxShoot } from "./sound";
 import "./gameAnimations.less";
 import {
   createRun,
@@ -777,6 +778,7 @@ const SlingshotGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
 
   const setEngine = useCallback((id: keyof EngineInput, on: boolean) => {
     inputsRef.current[id] = on;
+    if (on) sfxShoot();
   }, []);
 
   const pushText = (s: Sim, x: number, y: number, text: string, color: string, life = 1.5) => {
@@ -834,23 +836,28 @@ const SlingshotGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
             case "base_arrived":
               pushText(s, ev.x, ev.y, t("game.slingshot.arrived", { name: ev.name }), "#86efac", 1.8);
               burst(s, ev.x, ev.y, ["#4ade80", "#86efac", "#bbf7d0"], 14, 160);
+              sfxRefuel();
               break;
             case "slingshot":
               pushText(s, ev.x, ev.y, t("game.slingshot.slingshot", { deg: ev.turnDeg }), "#7dd3fc", 1.6);
               burst(s, ev.x, ev.y, ["#7dd3fc", "#bae6fd", "#e0f2fe"], 10, 120);
+              sfxSlingshot();
               break;
             case "meteor_hit":
               pushText(s, ev.x, ev.y, t("game.slingshot.meteorHit"), "#fb923c", 1.4);
               burst(s, ev.x, ev.y, ["#fbbf24", "#fb923c", "#ef4444", "#f8fafc"], 20, 260);
               s.shake = 12;
+              sfxHurt();
               break;
             case "bounce":
               pushText(s, ev.x, ev.y, t("game.slingshot.bounce"), "#f87171", 1.3);
               burst(s, ev.x, ev.y, ["#f87171", "#fca5a5", "#fde68a"], 14, 200);
               s.shake = 8;
+              sfxBounce();
               break;
             case "atmo_enter":
               pushText(s, ev.x, ev.y, t("game.slingshot.atmoWarning"), "#fdba74", 1.9);
+              sfxAlarm();
               break;
             default:
               break;
@@ -910,6 +917,7 @@ const SlingshotGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
       // 终局结算（只一次）
       if (run.phase === "over" && !s.recorded) {
         s.recorded = true;
+        sfxLose();
         const score = Math.round(run.distancePx);
         updateBest(score);
         recordScore({

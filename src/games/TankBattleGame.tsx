@@ -23,6 +23,7 @@ import GameFrame, {
   CHIP_BLUE,
   CHIP_RED,
 } from "./GameFrame";
+import { sfxShoot, sfxHit, sfxBoom, sfxWin, sfxLose } from "./sound";
 import "./gameAnimations.less";
 
 /* ------------------------------------------------------------------ */
@@ -680,6 +681,7 @@ function fireBullet(sim: Sim, t: Tank): void {
   t.fireTimer = cd;
   t.recoil = 1;
   t.muzzle = 0.09;
+  sfxShoot();
   const bx = t.x + Math.sin(t.tyaw) * 30 * t.scale;
   const bz = t.z + Math.cos(t.tyaw) * 30 * t.scale;
   sim.bullets.push({
@@ -702,9 +704,11 @@ function damageTank(sim: Sim, t: Tank, dmg: number, atX: number, atZ: number): v
   t.flash = 0.16;
   spawnExplosion(sim, atX, atZ, 26, false);
   spawnText(sim, atX, atZ, 46, `-${dmg}`, "#ffd166");
+  sfxHit();
   if (t.hp <= 0 && t.alive) {
     t.alive = false;
     spawnExplosion(sim, t.x, t.z, 14, true);
+    sfxBoom();
     if (t.kind === "enemy") {
       sim.kills += 1;
       spawnText(sim, t.x, t.z, 64, `+${t.score}`, "#7ee8a2");
@@ -881,6 +885,11 @@ function updateFx(sim: Sim, dt: number): void {
 function finishGame(sim: Sim, result: "win" | "lose"): void {
   sim.state = "over";
   sim.result = result;
+  if (result === "win") {
+    sfxWin();
+  } else {
+    sfxLose();
+  }
   if (!sim.recorded) {
     sim.recorded = true;
     const hpLeft = Math.max(0, Math.round(sim.player.hp));

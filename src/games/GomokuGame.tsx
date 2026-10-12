@@ -12,6 +12,7 @@ import type { FatNotesPluginSDK } from "fat-notes-sdk";
 import { recordScore } from "../scoreClient";
 import { useI18n } from "../hooks";
 import GameFrame, { GhostBtn, CHIP_BLUE, CHIP_GOLD, CHIP_PURPLE } from "./GameFrame";
+import { sfxClick, sfxWin } from "./sound";
 import "./gameAnimations.less";
 
 const N = 15;
@@ -147,8 +148,10 @@ const GomokuGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
       if (prev[r][c] !== 0) return prev;
       const next = prev.map((row) => row.slice());
       next[r][c] = color;
+      sfxClick();
       if (checkWin(next, r, c, color)) {
         setWinner(color);
+        if (color === 1) sfxWin();
         return next;
       }
       if (color === 1) {

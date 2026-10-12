@@ -10,6 +10,7 @@ import type { FatNotesPluginSDK } from "fat-notes-sdk";
 import { recordScore } from "../scoreClient";
 import { useI18n } from "../hooks";
 import GameFrame, { GhostBtn, CHIP_GOLD, CHIP_RED, CHIP_GREEN } from "./GameFrame";
+import { sfxHit, sfxLose } from "./sound";
 import "./gameAnimations.less";
 
 const HOLES = 9;
@@ -86,6 +87,7 @@ const WhackGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
           setOver(true);
           setActive(null);
           clearTimers();
+          sfxLose();
           return 0;
         }
         return t - 1;
@@ -123,6 +125,7 @@ const WhackGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
       setActive(null);
       setHits((h) => h + 1);
       setScore((s) => s + 10);
+      sfxHit();
       // 打中后更快出下一只
       if (timeRef.current > 0) {
         spawnRef.current = window.setTimeout(

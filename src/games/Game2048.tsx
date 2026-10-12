@@ -11,6 +11,7 @@ import type { FatNotesPluginSDK } from "fat-notes-sdk";
 import { recordScore } from "../scoreClient";
 import { useI18n } from "../hooks";
 import GameFrame, { GhostBtn, CHIP_GOLD, CHIP_BLUE, CHIP_PURPLE } from "./GameFrame";
+import { sfxMove, sfxClear, sfxLose } from "./sound";
 import "./gameAnimations.less";
 
 type Grid = number[][]; // 4x4，0 表示空格
@@ -278,6 +279,8 @@ const Game2048: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
         const next = clone(prev);
         const { moved, gained, merged } = moveFx(next, dir);
         if (!moved) return prev;
+        sfxMove();
+        if (merged.length > 0) sfxClear();
         const spawned = spawnRandomAt(next);
 
         // 记录动画：生成位 pop，合并位 merge
@@ -307,6 +310,7 @@ const Game2048: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
 
         if (!hasMoves(next)) {
           setOver(true);
+          sfxLose();
           if (!recorded) {
             setRecorded(true);
             recordScore({

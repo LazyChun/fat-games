@@ -16,6 +16,7 @@ import type { FatNotesPluginSDK } from "fat-notes-sdk";
 import { recordScore } from "../scoreClient";
 import { useI18n } from "../hooks";
 import GameFrame, { GhostBtn, CHIP_RED, CHIP_BLUE } from "./GameFrame";
+import { sfxReveal, sfxFlag, sfxBoom, sfxWin } from "./sound";
 import "./gameAnimations.less";
 
 const ROWS = 9;
@@ -192,6 +193,7 @@ const MinesweeperGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
     if (started && !over && board.revealed >= safeCells) {
       setOver(true);
       setWon(true);
+      sfxWin();
       // 胜利时标记剩余雷格为旗
       setBoard((b) => {
         const next = cloneBoard(b);
@@ -247,6 +249,7 @@ const MinesweeperGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
         }
         const exploded = revealAt(next, r, c);
         if (exploded) {
+          sfxBoom();
           // 揭开所有雷
           for (let rr = 0; rr < ROWS; rr++) {
             for (let cc = 0; cc < COLS; cc++) {
@@ -256,6 +259,8 @@ const MinesweeperGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
           }
           setOver(true);
           setWon(false);
+        } else {
+          sfxReveal();
         }
         return next;
       });
@@ -276,9 +281,11 @@ const MinesweeperGame: React.FC<{ sdk: FatNotesPluginSDK }> = () => {
         if (target.state === "hidden") {
           target.state = "flagged";
           setFlags((f) => f + 1);
+          sfxFlag();
         } else if (target.state === "flagged") {
           target.state = "hidden";
           setFlags((f) => f - 1);
+          sfxFlag();
         }
         return next;
       });
