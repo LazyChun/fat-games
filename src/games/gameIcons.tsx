@@ -223,3 +223,20 @@ export const IconSlingshot: React.FC<GameIconProps> = (props) => (
     <circle cx="18.8" cy="6.4" r="1.5" fill="currentColor" stroke="none" />
   </svg>
 );
+
+/** 数字华容道：4x4 网格 + 一个可滑动的实心方块 */
+export const IconSliding: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    <path d="M5.2 5.2 H18.8 V18.8 H5.2 Z" />
+    <path d="M5.2 9.8 H18.8 M5.2 14.4 H18.8 M9.8 5.2 V18.8 M14.4 5.2 V18.8" />
+    <rect
+      x="9.8"
+      y="5.2"
+      width="4.6"
+      height="4.6"
+      rx="1.2"
+      fill="currentColor"
+      stroke="none"
+    />
+  </svg>
+);

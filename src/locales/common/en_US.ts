@@ -56,6 +56,8 @@ export default {
   "game.tankbattle.desc": "Drive a tank on a 3D battlefield and destroy all enemies",
   "game.backfire.title": "Backfire Bomber",
   "game.backfire.desc": "Bomb ground targets from your bomber",
+  "game.sliding.title": "Number Slide",
+  "game.sliding.desc": "Slide tiles back into order",
   "game.scores.title": "Leaderboard",
   "game.scores.desc": "View game scores and statistics",
 
@@ -306,6 +308,16 @@ export default {
   "game.slingshot.holdTip": "Hold to fire",
   "game.slingshot.help":
     "Controls: ↑/W tail main engine accelerates along the nose; ↓/S nose nozzle brakes; ←/A and →/D side nozzles turn left/right — all holdable, firing burns energy. Every planet pulls you with gravity: dive into the blue gravity well (dashed ring) to get deflected and accelerated for free — that is the slingshot (a ≥25° turn counts). Green-halo base planets refuel you automatically; reaching one switches your next destination. Meteor hits cost 30% energy and knock you back (brief invulnerability); deep atmosphere drains energy continuously, and touching a planet core bounces you with damage. Out of energy ends the route, scored by distance travelled (1px = 1km). Space starts/restarts, P pauses.",
+
+  "game.sliding.moves": "Moves",
+  "game.sliding.time": "Time (s)",
+  "game.sliding.size": "Size",
+  "game.sliding.restart": "Restart",
+  "game.sliding.win": "Solved!",
+  "game.sliding.winDetail": "Solved in {moves} moves · {seconds}s",
+  "game.sliding.again": "Play Again",
+  "game.sliding.help":
+    "Controls: click a tile next to the blank, or use Arrow keys / WASD to slide. Arrange the numbers in order 1→N to win. Switch between 3×3 / 4×4 / 5×5; fewer moves and less time mean a higher score.",
 
   "game.scores.total": "Total Records",
   "game.scores.games": "Game Types",

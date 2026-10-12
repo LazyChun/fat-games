@@ -25,6 +25,7 @@ import {
   IconBackfire,
   IconRocket,
   IconSlingshot,
+  IconSliding,
   IconScores,
 } from "./gameIcons";
 
@@ -43,6 +44,7 @@ import TankBattleGame from "./TankBattleGame";
 import BackfireBomberGame from "./BackfireBomberGame";
 import RocketLandingGame from "./RocketLandingGame";
 import SlingshotGame from "./SlingshotGame";
+import SlidingPuzzleGame from "./SlidingPuzzleGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -231,6 +233,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.casual",
     icon: IconSlingshot,
     component: SlingshotGame,
+  },
+  {
+    id: "sliding",
+    title: "数字华容道",
+    desc: "滑动数字方块，按序还原",
+    category: "益智",
+    titleKey: "game.sliding.title",
+    descKey: "game.sliding.desc",
+    categoryKey: "category.puzzle",
+    icon: IconSliding,
+    component: SlidingPuzzleGame,
   },
   {
     id: "scores",

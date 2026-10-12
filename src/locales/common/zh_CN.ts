@@ -55,6 +55,8 @@ export default {
   "game.tankbattle.desc": "3D 战场驾驶坦克，击毁全部敌军",
   "game.backfire.title": "逆火战轰",
   "game.backfire.desc": "驾驶轰炸机，投弹摧毁地面目标",
+  "game.sliding.title": "数字华容道",
+  "game.sliding.desc": "滑动数字方块，按序还原",
   "game.scores.title": "排行榜",
   "game.scores.desc": "查看各游戏成绩记录与统计",
 
@@ -306,8 +308,17 @@ export default {
   "game.slingshot.help":
     "操作：↑/W 尾喷口主引擎，沿机头方向加速；↓/S 前喷口减速刹车；←/A、→/D 侧喷口左右转向，均可按住，点火消耗能源。所有行星都产生引力：切入蓝色引力带（虚线环）会被大幅偏转并加速，这就是不耗能的引力弹弓（转向 ≥25° 计一次）；靠近绿色光环的基地行星自动补给能源，抵达即切换下一站；陨石撞击损失 30% 能源并被击退（短暂无敌）；深潜大气层持续掉能，触及星球核心会反弹受损。能源耗尽即航线终止，按累计航行距离计分（1px = 1km）。按空格开始/再来一局，P 暂停。",
 
-  "game.scores.total": "总记录数",
-  "game.scores.games": "游戏种类",
+  "game.sliding.moves": "步数",
+  "game.sliding.time": "用时(秒)",
+  "game.sliding.size": "难度",
+  "game.sliding.restart": "重新开始",
+  "game.sliding.win": "还原成功！",
+  "game.sliding.winDetail": "用了 {moves} 步 · {seconds} 秒",
+  "game.sliding.again": "再来一局",
+  "game.sliding.help":
+    "操作：点击空格相邻的数字方块，或用方向键 / WASD 滑动空格；把数字按 1→N 排好顺序即为胜利。可切换 3×3 / 4×4 / 5×5 难度，步数越少、用时越短得分越高。",
+
+  "game.scores.total": "总记录数",  "game.scores.games": "游戏种类",
   "game.scores.recordsSuffix": "条",
   "game.scores.title2": "成绩榜",
   "game.scores.refresh": "刷新",
