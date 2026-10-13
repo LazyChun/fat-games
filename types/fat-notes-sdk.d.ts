@@ -278,6 +278,38 @@ export interface BlockDisplayConfigDef {
   render: () => ReactNode;
 }
 
+/** 插件注册到全局搜索的单个搜索项 */
+export interface PluginSearchItemDef {
+  /** 项唯一 id（插件内唯一，推荐 "<pluginId>.<itemId>"） */
+  id: string;
+  /** 名称（主匹配文本） */
+  title: string;
+  /** 描述（次匹配文本 + 搜索结果第二行） */
+  desc?: string;
+  /** 图标组件（搜索结果回显） */
+  icon?: ComponentType<{ style?: CSSProperties }>;
+  /** 额外匹配关键词（命中但不高亮） */
+  keywords?: string[];
+  /** 搜索结果类型标签文案（如 "工具"）；缺省用宿主 i18n type.plugin */
+  tag?: string;
+  /** 点击后需激活的活动栏/工作台页共用 id（如 fat-tools.main）；缺省不切换视图 */
+  activityId?: string;
+  /** 点击回调（宿主切换视图后执行） */
+  onSelect?: () => void;
+}
+
+/** 插件注册的全局搜索提供者 */
+export interface SearchProviderDef {
+  /** 提供者 id，推荐 "<pluginId>.search" */
+  id: string;
+  /** 提供者名称（缺省类型标签回退） */
+  name?: string;
+  /** 项缺省图标组件 */
+  icon?: ComponentType<{ style?: CSSProperties }>;
+  /** 搜索项列表 */
+  items: PluginSearchItemDef[];
+}
+
 export interface ContributionsApi {
   registerActivityBarItem(def: ActivityBarItemDef): Disposable;
   /** Register the plugin's primary sidebar contribution using only a render callback. */
@@ -290,6 +322,7 @@ export interface ContributionsApi {
   registerBlockType(def: BlockTypeDef): Disposable;
   registerBlockDisplayConfig(def: BlockDisplayConfigDef): Disposable;
   registerSettingsPage(def: SettingsPageDef): Disposable;
+  registerSearchProvider(def: SearchProviderDef): Disposable;
   registerMenu(target: string, items: MenuItemDef[]): Disposable;
   /**
    * Request the host to hide the secondary sidebar while this registration

@@ -11,6 +11,7 @@
  *
  * 其它贡献点：
  *   - 路由页注册（供宿主面包屑 / 全局导航识别）
+ *   - 全局搜索注册（每个游戏注册为可搜索项，宿主全局搜索可直达）
  *   - 页脚状态、设置页
  *   - 命令：fat-games.ping / fat-games.openGame
  *   - 本插件页激活时隐藏右侧次侧栏与底部面板，让工作区更宽
@@ -37,7 +38,10 @@ const ACTIVITY_ID = "fat-games.main";
  * 某个宿主版本缺少某个 SDK 方法时，不能让它中断整个 activate()，
  * 否则后续贡献点与首屏 UI 都会一起消失。
  */
-function safeRegister(label: string, fn: () => Disposable | undefined | null): void {
+function safeRegister(
+  label: string,
+  fn: () => Disposable | undefined | null,
+): void {
   try {
     const d = fn();
     if (d) disposables.push(d);
@@ -63,7 +67,9 @@ export async function activate(sdk: FatNotesPluginSDK): Promise<void> {
 
   // 2. 主侧边栏（次面板）：只展示游戏菜单
   safeRegister("primarySidebar", () =>
-    sdk.contributions.registerPrimarySidebar(() => React.createElement(MenuView, { sdk })),
+    sdk.contributions.registerPrimarySidebar(() =>
+      React.createElement(MenuView, { sdk }),
+    ),
   );
 
   // 3. 工作台整页（右侧工作区）：id 与活动栏项一致，宿主才会在右侧渲染它
@@ -104,10 +110,42 @@ export async function activate(sdk: FatNotesPluginSDK): Promise<void> {
     }),
   );
 
+  // 5.5 全局搜索注册：每个游戏注册为一个搜索项（宿主全局搜索可直达）
+  safeRegister("searchProvider", () =>
+    sdk.contributions.registerSearchProvider({
+      id: "fat-games.search",
+      name: "fat-games 游戏箱",
+      items: GAMES.map((game) => ({
+        id: game.id,
+        title: game.title,
+        desc: game.desc,
+        icon: game.icon,
+        // 关键词：游戏 id、中文分类、id 拆词与连写
+        keywords: Array.from(
+          new Set([
+            game.id,
+            game.category,
+            ...game.id.split("-"),
+            game.id.split("-").join(" "),
+          ]),
+        ),
+        tag: "游戏",
+        activityId: ACTIVITY_ID,
+        onSelect: () => {
+          setPreferredGameId(game.id);
+          const path = gameIdToPath(game.id);
+          if (path) sdk.router.navigate(path);
+        },
+      })),
+    }),
+  );
+
   // 6. 命令：ping
   safeRegister("command:ping", () =>
     sdk.commands.register("fat-games.ping", async () => {
-      sdk.ui.toast.info(`[fat-games] pong（宿主 ${sdk.host.version}，游戏数 ${GAMES.length}）`);
+      sdk.ui.toast.info(
+        `[fat-games] pong（宿主 ${sdk.host.version}，游戏数 ${GAMES.length}）`,
+      );
       return "pong";
     }),
   );
@@ -137,7 +175,11 @@ export async function activate(sdk: FatNotesPluginSDK): Promise<void> {
         React.createElement(
           "div",
           { style: { padding: 20, maxWidth: 560 } },
-          React.createElement("h3", { style: { marginTop: 0 } }, "fat-games 游戏箱"),
+          React.createElement(
+            "h3",
+            { style: { marginTop: 0 } },
+            "fat-games 游戏箱",
+          ),
           React.createElement(
             "p",
             null,
@@ -224,10 +266,17 @@ export async function activate(sdk: FatNotesPluginSDK): Promise<void> {
   const syncHide = (activeKey: string | undefined): void => {
     const shouldHide = activeKey === ACTIVITY_KEY;
     if (shouldHide) {
-      if (!hideSecondaryDisposable && typeof sdk.contributions.registerHideSecondarySidebar === "function") {
-        hideSecondaryDisposable = sdk.contributions.registerHideSecondarySidebar();
+      if (
+        !hideSecondaryDisposable &&
+        typeof sdk.contributions.registerHideSecondarySidebar === "function"
+      ) {
+        hideSecondaryDisposable =
+          sdk.contributions.registerHideSecondarySidebar();
       }
-      if (!hidePanelDisposable && typeof sdk.contributions.registerHidePanel === "function") {
+      if (
+        !hidePanelDisposable &&
+        typeof sdk.contributions.registerHidePanel === "function"
+      ) {
         hidePanelDisposable = sdk.contributions.registerHidePanel();
       }
     } else {
@@ -241,7 +290,9 @@ export async function activate(sdk: FatNotesPluginSDK): Promise<void> {
   try {
     syncHide(sdk.store.select(selectActivityMenuKey));
     disposables.push(
-      sdk.store.subscribe(selectActivityMenuKey, (nextKey) => syncHide(nextKey)),
+      sdk.store.subscribe(selectActivityMenuKey, (nextKey) =>
+        syncHide(nextKey),
+      ),
     );
   } catch (e) {
     // eslint-disable-next-line no-console
