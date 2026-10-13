@@ -319,6 +319,26 @@ export default {
   "game.sliding.help":
     "Controls: click a tile next to the blank, or use Arrow keys / WASD to slide. Arrange the numbers in order 1→N to win. Switch between 3×3 / 4×4 / 5×5; fewer moves and less time mean a higher score.",
 
+  "game.pool3d.title": "3D Pool",
+  "game.pool3d.desc": "Aim and shoot, clear all balls",
+  "game.pool3d.shots": "Shots",
+  "game.pool3d.left": "Left",
+  "game.pool3d.potted": "Potted",
+  "game.pool3d.best": "Best Shots",
+  "game.pool3d.restart": "New Rack",
+  "game.pool3d.reposition": "Reposition Cue",
+  "game.pool3d.repositioned": "Cue ball repositioned",
+  "game.pool3d.cuePotted": "Cue ball potted, auto repositioned",
+  "game.pool3d.win": "Table Cleared!",
+  "game.pool3d.winDetail": "Cleared the table in {shots} shots",
+  "game.pool3d.winBest": "Best record: {best} shots",
+  "game.pool3d.again": "Play Again",
+  "game.pool3d.viewDefault": "Default View",
+  "game.pool3d.viewTop": "Top View",
+  "game.pool3d.viewHint": "Right-drag to orbit · wheel to zoom",
+  "game.pool3d.help":
+    "Controls: move the mouse to aim (dashed line shows the aim); hold the left button and drag to charge power, release to shoot; Space shoots with the current power, R restarts. Right-drag to orbit the view freely, scroll to zoom, or use the Default View / Top View buttons — the top view makes straight shots easier. Pot all 15 balls to clear the table — fewer shots mean a higher score. The cue ball is repositioned automatically when potted.",
+
   "game.scores.total": "Total Records",
   "game.scores.games": "Game Types",
   "game.scores.recordsSuffix": "",

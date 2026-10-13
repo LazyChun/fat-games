@@ -292,10 +292,15 @@ export interface PluginSearchItemDef {
   keywords?: string[];
   /** 搜索结果类型标签文案（如 "工具"）；缺省用宿主 i18n type.plugin */
   tag?: string;
+  /**
+   * 输入内容匹配模式：用户搜索文本命中该正则时，本项也出现在结果中
+   * （如计算器的算式输入 1+1、sqrt(16)）。命中优先级低于名称匹配。
+   */
+  inputPattern?: RegExp;
   /** 点击后需激活的活动栏/工作台页共用 id（如 fat-tools.main）；缺省不切换视图 */
   activityId?: string;
-  /** 点击回调（宿主切换视图后执行） */
-  onSelect?: () => void;
+  /** 点击回调（宿主切换视图后执行）；query 为触发本次命中的搜索文本（inputPattern 场景自动填入用） */
+  onSelect?: (query?: string) => void;
 }
 
 /** 插件注册的全局搜索提供者 */

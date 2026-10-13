@@ -26,6 +26,7 @@ import {
   IconRocket,
   IconSlingshot,
   IconSliding,
+  IconPool,
   IconScores,
 } from "./gameIcons";
 
@@ -45,6 +46,7 @@ import BackfireBomberGame from "./BackfireBomberGame";
 import RocketLandingGame from "./RocketLandingGame";
 import SlingshotGame from "./SlingshotGame";
 import SlidingPuzzleGame from "./SlidingPuzzleGame";
+import Pool3DGame from "./Pool3DGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -244,6 +246,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.puzzle",
     icon: IconSliding,
     component: SlidingPuzzleGame,
+  },
+  {
+    id: "pool3d",
+    title: "3D 台球",
+    desc: "瞄准击球，清空台面所有球",
+    category: "休闲",
+    titleKey: "game.pool3d.title",
+    descKey: "game.pool3d.desc",
+    categoryKey: "category.casual",
+    icon: IconPool,
+    component: Pool3DGame,
   },
   {
     id: "scores",

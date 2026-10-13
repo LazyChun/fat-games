@@ -318,6 +318,26 @@ export default {
   "game.sliding.help":
     "操作：点击空格相邻的数字方块，或用方向键 / WASD 滑动空格；把数字按 1→N 排好顺序即为胜利。可切换 3×3 / 4×4 / 5×5 难度，步数越少、用时越短得分越高。",
 
+  "game.pool3d.title": "3D 台球",
+  "game.pool3d.desc": "瞄准击球，清空台面所有球",
+  "game.pool3d.shots": "击数",
+  "game.pool3d.left": "剩余",
+  "game.pool3d.potted": "进球",
+  "game.pool3d.best": "最佳杆数",
+  "game.pool3d.restart": "重新开球",
+  "game.pool3d.reposition": "白球复位",
+  "game.pool3d.repositioned": "白球已复位",
+  "game.pool3d.cuePotted": "白球落袋，已自动复位",
+  "game.pool3d.win": "清台成功！",
+  "game.pool3d.winDetail": "用了 {shots} 杆清空台面",
+  "game.pool3d.winBest": "最佳纪录 {best} 杆",
+  "game.pool3d.again": "再来一局",
+  "game.pool3d.viewDefault": "默认视角",
+  "game.pool3d.viewTop": "俯视",
+  "game.pool3d.viewHint": "右键拖拽旋转视角 · 滚轮缩放",
+  "game.pool3d.help":
+    "操作：移动鼠标瞄准（虚线为瞄准线）；按住左键拖动蓄力、松开击球；空格直接击球（用当前力度），R 重新开球。右键拖拽可自由旋转视角、滚轮缩放，或点击「默认视角 / 俯视」一键切换——俯视视角更方便瞄直线球。把 15 颗球全部打进袋即清台成功，杆数越少得分越高；白球落袋会自动复位。",
+
   "game.scores.total": "总记录数",  "game.scores.games": "游戏种类",
   "game.scores.recordsSuffix": "条",
   "game.scores.title2": "成绩榜",

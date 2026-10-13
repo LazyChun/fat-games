@@ -240,3 +240,20 @@ export const IconSliding: React.FC<GameIconProps> = (props) => (
     />
   </svg>
 );
+
+/** 3D 台球：球台（外框 + 毛呢 + 六袋）+ 一颗实心球 + 白球 + 球杆 */
+export const IconPool: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    <rect x="3.2" y="4.6" width="17.6" height="14.8" rx="3.6" />
+    <rect x="5.6" y="7" width="12.8" height="10" rx="2.6" />
+    <circle cx="5.2" cy="6.6" r="1.05" fill="currentColor" stroke="none" opacity="0.85" />
+    <circle cx="18.8" cy="6.6" r="1.05" fill="currentColor" stroke="none" opacity="0.85" />
+    <circle cx="5.2" cy="17.4" r="1.05" fill="currentColor" stroke="none" opacity="0.85" />
+    <circle cx="18.8" cy="17.4" r="1.05" fill="currentColor" stroke="none" opacity="0.85" />
+    <circle cx="12" cy="6.6" r="1.05" fill="currentColor" stroke="none" opacity="0.85" />
+    <circle cx="12" cy="17.4" r="1.05" fill="currentColor" stroke="none" opacity="0.85" />
+    <circle cx="8.1" cy="13.4" r="1.7" fill="currentColor" stroke="none" />
+    <circle cx="13.9" cy="13.4" r="1.7" />
+    <path d="M15.6 13.4 L19.8 13.4" strokeWidth={2} />
+  </svg>
+);

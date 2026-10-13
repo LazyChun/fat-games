@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3D Pool - Preview</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #14161b; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; font-family: system-ui, sans-serif; }
+  h1 { color: #fff; font-size: 16px; margin: 8px 0; opacity: .85; }
+  canvas { width: min(660px, 92vw); border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,.55); }
+  p { color: rgba(255,255,255,.55); font-size: 12px; margin-top: 10px; }
+  kbd { background: rgba(255,255,255,.12); border-radius: 4px; padding: 1px 6px; font-size: 11px; }
+</style>
+</head>
+<body>
+<h1>🎱 3D 台球 · 视觉预览</h1>
+<canvas id="game" width="1000" height="500"></canvas>
+<div style="margin-top:10px; display:flex; gap:10px; align-items:center;">
+  <button id="btnDefault" style="padding:6px 14px; border-radius:16px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.1); color:#fff; cursor:pointer;">默认视角</button>
+  <button id="btnTop" style="padding:6px 14px; border-radius:16px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.1); color:#fff; cursor:pointer;">俯视</button>
+  <span style="color:rgba(255,255,255,.55); font-size:12px;">右键拖拽旋转视角 · 滚轮缩放</span>
+</div>
+<p>移动鼠标瞄准 · 按住左键拖动蓄力、松开击球 · <kbd>Space</kbd> 击球 · <kbd>R</kbd> 重新开球</p>
+<script>
+"use strict";
+/* ============ 与 Pool3DGame.tsx / poolLogic.ts 一致的常量与逻辑 ============ */
+const BALL_R = 2.25, BALL_D = BALL_R * 2, TABLE_L = 96, TABLE_W = 48;
+const FRICTION = 0.42, CUSHION_REST = 0.78, BALL_REST = 0.95;
+const MIN_SHOT_SPEED = 7, MAX_SHOT_SPEED = 42, STOP_EPS = 0.35;
+const POCKET_R = 3.35, SIDE_POCKET_R = 2.9, CORNER_MOUTH = 4.6, SIDE_MOUTH = 3.0;
+const HEAD_X = TABLE_L / 4, FOOT_X = TABLE_L * 0.72;
+const POCKETS = [
+  { x: 0, y: 0, r: POCKET_R }, { x: TABLE_L, y: 0, r: POCKET_R },
+  { x: 0, y: TABLE_W, r: POCKET_R }, { x: TABLE_L, y: TABLE_W, r: POCKET_R },
+  { x: TABLE_L / 2, y: 0, r: SIDE_POCKET_R }, { x: TABLE_L / 2, y: TABLE_W, r: SIDE_POCKET_R },
+];
+const BALL_COLORS = { 1:"#f5c518",2:"#2a6de8",3:"#e03e3e",4:"#7d3ff2",5:"#f58a1f",6:"#1f9d55",7:"#9c3d54",8:"#22262e",9:"#f5c518",10:"#2a6de8",11:"#e03e3e",12:"#7d3ff2",13:"#f58a1f",14:"#1f9d55",15:"#9c3d54" };
+const ballColor = id => id === 0 ? "#f2f3f6" : (BALL_COLORS[id] || "#e8e8e8");
+const isStriped = id => id > 8;
+const clamp = (v,lo,hi) => v < lo ? lo : v > hi ? hi : v;
+
+function shuffle(arr, rng) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+function createRack() {
+  const balls = [{ id: 0, x: HEAD_X, y: TABLE_W / 2, vx: 0, vy: 0, potted: false }];
+  const rest = shuffle([2,3,4,5,6,7,9,10,11,12,13,14,15], Math.random);
+  const ids = [1, ...rest.slice(0, 3), 8, ...rest.slice(3)];
+  const rowStep = BALL_D * Math.sin(Math.PI / 3);
+  let idx = 0;
+  for (let row = 0; row < 5; row++) {
+    const count = row + 1, x = FOOT_X + row * rowStep;
+    for (let k = 0; k < count; k++) {
+      balls.push({ id: ids[idx], x, y: TABLE_W / 2 + (k - (count - 1) / 2) * BALL_D, vx: 0, vy: 0, potted: false });
+      idx++;
+    }
+  }
+  return balls;
+}
+function inPocketMouth(x, y, cushion) {
+  if (cushion === "top" || cushion === "bottom") return x < CORNER_MOUTH || x > TABLE_L - CORNER_MOUTH || Math.abs(x - TABLE_L / 2) < SIDE_MOUTH;
+  return y < CORNER_MOUTH || y > TABLE_W - CORNER_MOUTH;
+}
+function stepBalls(balls, h) {
+  const res = { potted: [], cushionHits: 0, ballImpacts: 0 };
+  const damp = Math.exp(-FRICTION * h);
+  for (const b of balls) {
+    if (b.potted) continue;
+    const sp = Math.hypot(b.vx, b.vy);
+    if (sp < STOP_EPS) { b.vx = 0; b.vy = 0; continue; }
+    b.vx *= damp; b.vy *= damp;
+    b.x += b.vx * h; b.y += b.vy * h;
+  }
+  for (const b of balls) {
+    if (b.potted) continue;
+    if (b.y < BALL_R) { if (!inPocketMouth(b.x, b.y, "top")) { b.y = BALL_R; if (b.vy < 0) { b.vy = -b.vy * CUSHION_REST; res.cushionHits++; } } }
+    else if (b.y > TABLE_W - BALL_R) { if (!inPocketMouth(b.x, b.y, "bottom")) { b.y = TABLE_W - BALL_R; if (b.vy > 0) { b.vy = -b.vy * CUSHION_REST; res.cushionHits++; } } }
+    if (b.x < BALL_R) { if (!inPocketMouth(b.x, b.y, "left")) { b.x = BALL_R; if (b.vx < 0) { b.vx = -b.vx * CUSHION_REST; res.cushionHits++; } } }
+    else if (b.x > TABLE_L - BALL_R) { if (!inPocketMouth(b.x, b.y, "right")) { b.x = TABLE_L - BALL_R; if (b.vx > 0) { b.vx = -b.vx * CUSHION_REST; res.cushionHits++; } } }
+  }
+  for (let i = 0; i < balls.length; i++) {
+    const a = balls[i]; if (a.potted) continue;
+    for (let j = i + 1; j < balls.length; j++) {
+      const b = balls[j]; if (b.potted) continue;
+      const dx = b.x - a.x, dy = b.y - a.y, dist = Math.hypot(dx, dy);
+      if (dist >= BALL_D || dist < 1e-9) continue;
+      const nx = dx / dist, ny = dy / dist, ov = (BALL_D - dist) / 2;
+      a.x -= nx * ov; a.y -= ny * ov; b.x += nx * ov; b.y += ny * ov;
+      const rv = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
+      if (rv < 0) { const imp = (-(1 + BALL_REST) * rv) / 2; a.vx -= imp * nx; a.vy -= imp * ny; b.vx += imp * nx; b.vy += imp * ny; res.ballImpacts++; }
+    }
+  }
+  for (const b of balls) {
+    if (b.potted) continue;
+    for (const p of POCKETS) {
+      if (Math.hypot(b.x - p.x, b.y - p.y) < p.r) { b.potted = true; b.vx = 0; b.vy = 0; res.potted.push(b.id); break; }
+    }
+  }
+  return res;
+}
+const anyMoving = balls => balls.some(b => !b.potted && Math.hypot(b.vx, b.vy) >= STOP_EPS);
+function shoot(balls, angle, power) {
+  const cue = balls[0]; if (cue.potted) return;
+  const speed = MIN_SHOT_SPEED + (MAX_SHOT_SPEED - MIN_SHOT_SPEED) * clamp(power, 0, 1);
+  cue.vx = Math.cos(angle) * speed; cue.vy = Math.sin(angle) * speed;
+}
+function autoPlaceCue(balls) {
+  const cue = balls[0];
+  cue.potted = false; cue.vx = 0; cue.vy = 0;
+  let placed = false;
+  const trySpot = (tx, ty, rad) => {
+    for (let r = 0; r <= rad; r += BALL_D) {
+      for (let dy = -r; dy <= r + 0.01; dy += BALL_D) {
+        for (let dx = -r; dx <= r + 0.01; dx += BALL_D) {
+          if (Math.hypot(dx, dy) > r + 0.01) continue;
+          const x = clamp(tx + dx, BALL_R, TABLE_L - BALL_R), y = clamp(ty + dy, BALL_R, TABLE_W - BALL_R);
+          if (balls.every(b => b.id === 0 || b.potted || Math.hypot(b.x - x, b.y - y) >= BALL_D - 0.01)) { cue.x = x; cue.y = y; return true; }
+        }
+      }
+    }
+    return false;
+  };
+  placed = trySpot(HEAD_X, TABLE_W / 2, TABLE_W / 2 - BALL_R) || trySpot(TABLE_L / 2, TABLE_W / 2, TABLE_L / 4);
+  if (!placed) { cue.x = TABLE_L / 2; cue.y = TABLE_W / 2; }
+}
+
+/* ============ 相机（与 Pool3DGame.tsx 一致，支持视角切换） ============ */
+const CW = 1000, CH = 500, FOCAL = 950;
+const CAM_TARGET = { x: TABLE_L / 2, y: TABLE_W / 2, z: 0 };
+const DEFAULT_VIEW = { yaw: Math.PI * 1.5, pitch: 50, dist: 175 };
+const TOP_VIEW = { yaw: Math.PI * 1.5, pitch: 88, dist: 112 };
+const vsub = (a,b) => ({ x: a.x-b.x, y: a.y-b.y, z: a.z-b.z });
+const vcross = (a,b) => ({ x: a.y*b.z-a.z*b.y, y: a.z*b.x-a.x*b.z, z: a.x*b.y-a.y*b.x });
+const vnorm = v => { const l = Math.hypot(v.x,v.y,v.z) || 1; return { x:v.x/l, y:v.y/l, z:v.z/l }; };
+const vdot = (a,b) => a.x*b.x + a.y*b.y + a.z*b.z;
+function eyeFromView(v) {
+  const cp = Math.cos(v.pitch * Math.PI / 180), sp = Math.sin(v.pitch * Math.PI / 180);
+  return { x: CAM_TARGET.x + v.dist*cp*Math.cos(v.yaw), y: CAM_TARGET.y + v.dist*cp*Math.sin(v.yaw), z: CAM_TARGET.z + v.dist*sp };
+}
+let view = { ...DEFAULT_VIEW };
+let cam = null;
+function buildCam() {
+  const eye = eyeFromView(view);
+  const fwd = vnorm(vsub(CAM_TARGET, eye));
+  const rgt = vnorm(vcross(fwd, { x:0, y:0, z:1 }));
+  const up = vcross(rgt, fwd);
+  cam = { eye, rgt, up, fwd, focal: FOCAL, cx: CW/2, cy: CH/2 };
+}
+buildCam();
+function w2s(x, y, z) {
+  const d = vsub({ x, y, z }, cam.eye);
+  const zc = vdot(d, cam.fwd);
+  if (zc < 2) return null;
+  const xc = vdot(d, cam.rgt), yc = vdot(d, cam.up), scale = cam.focal / zc;
+  return { x: cam.cx + xc * scale, y: cam.cy - yc * scale, scale, zc };
+}
+function s2p(sx, sy) {
+  const dx = (sx - cam.cx) / cam.focal, dy = -(sy - cam.cy) / cam.focal;
+  const dir = vnorm({ x: cam.rgt.x*dx + cam.up.x*dy + cam.fwd.x, y: cam.rgt.y*dx + cam.up.y*dy + cam.fwd.y, z: cam.rgt.z*dx + cam.up.z*dy + cam.fwd.z });
+  if (dir.z >= -1e-6) return null;
+  const t = (0 - cam.eye.z) / dir.z;
+  if (t <= 0) return null;
+  return { x: cam.eye.x + dir.x * t, y: cam.eye.y + dir.y * t };
+}
+
+/* ============ 渲染 ============ */
+function hexToRgb(h){h=h.replace('#','');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
+const shade=(h,f)=>{const[r,g,b]=hexToRgb(h);return`rgb(${r*f|0},${g*f|0},${b*f|0})`;};
+const tint=(h,f)=>{const[r,g,b]=hexToRgb(h);return`rgb(${r+(255-r)*f|0},${g+(255-g)*f|0},${b+(255-b)*f|0})`;};
+
+function drawTable(ctx) {
+  const corners = [{x:0,y:0},{x:TABLE_L,y:0},{x:TABLE_L,y:TABLE_W},{x:0,y:TABLE_W}];
+  const pts = corners.map(c => w2s(c.x, c.y, 0)).filter(Boolean);
+  if (pts.length < 4) return;
+  const center = w2s(TABLE_L/2, TABLE_W/2, 0);
+  const railW = 7.6;
+  const outer = pts.map((p) => {
+    const dx = p.x - center.x, dy = p.y - center.y, dl = Math.hypot(dx,dy) || 1, w = railW * p.scale;
+    return { x: p.x + (dx/dl)*w, y: p.y + (dy/dl)*w };
+  });
+  // 桌影
+  ctx.fillStyle = "rgba(0,0,0,0.18)";
+  ctx.beginPath();
+  outer.forEach((p,i)=> i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+  ctx.closePath(); ctx.fill();
+  // 木框
+  ctx.fillStyle = "#5b3520";
+  ctx.beginPath();
+  outer.forEach((p,i)=> i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+  ctx.closePath(); ctx.fill();
+  // 毛呢轮廓（角斜切 + 中袋凹口）
+  const CORNER_CUT = 3.6, MOUTH_HALF = 3.0;
+  const FELT_POINTS = [
+    { x: 0, y: CORNER_CUT }, { x: CORNER_CUT, y: 0 },
+    { x: TABLE_L/2 - MOUTH_HALF, y: 0 }, { x: TABLE_L/2 + MOUTH_HALF, y: 0 },
+    { x: TABLE_L - CORNER_CUT, y: 0 }, { x: TABLE_L, y: CORNER_CUT },
+    { x: TABLE_L, y: TABLE_W - CORNER_CUT }, { x: TABLE_L - CORNER_CUT, y: TABLE_W },
+    { x: TABLE_L/2 + MOUTH_HALF, y: TABLE_W }, { x: TABLE_L/2 - MOUTH_HALF, y: TABLE_W },
+    { x: CORNER_CUT, y: TABLE_W }, { x: 0, y: TABLE_W - CORNER_CUT },
+  ];
+  const feltPts = FELT_POINTS.map(c => w2s(c.x, c.y, 0)).filter(Boolean);
+  // 内侧高光（沿毛呢轮廓，袋口处自然断开）
+  ctx.strokeStyle = "rgba(255,255,255,0.1)"; ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  feltPts.forEach((p,i)=> i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+  ctx.closePath(); ctx.stroke();
+  // 毛呢
+  const g = ctx.createLinearGradient(0, feltPts[0].y, 0, feltPts[6].y);
+  g.addColorStop(0, tint("#2e8b57", 0.06)); g.addColorStop(0.5, "#2e8b57"); g.addColorStop(1, "#257a49");
+  ctx.fillStyle = g;
+  ctx.beginPath();
+  feltPts.forEach((p,i)=> i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+  ctx.closePath(); ctx.fill();
+  // 库边（袋口处断开）
+  function subtractHoles(a0, a1, holes) {
+    const hs = holes.filter(([h0,h1]) => h1 > a0 && h0 < a1).map(([h0,h1]) => [Math.max(a0,h0), Math.min(a1,h1)]).sort((x,y) => x[0]-y[0]);
+    const out = []; let cur = a0;
+    for (const [h0,h1] of hs) { if (h0 > cur + 0.6) out.push([cur,h0]); cur = Math.max(cur,h1); }
+    if (a1 > cur + 0.6) out.push([cur,a1]);
+    return out;
+  }
+  function cushionSegments() {
+    const segs = [];
+    for (const y of [0, TABLE_W]) {
+      for (const [from,to] of subtractHoles(0, TABLE_L, [[0,CORNER_MOUTH],[TABLE_L-CORNER_MOUTH,TABLE_L],[TABLE_L/2-SIDE_MOUTH,TABLE_L/2+SIDE_MOUTH]])) segs.push({ fixed: y, axis: "x", from, to });
+    }
+    for (const x of [0, TABLE_L]) {
+      for (const [from,to] of subtractHoles(0, TABLE_W, [[0,CORNER_MOUTH],[TABLE_W-CORNER_MOUTH,TABLE_W]])) segs.push({ fixed: x, axis: "y", from, to });
+    }
+    return segs;
+  }
+  ctx.strokeStyle = "#1e6b41"; ctx.lineCap = "round";
+  for (const s of cushionSegments()) {
+    const mid = s.axis === "x" ? { x: (s.from+s.to)/2, y: s.fixed } : { x: s.fixed, y: (s.from+s.to)/2 };
+    const msp = w2s(mid.x, mid.y, 0);
+    ctx.lineWidth = msp ? Math.max(3, 2.1*msp.scale) : 6;
+    ctx.beginPath();
+    let started = false;
+    const n = Math.max(2, Math.ceil((s.to - s.from) / 0.9));
+    for (let i = 0; i <= n; i++) {
+      const t = s.from + ((s.to - s.from) * i) / n;
+      const p = w2s(s.axis === "x" ? t : s.fixed, s.axis === "x" ? s.fixed : t, 0);
+      if (!p) continue;
+      if (!started) { ctx.moveTo(p.x, p.y); started = true; } else ctx.lineTo(p.x, p.y);
+    }
+    if (started) ctx.stroke();
+  }
+  // 袋口：视觉中心对齐斜切/凹口，真实透视椭圆 + 金属圈
+  function pocketVisCenter(p) {
+    if (p.x === 0 || p.x === TABLE_L) {
+      const ox = p.x === 0 ? CORNER_CUT/2 : -CORNER_CUT/2;
+      const oy = p.y === 0 ? CORNER_CUT/2 : -CORNER_CUT/2;
+      return { x: p.x + ox, y: p.y + oy };
+    }
+    return { x: p.x, y: p.y };
+  }
+  for (const p of POCKETS) {
+    const c = pocketVisCenter(p);
+    const sp = w2s(c.x, c.y, 0); if (!sp) continue;
+    const r = p.r * sp.scale * 1.08;
+    const dir = vnorm(vsub(cam.eye, { x: c.x, y: c.y, z: 0 }));
+    const cosT = Math.max(0.5, Math.abs(dir.z));
+    const wl = Math.hypot(dir.x, dir.y);
+    let rot = 0;
+    if (wl > 1e-4) {
+      const ux = dir.x / wl, uy = dir.y / wl;
+      const dxs = ux * cam.rgt.x + uy * cam.rgt.y;
+      const dys = ux * cam.up.x + uy * cam.up.y;
+      rot = Math.atan2(-dys, dxs);
+    }
+    ctx.fillStyle = "#120d08";
+    ctx.beginPath(); ctx.ellipse(sp.x, sp.y, r, r*cosT, rot, 0, Math.PI*2); ctx.fill();
+    ctx.strokeStyle = "rgba(214,178,136,0.5)"; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.ellipse(sp.x, sp.y, r, r*cosT, rot, 0, Math.PI*2); ctx.stroke();
+    ctx.fillStyle = "rgba(255,255,255,0.07)";
+    ctx.beginPath(); ctx.ellipse(sp.x - r*0.22, sp.y - r*0.2, r*0.45, r*0.45*cosT, rot, 0, Math.PI*2); ctx.fill();
+  }
+}
+function drawBall(ctx, ball) {
+  const sp = w2s(ball.x, ball.y, BALL_R); if (!sp) return;
+  const r = BALL_R * sp.scale;
+  const sh = w2s(ball.x, ball.y, 0);
+  if (sh) { ctx.fillStyle = "rgba(0,0,0,0.30)"; ctx.beginPath(); ctx.ellipse(sh.x, sh.y, r*1.02, r*0.4, 0, 0, Math.PI*2); ctx.fill(); }
+  const base = ballColor(ball.id);
+  const grad = ctx.createRadialGradient(sp.x - r*0.35, sp.y - r*0.42, r*0.1, sp.x, sp.y, r);
+  grad.addColorStop(0, tint(base, 0.35)); grad.addColorStop(0.55, base); grad.addColorStop(1, shade(base, 0.5));
+  ctx.fillStyle = grad;
+  ctx.beginPath(); ctx.arc(sp.x, sp.y, r, 0, Math.PI*2); ctx.fill();
+  if (ball.id === 0) { ctx.strokeStyle = "rgba(120,130,150,0.35)"; ctx.lineWidth = 1; ctx.stroke(); }
+  else {
+    ctx.save();
+    ctx.beginPath(); ctx.arc(sp.x, sp.y, r, 0, Math.PI*2); ctx.clip();
+    if (isStriped(ball.id)) { ctx.fillStyle = "rgba(255,255,255,0.94)"; ctx.fillRect(sp.x - r, sp.y - r*0.4, r*2, r*0.8); }
+    const nr = r * (isStriped(ball.id) ? 0.42 : 0.5);
+    ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(sp.x, sp.y, nr, 0, Math.PI*2); ctx.fill();
+    ctx.strokeStyle = "rgba(0,0,0,0.18)"; ctx.lineWidth = 0.8; ctx.stroke();
+    ctx.restore();
+    ctx.fillStyle = ball.id === 8 ? "#22262e" : "#20242c";
+    ctx.font = `700 ${Math.max(8, r*0.72)}px system-ui, sans-serif`;
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText(String(ball.id), sp.x, sp.y + r*0.02);
+  }
+  const hl = ctx.createRadialGradient(sp.x - r*0.42, sp.y - r*0.5, 0, sp.x - r*0.42, sp.y - r*0.5, r*0.34);
+  hl.addColorStop(0, "rgba(255,255,255,0.9)"); hl.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = hl; ctx.beginPath(); ctx.arc(sp.x, sp.y, r*0.86, 0, Math.PI*2); ctx.fill();
+}
+function drawCue(ctx, cue, angle, pull) {
+  const dx = Math.cos(angle), dy = Math.sin(angle);
+  const tipX = cue.x - dx*(BALL_R + 0.55 + pull), tipY = cue.y - dy*(BALL_R + 0.55 + pull);
+  const h = BALL_R * 0.5;
+  const seg = (from, to, color, ww) => {
+    const x1 = tipX - dx*from, y1 = tipY - dy*from;
+    const x2 = tipX - dx*to, y2 = tipY - dy*to;
+    const p1 = w2s(x1, y1, h), p2 = w2s(x2, y2, h);
+    if (!p1 || !p2) return;
+    ctx.strokeStyle = color; ctx.lineWidth = ww*1.15*p1.scale; ctx.lineCap = "round";
+    ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+  };
+  seg(12, 34, "#7a4a22", 1.28); seg(2.6, 12, "#e0b06a", 1.05); seg(0, 2.6, "#f4f0e6", 0.8);
+}
+function aimContact(balls, angle) {
+  const cue = balls[0], dx = Math.cos(angle), dy = Math.sin(angle);
+  let tEnd = Infinity, hitBall = false;
+  for (const [b, axis] of [[BALL_R,1],[TABLE_L-BALL_R,1],[BALL_R,2],[TABLE_W-BALL_R,2]]) {
+    const d = axis === 1 ? dx : dy, p0 = axis === 1 ? cue.x : cue.y;
+    if (Math.abs(d) < 1e-6) continue;
+    const t = (b - p0) / d;
+    if (t > 0 && t < tEnd) tEnd = t;
+  }
+  const d2 = BALL_D;
+  for (const b of balls) {
+    if (b.id === 0 || b.potted) continue;
+    const rx = b.x - cue.x, ry = b.y - cue.y, proj = rx*dx + ry*dy;
+    if (proj <= 0) continue;
+    const perp2 = rx*rx + ry*ry - proj*proj;
+    if (perp2 >= d2*d2) continue;
+    const t = proj - Math.sqrt(d2*d2 - perp2);
+    if (t > 0 && t < tEnd) { tEnd = t; hitBall = true; }
+  }
+  if (!Number.isFinite(tEnd) || tEnd > 400) tEnd = 400;
+  return { x: cue.x + dx*tEnd, y: cue.y + dy*tEnd, hitBall };
+}
+function drawAim(ctx, balls, angle) {
+  const cue = balls[0], dx = Math.cos(angle), dy = Math.sin(angle);
+  const contact = aimContact(balls, angle);
+  const p0 = { x: cue.x + dx*1.2, y: cue.y + dy*1.2 };
+  const len = Math.hypot(contact.x - p0.x, contact.y - p0.y);
+  ctx.save(); ctx.setLineDash([6, 10]); ctx.strokeStyle = "rgba(255,255,255,0.55)"; ctx.lineWidth = 1.6;
+  ctx.beginPath();
+  for (let i = 0; i <= 10; i++) {
+    const p = w2s(p0.x + dx*(i/10)*len, p0.y + dy*(i/10)*len, 0.05); if (!p) continue;
+    i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+  }
+  ctx.stroke(); ctx.restore();
+  const hp = w2s(contact.x, contact.y, 0.05);
+  if (hp) { ctx.fillStyle = contact.hitBall ? "rgba(255,190,80,0.9)" : "rgba(255,255,255,0.75)"; ctx.beginPath(); ctx.arc(hp.x, hp.y, 4.5, 0, Math.PI*2); ctx.fill(); ctx.strokeStyle = "rgba(0,0,0,0.35)"; ctx.lineWidth = 1; ctx.stroke(); }
+}
+function drawPowerBar(ctx, power, charging) {
+  const w = 190, h = 10, x = 16, y = CH - 28;
+  ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.beginPath(); ctx.roundRect(x-3, y-3, w+6, h+6, 8); ctx.fill();
+  ctx.fillStyle = "rgba(255,255,255,0.14)"; ctx.beginPath(); ctx.roundRect(x, y, w, h, 5); ctx.fill();
+  const pw = w * power;
+  const grad = ctx.createLinearGradient(x, 0, x+w, 0);
+  grad.addColorStop(0, "#35d97a"); grad.addColorStop(0.5, "#ffd166"); grad.addColorStop(1, "#ff6b57");
+  ctx.fillStyle = grad;
+  ctx.beginPath(); ctx.roundRect(x, y, Math.max(0, pw), h, 5); ctx.fill();
+  ctx.fillStyle = "rgba(255,255,255,0.9)"; ctx.font = "600 11px system-ui, sans-serif"; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+  ctx.fillText(charging ? "POWER" : "POWER · SPACE", x, y - 5);
+}
+
+/* ============ 游戏状态与主循环 ============ */
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+let balls = createRack();
+let phase = "aim"; // aim | moving
+const aim = { angle: Math.PI, power: 0.62, charging: false, hasPointer: false };
+let shots = 0;
+
+function fireShot() {
+  if (phase !== "aim" || balls[0].potted) return;
+  shoot(balls, aim.angle, aim.power);
+  phase = "moving";
+  shots++;
+}
+function restart() { balls = createRack(); phase = "aim"; shots = 0; }
+
+/* 调试钩子（仅供预览页自动化验证） */
+window.__dbg = {
+  shoot: (a, p) => {
+    shoot(balls, a, p);
+    phase = "moving";
+  },
+  restart,
+  view: () => ({ ...view }),
+  snapshot: () =>
+    balls.map((b) => ({
+      id: b.id,
+      x: +b.x.toFixed(2),
+      y: +b.y.toFixed(2),
+      vx: +b.vx.toFixed(2),
+      vy: +b.vy.toFixed(2),
+      potted: b.potted,
+    })),
+  probe: () => {
+    const cv = document.getElementById("game");
+    const c2d = cv.getContext("2d");
+    const img = c2d.getImageData(0, 0, cv.width, cv.height).data;
+    const px = (sx, sy) => {
+      const i = (Math.round(sy) * cv.width + Math.round(sx)) * 4;
+      return [img[i], img[i + 1], img[i + 2]];
+    };
+    const P = POCKETS.map((p) => {
+      const sp = w2s(p.x, p.y, 0);
+      return sp ? { name: p.x + "," + p.y, c: px(sp.x, sp.y) } : null;
+    });
+    const gap = (w2s(2.3, 0, 0) && px(w2s(2.3, 0, 0).x, w2s(2.3, 0, 0).y)) || null;
+    const rail = (w2s(6.9, 0, 0) && px(w2s(6.9, 0, 0).x, w2s(6.9, 0, 0).y)) || null;
+    return { P, gap, rail };
+  },
+};
+
+function frame(now) {
+  if (phase === "moving") {
+    const h = 1 / 120;
+    for (let s = 0; s < 2; s++) stepBalls(balls, h);
+    if (!anyMoving(balls)) {
+      if (balls[0].potted) autoPlaceCue(balls);
+      const left = balls.filter(b => b.id > 0 && !b.potted).length;
+      if (left === 0) { phase = "over"; }
+      else phase = "aim";
+    }
+  }
+  render();
+  requestAnimationFrame(frame);
+}
+function render() {
+  ctx.clearRect(0, 0, CW, CH);
+  drawTable(ctx);
+  const cue = balls[0];
+  const inAim = phase === "aim" && !cue.potted;
+  if (inAim && aim.hasPointer) drawAim(ctx, balls, aim.angle);
+  const drawables = balls.filter(b => !b.potted).map(b => ({ b, d: (w2s(b.x, b.y, BALL_R)||{zc:0}).zc })).sort((a,c) => c.d - a.d);
+  for (const { b } of drawables) drawBall(ctx, b);
+  if (inAim) {
+    const pull = aim.charging ? aim.power * 9 : 0.4;
+    drawCue(ctx, cue, aim.angle, pull);
+    drawPowerBar(ctx, aim.charging ? aim.power : 0.62, aim.charging);
+  }
+  // 底部信息
+  ctx.fillStyle = "rgba(255,255,255,0.85)";
+  ctx.font = "600 15px system-ui, sans-serif";
+  ctx.textAlign = "right"; ctx.textBaseline = "bottom";
+  ctx.fillText(`SHOTS ${shots} · LEFT ${balls.filter(b=>b.id>0&&!b.potted).length}`, CW - 16, CH - 10);
+}
+requestAnimationFrame(frame);
+
+/* ============ 交互 ============ */
+let drag = null; // { mode: "aim"|"view", x, y, view0 }
+function planePoint(e) {
+  const rect = canvas.getBoundingClientRect();
+  const sx = ((e.clientX - rect.left) / rect.width) * CW;
+  const sy = ((e.clientY - rect.top) / rect.height) * CH;
+  return s2p(sx, sy);
+}
+function updateAimFrom(pt) {
+  const cue = balls[0];
+  const dx = pt.x - cue.x, dy = pt.y - cue.y;
+  const dist = Math.hypot(dx, dy);
+  if (dist < 0.5) return;
+  aim.angle = Math.atan2(dy, dx);
+  if (aim.charging) aim.power = clamp(dist / 52, 0.05, 1);
+}
+canvas.addEventListener("contextmenu", e => e.preventDefault());
+canvas.addEventListener("pointermove", e => {
+  if (drag && drag.mode === "view") {
+    view = { ...drag.view0, yaw: drag.view0.yaw + (e.clientX - drag.x) * 0.006, pitch: clamp(drag.view0.pitch + (e.clientY - drag.y) * 0.006, 20, 89) };
+    buildCam();
+    return;
+  }
+  if (phase !== "aim") return;
+  const pt = planePoint(e); if (!pt) return;
+  aim.hasPointer = true; updateAimFrom(pt);
+});
+canvas.addEventListener("pointerdown", e => {
+  if (e.button === 2) {
+    e.preventDefault();
+    drag = { mode: "view", x: e.clientX, y: e.clientY, view0: { ...view } };
+    canvas.style.cursor = "grabbing";
+    return;
+  }
+  if (phase !== "aim") return;
+  const pt = planePoint(e); if (!pt) return;
+  drag = { mode: "aim", x: e.clientX, y: e.clientY, view0: { ...view } };
+  aim.charging = true; aim.hasPointer = true; updateAimFrom(pt);
+});
+canvas.addEventListener("pointerup", e => {
+  if (!drag) return;
+  const mode = drag.mode;
+  drag = null;
+  if (mode === "view") { canvas.style.cursor = "crosshair"; return; }
+  aim.charging = false;
+  const pt = planePoint(e); if (pt) updateAimFrom(pt);
+  if (aim.power >= 0.05) fireShot();
+});
+canvas.addEventListener("wheel", e => {
+  e.preventDefault();
+  view = { ...view, dist: clamp(view.dist * (e.deltaY > 0 ? 1.14 : 1 / 1.14), 80, 280) };
+  buildCam();
+}, { passive: false });
+document.getElementById("btnDefault").addEventListener("click", () => { view = { ...DEFAULT_VIEW }; buildCam(); });
+document.getElementById("btnTop").addEventListener("click", () => { view = { ...TOP_VIEW }; buildCam(); });
+window.addEventListener("keydown", e => {
+  if (e.code === "Space") { e.preventDefault(); fireShot(); }
+  else if (e.key.toLowerCase() === "r") restart();
+});
+</script>
+</body>
+</html>
