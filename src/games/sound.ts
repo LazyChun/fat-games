@@ -296,3 +296,19 @@ export function sfxCoin(): void {
   tone(988, 0.09, { type: "sine", vol: 0.15, decay: 0.08 });
   tone(1319, 0.16, { type: "sine", vol: 0.13, decay: 0.14, delay: 0.06 });
 }
+
+/** 起跳 / 二段跳（跨栏等跑酷游戏） */
+export function sfxJump(): void {
+  if (!throttle("jump", 70)) return;
+  noise(0.07, 0.05, 0, 2000);
+  tone(240, 0.14, { type: "sine", vol: 0.14, decay: 0.12, slideTo: 620 });
+  tone(120, 0.12, { type: "triangle", vol: 0.08, decay: 0.1, slideTo: 300, delay: 0.02 });
+}
+
+/** 完美判定（跨栏贴栏顶、精确操作加分） */
+export function sfxPerfect(): void {
+  if (!throttle("perfect", 140)) return;
+  tone(1319, 0.1, { type: "sine", vol: 0.15, decay: 0.09 });
+  tone(1760, 0.16, { type: "sine", vol: 0.12, decay: 0.13, delay: 0.05 });
+  tone(2093, 0.2, { type: "triangle", vol: 0.1, decay: 0.17, delay: 0.1 });
+}

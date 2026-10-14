@@ -28,7 +28,9 @@ import {
   IconSliding,
   IconCurling,
   IconPool,
+  IconHurdle,
   IconScores,
+  IconArchery,
 } from "./gameIcons";
 
 import Game2048 from "./Game2048";
@@ -49,6 +51,8 @@ import SlingshotGame from "./SlingshotGame";
 import SlidingPuzzleGame from "./SlidingPuzzleGame";
 import CurlingGame from "./CurlingGame";
 import Pool3DGame from "./Pool3DGame";
+import HurdleGame from "./HurdleGame";
+import ArcheryGame from "./ArcheryGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -270,6 +274,28 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.casual",
     icon: IconPool,
     component: Pool3DGame,
+  },
+  {
+    id: "hurdle",
+    title: "跨栏冲刺",
+    desc: "蓄力起跳，精准跨栏，途中收集体力与生命补给",
+    category: "休闲",
+    titleKey: "game.hurdle.title",
+    descKey: "game.hurdle.desc",
+    categoryKey: "category.casual",
+    icon: IconHurdle,
+    component: HurdleGame,
+  },
+  {
+    id: "archery",
+    title: "反弹神射",
+    desc: "拖弓蓄力，借反弹与风命中目标",
+    category: "休闲",
+    titleKey: "game.archery.title",
+    descKey: "game.archery.desc",
+    categoryKey: "category.casual",
+    icon: IconArchery,
+    component: ArcheryGame,
   },
   {
     id: "scores",

@@ -270,3 +270,26 @@ export const IconPool: React.FC<GameIconProps> = (props) => (
     <path d="M15.6 13.4 L19.8 13.4" strokeWidth={2} />
   </svg>
 );
+
+/** 跨栏冲刺：栏架（横板 + 双腿）+ 腾空跨过的运动员 */
+export const IconHurdle: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    <path d="M5.5 14.6 H18.5" />
+    <path d="M7.5 14.6 V19.4 M16.5 14.6 V19.4" />
+    <circle cx="11.6" cy="6.2" r="2" />
+    <path d="M11.6 8.2 Q11.6 11.6 9.6 13.2" strokeWidth={2.4} />
+    <path d="M11.4 9 L13.3 10.8" />
+    <path d="M9.6 13.2 L7.8 15.2 M9.6 13.2 L11.6 15" />
+  </svg>
+);
+
+/** 反弹神射：拉开的弓 + 搭弦待发的箭（弓臂 + 弓弦 + 箭杆 + 箭头） */
+export const IconArchery: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    <path d="M5.2 5.4 Q15.6 4.2 5.2 18.6" />
+    <path d="M5.2 5.4 V18.6" strokeWidth={1.2} />
+    <path d="M7 11.9 L18 7.6" />
+    <path d="M19.4 6.9 L15 8.9 L17.8 11.6 Z" fill="currentColor" stroke="none" />
+    <path d="M7 11.9 L5.2 10.4 M7 11.9 L5.2 13.4" strokeWidth={1.2} />
+  </svg>
+);

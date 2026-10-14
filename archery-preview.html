@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>反弹神射 · 独立预览（fat-games 插件内同款）</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 20px 10px;
+    font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: radial-gradient(120% 140% at 20% 0%, #fdfbf7 0%, #f5f1ea 45%, #ede6da 100%);
+    color: rgba(0,0,0,0.85);
+  }
+  .frame {
+    width: 820px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgba(120,100,70,0.18);
+    box-shadow: 0 10px 30px rgba(90,70,40,0.14);
+  }
+  .bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .bar .emoji { font-size: 22px; }
+  .bar .title { font-size: 16px; font-weight: 800; }
+  .bar .spacer { flex: 1; }
+  .bar button {
+    border: 1px solid rgba(0,0,0,0.18); background: rgba(255,255,255,0.9);
+    color: rgba(0,0,0,0.75); border-radius: 20px; padding: 6px 16px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  .bar button.primary {
+    background: linear-gradient(135deg, #4facfe 0%, #1677ff 100%);
+    color: #fff; border: none; box-shadow: 0 3px 10px rgba(22,119,255,0.28);
+  }
+  .stats {
+    display: flex; flex-wrap: wrap; gap: 10px; padding: 12px 16px 0;
+  }
+  .chip {
+    min-width: 108px; padding: 7px 14px; border-radius: 14px;
+    display: flex; flex-direction: column; gap: 1px; line-height: 1.25;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.14);
+  }
+  .chip .lbl { font-size: 11px; }
+  .chip .val { font-size: 19px; font-weight: 800; }
+  .stage {
+    position: relative; margin: 16px;
+    width: 760px; height: 460px;
+    border-radius: 14px; overflow: hidden;
+    border: 2px solid rgba(120,150,180,0.35);
+    box-shadow: 0 10px 30px rgba(5,8,20,0.45);
+  }
+  canvas { display: block; width: 100%; height: 100%; cursor: crosshair; touch-action: none; }
+  .overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; gap: 10px;
+    align-items: center; justify-content: center;
+    text-align: center; color: #fff;
+    pointer-events: none;
+  }
+  .overlay .big { font-size: 30px; font-weight: 900; }
+  .overlay .mid { font-size: 18px; font-weight: 800; }
+  .overlay .sub { font-size: 13px; opacity: 0.92; max-width: 560px; line-height: 1.7; padding: 0 14px; }
+  .overlay button {
+    pointer-events: auto; cursor: pointer; border: none;
+    background: linear-gradient(135deg, #4facfe 0%, #1677ff 100%);
+    color: #fff; border-radius: 20px; padding: 8px 22px;
+    font-size: 14px; font-weight: 700;
+    box-shadow: 0 3px 10px rgba(22,119,255,0.28);
+  }
+  .overlay button.ghost {
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.4);
+  }
+  .idle-bg { background: rgba(20,40,60,0.55); }
+  .levelup-bg { background: rgba(10,40,20,0.6); color: #eaffdc; }
+  .over-bg { background: rgba(30,6,12,0.62); }
+  .won-bg { background: rgba(60,20,4,0.62); }
+  .help {
+    font-size: 12px; color: rgba(0,0,0,0.5);
+    text-align: center; max-width: 800px; line-height: 1.7; padding: 0 12px;
+  }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="bar">
+      <span class="emoji">🏹</span>
+      <span class="title">反弹神射</span>
+      <div class="spacer"></div>
+      <button id="btnHead" class="primary">开始射箭</button>
+    </div>
+    <div class="stats">
+      <div class="chip" style="background:linear-gradient(135deg,#ffe9a8,#ffc93c)"><span class="lbl">总分</span><span class="val" id="stScore">0</span></div>
+      <div class="chip" style="background:linear-gradient(135deg,#d6e6ff,#8fc3ff)"><span class="lbl">关卡 · 目标</span><span class="val" id="stLevel">1 · 0/75</span></div>
+      <div class="chip" style="background:linear-gradient(135deg,#dcf5d0,#9ade6e)"><span class="lbl">剩余箭</span><span class="val" id="stArrows">5</span></div>
+      <div class="chip" style="background:linear-gradient(135deg,#efe0ff,#c99aff)"><span class="lbl">连击</span><span class="val" id="stCombo">—</span></div>
+      <div class="chip" style="background:linear-gradient(135deg,#ffd9d4,#ff8a80)"><span class="lbl">最高分</span><span class="val" id="stBest">0</span></div>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="cv" width="760" height="460"></canvas>
+      <div class="overlay idle-bg" id="ovIdle">
+        <div class="big">🏹</div>
+        <div class="mid">拖弓蓄力 · 松开即射</div>
+        <div class="sub">在弓手处按住鼠标向外拖弓（向左下拖 → 向右上射），虚线是弹道预览。重力与风力影响弹道；箭撞砖墙 / 冰面会反弹，每次反弹命中 +50%；木箱一碰即碎、炸药桶引爆清障。命中苹果头靶 +15，误伤射手 -20。连续命中连击最高 ×4。每关 5 支箭，达到目标分晋级！</div>
+        <div><button id="btnIdle">开始射箭</button></div>
+      </div>
+      <div class="overlay levelup-bg" id="ovLevel" style="display:none">
+        <div class="big">🎉</div>
+        <div class="mid" id="lvTitle">第 2 关达成！</div>
+        <div class="sub">风更强、靶更远，下一关见真章</div>
+        <div><button id="btnLevel">下一关</button></div>
+      </div>
+      <div class="overlay over-bg" id="ovOver" style="display:none">
+        <div class="big">😵</div>
+        <div class="mid">箭尽关败</div>
+        <div class="sub">本关未达目标分 · 旅程结束</div>
+        <div class="mid" style="font-size:15px" id="ovStats">总分 0 · 闯过 0 关</div>
+        <div class="sub" id="ovBest"></div>
+        <div style="display:flex;gap:10px"><button id="btnAgain">再来一局</button><button class="ghost" id="btnRestart1">重新开始</button></div>
+      </div>
+      <div class="overlay won-bg" id="ovWon" style="display:none">
+        <div class="big">🏆</div>
+        <div class="mid">百步穿杨！</div>
+        <div class="sub">八关全通 · 封神射手</div>
+        <div class="mid" style="font-size:15px" id="ovStats2">总分 0 · 闯过 8 关</div>
+        <div class="sub" id="ovBest2"></div>
+        <div style="display:flex;gap:10px"><button id="btnAgain2">再来一局</button><button class="ghost" id="btnRestart2">重新开始</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="help">
+    操作：在弓手处按住鼠标向外拖弓蓄力（向左下拖 → 向右上射），虚线为弹道预览，松开发射；重力 + 每箭随机风力影响弹道。箭撞砖墙/冰面会反弹，每次反弹命中 +50%；木箱一碰即碎、炸药桶引爆清障；苹果头靶 +15，误伤射手 -20。连续命中（2.2 秒内）连击最高 ×4。每关 5 支箭达到目标分晋级，风力随关卡增强！空格：开始 / 下一关 / 再来一局。
+  </div>
+<script>
+"use strict";
+/* ═══ 常量与纯逻辑（与插件内 archeryLogic 同款） ═══ */
+const ARC = {
+  W: 760, H: 460, GROUND: 384,
+  ARCHER: { x: 88, y: 340 },
+  gravity: 980, minPower: 140, maxPower: 560, dragMax: 210,
+  bounceMax: 3, bounceBonusPer: 0.5, restBrick: 0.52, restIce: 0.9,
+  stuckLifeMs: 5000,
+  ringRadii: [6, 13, 20, 27, 34], ringScores: [50, 30, 20, 10, 5],
+  bullseyeR: 34, appleR: 9, npcR: 28,
+  appleScore: 15, npcPenalty: 20,
+  barrelR: 24, barrelBlast: 76, barrelKillScore: 25, barrelFlatScore: 10,
+  comboWindowMs: 2200, comboCap: 4,
+  windBase: 110, windPerLevel: 130, windCap: 430,
+  arrowsPerLevel: 5, maxLevel: 8,
+};
+const goalForLevel = (lv) => 40 + 35 * lv;
+
+function mulberry32(seed) {
+  let a = seed >>> 0;
+  return () => {
+    a |= 0; a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+let obsSeq = 0, tgtSeq = 0;
+
+function createWorld(level, seed = 1000 + level * 7919) {
+  const rng = mulberry32(seed);
+  const w = {
+    level, phase: "idle", arrowsLeft: ARC.arrowsPerLevel,
+    score: 0, levelScore: 0, goal: goalForLevel(level),
+    combo: 0, comboTimer: 0, wind: 0,
+    windMax: Math.min(ARC.windBase + (level - 1) * ARC.windPerLevel, ARC.windCap),
+    time: 0, arrows: [], obstacles: [], targets: [], events: [], settled: false,
+  };
+  const ob = (kind, x, y, ww, hh) => w.obstacles.push({ id: ++obsSeq, kind, x, y, w: ww, h: hh, alive: true });
+  // 低墙：封平射低弹道，逼中高抛越顶；砖墙顶面可反弹（弹道加成）；木箱（L2+）低处遮挡；炸药桶（L4+）贴首箱
+  ob("brick", 310 + rng() * 10, 300, 12, 80);
+  const crates = Math.min(1 + Math.floor((level - 1) / 2), 2);
+  for (let c = 0; c < crates; c++) ob("crate", 450 + c * 52 + rng() * 6, ARC.GROUND - 36, 50, 36);
+  if (level >= 4) ob("barrel", 440 + rng() * 6, ARC.GROUND - 24, 24, 24);
+  const addTarget = (t) => w.targets.push({ id: ++tgtSeq, ...t });
+  const nBull = Math.min(2 + Math.floor(level / 2), 4);
+  const bullY = [[230, 250], [310, 335], [260, 290], [330, 350]];
+  const bullX = [[250, 268], [360, 376], [446, 460], [470, 484]];
+  for (let i = 0; i < nBull; i++) {
+    const x = bullX[i][0] + rng() * (bullX[i][1] - bullX[i][0]);
+    const y = bullY[i][0] + rng() * (bullY[i][1] - bullY[i][0]);
+    const moving = level >= 2 && rng() < 0.28 + level * 0.05;
+    addTarget({
+      kind: "bullseye", x, y, alive: true, moving,
+      minY: Math.max(96, y - 56), maxY: Math.min(352, y + 56),
+      speed: 34 + level * 5, dir: rng() < 0.5 ? 1 : -1,
+    });
+  }
+  addTarget({ kind: "apple", x: 395 + rng() * 10, y: ARC.GROUND - 34, alive: true, moving: false, minY: 0, maxY: 0, speed: 0, dir: 1 });
+  return w;
+}
+
+const hasFlying = (w) => w.arrows.some((a) => !a.stuck && !a.removed);
+
+function computeLaunch(archer, pointer) {
+  const dx = archer.x - pointer.x, dy = archer.y - pointer.y;
+  const dist = Math.hypot(dx, dy);
+  if (dist < 1) return { vx: ARC.minPower, vy: 0, power: ARC.minPower };
+  const t = Math.min(dist, ARC.dragMax) / ARC.dragMax;
+  const power = ARC.minPower + (ARC.maxPower - ARC.minPower) * t;
+  const k = power / dist;
+  return { vx: dx * k, vy: dy * k, power };
+}
+
+function startShot(w, launch) {
+  if ((w.phase !== "idle" && w.phase !== "flying") || w.arrowsLeft <= 0 || hasFlying(w)) return;
+  w.wind = (Math.random() * 2 - 1) * w.windMax;
+  w.arrowsLeft -= 1;
+  w.arrows.push({
+    x: ARC.ARCHER.x + 18, y: ARC.ARCHER.y - 4, vx: launch.vx, vy: launch.vy,
+    rot: Math.atan2(launch.vy, launch.vx), bounces: 0, stuck: false, stuckAt: 0, removed: false,
+  });
+  w.events.push({ type: "shot" });
+}
+
+function previewPath(w, launch, maxSteps = 340, dt = 1 / 60) {
+  const pts = [];
+  let x = ARC.ARCHER.x + 18, y = ARC.ARCHER.y - 4, vx = launch.vx, vy = launch.vy;
+  for (let i = 0; i < maxSteps; i++) {
+    x += vx * dt; y += vy * dt; vy += ARC.gravity * dt; vx += w.wind * dt;
+    if (i % 3 === 0) pts.push({ x, y });
+    if (y >= ARC.GROUND - 2 || x < 0 || x > ARC.W || y < 0) break;
+    if (hitObstacle(w, x, y)) break;
+  }
+  return pts;
+}
+
+function hitObstacle(w, x, y) {
+  for (const o of w.obstacles) {
+    if (!o.alive) continue;
+    if (x >= o.x && x <= o.x + o.w && y >= o.y && y <= o.y + o.h) return o;
+  }
+  return null;
+}
+
+function bounceOff(a, o, rest) {
+  const left = a.x - o.x, right = o.x + o.w - a.x, top = a.y - o.y, bottom = o.y + o.h - a.y;
+  const m = Math.min(left, right, top, bottom);
+  if (m === left) { a.x = o.x - 2; a.vx = -a.vx * rest; }
+  else if (m === right) { a.x = o.x + o.w + 2; a.vx = -a.vx * rest; }
+  else if (m === top) { a.y = o.y - 2; a.vy = -a.vy * rest; }
+  else { a.y = o.y + o.h + 2; a.vy = -a.vy * rest; }
+}
+
+function checkTargets(w, a) {
+  for (const t of w.targets) {
+    if (!t.alive) continue;
+    if (t.kind === "bullseye") {
+      const d = Math.hypot(a.x - t.x, a.y - t.y);
+      if (d <= ARC.bullseyeR) {
+        t.alive = false;
+        let ring = ARC.ringRadii.length - 1;
+        for (let i = 0; i < ARC.ringRadii.length; i++) {
+          if (d <= ARC.ringRadii[i]) { ring = i; break; }
+        }
+        return { points: ARC.ringScores[ring], kind: "bullseye", ring, x: t.x, y: t.y };
+      }
+    } else {
+      const dApple = Math.hypot(a.x - t.x, a.y - (t.y - 30));
+      if (dApple <= ARC.appleR) {
+        t.alive = false;
+        return { points: ARC.appleScore, kind: "apple", ring: 0, x: t.x, y: t.y - 30 };
+      }
+      const dNpc = Math.hypot(a.x - t.x, a.y - t.y);
+      if (dNpc <= ARC.npcR) {
+        t.alive = false;
+        return { points: ARC.npcPenalty, kind: "apple", ring: 0, x: t.x, y: t.y, npcHit: true };
+      }
+    }
+  }
+  return null;
+}
+
+function settleLevel(w) {
+  if (w.settled) return;
+  w.settled = true;
+  if (w.levelScore >= w.goal) {
+    if (w.level >= ARC.maxLevel) { w.phase = "won"; w.events.push({ type: "won" }); }
+    else { w.phase = "levelup"; w.events.push({ type: "levelup" }); }
+  } else {
+    w.phase = "over";
+    w.events.push({ type: "over" });
+  }
+}
+
+function advanceLevel(w) {
+  const next = createWorld(w.level + 1);
+  next.score = w.score;
+  next.phase = "flying";
+  return next;
+}
+
+function stepWorld(w, dtMs) {
+  const dt = Math.min(dtMs, 50) / 1000;
+  w.time += dtMs;
+  w.events.length = 0;
+  if (w.comboTimer > 0) {
+    w.comboTimer -= dtMs;
+    if (w.comboTimer <= 0) w.combo = 0;
+  }
+  for (const t of w.targets) {
+    if (!t.alive || !t.moving) continue;
+    t.y += t.dir * t.speed * dt;
+    if (t.y <= t.minY) { t.y = t.minY; t.dir = 1; }
+    else if (t.y >= t.maxY) { t.y = t.maxY; t.dir = -1; }
+  }
+  for (const a of w.arrows) {
+    if (a.removed) continue;
+    if (a.stuck) {
+      if (w.time - a.stuckAt > ARC.stuckLifeMs) a.removed = true;
+      continue;
+    }
+    const sub = 4, sdt = dt / sub;
+    let dead = false;
+    for (let s = 0; s < sub && !dead; s++) {
+      a.x += a.vx * sdt; a.y += a.vy * sdt;
+      a.vy += ARC.gravity * sdt; a.vx += w.wind * sdt;
+      a.rot = Math.atan2(a.vy, a.vx);
+      if (a.y >= ARC.GROUND - 2) {
+        a.y = ARC.GROUND - 2; a.stuck = true; a.stuckAt = w.time;
+        if (a.vx > 900) a.removed = true;
+        w.events.push({ type: "land", x: a.x, y: a.y });
+        dead = true; break;
+      }
+      if (a.x < -30 || a.x > ARC.W + 30 || a.y < -40) {
+        a.removed = true;
+        w.events.push({ type: "arrowout", x: a.x, y: a.y });
+        dead = true; break;
+      }
+      const hit = checkTargets(w, a);
+      if (hit) {
+        if (hit.npcHit) {
+          w.combo = 0; w.comboTimer = 0;
+          w.score = Math.max(0, w.score - ARC.npcPenalty);
+          w.levelScore = Math.max(0, w.levelScore - ARC.npcPenalty);
+          w.events.push({ type: "npc", x: hit.x, y: hit.y, points: -ARC.npcPenalty });
+        } else {
+          w.combo = Math.min(w.combo + 1, ARC.comboCap);
+          w.comboTimer = ARC.comboWindowMs;
+          const points = Math.round(hit.points * w.combo * (1 + ARC.bounceBonusPer * a.bounces));
+          w.score += points; w.levelScore += points;
+          w.events.push({ type: hit.kind === "apple" ? "apple" : hit.ring === 0 ? "bullseye" : "hit", x: hit.x, y: hit.y, points, ring: hit.ring });
+        }
+        a.stuck = true; a.stuckAt = w.time; dead = true; break;
+      }
+      const o = hitObstacle(w, a.x, a.y);
+      if (o) {
+        if (o.kind === "brick" || o.kind === "ice") {
+          if (a.bounces < ARC.bounceMax) {
+            a.bounces += 1;
+            bounceOff(a, o, o.kind === "ice" ? ARC.restIce : ARC.restBrick);
+            w.events.push({ type: "bounce", x: a.x, y: a.y, kind: o.kind });
+          } else {
+            a.stuck = true; a.stuckAt = w.time;
+            w.events.push({ type: "thud", x: a.x, y: a.y });
+            dead = true; break;
+          }
+        } else if (o.kind === "crate") {
+          o.alive = false; a.vx *= 0.7; a.vy *= 0.7;
+          w.events.push({ type: "crate", x: o.x + o.w / 2, y: o.y + o.h / 2 });
+        } else if (o.kind === "barrel") {
+          o.alive = false;
+          const flat = ARC.barrelFlatScore * Math.max(w.combo, 1);
+          w.score += flat; w.levelScore += flat;
+          for (const ob of w.obstacles) {
+            if (!ob.alive || ob.kind !== "crate") continue;
+            if (Math.hypot(ob.x + ob.w / 2 - (o.x + o.w / 2), ob.y + ob.h / 2 - (o.y + o.h / 2)) <= ARC.barrelBlast + 40) ob.alive = false;
+          }
+          for (const t of w.targets) {
+            if (!t.alive || t.kind !== "bullseye") continue;
+            if (Math.hypot(t.x - (o.x + o.w / 2), t.y - (o.y + o.h / 2)) <= ARC.barrelBlast) {
+              t.alive = false;
+              w.combo = Math.min(w.combo + 1, ARC.comboCap);
+              w.comboTimer = ARC.comboWindowMs;
+              const points = Math.round(ARC.barrelKillScore * w.combo);
+              w.score += points; w.levelScore += points;
+              w.events.push({ type: "hit", x: t.x, y: t.y, points, ring: 4 });
+            }
+          }
+          for (const ar of w.arrows) {
+            if (ar.removed) continue;
+            if (Math.hypot(ar.x - (o.x + o.w / 2), ar.y - (o.y + o.h / 2)) <= ARC.barrelBlast + 20) {
+              ar.stuck = false; ar.vx *= 0.5; ar.vy = -Math.abs(ar.vy) * 0.5 - 60;
+            }
+          }
+          w.events.push({ type: "boom", x: o.x + o.w / 2, y: o.y + o.h / 2 });
+          a.vx *= 0.4; a.vy *= 0.4;
+        }
+      }
+    }
+  }
+  if (w.arrowsLeft <= 0 && !hasFlying(w) && (w.phase === "flying" || w.phase === "idle")) settleLevel(w);
+  return w.events;
+}
+
+/* ═══ 轻量音效（Web Audio 合成，与插件风格一致） ═══ */
+let audioCtx = null;
+function ac() {
+  if (!audioCtx) {
+    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { audioCtx = null; }
+  }
+  if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+  return audioCtx;
+}
+function tone(freq, dur, type, vol, slideTo) {
+  const c = ac();
+  if (!c) return;
+  const o = c.createOscillator(), g = c.createGain();
+  o.type = type || "square";
+  o.frequency.setValueAtTime(freq, c.currentTime);
+  if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, c.currentTime + dur);
+  g.gain.setValueAtTime(vol, c.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + dur);
+  o.connect(g); g.connect(c.destination);
+  o.start(); o.stop(c.currentTime + dur);
+}
+function noise(dur, vol) {
+  const c = ac();
+  if (!c) return;
+  const n = c.createBufferSource(), buf = c.createBuffer(1, c.sampleRate * dur, c.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
+  n.buffer = buf;
+  const g = c.createGain();
+  g.gain.setValueAtTime(vol, c.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + dur);
+  n.connect(g); g.connect(c.destination);
+  n.start();
+}
+const sfx = {
+  shoot: () => tone(320, 0.12, "sawtooth", 0.10, 90),
+  bounce: () => tone(900, 0.06, "triangle", 0.08, 1400),
+  land: () => tone(180, 0.09, "sine", 0.10, 90),
+  clear: () => noise(0.12, 0.10),
+  boom: () => { noise(0.5, 0.22); tone(70, 0.4, "sawtooth", 0.16, 30); },
+  hit: () => tone(520, 0.08, "square", 0.08, 620),
+  bullseye: () => { tone(880, 0.09, "square", 0.09); setTimeout(() => tone(1320, 0.12, "square", 0.08), 70); },
+  apple: () => { tone(980, 0.08, "triangle", 0.10); setTimeout(() => tone(1470, 0.12, "triangle", 0.09), 60); },
+  hurt: () => { tone(220, 0.18, "sawtooth", 0.12, 100); noise(0.15, 0.08); },
+  levelup: () => { tone(660, 0.1, "square", 0.09); setTimeout(() => tone(880, 0.1, "square", 0.09), 90); setTimeout(() => tone(1100, 0.16, "square", 0.09), 180); },
+  lose: () => { tone(300, 0.22, "sawtooth", 0.12, 120); setTimeout(() => tone(180, 0.3, "sawtooth", 0.12, 80), 150); },
+  win: () => { [660, 880, 990, 1320].forEach((f, i) => setTimeout(() => tone(f, 0.16, "square", 0.10), i * 110)); },
+};
+
+/* ═══ 状态与输入 ═══ */
+const cv = document.getElementById("cv");
+const ctx = cv.getContext("2d");
+const stage = document.getElementById("stage");
+const ovIdle = document.getElementById("ovIdle"), ovLevel = document.getElementById("ovLevel"),
+      ovOver = document.getElementById("ovOver"), ovWon = document.getElementById("ovWon");
+const $ = (id) => document.getElementById(id);
+const BEST_KEY = "fat-games.archery.best";
+let best = Number(localStorage.getItem(BEST_KEY) || "0");
+
+let world = createWorld(1);
+let dragging = false, pointer = { x: 0, y: 0 }, preview = null;
+let fx = [], shake = { t: 0, mag: 0 }, lastT = 0, levelTimer = null;
+
+function snapshot() {
+  $("stScore").textContent = world.score;
+  $("stLevel").textContent = `${world.level} · ${world.levelScore}/${world.goal}`;
+  $("stArrows").textContent = world.arrowsLeft;
+  $("stCombo").textContent = world.combo > 0 ? `×${world.combo}` : "—";
+  $("stBest").textContent = best;
+  ovIdle.style.display = world.phase === "idle" ? "flex" : "none";
+  ovLevel.style.display = world.phase === "levelup" ? "flex" : "none";
+  ovOver.style.display = world.phase === "over" ? "flex" : "none";
+  ovWon.style.display = world.phase === "won" ? "flex" : "none";
+  const head = $("btnHead");
+  if (world.phase === "levelup") {
+    head.textContent = "下一关";
+    head.className = "primary";
+  } else if (world.phase === "idle" || world.phase === "over" || world.phase === "won") {
+    head.textContent = world.phase === "idle" ? "开始射箭" : "再来一局";
+    head.className = "primary";
+  } else {
+    head.textContent = "重新开始";
+    head.className = "";
+  }
+}
+function showResult() {
+  const stats = `总分 ${world.score} · 闯过 ${world.level - 1} 关`;
+  if (world.phase === "won") {
+    $("ovStats2").textContent = `总分 ${world.score} · 闯过 ${ARC.maxLevel} 关`;
+    $("ovBest2").textContent = best > 0 ? `历史最高 ${best} 分` : "";
+  } else {
+    $("ovStats").textContent = stats;
+    $("ovBest").textContent = best > 0 ? `历史最高 ${best} 分` : "";
+  }
+}
+function finalize() {
+  if (world.phase === "over" || world.phase === "won") {
+    if (world.score > best) {
+      best = world.score;
+      localStorage.setItem(BEST_KEY, String(best));
+    }
+    showResult();
+  }
+}
+
+function startGame() {
+  if (world.phase === "idle") {
+    world.phase = "flying";
+  } else if (world.phase === "over" || world.phase === "won") {
+    // 「再来一局」：失败/通关后重开全新第一关，避免带着 0 箭的空世界继续
+    world = createWorld(1);
+    world.phase = "flying";
+  } else {
+    return;
+  }
+  fx = [];
+  snapshot();
+}
+function restart() {
+  world = createWorld(1);
+  fx = [];
+  snapshot();
+}
+function nextLevel() {
+  if (world.phase !== "levelup") return;
+  world = advanceLevel(world);
+  fx = [];
+  snapshot();
+}
+function playEvent(e) {
+  const now = performance.now();
+  const push = (x, y, text, color, life = 900) => fx.push({ x, y, text, color, born: now, life });
+  switch (e.type) {
+    case "shot": sfx.shoot(); break;
+    case "bounce": sfx.bounce(); break;
+    case "thud": case "land": sfx.land(); break;
+    case "crate": sfx.clear(); push(e.x, e.y - 16, "碎！", "#e8b15a", 700); break;
+    case "boom": sfx.boom(); shake = { t: 0, mag: 7 }; push(e.x, e.y - 20, "轰！", "#ff8a4c", 1100); break;
+    case "hit": sfx.hit(); push(e.x, e.y - 26, `+${e.points}`, "#ffd34d", 1000); break;
+    case "bullseye": sfx.bullseye(); push(e.x, e.y - 30, `十环 +${e.points}`, "#ffd34d", 1200); break;
+    case "apple": sfx.apple(); push(e.x, e.y - 40, "苹果！", "#ff7d6a", 1100); push(e.x, e.y - 16, `+${e.points}`, "#ffd34d", 1100); break;
+    case "npc": sfx.hurt(); shake = { t: 0, mag: 4 }; push(e.x, e.y - 46, "哎哟！", "#ff8b8b", 1300); push(e.x, e.y - 22, `${e.points}`, "#ff8b8b", 1300); break;
+    case "levelup":
+      sfx.levelup();
+      if (levelTimer === null) {
+        levelTimer = setTimeout(() => {
+          levelTimer = null;
+          world = advanceLevel(world);
+          fx = [];
+          snapshot();
+        }, 1500);
+      }
+      break;
+    case "over": sfx.lose(); finalize(); break;
+    case "won": sfx.win(); finalize(); break;
+  }
+}
+
+function canvasPos(ev) {
+  const r = cv.getBoundingClientRect();
+  return { x: ((ev.clientX - r.left) / r.width) * ARC.W, y: ((ev.clientY - r.top) / r.height) * ARC.H };
+}
+
+cv.addEventListener("pointerdown", (e) => {
+  if (world.phase !== "flying") return;
+  e.preventDefault();
+  dragging = true;
+  pointer = canvasPos(e);
+  cv.setPointerCapture && cv.setPointerCapture(e.pointerId);
+});
+cv.addEventListener("pointermove", (e) => {
+  if (!dragging) return;
+  pointer = canvasPos(e);
+  preview = previewPath(world, computeLaunch(ARC.ARCHER, pointer));
+});
+window.addEventListener("pointerup", (e) => {
+  if (!dragging) return;
+  dragging = false;
+  const launch = computeLaunch(ARC.ARCHER, pointer);
+  if (Math.hypot(launch.vx, launch.vy) >= ARC.minPower + 20) {
+    startShot(world, launch);
+  }
+  preview = null;
+});
+window.addEventListener("keydown", (e) => {
+  if (e.code !== "Space") return;
+  e.preventDefault();
+  if (world.phase === "idle" || world.phase === "over" || world.phase === "won") startGame();
+  else if (world.phase === "levelup") nextLevel();
+});
+$("btnHead").onclick = () => { if (world.phase === "levelup") nextLevel(); else if (world.phase === "flying") restart(); else startGame(); };
+$("btnIdle").onclick = startGame;
+$("btnLevel").onclick = nextLevel;
+$("btnAgain").onclick = startGame;
+$("btnRestart1").onclick = restart;
+$("btnAgain2").onclick = startGame;
+$("btnRestart2").onclick = restart;
+
+/* ═══ 绘制 ═══ */
+function roundRect(c, x, y, w, h, r) {
+  c.beginPath();
+  c.moveTo(x + r, y);
+  c.arcTo(x + w, y, x + w, y + h, r);
+  c.arcTo(x + w, y + h, x, y + h, r);
+  c.arcTo(x, y + h, x, y, r);
+  c.arcTo(x, y, x + w, y, r);
+  c.closePath();
+}
+function drawArrowShape(c, x, y, rot, color, alpha) {
+  c.save();
+  c.translate(x, y); c.rotate(rot);
+  c.globalAlpha = alpha;
+  c.strokeStyle = color; c.lineWidth = 2.4;
+  c.beginPath(); c.moveTo(-18, 0); c.lineTo(10, 0); c.stroke();
+  c.fillStyle = color;
+  c.beginPath(); c.moveTo(16, 0); c.lineTo(7, -4); c.lineTo(7, 4); c.closePath(); c.fill();
+  c.strokeStyle = "rgba(230,120,80,0.9)"; c.lineWidth = 2;
+  c.beginPath(); c.moveTo(-18, 0); c.lineTo(-24, -4); c.moveTo(-18, 0); c.lineTo(-24, 4); c.stroke();
+  c.restore();
+}
+function drawWind(c, w) {
+  const strong = Math.abs(w.wind) / w.windMax, dir = w.wind >= 0 ? 1 : -1;
+  c.save();
+  c.translate(ARC.W / 2, 30);
+  c.fillStyle = "rgba(30,45,60,0.7)";
+  roundRect(c, -84, -15, 168, 30, 15); c.fill();
+  c.fillStyle = "#fff"; c.font = "700 12px -apple-system, sans-serif"; c.textAlign = "center";
+  c.fillText("风", -62, 5);
+  for (let i = 0; i < 3; i++) {
+    const bx = -30 + i * 22;
+    c.strokeStyle = "#d8e2ea"; c.lineWidth = 2;
+    c.beginPath(); c.moveTo(bx, 6); c.lineTo(bx, -2); c.stroke();
+    c.fillStyle = i < Math.round(strong * 3) ? (strong > 0.66 ? "#ff8a4c" : "#ffd34d") : "rgba(255,255,255,0.22)";
+    c.beginPath(); c.moveTo(bx + dir * (i + 1) * 6, -2); c.lineTo(bx, -8); c.lineTo(bx, 2); c.closePath(); c.fill();
+  }
+  c.fillStyle = "rgba(255,255,255,0.85)"; c.font = "700 12px -apple-system, sans-serif";
+  c.fillText(`${dir > 0 ? "→" : "←"} ${Math.round(Math.abs(w.wind))}`, 30, 5);
+  c.restore();
+}
+function drawObstacles(c, w) {
+  for (const o of w.obstacles) {
+    if (!o.alive) continue;
+    if (o.kind === "brick") {
+      c.fillStyle = "#b96a4a"; c.fillRect(o.x, o.y, o.w, o.h);
+      c.strokeStyle = "rgba(90,45,25,0.55)"; c.lineWidth = 1;
+      const rows = Math.floor(o.h / 14);
+      for (let r = 0; r < rows; r++) c.strokeRect(o.x + 0.5, o.y + r * 14 + 0.5, o.w - 1, 14);
+      c.fillStyle = "rgba(255,255,255,0.18)"; c.fillRect(o.x + 1, o.y + 1, o.w - 2, 6);
+    } else if (o.kind === "ice") {
+      c.fillStyle = "rgba(190,235,255,0.72)"; c.fillRect(o.x, o.y, o.w, o.h);
+      c.strokeStyle = "rgba(90,170,220,0.9)"; c.lineWidth = 1.5;
+      c.strokeRect(o.x + 0.75, o.y + 0.75, o.w - 1.5, o.h - 1.5);
+      c.fillStyle = "rgba(255,255,255,0.75)"; c.fillRect(o.x + 2, o.y + 3, 3, o.h - 6);
+    } else if (o.kind === "crate") {
+      c.fillStyle = "#c98a4b"; c.fillRect(o.x, o.y, o.w, o.h);
+      c.strokeStyle = "rgba(90,55,20,0.6)"; c.lineWidth = 1.5;
+      c.strokeRect(o.x + 1, o.y + 1, o.w - 2, o.h - 2);
+      c.beginPath(); c.moveTo(o.x, o.y); c.lineTo(o.x + o.w, o.y + o.h); c.moveTo(o.x + o.w, o.y); c.lineTo(o.x, o.y + o.h); c.stroke();
+      c.fillStyle = "rgba(90,55,20,0.25)"; c.fillRect(o.x + 1, o.y + 1, o.w - 2, 5);
+    } else {
+      const cx = o.x + o.w / 2, cy = o.y + o.h / 2;
+      c.fillStyle = "#d64545";
+      c.beginPath(); c.ellipse(cx, cy, 13, 13, 0, 0, Math.PI * 2); c.fill();
+      c.strokeStyle = "#a02828"; c.lineWidth = 2; c.stroke();
+      c.fillStyle = "#f2b033"; c.fillRect(cx - 11, cy - 4, 22, 4); c.fillRect(cx - 11, cy + 1, 22, 4);
+      c.fillStyle = "#fff"; c.font = "900 11px sans-serif"; c.textAlign = "center";
+      c.fillText("!", cx, cy + 4);
+    }
+  }
+}
+function drawTargets(c, w) {
+  for (const t of w.targets) {
+    if (!t.alive) continue;
+    if (t.kind === "bullseye") {
+      c.strokeStyle = "rgba(90,70,40,0.5)"; c.lineWidth = 2;
+      c.beginPath(); c.moveTo(t.x, t.y + 34); c.lineTo(t.x, ARC.GROUND); c.moveTo(t.x - 14, ARC.GROUND); c.lineTo(t.x + 14, ARC.GROUND); c.stroke();
+      const rings = [[34, "#f5f2ea"], [27, "#e0d8c8"], [20, "#3f6aa8"], [13, "#d64545"], [6, "#f2b033"]];
+      for (const [r, col] of rings) {
+        c.fillStyle = col;
+        c.beginPath(); c.arc(t.x, t.y, r, 0, Math.PI * 2); c.fill();
+      }
+      c.strokeStyle = "rgba(0,0,0,0.25)"; c.lineWidth = 1;
+      for (const [r] of rings.slice(0, 4)) {
+        c.beginPath(); c.arc(t.x, t.y, r, 0, Math.PI * 2); c.stroke();
+      }
+    } else {
+      c.fillStyle = "#e03e32";
+      c.beginPath(); c.arc(t.x, t.y - 30, ARC.appleR, 0, Math.PI * 2); c.fill();
+      c.fillStyle = "rgba(255,255,255,0.4)";
+      c.beginPath(); c.arc(t.x - 2.5, t.y - 33, 2.6, 0, Math.PI * 2); c.fill();
+      c.strokeStyle = "#7a4a20"; c.lineWidth = 1.5;
+      c.beginPath(); c.moveTo(t.x, t.y - 38); c.lineTo(t.x + 1.5, t.y - 41); c.stroke();
+      c.fillStyle = "#f6c98b";
+      c.beginPath(); c.arc(t.x, t.y - 16, 9, 0, Math.PI * 2); c.fill();
+      c.fillStyle = "#3a2c1c";
+      c.beginPath(); c.arc(t.x - 3.2, t.y - 17, 1.3, 0, Math.PI * 2); c.arc(t.x + 3.2, t.y - 17, 1.3, 0, Math.PI * 2); c.fill();
+      c.fillStyle = "#4a78c9";
+      roundRect(c, t.x - 12, t.y - 4, 24, 34, 9); c.fill();
+      c.strokeStyle = "#2f4f8f"; c.lineWidth = 1.5;
+      c.beginPath(); c.moveTo(t.x, t.y + 14); c.lineTo(t.x, t.y + 30); c.moveTo(t.x, t.y + 30); c.lineTo(t.x - 9, t.y + 33); c.moveTo(t.x, t.y + 30); c.lineTo(t.x + 9, t.y + 33); c.stroke();
+    }
+  }
+}
+function drawArcher(c, w) {
+  const ax = ARC.ARCHER.x, ay = ARC.ARCHER.y;
+  let aim = 0.1;
+  if (dragging) aim = Math.atan2(ay - pointer.y, ax - pointer.x);
+  const pull = dragging ? Math.min(1, Math.hypot(pointer.x - ax, pointer.y - ay) / ARC.dragMax) : 0;
+  c.save();
+  c.translate(ax, ay); c.rotate(aim);
+  c.strokeStyle = "#7a4a20"; c.lineWidth = 3.4;
+  c.beginPath(); c.arc(0, 0, 26, -Math.PI / 2.1, Math.PI / 2.1); c.stroke();
+  const bend = 26 * (1 - pull * 0.86);
+  c.strokeStyle = "#e8e0d0"; c.lineWidth = 1.4;
+  c.beginPath(); c.moveTo(0, -19); c.lineTo(14, -bend + 5); c.lineTo(0, 19); c.stroke();
+  if (dragging && pull > 0.02) {
+    c.strokeStyle = "#f0e4c8"; c.lineWidth = 2.4;
+    c.beginPath(); c.moveTo(20, -5); c.lineTo(8, -bend + 5 + pull * 14); c.stroke();
+  }
+  c.restore();
+  c.fillStyle = "#3f6aa8";
+  roundRect(c, ax - 7, ay - 12, 14, 26, 6); c.fill();
+  c.fillStyle = "#f6c98b";
+  c.beginPath(); c.arc(ax, ay - 19, 8, 0, Math.PI * 2); c.fill();
+  c.fillStyle = "#3a2c1c";
+  c.beginPath(); c.arc(ax - 3, ay - 20, 1.2, 0, Math.PI * 2); c.arc(ax + 3, ay - 20, 1.2, 0, Math.PI * 2); c.fill();
+  c.fillStyle = "#a06030";
+  roundRect(c, ax - 11, ay - 6, 6, 18, 3); c.fill();
+  c.strokeStyle = "#d8c8a8"; c.lineWidth = 1.2;
+  for (let i = 0; i < 2; i++) {
+    c.beginPath(); c.moveTo(ax - 10, ay - 5 + i * 8); c.lineTo(ax - 4, ay - 5 + i * 8); c.stroke();
+  }
+}
+function draw() {
+  const c = ctx;
+  c.save();
+  if (shake.mag > 0 && shake.t < 350) {
+    const k = Math.max(0, 1 - shake.t / 350);
+    c.translate((Math.random() - 0.5) * shake.mag * k * 2, (Math.random() - 0.5) * shake.mag * k * 2);
+  }
+  const sky = c.createLinearGradient(0, 0, 0, ARC.GROUND);
+  sky.addColorStop(0, "#b8e0ff"); sky.addColorStop(0.62, "#e8f6ff"); sky.addColorStop(1, "#fdf6e3");
+  c.fillStyle = sky; c.fillRect(0, 0, ARC.W, ARC.H);
+  c.fillStyle = "rgba(255,210,110,0.95)";
+  c.beginPath(); c.arc(700, 54, 26, 0, Math.PI * 2); c.fill();
+  c.fillStyle = "rgba(255,255,255,0.9)";
+  for (const cx0 of [140, 260, 470]) {
+    const px = ((cx0 + world.time / 333) % (ARC.W + 120)) - 60;
+    c.beginPath(); c.ellipse(px, 86, 42, 14, 0, 0, Math.PI * 2); c.ellipse(px + 24, 78, 30, 12, 0, 0, Math.PI * 2); c.fill();
+  }
+  c.fillStyle = "#cfe3c0";
+  c.beginPath(); c.moveTo(0, ARC.GROUND);
+  c.quadraticCurveTo(150, ARC.GROUND - 60, 300, ARC.GROUND);
+  c.quadraticCurveTo(430, ARC.GROUND - 88, 560, ARC.GROUND);
+  c.quadraticCurveTo(660, ARC.GROUND - 46, ARC.W, ARC.GROUND);
+  c.lineTo(ARC.W, ARC.GROUND); c.lineTo(0, ARC.GROUND); c.fill();
+  const grass = c.createLinearGradient(0, ARC.GROUND, 0, ARC.H);
+  grass.addColorStop(0, "#7ec850"); grass.addColorStop(1, "#4e9331");
+  c.fillStyle = grass; c.fillRect(0, ARC.GROUND, ARC.W, ARC.H - ARC.GROUND);
+  c.fillStyle = "rgba(255,255,255,0.25)"; c.fillRect(0, ARC.GROUND, ARC.W, 3);
+  drawWind(c, world);
+  drawObstacles(c, world);
+  drawTargets(c, world);
+  for (const a of world.arrows) {
+    if (!a.stuck || a.removed) continue;
+    drawArrowShape(c, a.x, a.y, a.rot, "#8a5a2b", 0.85);
+  }
+  drawArcher(c, world);
+  for (const a of world.arrows) {
+    if (a.stuck || a.removed) continue;
+    c.strokeStyle = "rgba(255,255,255,0.28)"; c.lineWidth = 2;
+    c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(a.x - Math.cos(a.rot) * 26, a.y - Math.sin(a.rot) * 26); c.stroke();
+    drawArrowShape(c, a.x, a.y, a.rot, "#f0e4c8", 1);
+  }
+  if (preview && preview.length > 1) {
+    c.save();
+    c.strokeStyle = "rgba(255,255,255,0.55)"; c.lineWidth = 2; c.setLineDash([4, 6]);
+    c.beginPath(); c.moveTo(preview[0].x, preview[0].y);
+    for (let i = 1; i < preview.length; i++) c.lineTo(preview[i].x, preview[i].y);
+    c.stroke(); c.setLineDash([]); c.restore();
+  }
+  const now = performance.now();
+  fx = fx.filter((f) => now - f.born < f.life);
+  for (const f of fx) {
+    const k = (now - f.born) / f.life;
+    c.globalAlpha = 1 - k * k;
+    c.fillStyle = f.color;
+    c.font = "800 17px -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif";
+    c.textAlign = "center";
+    c.fillText(f.text, f.x, f.y - 26 * k);
+  }
+  c.globalAlpha = 1;
+  if (dragging && preview) {
+    const launch = computeLaunch(ARC.ARCHER, pointer);
+    const pct = Math.round(((Math.hypot(launch.vx, launch.vy) - ARC.minPower) / (ARC.maxPower - ARC.minPower)) * 100);
+    c.fillStyle = "rgba(20,30,40,0.75)";
+    roundRect(c, ARC.W / 2 - 74, 12, 148, 26, 13); c.fill();
+    c.fillStyle = "#fff"; c.font = "700 13px -apple-system, sans-serif"; c.textAlign = "center";
+    c.fillText(`蓄力 ${pct}%`, ARC.W / 2, 30);
+  }
+  c.restore();
+}
+
+function loop(t) {
+  const dtMs = lastT ? t - lastT : 16;
+  lastT = t;
+  const ev = stepWorld(world, dtMs);
+  for (const e of ev) playEvent(e);
+  shake.t += dtMs;
+  if (world.phase === "levelup" && levelTimer === null) {
+    levelTimer = setTimeout(() => {
+      levelTimer = null;
+      world = advanceLevel(world);
+      fx = [];
+      snapshot();
+    }, 1500);
+  }
+  draw();
+  snapshot(); // 每帧刷新 HUD（与插件行为一致）
+  requestAnimationFrame(loop);
+}
+
+snapshot();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
