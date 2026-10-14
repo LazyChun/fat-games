@@ -410,6 +410,28 @@ export default {
   "game.match.help":
     "Controls: click a tile to select it, then click an adjacent tile to swap; match 3+ of the same kind in a row or column to clear them — cascading clears multiply your score. Score as high as possible in 60 seconds.",
 
+  "game.hawk.title": "Eagle & Chicks",
+  "game.hawk.desc": "Guard your chicks from swooping eagles",
+  "game.hawk.score": "Score",
+  "game.hawk.time": "Time",
+  "game.hawk.chicks": "Chicks",
+  "game.hawk.caught": "Caught",
+  "game.hawk.start": "Start",
+  "game.hawk.pause": "Pause",
+  "game.hawk.restart": "Restart",
+  "game.hawk.again": "Play Again",
+  "game.hawk.idle": "Press Space or click Start",
+  "game.hawk.win": "Well Guarded!",
+  "game.hawk.winDetail": "Survived {seconds}s · {chicks} chicks left",
+  "game.hawk.lose": "All chicks caught",
+  "game.hawk.loseDetail": "Survived {seconds}s · Score {score} · {rescued} rescued",
+  "game.hawk.overScore": "Score {score}",
+  "game.hawk.rescue": "Rescue +{points}",
+  "game.hawk.egg": "Golden egg +{points}",
+  "game.hawk.eggFull": "Line full +{points}",
+  "game.hawk.help":
+    "Move the hen with Arrow keys / WASD or the mouse. Bump a swooping eagle to peck it dizzy and rescue a caught chick; catch a golden egg to add a chick. Survive 60 seconds with chicks left to win; lose when all chicks are caught. Space starts/pauses, P pauses.",
+
   "game.archery.title": "Ricochet Archery",
   "game.archery.desc": "Draw the bow, bank off walls and wind to hit the mark",
   "game.archery.score": "Score",

@@ -382,6 +382,29 @@ export default {
   "game.match.help":
     "操作：点击选中方块，再点击相邻方块交换；横向或纵向凑齐 3 个及以上同色方块即可消除，级联消除连击加倍。60 秒内得分越高越好。",
 
+  "game.hawk.title": "老鹰抓小鸡",
+  "game.hawk.desc": "操控母鸡保护小鸡，抵挡老鹰俯冲",
+  "game.hawk.score": "得分",
+  "game.hawk.time": "时间",
+  "game.hawk.chicks": "小鸡",
+  "game.hawk.caught": "被抓",
+  "game.hawk.start": "开始",
+  "game.hawk.pause": "暂停",
+  "game.hawk.restart": "重新开始",
+  "game.hawk.again": "再来一局",
+  "game.hawk.idle": "点击「开始」或按空格守护小鸡",
+  "game.hawk.win": "守护成功！",
+  "game.hawk.winDetail": "坚持 {seconds} 秒 · 剩余 {chicks} 只小鸡",
+  "game.hawk.lose": "小鸡被抓光",
+  "game.hawk.loseDetail":
+    "坚持 {seconds} 秒 · 得分 {score} · 救回 {rescued} 只",
+  "game.hawk.overScore": "得分 {score}",
+  "game.hawk.rescue": "救援 +{points}",
+  "game.hawk.egg": "金蛋 +{points}",
+  "game.hawk.eggFull": "队列已满 +{points}",
+  "game.hawk.help":
+    "操作：方向键 / WASD 或鼠标指挥母鸡，老鹰俯冲时迎上去把它啄晕，可救回被抓的小鸡；接到金蛋补一只小鸡。坚持 60 秒且仍有小鸡存活获胜，小鸡被抓光则失败。空格 开始/暂停，P 暂停。",
+
   "game.hurdle.title": "跨栏冲刺",
   "game.hurdle.desc": "蓄力起跳，精准跨栏，途中收集体力与生命补给",
   "game.hurdle.score": "得分",

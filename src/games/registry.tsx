@@ -32,6 +32,7 @@ import {
   IconScores,
   IconArchery,
   IconMatch,
+  IconHawkChicken,
 } from "./gameIcons";
 
 import Game2048 from "./Game2048";
@@ -55,6 +56,7 @@ import Pool3DGame from "./Pool3DGame";
 import HurdleGame from "./HurdleGame";
 import ArcheryGame from "./ArcheryGame";
 import MatchGame from "./MatchGame";
+import HawkChickenGame from "./HawkChickenGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -309,6 +311,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.casual",
     icon: IconMatch,
     component: MatchGame,
+  },
+  {
+    id: "hawk",
+    title: "老鹰抓小鸡",
+    desc: "操控母鸡保护小鸡，抵挡老鹰俯冲",
+    category: "休闲",
+    titleKey: "game.hawk.title",
+    descKey: "game.hawk.desc",
+    categoryKey: "category.casual",
+    icon: IconHawkChicken,
+    component: HawkChickenGame,
   },
   {
     id: "scores",

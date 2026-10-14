@@ -302,3 +302,17 @@ export const IconMatch: React.FC<GameIconProps> = (props) => (
     <rect x="15.6" y="8.2" width="6" height="6" rx="1.8" />
   </svg>
 );
+
+/** 老鹰抓小鸡：母鸡护着身后的小鸡（身体 + 鸡冠 + 喙 + 尾羽 + 小鸡） */
+export const IconHawkChicken: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    <ellipse cx="10.4" cy="13.2" rx="6" ry="4.3" />
+    <circle cx="15.4" cy="9.6" r="2.5" />
+    <path d="M14 7.8 Q15 5.6 16 7.7 M15.2 7.2 Q16.4 5 17.4 7.1" />
+    <path d="M17.6 9.6 L20.2 10 L17.6 10.7" />
+    <path d="M5.6 12.4 Q3 14.6 5.2 16.8" />
+    <path d="M5.4 15.4 Q3.6 15.6 4.2 14" />
+    <circle cx="8.6" cy="18.9" r="2.1" />
+    <path d="M10.4 18.9 L12.2 19.2 L10.4 19.6" />
+  </svg>
+);

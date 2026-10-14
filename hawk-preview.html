@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>老鹰抓小鸡 · 独立预览（fat-games 插件内同款）</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f59e0b'/%3E%3Cellipse cx='30' cy='36' rx='12' ry='9' fill='%23fff7ec'/%3E%3Ccircle cx='42' cy='28' r='6' fill='%23fff7ec'/%3E%3Ccircle cx='38' cy='22' r='4' fill='%23ef4444'/%3E%3Ccircle cx='24' cy='46' r='6' fill='%23ffd94a'/%3E%3C/svg%3E" />
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 20px 10px;
+    font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: radial-gradient(120% 140% at 20% 0%, #fdfbf7 0%, #f5f1ea 45%, #ede6da 100%);
+    color: rgba(0,0,0,0.85);
+  }
+  .frame {
+    width: 560px;
+    max-width: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgba(120,100,70,0.18);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.65), 0 10px 30px rgba(90,70,40,0.14);
+  }
+  .bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .bar .emoji { font-size: 22px; }
+  .bar .title { font-size: 16px; font-weight: 800; }
+  .bar .spacer { flex: 1; }
+  .bar button {
+    border: 1px solid rgba(0,0,0,0.18); background: rgba(255,255,255,0.9);
+    color: rgba(0,0,0,0.75); border-radius: 20px; padding: 6px 16px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: transform 0.12s ease;
+  }
+  .bar button:hover { transform: translateY(-1px); }
+  .stats { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px 16px 0; }
+  .chip {
+    min-width: 88px; padding: 7px 14px; border-radius: 14px;
+    display: flex; flex-direction: column; gap: 1px; line-height: 1.25;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.14);
+  }
+  .chip .lbl { font-size: 11px; }
+  .chip .val { font-size: 19px; font-weight: 800; }
+  .chip.gold   { background: linear-gradient(135deg,#ffd86b 0%,#f6a821 100%); }
+  .chip.gold .lbl { color: rgba(90,55,0,0.75); } .chip.gold .val { color: #5a3400; }
+  .chip.green  { background: linear-gradient(135deg,#7ee8a2 0%,#2e9e5b 100%); }
+  .chip.green .lbl, .chip.green .val { color: #fff; }
+  .chip.blue   { background: linear-gradient(135deg,#6bb6ff 0%,#2b7de9 100%); }
+  .chip.blue .lbl, .chip.blue .val { color: #fff; }
+  .chip.red    { background: linear-gradient(135deg,#ff9a8b 0%,#f2554a 100%); }
+  .chip.red .lbl, .chip.red .val { color: #fff; }
+
+  .stage {
+    position: relative;
+    margin: 16px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(40,90,40,0.35);
+    border: 3px solid rgba(110,150,90,0.5);
+  }
+  .stage canvas { display: block; width: 100%; height: auto; }
+  .overlay {
+    position: absolute; inset: 0;
+    background: rgba(20,40,25,0.78);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; text-align: center; padding: 20px; color: #d8f5d8;
+    z-index: 5;
+    animation: fadein 0.35s ease;
+  }
+  @keyframes fadein { from { opacity: 0; } }
+  .overlay.hidden { display: none; }
+  .overlay .big { font-size: 26px; font-weight: 900; }
+  .overlay .mid { font-size: 14px; opacity: 0.92; }
+  .overlay .sub { font-size: 12px; opacity: 0.7; }
+  .overlay button {
+    margin-top: 6px; border: none; cursor: pointer;
+    background: linear-gradient(135deg,#4facfe 0%,#1677ff 100%);
+    color: #fff; border-radius: 20px; padding: 9px 26px;
+    font-size: 15px; font-weight: 700;
+    box-shadow: 0 3px 10px rgba(22,119,255,0.28);
+  }
+
+  .help {
+    font-size: 12px; color: rgba(0,0,0,0.5);
+    text-align: center; max-width: 560px; padding: 0 12px; line-height: 1.6;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: radial-gradient(120% 140% at 20% 0%, #23272e 0%, #1b1e24 55%, #14161b 100%);
+      color: rgba(255,255,255,0.88);
+    }
+    .frame {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.1);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .bar { border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .bar button {
+      background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.88);
+      border-color: rgba(255,255,255,0.22);
+    }
+    .overlay { background: rgba(18,20,26,0.8); color: #d8f5d8; }
+    .help { color: rgba(255,255,255,0.45); }
+  }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="bar">
+      <span class="emoji">🐔</span>
+      <span class="title">老鹰抓小鸡</span>
+      <span class="spacer"></span>
+      <button id="btnPause" type="button">开始</button>
+      <button id="btnRestart" type="button">重新开始</button>
+    </div>
+    <div class="stats">
+      <div class="chip gold"><span class="lbl">得分</span><span class="val" id="chipScore">0</span></div>
+      <div class="chip blue"><span class="lbl">时间</span><span class="val" id="chipTime">0s</span></div>
+      <div class="chip green"><span class="lbl">小鸡</span><span class="val" id="chipChicks">6</span></div>
+      <div class="chip red"><span class="lbl">被抓</span><span class="val" id="chipCaught">0</span></div>
+    </div>
+    <div class="stage">
+      <canvas id="cv" width="480" height="640"></canvas>
+      <div class="overlay" id="overlay">
+        <div class="big" id="ovTitle">🐔 老鹰抓小鸡</div>
+        <div class="mid" id="ovSub">操控母鸡保护小鸡，抵挡老鹰俯冲；坚持 60 秒获胜</div>
+        <button id="btnStart" type="button">开始游戏</button>
+      </div>
+    </div>
+  </div>
+  <div class="help">
+    操作：方向键 / WASD 或鼠标指挥母鸡，老鹰俯冲时迎上去把它啄晕，可救回被抓的小鸡；
+    接到金蛋补一只小鸡。坚持 60 秒且仍有小鸡存活获胜，小鸡被抓光则失败。空格 开始/暂停，P 暂停。
+  </div>
+  <script>
+  (function () {
+    "use strict";
+
+    /* ================= 常量 ================= */
+    var W = 480, H = 640;
+    var HEN_R = 19, CHICK_R = 11, EAGLE_R = 22;
+    var CHICK_SPACING = 34, CHICK_FOLLOW_SPEED = 320, HEN_SPEED = 340;
+    var START_CHICKS = 6, MAX_CHICKS = 8, WIN_SECONDS = 60;
+    var BEST_KEY = "fat-games.hawk.best";
+
+    /* ================= DOM ================= */
+    function $(id) { return document.getElementById(id); }
+    var canvas = $("cv"), ctx = canvas.getContext("2d");
+    var overlay = $("overlay");
+    var chipScore = $("chipScore"), chipTime = $("chipTime");
+    var chipChicks = $("chipChicks"), chipCaught = $("chipCaught");
+    var btnPause = $("btnPause"), btnRestart = $("btnRestart"), btnStart = $("btnStart");
+
+    /* ================= 音效（Web Audio 合成） ================= */
+    var AC = null;
+    function beep(freq, dur, type, vol, delay, slideTo) {
+      try {
+        if (!AC) {
+          var Ctx = window.AudioContext || window.webkitAudioContext;
+          if (!Ctx) return;
+          AC = new Ctx();
+        }
+        if (AC.state === "suspended") AC.resume();
+        var t0 = AC.currentTime + (delay || 0);
+        var osc = AC.createOscillator(), g = AC.createGain();
+        osc.type = type || "sine";
+        osc.frequency.setValueAtTime(freq, t0);
+        if (slideTo) osc.frequency.exponentialRampToValueAtTime(slideTo, t0 + dur);
+        g.gain.setValueAtTime(0.0001, t0);
+        g.gain.exponentialRampToValueAtTime(vol || 0.15, t0 + 0.008);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + (dur || 0.12));
+        osc.connect(g); g.connect(AC.destination);
+        osc.start(t0); osc.stop(t0 + (dur || 0.12) + 0.05);
+      } catch (e) { /* 忽略 */ }
+    }
+    function noise(dur, vol, delay, freq) {
+      try {
+        if (!AC) {
+          var Ctx = window.AudioContext || window.webkitAudioContext;
+          if (!Ctx) return;
+          AC = new Ctx();
+        }
+        if (AC.state === "suspended") AC.resume();
+        var t0 = AC.currentTime + (delay || 0);
+        var len = Math.max(1, Math.floor(AC.sampleRate * dur));
+        var buf = AC.createBuffer(1, len, AC.sampleRate);
+        var data = buf.getChannelData(0);
+        for (var i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+        var src = AC.createBufferSource(); src.buffer = buf;
+        var filter = AC.createBiquadFilter();
+        filter.type = "lowpass";
+        filter.frequency.setValueAtTime(freq || 1200, t0);
+        var g = AC.createGain();
+        g.gain.setValueAtTime(vol || 0.2, t0);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+        src.connect(filter); filter.connect(g); g.connect(AC.destination);
+        src.start(t0); src.stop(t0 + dur + 0.05);
+      } catch (e) { /* 忽略 */ }
+    }
+    var sfx = {
+      click: function () { beep(420, 0.09, "triangle", 0.16); },
+      hit: function () { noise(0.08, 0.16, 0, 2600); beep(900, 0.07, "square", 0.08); },
+      score: function () { beep(880, 0.1, "sine", 0.15); beep(1320, 0.14, "sine", 0.12, 0.05); },
+      eat: function () { beep(440, 0.09, "triangle", 0.16, 0, 660); beep(660, 0.12, "sine", 0.1, 0.06); },
+      coin: function () { beep(988, 0.09, "sine", 0.15); beep(1319, 0.16, "sine", 0.13, 0.06); },
+      hurt: function () { beep(280, 0.16, "square", 0.1, 0, 110); noise(0.14, 0.1, 0, 1400); },
+      win: function () {
+        [523, 659, 784, 1047].forEach(function (f, i) { beep(f, 0.16, "triangle", 0.16, i * 0.09); });
+        beep(1319, 0.3, "sine", 0.12, 0.36);
+      },
+      lose: function () {
+        [392, 330, 262, 196].forEach(function (f, i) { beep(f, 0.2, "triangle", 0.14, i * 0.11); });
+      }
+    };
+
+    /* ================= 游戏逻辑（与 hawkLogic.ts 同款） ================= */
+    function rand(a, b) { return a + Math.random() * (b - a); }
+    function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+    function makeEagle() {
+      var fromLeft = Math.random() < 0.5;
+      return {
+        x: fromLeft ? 40 : W - 40,
+        y: rand(30, 80),
+        vx: (fromLeft ? 1 : -1) * rand(90, 130),
+        vy: 0,
+        homeY: rand(36, 80),
+        phase: rand(0, Math.PI * 2),
+        state: "circle",
+        stateT: rand(1.5, 3.6),
+        carryChick: false,
+        speedMul: rand(0.88, 1.12)
+      };
+    }
+
+    function newSim() {
+      var hen = { x: W / 2, y: H - 88 };
+      var chicks = [];
+      for (var i = 1; i <= START_CHICKS; i++) {
+        chicks.push({ x: hen.x - i * CHICK_SPACING, y: hen.y + (i % 2 === 0 ? 5 : -5) });
+      }
+      return {
+        hen: hen,
+        facing: 1,
+        chicks: chicks,
+        eagles: [makeEagle()],
+        eggs: [],
+        score: 0,
+        time: 0,
+        caught: 0,
+        rescued: 0,
+        peckCd: 0,
+        nextEagleIn: 16,
+        nextEggIn: 6,
+        running: false,
+        over: false,
+        won: false
+      };
+    }
+
+    function moveHen(sim, dx, dy, dt) {
+      var len = Math.hypot(dx, dy);
+      if (len > 0.001) {
+        sim.hen.x += (dx / len) * HEN_SPEED * dt;
+        sim.hen.y += (dy / len) * HEN_SPEED * dt;
+        if (Math.abs(dx) > 0.001) sim.facing = dx > 0 ? 1 : -1;
+      }
+      sim.hen.x = clamp(sim.hen.x, 26, W - 26);
+      sim.hen.y = clamp(sim.hen.y, H - 210, H - 62);
+    }
+
+    function updateChicks(sim, dt) {
+      for (var i = 0; i < sim.chicks.length; i++) {
+        var c = sim.chicks[i];
+        var leader = i === 0 ? sim.hen : sim.chicks[i - 1];
+        var dx = c.x - leader.x, dy = c.y - leader.y;
+        var dist = Math.hypot(dx, dy);
+        if (dist > CHICK_SPACING) {
+          var tx = leader.x + (dx / dist) * CHICK_SPACING;
+          var ty = leader.y + (dy / dist) * CHICK_SPACING;
+          var t = Math.min(1, (CHICK_FOLLOW_SPEED * dt) / dist);
+          c.x += (tx - c.x) * t;
+          c.y += (ty - c.y) * t;
+        }
+        c.x = clamp(c.x, 26, W - 26);
+        c.y = clamp(c.y, H - 230, H - 56);
+      }
+    }
+
+    function peckEagle(sim, e, events) {
+      if (e.state === "stun" || sim.peckCd > 0) return;
+      var d = Math.hypot(e.x - sim.hen.x, e.y - sim.hen.y);
+      if (d < HEN_R + EAGLE_R + 2) {
+        e.state = "stun";
+        e.stateT = 2.6;
+        sim.peckCd = 1.2;
+        if (e.carryChick) {
+          e.carryChick = false;
+          sim.rescued += 1;
+          sim.score += 50;
+          var last = sim.chicks[sim.chicks.length - 1];
+          sim.chicks.push({
+            x: (last ? last.x : sim.hen.x) - CHICK_SPACING,
+            y: (last ? last.y : sim.hen.y) + 10
+          });
+          events.push({ type: "rescue", x: e.x, y: e.y, points: 50 });
+        } else {
+          events.push({ type: "stun", x: e.x, y: e.y });
+        }
+      }
+    }
+
+    function updateEagles(sim, dt, events) {
+      for (var i = 0; i < sim.eagles.length; i++) {
+        var e = sim.eagles[i];
+        e.phase += dt * 6;
+        switch (e.state) {
+          case "circle":
+            e.x += e.vx * dt;
+            e.y = e.homeY + Math.sin(e.phase) * 18;
+            if (e.x < 26) { e.x = 26; e.vx = Math.abs(e.vx); }
+            if (e.x > W - 26) { e.x = W - 26; e.vx = -Math.abs(e.vx); }
+            e.stateT -= dt;
+            if (e.stateT <= 0 && sim.chicks.length > 0) {
+              e.state = "dive";
+              e.stateT = 999;
+            }
+            break;
+          case "dive": {
+            var idx = sim.chicks.length - 1;
+            if (idx < 0) { e.state = "circle"; e.stateT = rand(1.5, 3); break; }
+            var t = sim.chicks[idx];
+            var dx = t.x - e.x, dy = t.y - e.y;
+            var dist = Math.hypot(dx, dy) || 1;
+            var spd = Math.min(560, 340 + sim.time * 1.5) * e.speedMul;
+            e.x += (dx / dist) * spd * dt;
+            e.y += (dy / dist) * spd * dt;
+            if (dist < CHICK_R + EAGLE_R + 4) {
+              sim.chicks.splice(idx, 1);
+              sim.caught += 1;
+              e.carryChick = true;
+              e.state = "carry";
+              e.stateT = 6;
+              events.push({ type: "catch", x: t.x, y: t.y });
+            }
+            break;
+          }
+          case "carry":
+            e.x += e.vx * dt;
+            e.y -= (150 + sim.time * 0.8) * dt;
+            e.stateT -= dt;
+            if (e.y < -80 || e.stateT <= 0) e.y = -999;
+            break;
+          case "stun":
+            e.x += Math.sin(e.phase * 2) * 26 * dt;
+            e.y += 6 * dt;
+            e.stateT -= dt;
+            if (e.stateT <= 0) {
+              e.state = "circle";
+              e.vx = (e.x < W / 2 ? 1 : -1) * rand(90, 130);
+              e.homeY = rand(36, 80);
+              e.stateT = rand(1.5, 3.4);
+            }
+            break;
+        }
+        peckEagle(sim, e, events);
+      }
+      sim.eagles = sim.eagles.filter(function (e) { return e.y > -120; });
+    }
+
+    function updateEggs(sim, dt, events) {
+      for (var i = 0; i < sim.eggs.length; i++) {
+        var egg = sim.eggs[i];
+        egg.y += egg.vy * dt;
+        var d = Math.hypot(egg.x - sim.hen.x, egg.y - sim.hen.y);
+        if (d < HEN_R + egg.r + 2) {
+          egg.y = H + 99;
+          if (sim.chicks.length < MAX_CHICKS) {
+            var last = sim.chicks[sim.chicks.length - 1];
+            sim.chicks.push({
+              x: (last ? last.x : sim.hen.x) - CHICK_SPACING,
+              y: (last ? last.y : sim.hen.y) + 6
+            });
+            sim.score += 30;
+            events.push({ type: "egg", x: egg.x, y: egg.y, points: 30 });
+          } else {
+            sim.score += 10;
+            events.push({ type: "eggFull", x: egg.x, y: egg.y, points: 10 });
+          }
+        }
+      }
+      sim.eggs = sim.eggs.filter(function (e) { return e.y < H + 40; });
+    }
+
+    function stepSim(sim, dt, input) {
+      var events = [];
+      if (sim.over) return events;
+      sim.time += dt;
+      sim.peckCd = Math.max(0, sim.peckCd - dt);
+      sim.score += 2 * dt;
+      moveHen(sim, input.dx, input.dy, dt);
+      updateChicks(sim, dt);
+      updateEagles(sim, dt, events);
+      updateEggs(sim, dt, events);
+      if (sim.nextEagleIn <= 0) {
+        sim.nextEagleIn = rand(11, 17);
+        var maxEagles = Math.min(3, 1 + Math.floor(sim.time / 25));
+        if (sim.eagles.length < maxEagles) sim.eagles.push(makeEagle());
+      } else {
+        sim.nextEagleIn -= dt;
+      }
+      if (sim.nextEggIn <= 0) {
+        if (sim.eggs.length < 2) {
+          sim.eggs.push({ x: rand(50, W - 50), y: -16, vy: 150, r: 9 });
+          sim.nextEggIn = rand(8, 14);
+        } else {
+          sim.nextEggIn = 2;
+        }
+      } else {
+        sim.nextEggIn -= dt;
+      }
+      if (sim.chicks.length === 0) {
+        sim.over = true;
+        sim.won = false;
+        events.push({ type: "lose", x: sim.hen.x, y: sim.hen.y });
+      } else if (sim.time >= WIN_SECONDS) {
+        sim.over = true;
+        sim.won = true;
+        sim.score += sim.chicks.length * 20 + 100;
+        events.push({ type: "win", x: sim.hen.x, y: sim.hen.y });
+      }
+      return events;
+    }
+
+    /* ================= 渲染 ================= */
+    var parts = [], floats = [];
+    var FLOAT_ZH = {
+      rescue: function (p) { return "救援 +" + p; },
+      egg: function (p) { return "金蛋 +" + p; },
+      eggFull: function (p) { return "队列已满 +" + p; }
+    };
+
+    function spawnParts(x, y, n, colors) {
+      for (var i = 0; i < n; i++) {
+        var a = Math.random() * Math.PI * 2;
+        var spd = 40 + Math.random() * 130;
+        parts.push({
+          x: x, y: y,
+          vx: Math.cos(a) * spd,
+          vy: Math.sin(a) * spd - 40,
+          life: 0.5 + Math.random() * 0.35,
+          maxLife: 0.85,
+          r: 1.8 + Math.random() * 2.2,
+          color: colors[Math.floor(Math.random() * colors.length)]
+        });
+      }
+    }
+    function addFloat(x, y, text, color) {
+      floats.push({ x: x, y: y, text: text, life: 0.9, maxLife: 0.9, color: color || "#ffe15e" });
+    }
+    function handleEvents(sim, events) {
+      for (var i = 0; i < events.length; i++) {
+        var ev = events[i];
+        switch (ev.type) {
+          case "stun":
+            sfx.hit();
+            spawnParts(ev.x, ev.y, 6, ["#8a6239", "#6b4826", "#f5d9a8"]);
+            break;
+          case "rescue":
+            sfx.score();
+            spawnParts(ev.x, ev.y, 10, ["#ffd94a", "#ffffff", "#fff7ec"]);
+            addFloat(ev.x, ev.y - 18, FLOAT_ZH.rescue(ev.points));
+            break;
+          case "catch":
+            sfx.hurt();
+            spawnParts(ev.x, ev.y, 10, ["#ffd94a", "#ffcf6b", "#ffffff"]);
+            break;
+          case "egg":
+            sfx.eat();
+            spawnParts(ev.x, ev.y, 8, ["#fbbf24", "#ffd94a", "#fff"]);
+            addFloat(ev.x, ev.y - 16, FLOAT_ZH.egg(ev.points), "#fbbf24");
+            break;
+          case "eggFull":
+            sfx.coin();
+            addFloat(ev.x, ev.y - 16, FLOAT_ZH.eggFull(ev.points), "#fbbf24");
+            break;
+          case "win":
+            sfx.win();
+            break;
+          case "lose":
+            sfx.lose();
+            break;
+        }
+      }
+    }
+
+    function drawBackground(ts) {
+      var sky = ctx.createLinearGradient(0, 0, 0, H);
+      sky.addColorStop(0, "#7dbdf0");
+      sky.addColorStop(0.55, "#c3e4fb");
+      sky.addColorStop(1, "#eaf7ff");
+      ctx.fillStyle = sky;
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = "rgba(255,214,102,0.35)";
+      ctx.beginPath(); ctx.arc(58, 52, 34, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#ffd766";
+      ctx.beginPath(); ctx.arc(58, 52, 21, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "rgba(255,255,255,0.85)";
+      var clouds = [[180, 60, 26], [330, 92, 20], [100, 118, 18]];
+      for (var i = 0; i < clouds.length; i++) {
+        var cx = clouds[i][0] + Math.sin(ts / 3000 + clouds[i][0]) * 6;
+        var cy = clouds[i][1], cr = clouds[i][2];
+        ctx.globalAlpha = 0.85;
+        ctx.beginPath();
+        ctx.arc(cx, cy, cr, 0, Math.PI * 2);
+        ctx.arc(cx + cr * 1.2, cy + 4, cr * 0.8, 0, Math.PI * 2);
+        ctx.arc(cx - cr * 1.2, cy + 5, cr * 0.75, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 0.7;
+        ctx.beginPath();
+        ctx.arc(cx, cy + 12, cr * 1.15, 0, Math.PI * 2);
+        ctx.arc(cx + cr * 1.3, cy + 12, cr * 0.9, 0, Math.PI * 2);
+        ctx.arc(cx - cr * 1.3, cy + 12, cr * 0.85, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+      var grass = ctx.createLinearGradient(0, H - 260, 0, H);
+      grass.addColorStop(0, "#8ed081");
+      grass.addColorStop(1, "#57a84f");
+      ctx.fillStyle = grass;
+      ctx.fillRect(0, H - 260, W, 260);
+      ctx.fillStyle = "rgba(255,255,255,0.14)";
+      ctx.fillRect(0, H - 260, W, 12);
+      ctx.fillStyle = "rgba(255,255,255,0.5)";
+      var flowers = [[60, H - 150], [150, H - 98], [240, H - 176], [330, H - 108], [420, H - 166]];
+      for (var j = 0; j < flowers.length; j++) {
+        ctx.beginPath(); ctx.arc(flowers[j][0], flowers[j][1], 3.4, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(flowers[j][0] + 7, flowers[j][1] - 3, 3, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.fillStyle = "rgba(255,220,120,0.7)";
+      var yellows = [[100, H - 132], [200, H - 158], [370, H - 130]];
+      for (var k = 0; k < yellows.length; k++) {
+        ctx.beginPath(); ctx.arc(yellows[k][0], yellows[k][1], 3, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+
+    function drawHen(x, y, facing, ts) {
+      var flap = Math.sin(ts / 90) * 0.2;
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(facing, 1);
+      ctx.fillStyle = "#f2e2cc";
+      ctx.beginPath();
+      ctx.moveTo(-14, -6);
+      ctx.quadraticCurveTo(-30, -14, -27, 0);
+      ctx.quadraticCurveTo(-24, 10, -13, 8);
+      ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#fff7ec";
+      ctx.beginPath(); ctx.ellipse(0, 0, 23, 16, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = "rgba(0,0,0,0.14)"; ctx.lineWidth = 1.4; ctx.stroke();
+      ctx.fillStyle = "#f8e5c2";
+      ctx.beginPath(); ctx.ellipse(0, 5 + flap * 2, 14, 9, flap, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#fff7ec";
+      ctx.beginPath(); ctx.arc(17, -12, 10, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#ef4444";
+      var combs = [[12, -20], [17, -23], [22, -20]];
+      for (var i = 0; i < combs.length; i++) {
+        ctx.beginPath();
+        ctx.moveTo(combs[i][0] - 3, combs[i][1]);
+        ctx.lineTo(combs[i][0], combs[i][1] - 6.5);
+        ctx.lineTo(combs[i][0] + 3, combs[i][1]);
+        ctx.closePath(); ctx.fill();
+      }
+      ctx.fillStyle = "#f59e0b";
+      ctx.beginPath();
+      ctx.moveTo(25, -13); ctx.lineTo(33, -11); ctx.lineTo(25, -8);
+      ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#333";
+      ctx.beginPath(); ctx.arc(21, -14, 1.8, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    }
+
+    function drawChick(x, y, ts, idx) {
+      var bob = Math.sin(ts / 110 + idx * 0.9) * 1.4;
+      ctx.save();
+      ctx.translate(x, y + bob);
+      ctx.fillStyle = "#ffd94a";
+      ctx.beginPath(); ctx.arc(0, 0, CHICK_R, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = "rgba(0,0,0,0.12)"; ctx.lineWidth = 1.2; ctx.stroke();
+      ctx.fillStyle = "#ffcf6b";
+      ctx.beginPath(); ctx.ellipse(1.5, 3.5, 6, 4, -0.4, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(-3, -8, 2.4, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#f97316";
+      ctx.beginPath();
+      ctx.moveTo(6.5, -2); ctx.lineTo(11.5, -1); ctx.lineTo(6.5, 1);
+      ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#333";
+      ctx.beginPath(); ctx.arc(4.5, -4, 1.7, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    }
+
+    function drawEagle(e, ts) {
+      var stunned = e.state === "stun";
+      var flap = Math.sin(e.phase) * (stunned ? 0.12 : 0.55);
+      var ang = stunned ? Math.sin(e.phase * 2) * 0.18 : Math.atan2(e.vy, e.vx);
+      ctx.save();
+      ctx.translate(e.x, e.y);
+      ctx.rotate(ang);
+      ctx.fillStyle = "#7a5834";
+      ctx.beginPath();
+      ctx.moveTo(-16, -4); ctx.lineTo(-30, -8); ctx.lineTo(-28, -1); ctx.lineTo(-16, 4);
+      ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#8a6239";
+      ctx.beginPath(); ctx.ellipse(0, 0, 22, 12.5, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = "rgba(0,0,0,0.18)"; ctx.lineWidth = 1.3; ctx.stroke();
+      ctx.fillStyle = "#6b4826";
+      ctx.beginPath();
+      ctx.moveTo(-4, -4);
+      ctx.quadraticCurveTo(-12, -18 - flap * 10, -30, -16 - flap * 12);
+      ctx.quadraticCurveTo(-16, -2, -6, 2);
+      ctx.closePath(); ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(-4, 4);
+      ctx.quadraticCurveTo(-12, 18 + flap * 10, -30, 16 + flap * 12);
+      ctx.quadraticCurveTo(-16, 2, -6, -2);
+      ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#8a6239";
+      ctx.beginPath(); ctx.arc(19, -6, 8.5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#f59e0b";
+      ctx.beginPath();
+      ctx.moveTo(26, -8);
+      ctx.quadraticCurveTo(33, -6, 27, -2);
+      ctx.closePath(); ctx.fill();
+      if (stunned) {
+        ctx.strokeStyle = "#fff"; ctx.lineWidth = 1.3;
+        ctx.beginPath(); ctx.arc(20, -7, 2.6, 0, Math.PI * 2); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(18.6, -8.4); ctx.lineTo(21.4, -5.6);
+        ctx.moveTo(21.4, -8.4); ctx.lineTo(18.6, -5.6);
+        ctx.stroke();
+      } else {
+        ctx.fillStyle = "#3b2410";
+        ctx.beginPath(); ctx.arc(20, -7, 2, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = "#fff";
+        ctx.beginPath(); ctx.arc(20.8, -7.8, 0.7, 0, Math.PI * 2); ctx.fill();
+      }
+      if (e.carryChick && !stunned) {
+        ctx.fillStyle = "#ffd94a";
+        ctx.beginPath(); ctx.arc(27, 2, 6, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = "rgba(0,0,0,0.15)"; ctx.lineWidth = 1; ctx.stroke();
+        ctx.fillStyle = "#f97316";
+        ctx.beginPath();
+        ctx.moveTo(32, 1); ctx.lineTo(35.5, 2.2); ctx.lineTo(32, 3.4);
+        ctx.closePath(); ctx.fill();
+      }
+      if (stunned) {
+        ctx.fillStyle = "#ffe15e";
+        ctx.beginPath(); ctx.arc(-18, -14 + Math.sin(ts / 120) * 2, 2.2, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(-12, -18 + Math.cos(ts / 130) * 2, 1.6, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    function drawEgg(x, y, ts) {
+      var wob = Math.sin(ts / 200 + x) * 0.12;
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(wob);
+      ctx.fillStyle = "#fbbf24";
+      ctx.beginPath(); ctx.ellipse(0, 0, 8, 10.5, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "rgba(255,255,255,0.5)";
+      ctx.beginPath(); ctx.ellipse(-2.5, -3.5, 2.4, 3.4, -0.4, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    }
+
+    /* ================= 主循环 ================= */
+    var sim = newSim();
+    var keys = {};
+    var mouse = { x: 0, y: 0, active: false };
+    var best = 0;
+    try { best = parseInt(localStorage.getItem(BEST_KEY) || "0", 10) || 0; } catch (e) {}
+    var rafId = 0, lastTs = 0;
+
+    function updateUi() {
+      chipScore.textContent = String(Math.floor(sim.score));
+      chipTime.textContent = Math.floor(sim.time) + "s";
+      chipChicks.textContent = String(sim.chicks.length);
+      chipCaught.textContent = String(sim.caught);
+    }
+
+    function loop(ts) {
+      rafId = requestAnimationFrame(loop);
+      if (!lastTs) lastTs = ts;
+      var dt = Math.min(0.05, (ts - lastTs) / 1000);
+      lastTs = ts;
+
+      if (sim.running && !sim.over) {
+        var dx = 0, dy = 0;
+        if (keys["arrowleft"] || keys["a"]) dx -= 1;
+        if (keys["arrowright"] || keys["d"]) dx += 1;
+        if (keys["arrowup"] || keys["w"]) dy -= 1;
+        if (keys["arrowdown"] || keys["s"]) dy += 1;
+        if (dx === 0 && dy === 0 && mouse.active) {
+          var rx = mouse.x - sim.hen.x, ry = mouse.y - sim.hen.y;
+          var d = Math.hypot(rx, ry);
+          if (d > 14) { dx = rx / d; dy = ry / d; }
+        }
+        var events = stepSim(sim, dt, { dx: dx, dy: dy });
+        handleEvents(sim, events);
+        if (sim.over) showOver();
+      }
+
+      for (var i = 0; i < parts.length; i++) {
+        parts[i].x += parts[i].vx * dt;
+        parts[i].y += parts[i].vy * dt;
+        parts[i].vy += 320 * dt;
+        parts[i].life -= dt;
+      }
+      parts = parts.filter(function (p) { return p.life > 0; });
+      for (var j = 0; j < floats.length; j++) {
+        floats[j].y -= 32 * dt;
+        floats[j].life -= dt;
+      }
+      floats = floats.filter(function (f) { return f.life > 0; });
+
+      ctx.clearRect(0, 0, W, H);
+      drawBackground(ts);
+      for (var k = 0; k < sim.eggs.length; k++) drawEgg(sim.eggs[k].x, sim.eggs[k].y, ts);
+      for (var m = 0; m < sim.eagles.length; m++) drawEagle(sim.eagles[m], ts);
+      if (!sim.over) drawHen(sim.hen.x, sim.hen.y, sim.facing, ts);
+      for (var n = 0; n < sim.chicks.length; n++) drawChick(sim.chicks[n].x, sim.chicks[n].y, ts, n);
+      for (var p = 0; p < parts.length; p++) {
+        ctx.globalAlpha = Math.max(0, parts[p].life / parts[p].maxLife);
+        ctx.fillStyle = parts[p].color;
+        ctx.beginPath(); ctx.arc(parts[p].x, parts[p].y, parts[p].r, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      ctx.textAlign = "center";
+      ctx.font = "bold 15px sans-serif";
+      for (var q = 0; q < floats.length; q++) {
+        ctx.globalAlpha = Math.max(0, floats[q].life / floats[q].maxLife);
+        ctx.fillStyle = floats[q].color;
+        ctx.fillText(floats[q].text, floats[q].x, floats[q].y);
+      }
+      ctx.globalAlpha = 1;
+      ctx.textAlign = "start";
+
+      updateUi();
+    }
+
+    function restart() {
+      sim = newSim();
+      parts = [];
+      floats = [];
+      overlay.classList.add("hidden");
+      updateUi();
+    }
+
+    function startPause() {
+      if (sim.over) { restart(); return; }
+      sim.running = !sim.running;
+      btnPause.textContent = sim.running ? "暂停" : "开始";
+    }
+
+    function showOver() {
+      var title = $("ovTitle"), sub = $("ovSub");
+      overlay.classList.remove("hidden");
+      if (sim.won) {
+        title.textContent = "🎉 守护成功！";
+        sub.textContent = "坚持 " + Math.floor(sim.time) + " 秒 · 剩余 " + sim.chicks.length + " 只小鸡";
+      } else {
+        title.textContent = "😢 小鸡被抓光";
+        sub.textContent = "坚持 " + Math.floor(sim.time) + " 秒 · 得分 " + Math.floor(sim.score) +
+          " · 救回 " + sim.rescued + " 只";
+      }
+      btnStart.textContent = "再来一局";
+      var s = Math.floor(sim.score);
+      if (s > best) {
+        best = s;
+        try { localStorage.setItem(BEST_KEY, String(best)); } catch (e) {}
+      }
+    }
+
+    /* ================= 输入 ================= */
+    window.addEventListener("keydown", function (e) {
+      var k = e.key.toLowerCase();
+      if (["arrowup", "arrowdown", "arrowleft", "arrowright", " "].indexOf(k) >= 0) e.preventDefault();
+      if (k === " ") { startPause(); return; }
+      if (k === "p") {
+        if (!sim.over) { sim.running = !sim.running; btnPause.textContent = sim.running ? "暂停" : "开始"; }
+        return;
+      }
+      keys[k] = true;
+    });
+    window.addEventListener("keyup", function (e) { keys[e.key.toLowerCase()] = false; });
+
+    function toCanvas(e) {
+      var rect = canvas.getBoundingClientRect();
+      var scale = W / rect.width;
+      mouse.x = (e.clientX - rect.left) * scale;
+      mouse.y = (e.clientY - rect.top) * scale;
+      mouse.active = true;
+    }
+    canvas.addEventListener("pointermove", toCanvas);
+    canvas.addEventListener("pointerdown", toCanvas);
+    canvas.addEventListener("pointerleave", function () { mouse.active = false; });
+
+    btnPause.addEventListener("click", function () { sfx.click(); startPause(); });
+    btnRestart.addEventListener("click", function () { sfx.click(); restart(); });
+    btnStart.addEventListener("click", function () { sfx.click(); if (sim.over) restart(); startPause(); });
+
+    /* ================= 启动 ================= */
+    updateUi();
+    rafId = requestAnimationFrame(loop);
+  })();
+  </script>
+</body>
+</html>
