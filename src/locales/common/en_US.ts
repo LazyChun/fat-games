@@ -58,6 +58,8 @@ export default {
   "game.backfire.desc": "Bomb ground targets from your bomber",
   "game.sliding.title": "Number Slide",
   "game.sliding.desc": "Slide tiles back into order",
+  "game.match.title": "Happy Match",
+  "game.match.desc": "Swap adjacent tiles, match three, score high in 60s",
   "game.scores.title": "Leaderboard",
   "game.scores.desc": "View game scores and statistics",
 
@@ -390,6 +392,23 @@ export default {
   "game.hurdle.staminaFull": "Stamina full",
   "game.hurdle.help":
     "Controls: Space / ↑ / W (or click) to jump — hold to jump higher, press again mid-air for a double jump; jumps and double jumps cost stamina, which slowly recovers on the ground. Clearing a hurdle just above the bar scores \"Perfect\" for more points; jumping too high only counts as a clean pass. Grab golden rings for bonus points. Hurdle heights vary randomly and hurdles keep getting denser — tall hurdles need a fuller charge. Life packs and stamina packs drift high in the sky: grab them for +1 life / full stamina. Hitting a hurdle trips you, resets your combo and costs a life. The pace keeps rising. P to pause.",
+
+  "game.match.score": "Score",
+  "game.match.best": "Best",
+  "game.match.time": "Time",
+  "game.match.combo": "Combo",
+  "game.match.start": "Start",
+  "game.match.restart": "Restart",
+  "game.match.hint": "Hint",
+  "game.match.noMove": "No moves left — auto reshuffle",
+  "game.match.idleTitle": "60s Challenge · Match 3",
+  "game.match.idleDesc": "Swap adjacent tiles to match 3 or more; cascades multiply your score",
+  "game.match.over.title": "Time's up!",
+  "game.match.over.score": "Score {score}",
+  "game.match.over.best": "Best {best}",
+  "game.match.again": "Play Again",
+  "game.match.help":
+    "Controls: click a tile to select it, then click an adjacent tile to swap; match 3+ of the same kind in a row or column to clear them — cascading clears multiply your score. Score as high as possible in 60 seconds.",
 
   "game.archery.title": "Ricochet Archery",
   "game.archery.desc": "Draw the bow, bank off walls and wind to hit the mark",

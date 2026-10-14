@@ -31,6 +31,7 @@ import {
   IconHurdle,
   IconScores,
   IconArchery,
+  IconMatch,
 } from "./gameIcons";
 
 import Game2048 from "./Game2048";
@@ -53,6 +54,7 @@ import CurlingGame from "./CurlingGame";
 import Pool3DGame from "./Pool3DGame";
 import HurdleGame from "./HurdleGame";
 import ArcheryGame from "./ArcheryGame";
+import MatchGame from "./MatchGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -296,6 +298,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.casual",
     icon: IconArchery,
     component: ArcheryGame,
+  },
+  {
+    id: "match",
+    title: "快乐消消",
+    desc: "交换相邻方块，三连消除，限时冲高分",
+    category: "休闲",
+    titleKey: "game.match.title",
+    descKey: "game.match.desc",
+    categoryKey: "category.casual",
+    icon: IconMatch,
+    component: MatchGame,
   },
   {
     id: "scores",

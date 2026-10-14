@@ -293,3 +293,12 @@ export const IconArchery: React.FC<GameIconProps> = (props) => (
     <path d="M7 11.9 L5.2 10.4 M7 11.9 L5.2 13.4" strokeWidth={1.2} />
   </svg>
 );
+
+/** 快乐消消：三颗糖果成排，中间一颗错位待交换 */
+export const IconMatch: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    <rect x="3.6" y="8.2" width="6" height="6" rx="1.8" />
+    <rect x="9.6" y="12" width="6" height="6" rx="1.8" fill="currentColor" stroke="none" />
+    <rect x="15.6" y="8.2" width="6" height="6" rx="1.8" />
+  </svg>
+);

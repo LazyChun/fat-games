@@ -57,6 +57,8 @@ export default {
   "game.backfire.desc": "驾驶轰炸机，投弹摧毁地面目标",
   "game.sliding.title": "数字华容道",
   "game.sliding.desc": "滑动数字方块，按序还原",
+  "game.match.title": "快乐消消",
+  "game.match.desc": "交换相邻方块，三连消除，限时冲高分",
   "game.scores.title": "排行榜",
   "game.scores.desc": "查看各游戏成绩记录与统计",
 
@@ -362,6 +364,23 @@ export default {
   "game.pool3d.viewHint": "右键拖拽旋转视角 · 滚轮缩放",
   "game.pool3d.help":
     "操作：移动鼠标瞄准（虚线为瞄准线）；按住左键拖动蓄力、松开击球；空格直接击球（用当前力度），R 重新开球。右键拖拽可自由旋转视角、滚轮缩放，或点击「默认视角 / 俯视」一键切换——俯视视角更方便瞄直线球。把 15 颗球全部打进袋即清台成功，杆数越少得分越高；白球落袋会自动复位。",
+
+  "game.match.score": "得分",
+  "game.match.best": "最佳",
+  "game.match.time": "时间",
+  "game.match.combo": "连击",
+  "game.match.start": "开始游戏",
+  "game.match.restart": "重新开始",
+  "game.match.hint": "提示",
+  "game.match.noMove": "无步可走，已自动洗牌",
+  "game.match.idleTitle": "限时 60 秒 · 三连消除",
+  "game.match.idleDesc": "交换相邻方块凑齐三连即可消除，级联连击分数翻倍",
+  "game.match.over.title": "时间到！",
+  "game.match.over.score": "得分 {score}",
+  "game.match.over.best": "最佳 {best}",
+  "game.match.again": "再来一局",
+  "game.match.help":
+    "操作：点击选中方块，再点击相邻方块交换；横向或纵向凑齐 3 个及以上同色方块即可消除，级联消除连击加倍。60 秒内得分越高越好。",
 
   "game.hurdle.title": "跨栏冲刺",
   "game.hurdle.desc": "蓄力起跳，精准跨栏，途中收集体力与生命补给",

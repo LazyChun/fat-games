@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>快乐消消 · 独立预览（fat-games 插件内同款）</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e53935'/%3E%3Ccircle cx='20' cy='20' r='9' fill='%23ffffff' opacity='0.4'/%3E%3Crect x='14' y='27' width='36' height='12' rx='6' fill='%23fff176'/%3E%3C/svg%3E" />
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 20px 10px;
+    font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: radial-gradient(120% 140% at 20% 0%, #fdfbf7 0%, #f5f1ea 45%, #ede6da 100%);
+    color: rgba(0,0,0,0.85);
+  }
+  .frame {
+    width: 560px;
+    max-width: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgba(120,100,70,0.18);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.65), 0 10px 30px rgba(90,70,40,0.14);
+  }
+  .bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .bar .emoji { font-size: 22px; }
+  .bar .title { font-size: 16px; font-weight: 800; }
+  .bar .spacer { flex: 1; }
+  .bar button {
+    border: 1px solid rgba(0,0,0,0.18); background: rgba(255,255,255,0.9);
+    color: rgba(0,0,0,0.75); border-radius: 20px; padding: 6px 16px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: transform 0.12s ease;
+  }
+  .bar button:hover { transform: translateY(-1px); }
+  .stats { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px 16px 0; }
+  .chip {
+    min-width: 88px; padding: 7px 14px; border-radius: 14px;
+    display: flex; flex-direction: column; gap: 1px; line-height: 1.25;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.14);
+  }
+  .chip .lbl { font-size: 11px; }
+  .chip .val { font-size: 19px; font-weight: 800; }
+  .chip.gold   { background: linear-gradient(135deg,#ffd86b 0%,#f6a821 100%); }
+  .chip.gold .lbl { color: rgba(90,55,0,0.75); } .chip.gold .val { color: #5a3400; }
+  .chip.green  { background: linear-gradient(135deg,#7ee8a2 0%,#2e9e5b 100%); }
+  .chip.green .lbl, .chip.green .val { color: #fff; }
+  .chip.blue   { background: linear-gradient(135deg,#6bb6ff 0%,#2b7de9 100%); }
+  .chip.blue .lbl, .chip.blue .val { color: #fff; }
+  .chip.red    { background: linear-gradient(135deg,#ff9a8b 0%,#f2554a 100%); }
+  .chip.red .lbl, .chip.red .val { color: #fff; }
+  .chip.time-low .val { color: #fff; animation: pulse 0.7s infinite; }
+  @keyframes pulse { 50% { opacity: 0.45; } }
+
+  .stage {
+    position: relative;
+    margin: 16px;
+    height: 380px;
+    display: flex; align-items: flex-start; justify-content: center;
+  }
+  .board-wrap { transform-origin: top center; }
+  .board {
+    position: relative;
+    width: 380px; height: 380px;
+    border-radius: 16px;
+    background: rgba(0,0,0,0.035);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+  }
+  .tile {
+    position: absolute; left: 0; top: 0;
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.22), inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -3px 6px rgba(0,0,0,0.16);
+    transition: transform 0.2s cubic-bezier(0.3,0.9,0.4,1), opacity 0.24s ease, box-shadow 0.15s ease;
+  }
+  .tile.dying { transform: scale(0.15); opacity: 0.1; }
+  .tile.selected { box-shadow: 0 0 0 3px rgba(0,0,0,0.35), 0 0 16px 3px rgba(30,136,229,0.5); }
+  .tile.hinted { box-shadow: 0 0 0 3px rgba(255,255,255,0.95), 0 0 18px 4px rgba(255,255,255,0.65); animation: hintglow 0.6s infinite alternate; }
+  @keyframes hintglow { from { box-shadow: 0 0 0 3px rgba(255,255,255,0.8), 0 0 10px 2px rgba(255,255,255,0.4);} to { box-shadow: 0 0 0 3px #fff, 0 0 22px 6px rgba(255,255,255,0.9);} }
+
+  .overlay {
+    position: absolute; inset: 0;
+    border-radius: 16px;
+    background: rgba(250,248,243,0.82);
+    backdrop-filter: blur(2px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; text-align: center; padding: 20px;
+    z-index: 5;
+    animation: fadein 0.35s ease;
+  }
+  @keyframes fadein { from { opacity: 0; } }
+  .overlay .big { font-size: 26px; font-weight: 900; }
+  .overlay .emoji-big { font-size: 34px; }
+  .overlay .mid { font-size: 22px; font-weight: 800; }
+  .overlay .sub { font-size: 14px; opacity: 0.8; max-width: 300px; }
+  .overlay button {
+    margin-top: 6px; border: none; cursor: pointer;
+    background: linear-gradient(135deg,#4facfe 0%,#1677ff 100%);
+    color: #fff; border-radius: 20px; padding: 9px 26px;
+    font-size: 15px; font-weight: 700;
+    box-shadow: 0 3px 10px rgba(22,119,255,0.28);
+  }
+
+  .toast {
+    position: absolute; left: 50%; top: 10px;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.72); color: #fff;
+    padding: 6px 14px; border-radius: 14px;
+    font-size: 12px; font-weight: 600; z-index: 6;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .toast.show { opacity: 1; }
+
+  .help {
+    font-size: 12px; color: rgba(0,0,0,0.5);
+    text-align: center; max-width: 560px; padding: 0 12px; line-height: 1.6;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: radial-gradient(120% 140% at 20% 0%, #23272e 0%, #1b1e24 55%, #14161b 100%);
+      color: rgba(255,255,255,0.88);
+    }
+    .frame {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.1);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .bar { border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .bar button {
+      background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.88);
+      border-color: rgba(255,255,255,0.22);
+    }
+    .board { background: rgba(255,255,255,0.03); box-shadow: inset 0 1px 0 rgba(255,255,255,0.08); }
+    .overlay { background: rgba(18,20,26,0.78); }
+    .help { color: rgba(255,255,255,0.45); }
+  }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="bar">
+      <span class="emoji">🍬</span>
+      <span class="title">快乐消消</span>
+      <span class="spacer"></span>
+      <button id="btnHint" type="button">提示</button>
+      <button id="btnRestart" type="button">重新开始</button>
+    </div>
+    <div class="stats">
+      <div class="chip gold"><span class="lbl">得分</span><span class="val" id="chipScore">0</span></div>
+      <div class="chip green"><span class="lbl">最佳</span><span class="val" id="chipBest">0</span></div>
+      <div class="chip blue" id="chipTimeWrap"><span class="lbl">时间</span><span class="val" id="chipTime">60</span></div>
+      <div class="chip red"><span class="lbl">连击</span><span class="val" id="chipCombo">×1</span></div>
+    </div>
+    <div class="stage" id="stage">
+      <div class="board-wrap" id="boardWrap">
+        <div class="board" id="board"></div>
+      </div>
+      <div class="toast" id="toast"></div>
+      <div class="overlay" id="overlay">
+        <div class="emoji-big">🍬</div>
+        <div class="big">限时 60 秒 · 三连消除</div>
+        <div class="sub">交换相邻方块凑齐三连即可消除，级联连击分数翻倍</div>
+        <button id="btnStart" type="button">开始游戏</button>
+      </div>
+    </div>
+  </div>
+  <div class="help">
+    操作：点击选中方块，再点击相邻方块交换；横向或纵向凑齐 3 个及以上同色方块即可消除，
+    级联消除连击加倍。60 秒内得分越高越好。
+  </div>
+  <script>
+  (function () {
+    "use strict";
+
+    /* ================= 常量与 DOM ================= */
+    var ROWS = 8, COLS = 8, KINDS = 6, GAME_TIME = 60;
+    var CELL = 44, GAP = 4, BOARD = 380;
+    var BEST_KEY = "fat-games.match.best";
+
+    var KIND_STYLE = [
+      { bg: "linear-gradient(145deg,#ff8a80 0%,#e53935 100%)" },
+      { bg: "linear-gradient(145deg,#ffcc80 0%,#fb8c00 100%)" },
+      { bg: "linear-gradient(145deg,#fff176 0%,#fdd835 100%)" },
+      { bg: "linear-gradient(145deg,#a5d6a7 0%,#43a047 100%)" },
+      { bg: "linear-gradient(145deg,#90caf9 0%,#1e88e5 100%)" },
+      { bg: "linear-gradient(145deg,#ce93d8 0%,#8e24aa 100%)" },
+    ];
+
+    function $(id) { return document.getElementById(id); }
+    var boardEl = $("board"), boardWrap = $("boardWrap"), stage = $("stage");
+    var overlay = $("overlay"), toastEl = $("toast");
+    var chipScore = $("chipScore"), chipBest = $("chipBest");
+    var chipTime = $("chipTime"), chipTimeWrap = $("chipTimeWrap"), chipCombo = $("chipCombo");
+
+    var tiles = [], selected = null, hintPair = null;
+    var busy = false, started = false, over = false;
+    var score = 0, best = 0, timeLeft = GAME_TIME, combo = 0;
+    var idSeq = 1, moves = 0, clearedTotal = 0, bestCombo = 0, session = 0;
+    var timerId = null, hintTimer = null, toastTimer = null;
+
+    /* ================= 音效（Web Audio 合成） ================= */
+    var AC = null;
+    function beep(freq, dur, type, vol, delay) {
+      try {
+        if (!AC) {
+          var Ctx = window.AudioContext || window.webkitAudioContext;
+          if (!Ctx) return;
+          AC = new Ctx();
+        }
+        if (AC.state === "suspended") AC.resume();
+        var t0 = AC.currentTime + (delay || 0);
+        var osc = AC.createOscillator(), g = AC.createGain();
+        osc.type = type || "sine";
+        osc.frequency.setValueAtTime(freq, t0);
+        g.gain.setValueAtTime(0.0001, t0);
+        g.gain.exponentialRampToValueAtTime(vol || 0.15, t0 + 0.008);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + (dur || 0.12));
+        osc.connect(g); g.connect(AC.destination);
+        osc.start(t0); osc.stop(t0 + (dur || 0.12) + 0.05);
+      } catch (e) { /* 忽略 */ }
+    }
+    var sfx = {
+      click: function () { beep(420, 0.09, "triangle", 0.16); },
+      move: function () { beep(240, 0.06, "square", 0.07); },
+      clear: function () { [660, 880, 1100].forEach(function (f, i) { beep(f, 0.1, "sine", 0.14, i * 0.045); }); },
+      mismatch: function () { beep(190, 0.14, "square", 0.08); },
+      lose: function () { [392, 330, 262, 196].forEach(function (f, i) { beep(f, 0.2, "triangle", 0.14, i * 0.11); }); },
+      win: function () { [523, 659, 784, 1047].forEach(function (f, i) { beep(f, 0.16, "triangle", 0.16, i * 0.09); }); },
+    };
+
+    /* ================= 纯逻辑（与插件 matchLogic.ts 同款） ================= */
+    function idx(r, c) { return r * COLS + c; }
+    function posOf(i) { return { r: Math.floor(i / COLS), c: i % COLS }; }
+    function isAdjacent(i, j) {
+      if (i === j) return false;
+      var a = posOf(i), b = posOf(j);
+      return Math.abs(a.r - b.r) + Math.abs(a.c - b.c) === 1;
+    }
+    function cellsFromTiles() {
+      var cells = new Array(ROWS * COLS).fill(0);
+      for (var k = 0; k < tiles.length; k++) {
+        var t = tiles[k];
+        if (t.r >= 0 && t.r < ROWS && t.c >= 0 && t.c < COLS) cells[idx(t.r, t.c)] = t.kind;
+      }
+      return cells;
+    }
+    function findRuns(cells) {
+      var runs = [], r, c, start, end, k, i;
+      for (r = 0; r < ROWS; r++) {
+        start = 0;
+        while (start < COLS) {
+          k = cells[idx(r, start)];
+          end = start + 1;
+          while (end < COLS && cells[idx(r, end)] === k) end++;
+          if (end - start >= 3) {
+            var inds = [];
+            for (c = start; c < end; c++) inds.push(idx(r, c));
+            runs.push({ kind: k, dir: "h", indices: inds });
+          }
+          start = end;
+        }
+      }
+      for (c = 0; c < COLS; c++) {
+        start = 0;
+        while (start < ROWS) {
+          k = cells[idx(start, c)];
+          end = start + 1;
+          while (end < ROWS && cells[idx(end, c)] === k) end++;
+          if (end - start >= 3) {
+            var inds2 = [];
+            for (r = start; r < end; r++) inds2.push(idx(r, c));
+            runs.push({ kind: k, dir: "v", indices: inds2 });
+          }
+          start = end;
+        }
+      }
+      return runs;
+    }
+    function swappedRuns(cells, a, b) {
+      var cp = cells.slice();
+      var tmp = cp[a]; cp[a] = cp[b]; cp[b] = tmp;
+      return findRuns(cp);
+    }
+    function hasAnyMove(cells) {
+      for (var r = 0; r < ROWS; r++) {
+        for (var c = 0; c < COLS; c++) {
+          var i = idx(r, c);
+          if (c + 1 < COLS && swappedRuns(cells, i, i + 1).length > 0) return true;
+          if (r + 1 < ROWS && swappedRuns(cells, i, i + COLS).length > 0) return true;
+        }
+      }
+      return false;
+    }
+    function scoreForRuns(runs, cascade) {
+      var raw = 0;
+      for (var i = 0; i < runs.length; i++) {
+        var len = runs[i].indices.length;
+        raw += len * 10 + (len - 3) * 20;
+      }
+      return raw * Math.max(1, cascade);
+    }
+    function createCells() {
+      var cells = new Array(ROWS * COLS);
+      for (var r = 0; r < ROWS; r++) {
+        for (var c = 0; c < COLS; c++) {
+          var i = idx(r, c);
+          var banned = {};
+          if (c >= 2 && cells[i - 1] === cells[i - 2]) banned[cells[i - 1]] = 1;
+          if (r >= 2 && cells[i - COLS] === cells[i - 2 * COLS]) banned[cells[i - COLS]] = 1;
+          var k = Math.floor(Math.random() * KINDS), guard = 0;
+          while (banned[k] && guard < 32) { k = Math.floor(Math.random() * KINDS); guard++; }
+          if (banned[k]) { k = 0; while (banned[k]) k++; }
+          cells[i] = k;
+        }
+      }
+      return cells;
+    }
+    function shuffleCells(cells) {
+      for (var attempt = 0; attempt < 200; attempt++) {
+        var cp = cells.slice();
+        for (var i = cp.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = cp[i]; cp[i] = cp[j]; cp[j] = tmp;
+        }
+        if (findRuns(cp).length === 0 && hasAnyMove(cp)) return cp;
+      }
+      // 兜底：改一个格子制造一步可走
+      for (var x = 0; x < cells.length; x++) {
+        for (var kk = 0; kk < KINDS; kk++) {
+          if (kk === cells[x]) continue;
+          var c2 = cells.slice();
+          c2[x] = kk;
+          if (findRuns(c2).length === 0 && hasAnyMove(c2)) return c2;
+        }
+      }
+      return createCells();
+    }
+    function boardToTiles(cells) {
+      var list = [];
+      for (var i = 0; i < cells.length; i++) {
+        list.push({ id: idSeq++, kind: cells[i], r: Math.floor(i / COLS), c: i % COLS });
+      }
+      return list;
+    }
+
+    /* ================= 渲染 ================= */
+    var tileEls = {};
+    function render() {
+      var seen = {};
+      for (var i = 0; i < tiles.length; i++) {
+        var t = tiles[i];
+        seen[t.id] = 1;
+        var el = tileEls[t.id];
+        if (!el) {
+          el = document.createElement("div");
+          el.className = "tile";
+          (function (id) { el.addEventListener("click", function () { onClick(id); }); })(t.id);
+          boardEl.appendChild(el);
+          tileEls[t.id] = el;
+        }
+        var tx = "translate(" + (t.c * (CELL + GAP)) + "px, " + (t.r * (CELL + GAP)) + "px)";
+        if (t.dying) tx += " scale(0.15)";
+        el.style.transform = tx;
+        el.style.background = KIND_STYLE[t.kind % KINDS].bg;
+        el.classList.toggle("dying", !!t.dying);
+        el.classList.toggle("selected", selected === t.id);
+        el.classList.toggle("hinted", !!hintPair && (hintPair[0] === t.id || hintPair[1] === t.id));
+      }
+      for (var id in tileEls) {
+        if (!seen[id]) { tileEls[id].remove(); delete tileEls[id]; }
+      }
+    }
+
+    /* ================= 流程 ================= */
+    function delay(ms) { return new Promise(function (res) { setTimeout(res, ms); }); }
+
+    function setChips() {
+      chipScore.textContent = score;
+      chipBest.textContent = best;
+      chipTime.textContent = Math.max(0, timeLeft);
+      chipTimeWrap.classList.toggle("time-low", started && !over && timeLeft <= 10);
+      chipCombo.textContent = "×" + Math.max(1, combo);
+    }
+    function toast(msg) {
+      toastEl.textContent = msg;
+      toastEl.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { toastEl.classList.remove("show"); }, 1800);
+    }
+
+    async function runCascade(initial) {
+      var my = session;
+      var current = initial;
+      var cascade = 0;
+      for (;;) {
+        if (my !== session) return;
+        var runs = findRuns(cellsFromTilesOf(current));
+        if (runs.length === 0) break;
+        cascade++;
+        combo = cascade;
+        if (cascade > bestCombo) bestCombo = cascade;
+        var byPos = {};
+        for (var i = 0; i < current.length; i++) byPos[idx(current[i].r, current[i].c)] = current[i].id;
+        var dyingIds = {};
+        for (var ri = 0; ri < runs.length; ri++) {
+          for (var ii = 0; ii < runs[ri].indices.length; ii++) dyingIds[byPos[runs[ri].indices[ii]]] = 1;
+        }
+        score += scoreForRuns(runs, cascade);
+        clearedTotal += Object.keys(dyingIds).length;
+        setChips();
+        current = current.map(function (t) { return dyingIds[t.id] ? { id: t.id, kind: t.kind, r: t.r, c: t.c, dying: true } : t; });
+        tiles = current;
+        render();
+        sfx.clear();
+        await delay(300);
+        if (my !== session) return;
+
+        // 下落 + 顶部补块（先摆到生成位，再过渡到落点）
+        var next = [];
+        for (var c = 0; c < COLS; c++) {
+          var col = current.filter(function (t) { return t.c === c && !dyingIds[t.id]; }).sort(function (a, b) { return a.r - b.r; });
+          var row = ROWS - 1;
+          for (var k = col.length - 1; k >= 0; k--) {
+            next.push({ id: col[k].id, kind: col[k].kind, r: row, c: c });
+            row--;
+          }
+          var missing = row + 1;
+          for (var n = 0; n < missing; n++) {
+            next.push({ id: idSeq++, kind: Math.floor(Math.random() * KINDS), r: -(missing - n), c: c, fall: missing });
+          }
+        }
+        tiles = next;
+        render();
+        await delay(30);
+        if (my !== session) return;
+        next = next.map(function (t) { return t.r < 0 ? { id: t.id, kind: t.kind, r: t.r + (t.fall || 0), c: t.c } : t; });
+        tiles = next;
+        render();
+        await delay(220);
+        if (my !== session) return;
+        current = next;
+      }
+
+      combo = 0;
+      setChips();
+      // 无步可走 → 自动洗牌
+      var cells = cellsFromTiles();
+      if (!hasAnyMove(cells)) {
+        tiles = boardToTiles(shuffleCells(cells));
+        render();
+        toast("无步可走，已自动洗牌");
+      }
+      busy = false;
+    }
+
+    function cellsFromTilesOf(list) {
+      var cells = new Array(ROWS * COLS).fill(0);
+      for (var i = 0; i < list.length; i++) {
+        var t = list[i];
+        if (t.r >= 0 && t.r < ROWS && t.c >= 0 && t.c < COLS) cells[idx(t.r, t.c)] = t.kind;
+      }
+      return cells;
+    }
+
+    async function doSwap(a, b) {
+      var my = session;
+      busy = true;
+      selected = null;
+      hintPair = null;
+      var swapped = tiles.map(function (t) {
+        if (t.id === a.id) return { id: t.id, kind: t.kind, r: b.r, c: b.c };
+        if (t.id === b.id) return { id: t.id, kind: t.kind, r: a.r, c: a.c };
+        return t;
+      });
+      tiles = swapped;
+      render();
+      sfx.move();
+      await delay(190);
+      if (my !== session) return;
+
+      if (findRuns(cellsFromTiles()).length > 0) {
+        moves++;
+        await runCascade(swapped);
+      } else {
+        tiles = swapped.map(function (t) {
+          if (t.id === a.id) return { id: t.id, kind: t.kind, r: a.r, c: a.c };
+          if (t.id === b.id) return { id: t.id, kind: t.kind, r: b.r, c: b.c };
+          return t;
+        });
+        render();
+        sfx.mismatch();
+        await delay(190);
+        if (my !== session) return;
+        busy = false;
+      }
+    }
+
+    function onClick(id) {
+      if (busy || !started || over) return;
+      if (selected === null) { sfx.click(); selected = id; render(); return; }
+      if (selected === id) { selected = null; render(); return; }
+      var a = null, b = null;
+      for (var i = 0; i < tiles.length; i++) {
+        if (tiles[i].id === selected) a = tiles[i];
+        if (tiles[i].id === id) b = tiles[i];
+      }
+      if (!a || !b) return;
+      if (!isAdjacent(a.r * COLS + a.c, b.r * COLS + b.c)) {
+        sfx.click();
+        selected = id;
+        render();
+        return;
+      }
+      doSwap(a, b);
+    }
+
+    function hint() {
+      if (busy || !started || over) return;
+      var cells = cellsFromTiles();
+      for (var r = 0; r < ROWS; r++) {
+        for (var c = 0; c < COLS; c++) {
+          var i = idx(r, c);
+          if (c + 1 < COLS && swappedRuns(cells, i, i + 1).length > 0) { flashHint(i, i + 1); return; }
+          if (r + 1 < ROWS && swappedRuns(cells, i, i + COLS).length > 0) { flashHint(i, i + COLS); return; }
+        }
+      }
+    }
+    function flashHint(i, j) {
+      var byPos = {};
+      for (var k = 0; k < tiles.length; k++) byPos[idx(tiles[k].r, tiles[k].c)] = tiles[k].id;
+      hintPair = [byPos[i], byPos[j]];
+      render();
+      clearTimeout(hintTimer);
+      hintTimer = setTimeout(function () { hintPair = null; render(); }, 1400);
+    }
+
+    function endGame() {
+      clearInterval(timerId);
+      over = true;
+      selected = null;
+      sfx.lose();
+      if (score > best) {
+        best = score;
+        try { localStorage.setItem(BEST_KEY, String(best)); } catch (e) { /* ignore */ }
+      }
+      setChips();
+      showOverlay(
+        '<div class="emoji-big">🎉</div>' +
+        '<div class="mid">时间到！</div>' +
+        '<div class="sub">得分 ' + score + ' · 最佳 ' + best + '</div>' +
+        '<button id="btnAgain" type="button">再来一局</button>'
+      );
+      $("btnAgain").addEventListener("click", function () { reset(true); });
+    }
+
+    function showOverlay(html) {
+      overlay.innerHTML = html;
+      overlay.style.display = "flex";
+    }
+
+    function startGame() {
+      started = true;
+      timeLeft = GAME_TIME;
+      overlay.style.display = "none";
+      clearInterval(timerId);
+      timerId = setInterval(function () {
+        if (!started || over) return;
+        timeLeft--;
+        setChips();
+        if (timeLeft <= 0) endGame();
+      }, 1000);
+      setChips();
+    }
+
+    function reset(autoStart) {
+      session++;
+      busy = false;
+      selected = null;
+      hintPair = null;
+      score = 0; combo = 0; moves = 0; clearedTotal = 0; bestCombo = 0;
+      tiles = boardToTiles(createCells());
+      render();
+      clearInterval(timerId);
+      started = false;
+      over = false;
+      if (autoStart) {
+        startGame();
+      } else {
+        timeLeft = GAME_TIME;
+        setChips();
+        showOverlay(
+          '<div class="emoji-big">🍬</div>' +
+          '<div class="big">限时 60 秒 · 三连消除</div>' +
+          '<div class="sub">交换相邻方块凑齐三连即可消除，级联连击分数翻倍</div>' +
+          '<button id="btnStart" type="button">开始游戏</button>'
+        );
+        $("btnStart").addEventListener("click", startGame);
+      }
+    }
+
+    function fit() {
+      var avail = window.innerWidth - 32;
+      var scale = Math.min(1, avail / (BOARD + 32));
+      boardWrap.style.transform = "scale(" + scale + ")";
+      stage.style.height = Math.round(BOARD * scale) + "px";
+    }
+
+    /* ================= 初始化 ================= */
+    try { best = Number(localStorage.getItem(BEST_KEY) || 0); } catch (e) { best = 0; }
+    $("btnStart").addEventListener("click", startGame);
+    $("btnHint").addEventListener("click", hint);
+    $("btnRestart").addEventListener("click", function () { reset(false); });
+    window.addEventListener("resize", fit);
+    reset(false);
+    fit();
+  })();
+  </script>
+</body>
+</html>
