@@ -241,6 +241,19 @@ export const IconSliding: React.FC<GameIconProps> = (props) => (
   </svg>
 );
 
+/** 冰壶：冰道两条边线 + 大本营同心圆 + 带手柄的冰壶 */
+export const IconCurling: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    <path d="M4 6.6 H20 M4 17.4 H20" opacity="0.5" />
+    <circle cx="8.6" cy="12" r="5.4" />
+    <circle cx="8.6" cy="12" r="3.5" />
+    <circle cx="8.6" cy="12" r="1.6" fill="currentColor" stroke="none" />
+    <circle cx="16.4" cy="12" r="3.2" fill="currentColor" stroke="none" />
+    <circle cx="16.4" cy="12" r="1.5" />
+    <path d="M14.6 9.6 Q16.4 8.2 18.2 9.6" />
+  </svg>
+);
+
 /** 3D 台球：球台（外框 + 毛呢 + 六袋）+ 一颗实心球 + 白球 + 球杆 */
 export const IconPool: React.FC<GameIconProps> = (props) => (
   <svg {...svgProps(props)}>

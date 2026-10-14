@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>冰壶 · 独立预览（fat-games 插件内同款）</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 20px 10px;
+    font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: radial-gradient(120% 140% at 20% 0%, #eef6fc 0%, #e4f0fa 45%, #d8e9f6 100%);
+    color: rgba(0,0,0,0.85);
+  }
+  .frame {
+    width: 620px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fbfdff;
+    border: 1px solid rgba(90,130,170,0.2);
+    box-shadow: 0 10px 30px rgba(40,80,120,0.18);
+  }
+  .bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .bar .emoji { font-size: 22px; }
+  .bar .title { font-size: 16px; font-weight: 800; }
+  .bar .spacer { flex: 1; }
+  .bar button {
+    border: 1px solid rgba(0,0,0,0.18); background: rgba(255,255,255,0.9);
+    color: rgba(0,0,0,0.75); border-radius: 20px; padding: 6px 16px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  .stats { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px 16px 0; }
+  .chip {
+    min-width: 104px; padding: 7px 14px; border-radius: 14px;
+    display: flex; flex-direction: column; gap: 1px; line-height: 1.25;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  }
+  .chip .lbl { font-size: 11px; opacity: 0.85; }
+  .chip .val { font-size: 19px; font-weight: 800; }
+  .stage {
+    position: relative; margin: 16px;
+    width: 520px; height: 460px;
+    border-radius: 14px; overflow: hidden;
+    border: 3px solid rgba(110,150,190,0.55);
+    box-shadow: 0 8px 24px rgba(60,90,120,0.25);
+    cursor: default;
+  }
+  canvas { display: block; }
+  .pill {
+    position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+    color: #fff; font-size: 13px; font-weight: 700;
+    padding: 5px 14px; border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    pointer-events: none;
+  }
+  .hint {
+    position: absolute; bottom: 32px; left: 0; right: 0;
+    text-align: center; font-size: 12px; font-weight: 600;
+    color: rgba(31,78,121,0.85); text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+    pointer-events: none;
+  }
+  .overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; gap: 8px;
+    align-items: center; justify-content: center;
+    text-align: center; pointer-events: none;
+    background: rgba(238,247,253,0.72);
+  }
+  .overlay .big { font-size: 22px; font-weight: 900; color: #1f4e79; }
+  .overlay .sub { font-size: 13px; opacity: 0.75; color: #1f4e79; }
+  .overlay.win { background: rgba(238,247,253,0.92); }
+  .overlay.win .big { font-size: 28px; }
+  .overlay button {
+    pointer-events: auto; cursor: pointer; border: none;
+    background: linear-gradient(135deg, #4facfe 0%, #1677ff 100%);
+    color: #fff; border-radius: 20px; padding: 8px 22px;
+    font-size: 14px; font-weight: 700;
+    box-shadow: 0 3px 10px rgba(22,119,255,0.28);
+  }
+  .help {
+    font-size: 12px; color: rgba(0,0,0,0.55);
+    text-align: center; padding: 0 16px 14px; line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="bar">
+    <span class="emoji">🥌</span>
+    <span class="title">冰壶</span>
+    <div class="spacer"></div>
+    <button onclick="restart()">重新开始</button>
+  </div>
+  <div class="stats">
+    <div class="chip" style="background:linear-gradient(135deg,#dbeafe,#c7dbff)">
+      <span class="lbl">局数</span><span class="val" id="stEnd">1/8</span>
+    </div>
+    <div class="chip" style="background:linear-gradient(135deg,#ffd9d6,#ffc4c0)">
+      <span class="lbl">你的得分</span><span class="val" id="stYou">0</span>
+    </div>
+    <div class="chip" style="background:linear-gradient(135deg,#ffecc9,#ffdc9e)">
+      <span class="lbl">AI 得分</span><span class="val" id="stAi">0</span>
+    </div>
+    <div class="chip" style="background:linear-gradient(135deg,#eceff3,#e2e6ec)">
+      <span class="lbl">剩余投壶</span><span class="val" id="stLeft">8</span>
+    </div>
+  </div>
+  <div class="stage" id="stage">
+    <canvas id="cv" width="520" height="460"></canvas>
+    <div class="pill" id="pill" style="background:#e5484d">该你投壶</div>
+    <div class="hint" id="hint">移动鼠标选点瞄准 · 按住左键蓄力 · 松开投出</div>
+    <div class="overlay" id="ovBanner" style="display:none"><div class="big" id="bannerText" style="font-size:17px"></div></div>
+    <div class="overlay" id="ovEnd" style="display:none"><div class="big" id="endText"></div><div class="sub" id="endSub"></div></div>
+    <div class="overlay win" id="ovOver" style="display:none">
+      <div class="big" id="overTitle"></div>
+      <div class="sub" id="overSub"></div>
+      <button onclick="restart()">再来一局</button>
+    </div>
+  </div>
+  <div class="help">
+    规则：共 8 局，每局双方各投 4 壶。轮到你时：移动鼠标选择投掷位置与瞄准方向（虚线），按住左键蓄力、松开投出。
+    局末距大本营圆心最近的一方得分——每比对方最内一壶更近得 1 分（需在大本营内）。壶未过前掷线或滑出冰面会被移除，力度不是越大越好！
+  </div>
+</div>
+
+<script>
+/* ================= 常量 ================= */
+const W = 520, H = 460;
+const STONE_R = 13, HOUSE_R = 62;
+const TEE_X = 120, TEE_Y = 230;
+const THROW_X = 440, HOG_X = 300;
+const BOUND_LEFT = 10, BOUND_RIGHT = 510, BOUND_TOP = 38, BOUND_BOTTOM = 422;
+const FRICTION = 430, MIN_POWER_V = 170, MAX_POWER_V = 730;
+const THROWS_PER_END = 8, TOTAL_ENDS = 8, CHARGE_TIME = 1.1;
+
+const cv = document.getElementById("cv");
+const ctx = cv.getContext("2d");
+const stage = document.getElementById("stage");
+
+/* ================= 冰面纹理（固定随机） ================= */
+function lcg(seed) {
+  let s = seed >>> 0;
+  return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
+}
+const rnd1 = lcg(20241014), rnd2 = lcg(8848);
+const ICE_SPECKS = Array.from({ length: 110 }, () => ({ x: rnd1() * W, y: rnd1() * H, r: 0.5 + rnd1() * 1.4 }));
+const ICE_LINES = Array.from({ length: 24 }, () => ({ x: rnd2() * W, y: rnd2() * H, len: 40 + rnd2() * 110, ang: rnd2() * Math.PI }));
+
+/* ================= 极简音效 ================= */
+let ac = null, lastSnd = {};
+function beep(freq, dur, type, vol, slideTo) {
+  try {
+    if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)();
+    if (ac.state === "suspended") ac.resume();
+    const t0 = ac.currentTime;
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = type || "triangle";
+    o.frequency.setValueAtTime(freq, t0);
+    if (slideTo) o.frequency.exponentialRampToValueAtTime(Math.max(40, slideTo), t0 + dur);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(vol, t0 + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    o.connect(g); g.connect(ac.destination);
+    o.start(t0); o.stop(t0 + dur + 0.05);
+  } catch (e) { /* ignore */ }
+}
+function snd(name, fn) {
+  const now = performance.now();
+  if (now - (lastSnd[name] || 0) < 70) return;
+  lastSnd[name] = now;
+  fn();
+}
+function sfxThrow() { snd("t", () => beep(300, 0.12, "square", 0.07, 180)); }
+function sfxHit() { snd("h", () => beep(300, 0.07, "square", 0.07, 180)); }
+function sfxScore() { snd("s", () => { beep(880, 0.1, "sine", 0.12); beep(1320, 0.14, "sine", 0.1, 0, 0.05); }); }
+function sfxBad() { snd("b", () => { beep(392, 0.2, "triangle", 0.12); setTimeout(() => beep(330, 0.2, "triangle", 0.12), 110); }); }
+function sfxWin() { [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => beep(f, 0.16, "triangle", 0.14), i * 90)); }
+function sfxLose() { [392, 330, 262, 196].forEach((f, i) => setTimeout(() => beep(f, 0.2, "triangle", 0.12), i * 110)); }
+
+/* ================= 状态 ================= */
+let sim = null;
+const timers = [];
+
+function newSim() {
+  return {
+    stones: [], end: 1, phase: "player",
+    playerTotal: 0, aiTotal: 0, throwsLeft: THROWS_PER_END,
+    first: "player", turn: "player",
+    power: 0, charging: false,
+    mouseX: 170, mouseY: TEE_Y, pendingY: TEE_Y,
+    over: null, endResult: null, recorded: false,
+    lastTs: 0, nextId: 1,
+  };
+}
+
+function makeStone(id, side, x, y, vx, vy) {
+  return { id, side, x, y, vx, vy, active: true };
+}
+function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+function distTee(x, y) { return Math.hypot(x - TEE_X, y - TEE_Y); }
+
+/* ================= 物理 ================= */
+function stepStones(dt) {
+  for (const s of sim.stones) {
+    if (!s.active) continue;
+    const sp = Math.hypot(s.vx, s.vy);
+    if (sp <= 0) continue;
+    const dec = FRICTION * dt;
+    if (sp <= dec) { s.vx = 0; s.vy = 0; }
+    else { const k = (sp - dec) / sp; s.vx *= k; s.vy *= k; }
+    s.x += s.vx * dt; s.y += s.vy * dt;
+  }
+  resolveCollisions();
+}
+function resolveCollisions() {
+  const st = sim.stones;
+  for (let i = 0; i < st.length; i++) {
+    const a = st[i];
+    if (!a.active) continue;
+    for (let j = i + 1; j < st.length; j++) {
+      const b = st[j];
+      if (!b.active) continue;
+      const dx = b.x - a.x, dy = b.y - a.y;
+      const dist = Math.hypot(dx, dy);
+      const minD = STONE_R * 2;
+      if (dist <= 0 || dist >= minD) continue;
+      const ov = (minD - dist) / dist;
+      const px = dx * ov * 0.5, py = dy * ov * 0.5;
+      a.x -= px; a.y -= py; b.x += px; b.y += py;
+      const nx = dx / dist, ny = dy / dist;
+      const van = a.vx * nx + a.vy * ny, vbn = b.vx * nx + b.vy * ny;
+      if (van - vbn > 0) {
+        a.vx += (vbn - van) * nx; a.vy += (vbn - van) * ny;
+        b.vx += (van - vbn) * nx; b.vy += (van - vbn) * ny;
+      }
+    }
+  }
+}
+function allStopped() {
+  return sim.stones.every((s) => !s.active || (Math.abs(s.vx) < 1 && Math.abs(s.vy) < 1));
+}
+function collidingNow() {
+  const st = sim.stones;
+  for (let i = 0; i < st.length; i++) {
+    const a = st[i]; if (!a.active) continue;
+    for (let j = i + 1; j < st.length; j++) {
+      const b = st[j]; if (!b.active) continue;
+      const dx = b.x - a.x, dy = b.y - a.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < STONE_R * 2 + 2 && dist > 0) {
+        const rel = ((a.vx - b.vx) * dx + (a.vy - b.vy) * dy) / dist;
+        if (rel > 1) return true;
+      }
+    }
+  }
+  return false;
+}
+function cullInvalid() {
+  let short = 0, out = 0;
+  for (const s of sim.stones) {
+    if (!s.active) continue;
+    const inB = s.x >= BOUND_LEFT && s.x <= BOUND_RIGHT && s.y >= BOUND_TOP && s.y <= BOUND_BOTTOM;
+    if (!inB) { s.active = false; out += 1; }
+    else if (s.x > HOG_X) { s.active = false; short += 1; }
+  }
+  return { short, out };
+}
+function scoreEnd() {
+  const pD = sim.stones.filter((s) => s.side === "player" && s.active && distTee(s.x, s.y) <= HOUSE_R).map((s) => distTee(s.x, s.y));
+  const aD = sim.stones.filter((s) => s.side === "ai" && s.active && distTee(s.x, s.y) <= HOUSE_R).map((s) => distTee(s.x, s.y));
+  if (!pD.length && !aD.length) return { player: 0, ai: 0 };
+  if (!aD.length) return { player: pD.length, ai: 0 };
+  if (!pD.length) return { player: 0, ai: aD.length };
+  const pB = Math.min(...pD), aB = Math.min(...aD);
+  if (pB < aB) return { player: pD.filter((d) => d < aB).length, ai: 0 };
+  return { player: 0, ai: aD.filter((d) => d < pB).length };
+}
+function whoseTurn(left, first) {
+  if (left <= 0) return first;
+  return left % 2 === 0 ? first : (first === "player" ? "ai" : "player");
+}
+
+/* ================= AI ================= */
+function aiThrow() {
+  const mine = sim.stones.filter((s) => s.side === "ai" && s.active);
+  const foes = sim.stones.filter((s) => s.side === "player" && s.active);
+  const myBest = mine.length ? Math.min(...mine.map((s) => distTee(s.x, s.y))) : Infinity;
+  const threat = foes.filter((f) => distTee(f.x, f.y) < Math.min(myBest, HOUSE_R))
+    .sort((a, b) => distTee(a.x, a.y) - distTee(b.x, b.y))[0];
+  let tx, ty;
+  if (threat) { tx = threat.x; ty = threat.y; }
+  else if (myBest < HOUSE_R * 0.7) { tx = TEE_X + (Math.random() - 0.5) * 26; ty = TEE_Y + (Math.random() - 0.5) * 26; }
+  else { tx = TEE_X + (Math.random() - 0.5) * 14; ty = TEE_Y + (Math.random() - 0.5) * 14; }
+  const y = clamp(ty + (Math.random() - 0.5) * 14, BOUND_TOP + STONE_R + 4, BOUND_BOTTOM - STONE_R - 4);
+  const d = Math.hypot(THROW_X - tx, y - ty);
+  const v = clamp(Math.sqrt(2 * FRICTION * d) * (0.94 + Math.random() * 0.16), MIN_POWER_V, MAX_POWER_V);
+  const len = Math.hypot(tx - THROW_X, ty - y) || 1;
+  return { y, vx: ((tx - THROW_X) / len) * v, vy: ((ty - y) / len) * v };
+}
+
+/* ================= 流程 ================= */
+function setPill(show, text, color) {
+  const p = document.getElementById("pill");
+  p.style.display = show ? "block" : "none";
+  if (show) { p.textContent = text; p.style.background = color; }
+}
+function showBanner(text) {
+  document.getElementById("bannerText").textContent = text;
+  document.getElementById("ovBanner").style.display = "flex";
+  timers.push(setTimeout(() => { document.getElementById("ovBanner").style.display = "none"; }, 1700));
+}
+function scheduleAi() {
+  timers.push(setTimeout(() => {
+    if (sim.phase !== "ai") return;
+    const d = aiThrow();
+    sim.stones.push(makeStone(sim.nextId++, "ai", THROW_X, d.y, d.vx, d.vy));
+    sim.phase = "sliding"; sim.turn = null;
+    sfxThrow(); updateHud();
+  }, 650 + Math.random() * 550));
+}
+function beginNextOrFinish() {
+  if (sim.end >= TOTAL_ENDS) {
+    sim.phase = "over"; sim.turn = null;
+    sim.over = sim.playerTotal > sim.aiTotal ? "player" : sim.playerTotal < sim.aiTotal ? "ai" : "draw";
+    if (!sim.recorded) {
+      sim.recorded = true;
+      try { localStorage.setItem("fat-games.curling", JSON.stringify({ score: sim.playerTotal, ai: sim.aiTotal, at: Date.now() })); } catch (e) {}
+    }
+    document.getElementById("overTitle").textContent =
+      sim.over === "player" ? "你赢了！" : sim.over === "ai" ? "AI 获胜" : "平局";
+    document.getElementById("overSub").textContent = `最终比分 ${sim.playerTotal} : ${sim.aiTotal}`;
+    document.getElementById("ovOver").style.display = "flex";
+    if (sim.over === "player") sfxWin(); else if (sim.over === "ai") sfxLose(); else sfxScore();
+  } else {
+    sim.end += 1;
+    sim.first = sim.end % 2 === 0 ? "ai" : "player";
+    sim.stones = [];
+    sim.throwsLeft = THROWS_PER_END;
+    sim.turn = sim.first;
+    sim.phase = sim.turn;
+    sim.pendingY = TEE_Y;
+    sim.endResult = null;
+    if (sim.turn === "ai") scheduleAi();
+  }
+  updateHud();
+}
+function settleStones() {
+  if (sim.phase !== "sliding") return;
+  const cull = cullInvalid();
+  if (cull.short + cull.out > 0) {
+    showBanner(cull.short > 0 && cull.out > 0
+      ? "有壶未过线或出界，已被移除"
+      : cull.short > 0 ? "壶未过前掷线，已被移除" : "壶滑出冰面，已被移除");
+    sfxBad();
+  }
+  sim.throwsLeft -= 1;
+  if (sim.throwsLeft > 0) {
+    sim.turn = whoseTurn(sim.throwsLeft, sim.first);
+    sim.phase = sim.turn;
+    if (sim.turn === "player") sim.pendingY = clamp(sim.pendingY, BOUND_TOP + STONE_R + 4, BOUND_BOTTOM - STONE_R - 4);
+    if (sim.turn === "ai") scheduleAi();
+  } else {
+    const res = scoreEnd();
+    sim.playerTotal += res.player;
+    sim.aiTotal += res.ai;
+    sim.endResult = res;
+    const ovEnd = document.getElementById("ovEnd");
+    document.getElementById("endSub").textContent = `当前比分 ${sim.playerTotal} : ${sim.aiTotal}`;
+    if (res.player === 0 && res.ai === 0) {
+      document.getElementById("endText").textContent = "本局无人得分";
+      document.getElementById("endText").style.color = "#8a8a8a";
+    } else if (res.player > 0) {
+      document.getElementById("endText").textContent = `本局你 +${res.player} 分`;
+      document.getElementById("endText").style.color = "#2e9e5b";
+      sfxScore();
+    } else {
+      document.getElementById("endText").textContent = `本局 AI +${res.ai} 分`;
+      document.getElementById("endText").style.color = "#e5484d";
+      sfxBad();
+    }
+    ovEnd.style.display = "flex";
+    timers.push(setTimeout(() => {
+      ovEnd.style.display = "none";
+      beginNextOrFinish();
+    }, 1900));
+  }
+  updateHud();
+}
+function throwPlayer() {
+  if (sim.phase !== "player" || !sim.charging) return;
+  sim.charging = false;
+  const p = sim.power;
+  sim.power = 0;
+  if (p < 0.05) { updateHud(); return; }
+  const mx = sim.mouseX >= 0 ? sim.mouseX : TEE_X;
+  const my = sim.mouseY >= 0 ? sim.mouseY : TEE_Y;
+  let dx = mx - THROW_X, dy = my - sim.pendingY;
+  const len = Math.hypot(dx, dy);
+  if (len < 1) { dx = -1; dy = 0; } else { dx /= len; dy /= len; }
+  const v = MIN_POWER_V + p * (MAX_POWER_V - MIN_POWER_V);
+  sim.stones.push(makeStone(sim.nextId++, "player", THROW_X, sim.pendingY, dx * v, dy * v));
+  sim.phase = "sliding"; sim.turn = null;
+  sfxThrow();
+  updateHud();
+}
+function restart() {
+  timers.forEach((t) => clearTimeout(t));
+  timers.length = 0;
+  sim = newSim();
+  document.getElementById("ovOver").style.display = "none";
+  document.getElementById("ovEnd").style.display = "none";
+  document.getElementById("ovBanner").style.display = "none";
+  updateHud();
+}
+
+/* ================= 绘制 ================= */
+function roundRect(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.arcTo(x + w, y, x + w, y + r, r);
+  ctx.lineTo(x + w, y + h - r); ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+  ctx.lineTo(x + r, y + h); ctx.arcTo(x, y + h, x, y + h - r, r);
+  ctx.lineTo(x, y + r); ctx.arcTo(x, y, x + r, y, r); ctx.closePath();
+}
+function drawStone(x, y, side, alpha) {
+  const g = ctx.createRadialGradient(x - 4, y - 5, 2, x, y, STONE_R);
+  if (side === "player") { g.addColorStop(0, "#ff9d90"); g.addColorStop(0.55, "#e5484d"); g.addColorStop(1, "#a62f35"); }
+  else { g.addColorStop(0, "#ffe28a"); g.addColorStop(0.55, "#f0a232"); g.addColorStop(1, "#b06a14"); }
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(x, y, STONE_R, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = "rgba(0,0,0,0.28)"; ctx.lineWidth = 1.4; ctx.stroke();
+  ctx.fillStyle = side === "player" ? "#fff" : "#3a2a12";
+  ctx.beginPath(); ctx.arc(x, y, STONE_R * 0.5, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = side === "player" ? "#e5484d" : "#f0a232";
+  ctx.beginPath(); ctx.arc(x, y, STONE_R * 0.22, 0, Math.PI * 2); ctx.fill();
+  ctx.globalAlpha = 1;
+}
+function draw(now) {
+  ctx.clearRect(0, 0, W, H);
+  const ice = ctx.createLinearGradient(0, 0, 0, H);
+  ice.addColorStop(0, "#eef7fd"); ice.addColorStop(0.5, "#ddeffb"); ice.addColorStop(1, "#eef7fd");
+  ctx.fillStyle = ice; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = "rgba(255,255,255,0.5)";
+  for (const sp of ICE_SPECKS) { ctx.beginPath(); ctx.arc(sp.x, sp.y, sp.r, 0, Math.PI * 2); ctx.fill(); }
+  ctx.strokeStyle = "rgba(255,255,255,0.42)"; ctx.lineWidth = 0.9;
+  for (const ln of ICE_LINES) {
+    const dx = Math.cos(ln.ang) * ln.len, dy = Math.sin(ln.ang) * ln.len;
+    ctx.beginPath(); ctx.moveTo(ln.x - dx / 2, ln.y - dy / 2); ctx.lineTo(ln.x + dx / 2, ln.y + dy / 2); ctx.stroke();
+  }
+  // 大本营
+  const rings = [
+    { r: HOUSE_R, c: "#4a7fd4" }, { r: HOUSE_R * 0.75, c: "#f7fbfe" },
+    { r: HOUSE_R * 0.5, c: "#e05b52" }, { r: HOUSE_R * 0.25, c: "#f7fbfe" },
+  ];
+  for (const rg of rings) { ctx.fillStyle = rg.c; ctx.beginPath(); ctx.arc(TEE_X, TEE_Y, rg.r, 0, Math.PI * 2); ctx.fill(); }
+  ctx.fillStyle = "#4a7fd4"; ctx.beginPath(); ctx.arc(TEE_X, TEE_Y, 6, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = "rgba(70,110,160,0.4)"; ctx.lineWidth = 1.2;
+  for (const rg of rings) { ctx.beginPath(); ctx.arc(TEE_X, TEE_Y, rg.r, 0, Math.PI * 2); ctx.stroke(); }
+  // 线
+  ctx.lineWidth = 1.4;
+  ctx.strokeStyle = "rgba(120,155,200,0.55)";
+  ctx.beginPath(); ctx.moveTo(TEE_X, BOUND_TOP - 10); ctx.lineTo(TEE_X, BOUND_BOTTOM + 10); ctx.stroke();
+  ctx.strokeStyle = "rgba(120,155,200,0.6)";
+  ctx.beginPath(); ctx.moveTo(TEE_X - HOUSE_R - 34, TEE_Y); ctx.lineTo(TEE_X + HOUSE_R + 34, TEE_Y); ctx.stroke();
+  ctx.strokeStyle = "rgba(229,72,77,0.75)";
+  ctx.beginPath(); ctx.moveTo(HOG_X, BOUND_TOP - 10); ctx.lineTo(HOG_X, BOUND_BOTTOM + 10); ctx.stroke();
+  ctx.setLineDash([7, 6]);
+  ctx.strokeStyle = "rgba(120,155,200,0.7)";
+  ctx.beginPath(); ctx.moveTo(THROW_X, BOUND_TOP - 10); ctx.lineTo(THROW_X, BOUND_BOTTOM + 10); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.strokeStyle = "rgba(90,130,170,0.5)"; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(8, BOUND_TOP); ctx.lineTo(W - 8, BOUND_TOP); ctx.moveTo(8, BOUND_BOTTOM); ctx.lineTo(W - 8, BOUND_BOTTOM); ctx.stroke();
+  // 壶
+  for (const s of sim.stones) if (s.active) drawStone(s.x, s.y, s.side, 1);
+  // 玩家回合
+  if (sim.phase === "player") {
+    const py = sim.pendingY;
+    const glow = 0.45 + 0.3 * Math.sin(now / 240);
+    ctx.strokeStyle = `rgba(229,72,77,${glow.toFixed(3)})`;
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(THROW_X, py, STONE_R + 7 + Math.sin(now / 240) * 3, 0, Math.PI * 2); ctx.stroke();
+    drawStone(THROW_X, py, "player", 0.82);
+    if (sim.mouseX >= 0 && sim.mouseY >= 0) {
+      const dx = sim.mouseX - THROW_X, dy = sim.mouseY - py;
+      const len = Math.hypot(dx, dy) || 1;
+      const ux = dx / len, uy = dy / len;
+      ctx.setLineDash([6, 6]);
+      ctx.strokeStyle = "rgba(229,72,77,0.65)"; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(THROW_X, py); ctx.lineTo(THROW_X + ux * 235, py + uy * 235); ctx.stroke();
+      const ax = THROW_X + ux * 214, ay = py + uy * 214;
+      ctx.beginPath();
+      ctx.moveTo(ax, ay);
+      ctx.lineTo(ax - ux * 12 + uy * 7, ay - uy * 12 - ux * 7);
+      ctx.lineTo(ax - ux * 12 - uy * 7, ay - uy * 12 + ux * 7);
+      ctx.closePath();
+      ctx.fillStyle = "rgba(229,72,77,0.65)"; ctx.fill();
+      ctx.setLineDash([]);
+    }
+    if (sim.charging) {
+      const bw = 176, bh = 10, bx = (W - bw) / 2, by = H - 18;
+      ctx.fillStyle = "rgba(255,255,255,0.8)";
+      roundRect(bx, by, bw, bh, 5); ctx.fill();
+      ctx.strokeStyle = "rgba(80,120,160,0.35)"; ctx.lineWidth = 1;
+      roundRect(bx, by, bw, bh, 5); ctx.stroke();
+      if (sim.power > 0.005) {
+        const grad = ctx.createLinearGradient(bx, 0, bx + bw, 0);
+        grad.addColorStop(0, "#3db861"); grad.addColorStop(0.55, "#f6c453"); grad.addColorStop(1, "#e5484d");
+        ctx.fillStyle = grad;
+        roundRect(bx, by, Math.max(6, bw * sim.power), bh, 5); ctx.fill();
+      }
+      ctx.fillStyle = "rgba(31,78,121,0.8)";
+      ctx.font = "bold 11px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(`${Math.round(sim.power * 100)}%`, W / 2, by - 5);
+      ctx.textAlign = "start";
+    }
+  }
+}
+
+/* ================= HUD ================= */
+function updateHud() {
+  document.getElementById("stEnd").textContent = `${sim.end}/${TOTAL_ENDS}`;
+  document.getElementById("stYou").textContent = sim.playerTotal;
+  document.getElementById("stAi").textContent = sim.aiTotal;
+  document.getElementById("stLeft").textContent = sim.throwsLeft;
+  const pill = document.getElementById("pill");
+  const hint = document.getElementById("hint");
+  if (sim.phase === "player") {
+    setPill(true, "该你投壶", "#e5484d");
+    hint.style.display = "block";
+    stage.style.cursor = "crosshair";
+  } else if (sim.phase === "ai") {
+    setPill(true, "AI 思考中…", "#f0a232");
+    hint.style.display = "none";
+    stage.style.cursor = "default";
+  } else {
+    setPill(false);
+    hint.style.display = "none";
+    stage.style.cursor = "default";
+  }
+}
+
+/* ================= 交互 ================= */
+cv.addEventListener("mousemove", (e) => {
+  const rect = cv.getBoundingClientRect();
+  const x = ((e.clientX - rect.left) / rect.width) * W;
+  const y = ((e.clientY - rect.top) / rect.height) * H;
+  sim.mouseX = x; sim.mouseY = y;
+  if (sim.phase === "player") sim.pendingY = clamp(y, BOUND_TOP + STONE_R + 4, BOUND_BOTTOM - STONE_R - 4);
+});
+cv.addEventListener("mousedown", (e) => {
+  if (e.button !== 0) return;
+  if (sim.phase !== "player" || sim.charging) return;
+  sim.charging = true; sim.power = 0;
+});
+window.addEventListener("mouseup", throwPlayer);
+stage.addEventListener("mouseleave", () => {
+  sim.mouseX = -1; sim.mouseY = -1;
+  if (sim.charging) { sim.charging = false; sim.power = 0; }
+});
+window.addEventListener("keydown", (e) => {
+  if (e.key === "r" || e.key === "R") restart();
+});
+
+/* ================= 主循环 ================= */
+let lastTs = 0;
+function loop(ts) {
+  requestAnimationFrame(loop);
+  if (!lastTs) lastTs = ts;
+  const dt = Math.min(0.05, (ts - lastTs) / 1000);
+  lastTs = ts;
+  if (sim.phase === "sliding") {
+    stepStones(dt);
+    if (collidingNow()) sfxHit();
+    if (allStopped()) settleStones();
+  } else if (sim.phase === "player" && sim.charging) {
+    sim.power = Math.min(1, sim.power + dt / CHARGE_TIME);
+  }
+  draw(ts);
+}
+
+sim = newSim();
+updateHud();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

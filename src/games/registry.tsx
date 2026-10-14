@@ -26,6 +26,7 @@ import {
   IconRocket,
   IconSlingshot,
   IconSliding,
+  IconCurling,
   IconPool,
   IconScores,
 } from "./gameIcons";
@@ -46,6 +47,7 @@ import BackfireBomberGame from "./BackfireBomberGame";
 import RocketLandingGame from "./RocketLandingGame";
 import SlingshotGame from "./SlingshotGame";
 import SlidingPuzzleGame from "./SlidingPuzzleGame";
+import CurlingGame from "./CurlingGame";
 import Pool3DGame from "./Pool3DGame";
 import ScoresView from "./ScoresView";
 
@@ -246,6 +248,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.puzzle",
     icon: IconSliding,
     component: SlidingPuzzleGame,
+  },
+  {
+    id: "curling",
+    title: "冰壶",
+    desc: "瞄准蓄力，把冰壶投进大本营",
+    category: "休闲",
+    titleKey: "game.curling.title",
+    descKey: "game.curling.desc",
+    categoryKey: "category.casual",
+    icon: IconCurling,
+    component: CurlingGame,
   },
   {
     id: "pool3d",
