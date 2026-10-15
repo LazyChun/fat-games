@@ -316,3 +316,20 @@ export const IconHawkChicken: React.FC<GameIconProps> = (props) => (
     <path d="M10.4 18.9 L12.2 19.2 L10.4 19.6" />
   </svg>
 );
+
+/** 龟兔赛跑：前方飞奔的兔子 + 后方稳爬的乌龟（寓言名场面） */
+export const IconTortoiseHare: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    <path d="M3 18.8 H21" strokeDasharray="3 2.4" opacity="0.65" />
+    {/* 兔子（前）：身体 + 头 + 竖耳 + 圆尾 + 奔跑腿 */}
+    <ellipse cx="16.6" cy="12.6" rx="3.9" ry="3.1" />
+    <ellipse cx="20.3" cy="10.2" rx="2.3" ry="2" />
+    <path d="M19.1 8.7 V5.3 M21.5 8.7 V5.3" />
+    <circle cx="12.4" cy="12.9" r="2.5" />
+    <path d="M15.6 15.3 L15 18.2 M17.5 15.3 L18 18.2" />
+    {/* 乌龟（后）：壳 + 头 + 腿 */}
+    <ellipse cx="6.4" cy="13.6" rx="3.3" ry="2.7" />
+    <circle cx="9.5" cy="11.7" r="1.8" />
+    <path d="M4.5 16 L4.5 18.4 M8.1 16 L8.1 18.4" />
+  </svg>
+);

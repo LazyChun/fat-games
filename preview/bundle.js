@@ -26,9 +26,9 @@
     mod
   ));
 
-  // node_modules/react/cjs/react.development.js
+  // ../node_modules/react/cjs/react.development.js
   var require_react_development = __commonJS({
-    "node_modules/react/cjs/react.development.js"(exports, module2) {
+    "../node_modules/react/cjs/react.development.js"(exports, module2) {
       "use strict";
       if (true) {
         (function() {
@@ -1899,9 +1899,9 @@
     }
   });
 
-  // node_modules/react/index.js
+  // ../node_modules/react/index.js
   var require_react = __commonJS({
-    "node_modules/react/index.js"(exports, module2) {
+    "../node_modules/react/index.js"(exports, module2) {
       "use strict";
       if (false) {
         module2.exports = null;
@@ -1911,9 +1911,9 @@
     }
   });
 
-  // node_modules/scheduler/cjs/scheduler.development.js
+  // ../node_modules/scheduler/cjs/scheduler.development.js
   var require_scheduler_development = __commonJS({
-    "node_modules/scheduler/cjs/scheduler.development.js"(exports) {
+    "../node_modules/scheduler/cjs/scheduler.development.js"(exports) {
       "use strict";
       if (true) {
         (function() {
@@ -2361,9 +2361,9 @@
     }
   });
 
-  // node_modules/scheduler/index.js
+  // ../node_modules/scheduler/index.js
   var require_scheduler = __commonJS({
-    "node_modules/scheduler/index.js"(exports, module2) {
+    "../node_modules/scheduler/index.js"(exports, module2) {
       "use strict";
       if (false) {
         module2.exports = null;
@@ -2373,9 +2373,9 @@
     }
   });
 
-  // node_modules/react-dom/cjs/react-dom.development.js
+  // ../node_modules/react-dom/cjs/react-dom.development.js
   var require_react_dom_development = __commonJS({
-    "node_modules/react-dom/cjs/react-dom.development.js"(exports) {
+    "../node_modules/react-dom/cjs/react-dom.development.js"(exports) {
       "use strict";
       if (true) {
         (function() {
@@ -23493,9 +23493,9 @@
     }
   });
 
-  // node_modules/react-dom/index.js
+  // ../node_modules/react-dom/index.js
   var require_react_dom = __commonJS({
-    "node_modules/react-dom/index.js"(exports, module2) {
+    "../node_modules/react-dom/index.js"(exports, module2) {
       "use strict";
       if (false) {
         checkDCE();
@@ -23506,9 +23506,9 @@
     }
   });
 
-  // node_modules/react-dom/client.js
+  // ../node_modules/react-dom/client.js
   var require_client = __commonJS({
-    "node_modules/react-dom/client.js"(exports) {
+    "../node_modules/react-dom/client.js"(exports) {
       "use strict";
       var m = require_react_dom();
       if (false) {
@@ -23537,9 +23537,9 @@
     }
   });
 
-  // node_modules/react-is/cjs/react-is.development.js
+  // ../node_modules/react-is/cjs/react-is.development.js
   var require_react_is_development = __commonJS({
-    "node_modules/react-is/cjs/react-is.development.js"(exports) {
+    "../node_modules/react-is/cjs/react-is.development.js"(exports) {
       "use strict";
       (function() {
         function typeOf(object) {
@@ -23630,9 +23630,9 @@
     }
   });
 
-  // node_modules/react-is/index.js
+  // ../node_modules/react-is/index.js
   var require_react_is = __commonJS({
-    "node_modules/react-is/index.js"(exports, module2) {
+    "../node_modules/react-is/index.js"(exports, module2) {
       "use strict";
       if (false) {
         module2.exports = null;
@@ -23642,9 +23642,9 @@
     }
   });
 
-  // node_modules/is-mobile/index.js
+  // ../node_modules/is-mobile/index.js
   var require_is_mobile = __commonJS({
-    "node_modules/is-mobile/index.js"(exports, module2) {
+    "../node_modules/is-mobile/index.js"(exports, module2) {
       "use strict";
       module2.exports = isMobile2;
       module2.exports.isMobile = isMobile2;
@@ -23669,9 +23669,9 @@
     }
   });
 
-  // node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.development.js
+  // ../node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.development.js
   var require_react_is_development2 = __commonJS({
-    "node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.development.js"(exports) {
+    "../node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.development.js"(exports) {
       "use strict";
       if (true) {
         (function() {
@@ -23824,9 +23824,9 @@
     }
   });
 
-  // node_modules/hoist-non-react-statics/node_modules/react-is/index.js
+  // ../node_modules/hoist-non-react-statics/node_modules/react-is/index.js
   var require_react_is2 = __commonJS({
-    "node_modules/hoist-non-react-statics/node_modules/react-is/index.js"(exports, module2) {
+    "../node_modules/hoist-non-react-statics/node_modules/react-is/index.js"(exports, module2) {
       "use strict";
       if (false) {
         module2.exports = null;
@@ -23836,9 +23836,9 @@
     }
   });
 
-  // node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js
+  // ../node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js
   var require_hoist_non_react_statics_cjs = __commonJS({
-    "node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js"(exports, module2) {
+    "../node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js"(exports, module2) {
       "use strict";
       var reactIs = require_react_is2();
       var REACT_STATICS = {
@@ -23924,9 +23924,9 @@
     }
   });
 
-  // node_modules/react/cjs/react-jsx-runtime.development.js
+  // ../node_modules/react/cjs/react-jsx-runtime.development.js
   var require_react_jsx_runtime_development = __commonJS({
-    "node_modules/react/cjs/react-jsx-runtime.development.js"(exports) {
+    "../node_modules/react/cjs/react-jsx-runtime.development.js"(exports) {
       "use strict";
       if (true) {
         (function() {
@@ -24802,9 +24802,9 @@
     }
   });
 
-  // node_modules/react/jsx-runtime.js
+  // ../node_modules/react/jsx-runtime.js
   var require_jsx_runtime = __commonJS({
-    "node_modules/react/jsx-runtime.js"(exports, module2) {
+    "../node_modules/react/jsx-runtime.js"(exports, module2) {
       "use strict";
       if (false) {
         module2.exports = null;
@@ -24814,23 +24814,23 @@
     }
   });
 
-  // preview/hurdle-preview.tsx
+  // hurdle-preview.tsx
   var import_client2 = __toESM(require_client());
 
-  // src/ThemeShell.tsx
+  // ../src/ThemeShell.tsx
   var import_react30 = __toESM(require_react());
 
-  // node_modules/antd/es/_util/getReactMajorVersionCanDelMe.js
+  // ../node_modules/antd/es/_util/getReactMajorVersionCanDelMe.js
   var import_react = __toESM(require_react());
   function getReactMajorVersion() {
     const majorVersion = Number.parseInt(import_react.version.split(".")[0], 10);
     return majorVersion;
   }
 
-  // node_modules/antd/es/_util/warning.js
+  // ../node_modules/antd/es/_util/warning.js
   var React9 = __toESM(require_react());
 
-  // node_modules/@rc-component/util/es/hooks/useEvent.js
+  // ../node_modules/@rc-component/util/es/hooks/useEvent.js
   var React = __toESM(require_react());
   var useEvent = (callback) => {
     const fnRef = React.useRef(callback);
@@ -24840,15 +24840,15 @@
   };
   var useEvent_default = useEvent;
 
-  // node_modules/@rc-component/util/es/hooks/useLayoutEffect.js
+  // ../node_modules/@rc-component/util/es/hooks/useLayoutEffect.js
   var React2 = __toESM(require_react());
 
-  // node_modules/@rc-component/util/es/Dom/canUseDom.js
+  // ../node_modules/@rc-component/util/es/Dom/canUseDom.js
   function canUseDom() {
     return !!(typeof window !== "undefined" && window.document && window.document.createElement);
   }
 
-  // node_modules/@rc-component/util/es/hooks/useLayoutEffect.js
+  // ../node_modules/@rc-component/util/es/hooks/useLayoutEffect.js
   var useInternalLayoutEffect = canUseDom() ? React2.useLayoutEffect : React2.useEffect;
   var useLayoutEffect2 = (callback, deps) => {
     const firstMountRef = React2.useRef(true);
@@ -24864,7 +24864,7 @@
   };
   var useLayoutEffect_default = useLayoutEffect2;
 
-  // node_modules/@rc-component/util/es/hooks/useState.js
+  // ../node_modules/@rc-component/util/es/hooks/useState.js
   var React3 = __toESM(require_react());
   var useSafeState = (defaultValue) => {
     const destroyRef = React3.useRef(false);
@@ -24885,7 +24885,7 @@
   };
   var useState_default = useSafeState;
 
-  // node_modules/@rc-component/util/es/hooks/useControlledState.js
+  // ../node_modules/@rc-component/util/es/hooks/useControlledState.js
   var import_react2 = __toESM(require_react());
   function useControlledState(defaultStateValue, value) {
     const [innerValue, setInnerValue] = (0, import_react2.useState)(defaultStateValue);
@@ -24903,10 +24903,10 @@
     ];
   }
 
-  // node_modules/@rc-component/util/es/hooks/useDelayState.js
+  // ../node_modules/@rc-component/util/es/hooks/useDelayState.js
   var React4 = __toESM(require_react());
 
-  // node_modules/@rc-component/util/es/raf.js
+  // ../node_modules/@rc-component/util/es/raf.js
   var raf = (callback) => +setTimeout(callback, 16);
   var caf = (num) => clearTimeout(num);
   if (typeof window !== "undefined" && "requestAnimationFrame" in window) {
@@ -24945,7 +24945,7 @@
   }
   var raf_default = wrapperRaf;
 
-  // node_modules/@rc-component/util/es/hooks/useId.js
+  // ../node_modules/@rc-component/util/es/hooks/useId.js
   var React5 = __toESM(require_react());
   function getUseId() {
     const fullClone = {
@@ -24986,7 +24986,7 @@
     }
   );
 
-  // node_modules/@rc-component/util/es/hooks/useMemo.js
+  // ../node_modules/@rc-component/util/es/hooks/useMemo.js
   var React6 = __toESM(require_react());
   function useMemo(getValue2, condition, shouldUpdate) {
     const cacheRef = React6.useRef({});
@@ -24997,7 +24997,7 @@
     return cacheRef.current.value;
   }
 
-  // node_modules/@rc-component/util/es/hooks/useSyncState.js
+  // ../node_modules/@rc-component/util/es/hooks/useSyncState.js
   var React7 = __toESM(require_react());
   function useSyncState(defaultValue) {
     const [, forceUpdate] = React7.useReducer((x) => x + 1, 0);
@@ -25013,11 +25013,11 @@
   }
   var useSyncState_default = useSyncState;
 
-  // node_modules/@rc-component/util/es/ref.js
+  // ../node_modules/@rc-component/util/es/ref.js
   var import_react3 = __toESM(require_react());
   var import_react_is = __toESM(require_react_is());
 
-  // node_modules/@rc-component/util/es/React/isFragment.js
+  // ../node_modules/@rc-component/util/es/React/isFragment.js
   var REACT_ELEMENT_TYPE_18 = Symbol.for("react.element");
   var REACT_ELEMENT_TYPE_19 = Symbol.for("react.transitional.element");
   var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -25030,7 +25030,7 @@
     );
   }
 
-  // node_modules/@rc-component/util/es/ref.js
+  // ../node_modules/@rc-component/util/es/ref.js
   var ReactMajorVersion = Number(import_react3.version.split(".")[0]);
   var fillRef = (ref, node2) => {
     if (typeof ref === "function") {
@@ -25088,7 +25088,7 @@
     return null;
   };
 
-  // node_modules/@rc-component/util/es/Dom/contains.js
+  // ../node_modules/@rc-component/util/es/Dom/contains.js
   function contains(root, n) {
     if (!root) {
       return false;
@@ -25106,7 +25106,7 @@
     return false;
   }
 
-  // node_modules/@rc-component/util/es/Dom/dynamicCSS.js
+  // ../node_modules/@rc-component/util/es/Dom/dynamicCSS.js
   var APPEND_ORDER = "data-rc-order";
   var APPEND_PRIORITY = "data-rc-priority";
   var MARK_KEY = `rc-util-key`;
@@ -25227,7 +25227,7 @@
     return newNode;
   }
 
-  // node_modules/@rc-component/util/es/Dom/findDOMNode.js
+  // ../node_modules/@rc-component/util/es/Dom/findDOMNode.js
   function isDOM(node2) {
     return node2 instanceof HTMLElement || node2 instanceof SVGElement;
   }
@@ -25241,10 +25241,10 @@
     return null;
   }
 
-  // node_modules/@rc-component/util/es/Dom/focus.js
+  // ../node_modules/@rc-component/util/es/Dom/focus.js
   var import_react4 = __toESM(require_react());
 
-  // node_modules/@rc-component/util/es/Dom/isVisible.js
+  // ../node_modules/@rc-component/util/es/Dom/isVisible.js
   var isVisible_default = ((element) => {
     if (!element) {
       return false;
@@ -25275,7 +25275,7 @@
     return false;
   });
 
-  // node_modules/@rc-component/util/es/Dom/shadow.js
+  // ../node_modules/@rc-component/util/es/Dom/shadow.js
   function getRoot(ele) {
     return ele?.getRootNode?.();
   }
@@ -25286,7 +25286,7 @@
     return inShadow(ele) ? getRoot(ele) : null;
   }
 
-  // node_modules/@rc-component/util/es/getScrollBarSize.js
+  // ../node_modules/@rc-component/util/es/getScrollBarSize.js
   function measureScrollbarSize(ele) {
     const randomId = `rc-scrollbar-measure-${Math.random().toString(36).substring(7)}`;
     const measureEle = document.createElement("div");
@@ -25341,7 +25341,7 @@ ${heightStyle}
     return measureScrollbarSize(target);
   }
 
-  // node_modules/@rc-component/util/es/warning.js
+  // ../node_modules/@rc-component/util/es/warning.js
   var warned = {};
   var preWarningFns = [];
   var preMessage = (fn) => {
@@ -25383,7 +25383,7 @@ ${heightStyle}
   warningOnce.noteOnce = noteOnce;
   var warning_default = warningOnce;
 
-  // node_modules/@rc-component/util/es/isEqual.js
+  // ../node_modules/@rc-component/util/es/isEqual.js
   function isEqual(obj1, obj2, shallow = false) {
     const refSet = /* @__PURE__ */ new Set();
     function deepEqual(a, b, level = 1) {
@@ -25424,10 +25424,10 @@ ${heightStyle}
   }
   var isEqual_default = isEqual;
 
-  // node_modules/@rc-component/util/es/isMobile.js
+  // ../node_modules/@rc-component/util/es/isMobile.js
   var import_is_mobile = __toESM(require_is_mobile());
 
-  // node_modules/@rc-component/util/es/pickAttrs.js
+  // ../node_modules/@rc-component/util/es/pickAttrs.js
   var attributes = `accept acceptCharset accessKey action allowFullScreen allowTransparency
     alt async autoComplete autoFocus autoPlay capture cellPadding cellSpacing challenge
     charSet checked classID className colSpan cols content contentEditable contextMenu
@@ -25454,7 +25454,7 @@ ${heightStyle}
     onAuxClick onToggle onBeforeToggle onCancel onClose onResize onScrollEnd`;
   var propList = `${attributes} ${eventsName}`.split(/[\s\n]+/);
 
-  // node_modules/@rc-component/util/es/Children/toArray.js
+  // ../node_modules/@rc-component/util/es/Children/toArray.js
   var import_react5 = __toESM(require_react());
   function toArray(children, option = {}) {
     let ret = [];
@@ -25473,7 +25473,7 @@ ${heightStyle}
     return ret;
   }
 
-  // node_modules/@rc-component/util/es/utils/get.js
+  // ../node_modules/@rc-component/util/es/utils/get.js
   function get(entity, path) {
     let current = entity;
     for (let i = 0; i < path.length; i += 1) {
@@ -25485,7 +25485,7 @@ ${heightStyle}
     return current;
   }
 
-  // node_modules/@rc-component/util/es/utils/set.js
+  // ../node_modules/@rc-component/util/es/utils/set.js
   function internalSet(entity, paths, value, removeIfUndefined) {
     if (!paths.length) {
       return value;
@@ -25559,14 +25559,14 @@ ${heightStyle}
     return mergeWith(sources);
   }
 
-  // node_modules/@rc-component/util/es/React/render.js
+  // ../node_modules/@rc-component/util/es/React/render.js
   var import_client = __toESM(require_client());
 
-  // node_modules/@rc-component/util/es/Portal.js
+  // ../node_modules/@rc-component/util/es/Portal.js
   var import_react6 = __toESM(require_react());
   var import_react_dom = __toESM(require_react_dom());
 
-  // node_modules/antd/es/_util/warning.js
+  // ../node_modules/antd/es/_util/warning.js
   function noop() {
   }
   var {
@@ -25619,13 +25619,13 @@ ${heightStyle}
   };
   var warning_default2 = warning2;
 
-  // node_modules/@rc-component/resize-observer/es/index.js
+  // ../node_modules/@rc-component/resize-observer/es/index.js
   var React13 = __toESM(require_react());
 
-  // node_modules/@rc-component/resize-observer/es/SingleObserver/index.js
+  // ../node_modules/@rc-component/resize-observer/es/SingleObserver/index.js
   var React12 = __toESM(require_react());
 
-  // node_modules/@rc-component/resize-observer/es/Collection.js
+  // ../node_modules/@rc-component/resize-observer/es/Collection.js
   var React10 = __toESM(require_react());
   var CollectionContext = /* @__PURE__ */ React10.createContext(null);
   function Collection({
@@ -25656,10 +25656,10 @@ ${heightStyle}
     }, children);
   }
 
-  // node_modules/@rc-component/resize-observer/es/useResizeObserver.js
+  // ../node_modules/@rc-component/resize-observer/es/useResizeObserver.js
   var React11 = __toESM(require_react());
 
-  // node_modules/@rc-component/resize-observer/es/utils/observerUtil.js
+  // ../node_modules/@rc-component/resize-observer/es/utils/observerUtil.js
   var elementListeners = /* @__PURE__ */ new Map();
   function onResize(entities) {
     entities.forEach((entity) => {
@@ -25693,7 +25693,7 @@ ${heightStyle}
     }
   }
 
-  // node_modules/@rc-component/resize-observer/es/useResizeObserver.js
+  // ../node_modules/@rc-component/resize-observer/es/useResizeObserver.js
   function useResizeObserver(enabled, getTarget, onDelayResize, onSyncResize) {
     const sizeRef = React11.useRef({
       width: -1,
@@ -25755,7 +25755,7 @@ ${heightStyle}
     ]);
   }
 
-  // node_modules/@rc-component/resize-observer/es/SingleObserver/index.js
+  // ../node_modules/@rc-component/resize-observer/es/SingleObserver/index.js
   function SingleObserver(props, ref) {
     const {
       children,
@@ -25787,7 +25787,7 @@ ${heightStyle}
   }
   var SingleObserver_default = RefSingleObserver;
 
-  // node_modules/@rc-component/resize-observer/es/index.js
+  // ../node_modules/@rc-component/resize-observer/es/index.js
   function _extends() {
     _extends = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -25830,7 +25830,7 @@ ${heightStyle}
   RefResizeObserver.Collection = Collection;
   var es_default = RefResizeObserver;
 
-  // node_modules/clsx/dist/clsx.mjs
+  // ../node_modules/clsx/dist/clsx.mjs
   function r(e) {
     var t, f, n = "";
     if ("string" == typeof e || "number" == typeof e) n += e;
@@ -25845,7 +25845,7 @@ ${heightStyle}
     return n;
   }
 
-  // node_modules/antd/es/config-provider/context.js
+  // ../node_modules/antd/es/config-provider/context.js
   var React14 = __toESM(require_react());
   var defaultPrefixCls = "ant";
   var defaultIconPrefixCls = "anticon";
@@ -25864,7 +25864,7 @@ ${heightStyle}
     Consumer: ConfigConsumer
   } = ConfigContext;
 
-  // node_modules/@emotion/hash/dist/hash.browser.esm.js
+  // ../node_modules/@emotion/hash/dist/hash.browser.esm.js
   function murmur2(str) {
     var h = 0;
     var k, i = 0, len = str.length;
@@ -25895,13 +25895,13 @@ ${heightStyle}
   }
   var hash_browser_esm_default = murmur2;
 
-  // node_modules/@ant-design/cssinjs/es/hooks/useCacheToken.js
+  // ../node_modules/@ant-design/cssinjs/es/hooks/useCacheToken.js
   var import_react8 = __toESM(require_react());
 
-  // node_modules/@ant-design/cssinjs/es/StyleContext.js
+  // ../node_modules/@ant-design/cssinjs/es/StyleContext.js
   var React15 = __toESM(require_react());
 
-  // node_modules/@ant-design/cssinjs/es/Cache.js
+  // ../node_modules/@ant-design/cssinjs/es/Cache.js
   var SPLIT = "%";
   function pathKey(keys2) {
     return keys2.join(SPLIT);
@@ -25943,7 +25943,7 @@ ${heightStyle}
   };
   var Cache_default = Entity;
 
-  // node_modules/@ant-design/cssinjs/es/StyleContext.js
+  // ../node_modules/@ant-design/cssinjs/es/StyleContext.js
   var ATTR_TOKEN = "data-token-hash";
   var ATTR_MARK = "data-css-hash";
   var ATTR_CACHE_PATH = "data-cache-path";
@@ -25983,11 +25983,11 @@ ${heightStyle}
   });
   var StyleContext_default = StyleContext;
 
-  // node_modules/@ant-design/cssinjs/es/theme/calc/CSSCalculator.js
+  // ../node_modules/@ant-design/cssinjs/es/theme/calc/CSSCalculator.js
   var CALC_UNIT = "CALC_UNIT";
   var regexp = new RegExp(CALC_UNIT, "g");
 
-  // node_modules/@ant-design/cssinjs/es/theme/ThemeCache.js
+  // ../node_modules/@ant-design/cssinjs/es/theme/ThemeCache.js
   function sameDerivativeOption(left, right) {
     if (left.length !== right.length) {
       return false;
@@ -26095,7 +26095,7 @@ ${heightStyle}
     }
   };
 
-  // node_modules/@ant-design/cssinjs/es/theme/Theme.js
+  // ../node_modules/@ant-design/cssinjs/es/theme/Theme.js
   var uuid2 = 0;
   var Theme = class {
     derivatives;
@@ -26113,7 +26113,7 @@ ${heightStyle}
     }
   };
 
-  // node_modules/@ant-design/cssinjs/es/theme/createTheme.js
+  // ../node_modules/@ant-design/cssinjs/es/theme/createTheme.js
   var cacheThemes = new ThemeCache();
   function createTheme(derivatives) {
     const derivativeArr = Array.isArray(derivatives) ? derivatives : [derivatives];
@@ -26123,7 +26123,7 @@ ${heightStyle}
     return cacheThemes.get(derivativeArr);
   }
 
-  // node_modules/@ant-design/cssinjs/es/util/index.js
+  // ../node_modules/@ant-design/cssinjs/es/util/index.js
   var resultCache = /* @__PURE__ */ new WeakMap();
   var RESULT_VALUE = {};
   function memoResult(callback, deps) {
@@ -26208,7 +26208,7 @@ ${heightStyle}
     return config;
   }
 
-  // node_modules/@ant-design/cssinjs/es/util/css-variables.js
+  // ../node_modules/@ant-design/cssinjs/es/util/css-variables.js
   var token2CSSVar = (token2, prefix2 = "") => {
     return `--${prefix2 ? `${prefix2}-` : ""}${token2}`.replace(/([a-z0-9])([A-Z])/g, "$1-$2").replace(/([A-Z]+)([A-Z][a-z0-9]+)/g, "$1-$2").replace(/([a-z])([A-Z0-9])/g, "$1-$2").toLowerCase();
   };
@@ -26256,11 +26256,11 @@ ${heightStyle}
     })];
   };
 
-  // node_modules/@ant-design/cssinjs/es/hooks/useGlobalCache.js
+  // ../node_modules/@ant-design/cssinjs/es/hooks/useGlobalCache.js
   var React16 = __toESM(require_react());
   var import_react7 = __toESM(require_react());
 
-  // node_modules/@ant-design/cssinjs/es/hooks/useHMR.js
+  // ../node_modules/@ant-design/cssinjs/es/hooks/useHMR.js
   var webpackHMR = false;
   function useDevHMR() {
     return webpackHMR;
@@ -26280,7 +26280,7 @@ ${heightStyle}
     }
   }
 
-  // node_modules/@ant-design/cssinjs/es/hooks/useGlobalCache.js
+  // ../node_modules/@ant-design/cssinjs/es/hooks/useGlobalCache.js
   var effectMap = /* @__PURE__ */ new Map();
   function useGlobalCache(prefix2, keyPath, cacheFn, onCacheRemove, onCacheEffect) {
     const {
@@ -26341,7 +26341,7 @@ ${heightStyle}
     return cacheContent;
   }
 
-  // node_modules/@ant-design/cssinjs/es/hooks/useCacheToken.js
+  // ../node_modules/@ant-design/cssinjs/es/hooks/useCacheToken.js
   var EMPTY_OVERRIDE = {};
   var hashPrefix = true ? "css-dev-only-do-not-override" : "css";
   var tokenKeys = /* @__PURE__ */ new Map();
@@ -26461,13 +26461,13 @@ ${heightStyle}
     return [order, styleId, styleText];
   };
 
-  // node_modules/@ant-design/cssinjs/es/hooks/useCSSVarRegister.js
+  // ../node_modules/@ant-design/cssinjs/es/hooks/useCSSVarRegister.js
   var import_react9 = __toESM(require_react());
 
-  // node_modules/@ant-design/cssinjs/es/hooks/useStyleRegister.js
+  // ../node_modules/@ant-design/cssinjs/es/hooks/useStyleRegister.js
   var React17 = __toESM(require_react());
 
-  // node_modules/@emotion/unitless/dist/unitless.browser.esm.js
+  // ../node_modules/@emotion/unitless/dist/unitless.browser.esm.js
   var unitlessKeys = {
     animationIterationCount: 1,
     borderImageOutset: 1,
@@ -26518,7 +26518,7 @@ ${heightStyle}
   };
   var unitless_browser_esm_default = unitlessKeys;
 
-  // node_modules/stylis/src/Enum.js
+  // ../node_modules/stylis/src/Enum.js
   var MS = "-ms-";
   var MOZ = "-moz-";
   var WEBKIT = "-webkit-";
@@ -26530,7 +26530,7 @@ ${heightStyle}
   var KEYFRAMES = "@keyframes";
   var LAYER = "@layer";
 
-  // node_modules/stylis/src/Utility.js
+  // ../node_modules/stylis/src/Utility.js
   var abs = Math.abs;
   var from = String.fromCharCode;
   var assign = Object.assign;
@@ -26573,7 +26573,7 @@ ${heightStyle}
     });
   }
 
-  // node_modules/stylis/src/Tokenizer.js
+  // ../node_modules/stylis/src/Tokenizer.js
   var line = 1;
   var column = 1;
   var length = 0;
@@ -26714,7 +26714,7 @@ ${heightStyle}
     return slice(index, position);
   }
 
-  // node_modules/stylis/src/Parser.js
+  // ../node_modules/stylis/src/Parser.js
   function compile(value) {
     return dealloc(parse("", null, null, null, [""], value = alloc(value), 0, [0], value));
   }
@@ -26882,7 +26882,7 @@ ${heightStyle}
     return node(value, root, parent, DECLARATION, substr(value, 0, length2), substr(value, length2 + 1, -1), length2, siblings);
   }
 
-  // node_modules/stylis/src/Prefixer.js
+  // ../node_modules/stylis/src/Prefixer.js
   function prefix(value, length2, children) {
     switch (hash(value, length2)) {
       // color-adjust
@@ -27071,7 +27071,7 @@ ${heightStyle}
     return value;
   }
 
-  // node_modules/stylis/src/Serializer.js
+  // ../node_modules/stylis/src/Serializer.js
   function serialize(children, callback) {
     var output = "";
     for (var i = 0; i < children.length; i++)
@@ -27096,7 +27096,7 @@ ${heightStyle}
     return strlen(children = serialize(element.children, callback)) ? element.return = element.value + "{" + children + "}" : "";
   }
 
-  // node_modules/stylis/src/Middleware.js
+  // ../node_modules/stylis/src/Middleware.js
   function middleware(collection) {
     var length2 = sizeof(collection);
     return function(element, index, children, callback) {
@@ -27141,7 +27141,7 @@ ${heightStyle}
     }
   }
 
-  // node_modules/@ant-design/cssinjs/es/linters/utils.js
+  // ../node_modules/@ant-design/cssinjs/es/linters/utils.js
   function lintWarning(message, info) {
     const {
       path,
@@ -27150,7 +27150,7 @@ ${heightStyle}
     warning_default(false, `[Ant Design CSS-in-JS] ${path ? `Error in ${path}: ` : ""}${message}${parentSelectors.length ? ` Selector: ${parentSelectors.join(" | ")}` : ""}`);
   }
 
-  // node_modules/@ant-design/cssinjs/es/linters/contentQuotesLinter.js
+  // ../node_modules/@ant-design/cssinjs/es/linters/contentQuotesLinter.js
   var linter = (key, value, info) => {
     if (key === "content") {
       const contentValuePattern = /(attr|counters?|url|(((repeating-)?(linear|radial))|conic)-gradient)\(|(no-)?(open|close)-quote/;
@@ -27162,7 +27162,7 @@ ${heightStyle}
   };
   var contentQuotesLinter_default = linter;
 
-  // node_modules/@ant-design/cssinjs/es/linters/hashedAnimationLinter.js
+  // ../node_modules/@ant-design/cssinjs/es/linters/hashedAnimationLinter.js
   var linter2 = (key, value, info) => {
     if (key === "animation") {
       if (info.hashId && value !== "none") {
@@ -27172,7 +27172,7 @@ ${heightStyle}
   };
   var hashedAnimationLinter_default = linter2;
 
-  // node_modules/@ant-design/cssinjs/es/util/cacheMapUtil.js
+  // ../node_modules/@ant-design/cssinjs/es/util/cacheMapUtil.js
   var ATTR_CACHE_MAP = "data-ant-cssinjs-cache-path";
   var CSS_FILE_STYLE = "_FILE_STYLE__";
   var cachePathMap;
@@ -27224,7 +27224,7 @@ ${heightStyle}
     return [styleStr, hash2];
   }
 
-  // node_modules/@ant-design/cssinjs/es/hooks/useStyleRegister.js
+  // ../node_modules/@ant-design/cssinjs/es/hooks/useStyleRegister.js
   var SKIP_CHECK = "_skip_check_";
   var MULTI_VALUE = "_multi_value_";
   function normalizeStyle(styleStr, autoPrefix) {
@@ -27510,7 +27510,7 @@ ${heightStyle}
     return [order, styleId, keyStyleText];
   };
 
-  // node_modules/@ant-design/cssinjs/es/hooks/useCSSVarRegister.js
+  // ../node_modules/@ant-design/cssinjs/es/hooks/useCSSVarRegister.js
   var CSS_VAR_PREFIX = "cssVar";
   var extract3 = (cache, effectStyles, options) => {
     const [, styleStr, styleId, cssVarKey] = cache;
@@ -27529,14 +27529,14 @@ ${heightStyle}
     return [order, styleId, styleText];
   };
 
-  // node_modules/@ant-design/cssinjs/es/extractStyle.js
+  // ../node_modules/@ant-design/cssinjs/es/extractStyle.js
   var ExtractStyleFns = {
     [STYLE_PREFIX]: extract2,
     [TOKEN_PREFIX]: extract,
     [CSS_VAR_PREFIX]: extract3
   };
 
-  // node_modules/@ant-design/cssinjs/es/transformers/legacyLogicalProperties.js
+  // ../node_modules/@ant-design/cssinjs/es/transformers/legacyLogicalProperties.js
   function noSplit(list) {
     list.notSplit = true;
     return list;
@@ -27599,7 +27599,7 @@ ${heightStyle}
     borderEndEndRadius: ["borderBottomRightRadius"]
   };
 
-  // node_modules/@babel/runtime/helpers/esm/typeof.js
+  // ../node_modules/@babel/runtime/helpers/esm/typeof.js
   function _typeof(o) {
     "@babel/helpers - typeof";
     return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
@@ -27609,7 +27609,7 @@ ${heightStyle}
     }, _typeof(o);
   }
 
-  // node_modules/@babel/runtime/helpers/esm/toPrimitive.js
+  // ../node_modules/@babel/runtime/helpers/esm/toPrimitive.js
   function toPrimitive(t, e) {
     if ("object" != _typeof(t) || !t) return t;
     var r2;
@@ -27621,13 +27621,13 @@ ${heightStyle}
     return ("string" === e ? String : Number)(t);
   }
 
-  // node_modules/@babel/runtime/helpers/esm/toPropertyKey.js
+  // ../node_modules/@babel/runtime/helpers/esm/toPropertyKey.js
   function toPropertyKey(t) {
     var i = toPrimitive(t, "string");
     return "symbol" == _typeof(i) ? i : i + "";
   }
 
-  // node_modules/@babel/runtime/helpers/esm/defineProperty.js
+  // ../node_modules/@babel/runtime/helpers/esm/defineProperty.js
   function _defineProperty(e, r2, t) {
     return (r2 = toPropertyKey(r2)) in e ? Object.defineProperty(e, r2, {
       value: t,
@@ -27637,15 +27637,15 @@ ${heightStyle}
     }) : e[r2] = t, e;
   }
 
-  // node_modules/@ant-design/cssinjs-utils/es/util/genStyleUtils.js
+  // ../node_modules/@ant-design/cssinjs-utils/es/util/genStyleUtils.js
   var import_react11 = __toESM(require_react());
 
-  // node_modules/@babel/runtime/helpers/esm/classCallCheck.js
+  // ../node_modules/@babel/runtime/helpers/esm/classCallCheck.js
   function _classCallCheck(a, n) {
     if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
   }
 
-  // node_modules/@babel/runtime/helpers/esm/createClass.js
+  // ../node_modules/@babel/runtime/helpers/esm/createClass.js
   function _defineProperties(e, r2) {
     for (var t = 0; t < r2.length; t++) {
       var o = r2[t];
@@ -27658,11 +27658,11 @@ ${heightStyle}
     }), e;
   }
 
-  // node_modules/@ant-design/cssinjs-utils/es/util/calc/CSSCalculator.js
+  // ../node_modules/@ant-design/cssinjs-utils/es/util/calc/CSSCalculator.js
   var CALC_UNIT2 = "CALC_UNIT";
   var regexp2 = new RegExp(CALC_UNIT2, "g");
 
-  // node_modules/@ant-design/cssinjs-utils/es/_util/hooks/useUniqueMemo.js
+  // ../node_modules/@ant-design/cssinjs-utils/es/_util/hooks/useUniqueMemo.js
   var import_react10 = __toESM(require_react());
   var BEAT_LIMIT = 1e3 * 60 * 10;
   var ArrayKeyMap = /* @__PURE__ */ (function() {
@@ -27734,10 +27734,10 @@ ${heightStyle}
   })();
   var uniqueMap = new ArrayKeyMap();
 
-  // node_modules/antd/es/theme/interface/presetColors.js
+  // ../node_modules/antd/es/theme/interface/presetColors.js
   var PresetColors = ["blue", "purple", "cyan", "green", "magenta", "pink", "red", "orange", "yellow", "volcano", "geekblue", "lime", "gold"];
 
-  // node_modules/antd/es/theme/themes/shared/genFontSizes.js
+  // ../node_modules/antd/es/theme/themes/shared/genFontSizes.js
   function getLineHeight(fontSize) {
     return (fontSize + 8) / fontSize;
   }
@@ -27757,19 +27757,19 @@ ${heightStyle}
     }));
   }
 
-  // node_modules/antd/es/theme/useToken.js
+  // ../node_modules/antd/es/theme/useToken.js
   var import_react13 = __toESM(require_react());
 
-  // node_modules/antd/es/version/version.js
+  // ../node_modules/antd/es/version/version.js
   var version_default = "6.3.1";
 
-  // node_modules/antd/es/version/index.js
+  // ../node_modules/antd/es/version/index.js
   var version_default2 = version_default;
 
-  // node_modules/antd/es/theme/context.js
+  // ../node_modules/antd/es/theme/context.js
   var import_react12 = __toESM(require_react());
 
-  // node_modules/antd/es/theme/themes/seed.js
+  // ../node_modules/antd/es/theme/themes/seed.js
   var defaultPresetColors = {
     blue: "#1677FF",
     purple: "#722ED1",
@@ -27840,7 +27840,7 @@ ${heightStyle}
   };
   var seed_default = seedToken;
 
-  // node_modules/@ant-design/fast-color/es/presetColors.js
+  // ../node_modules/@ant-design/fast-color/es/presetColors.js
   var presetColors_default = {
     aliceblue: "9ehhb",
     antiquewhite: "9sgk7",
@@ -27992,7 +27992,7 @@ ${heightStyle}
     yellowgreen: "61fzm"
   };
 
-  // node_modules/@ant-design/fast-color/es/FastColor.js
+  // ../node_modules/@ant-design/fast-color/es/FastColor.js
   var round = Math.round;
   function splitColorStr(str, parseNum) {
     const match2 = str.replace(/^[^(]*\((.*)/, "$1").replace(/\).*/, "").match(/\d*\.?\d+%?/g) || [];
@@ -28512,7 +28512,7 @@ ${heightStyle}
     }
   };
 
-  // node_modules/@ant-design/colors/es/generate.js
+  // ../node_modules/@ant-design/colors/es/generate.js
   var hueStep = 2;
   var saturationStep = 0.16;
   var saturationStep2 = 0.05;
@@ -28628,7 +28628,7 @@ ${heightStyle}
     return patterns.map((c) => c.toHexString());
   }
 
-  // node_modules/@ant-design/colors/es/presets.js
+  // ../node_modules/@ant-design/colors/es/presets.js
   var presetPrimaryColors = {
     "red": "#F5222D",
     "volcano": "#FA541C",
@@ -28712,7 +28712,7 @@ ${heightStyle}
   var greyDark = ["#151515", "#1f1f1f", "#2d2d2d", "#393939", "#494949", "#5a5a5a", "#6a6a6a", "#7b7b7b", "#888888", "#969696"];
   greyDark.primary = greyDark[5];
 
-  // node_modules/antd/es/theme/themes/shared/genColorMapToken.js
+  // ../node_modules/antd/es/theme/themes/shared/genColorMapToken.js
   function genColorMapToken(seed, {
     generateColorPalettes: generateColorPalettes3,
     generateNeutralColorPalettes: generateNeutralColorPalettes3
@@ -28807,7 +28807,7 @@ ${heightStyle}
     };
   }
 
-  // node_modules/antd/es/theme/themes/shared/genRadius.js
+  // ../node_modules/antd/es/theme/themes/shared/genRadius.js
   var genRadius = (radiusBase) => {
     let radiusLG = radiusBase;
     let radiusSM = radiusBase;
@@ -28851,7 +28851,7 @@ ${heightStyle}
   };
   var genRadius_default = genRadius;
 
-  // node_modules/antd/es/theme/themes/shared/genCommonMapToken.js
+  // ../node_modules/antd/es/theme/themes/shared/genCommonMapToken.js
   function genCommonMapToken(token2) {
     const {
       motionUnit,
@@ -28871,7 +28871,7 @@ ${heightStyle}
     };
   }
 
-  // node_modules/antd/es/theme/themes/shared/genControlHeight.js
+  // ../node_modules/antd/es/theme/themes/shared/genControlHeight.js
   var genControlHeight = (token2) => {
     const {
       controlHeight
@@ -28884,7 +28884,7 @@ ${heightStyle}
   };
   var genControlHeight_default = genControlHeight;
 
-  // node_modules/antd/es/theme/themes/shared/genFontMapToken.js
+  // ../node_modules/antd/es/theme/themes/shared/genFontMapToken.js
   var genFontMapToken = (fontSize) => {
     const fontSizePairs = getFontSizes(fontSize);
     const fontSizes = fontSizePairs.map((pair) => pair.size);
@@ -28920,7 +28920,7 @@ ${heightStyle}
   };
   var genFontMapToken_default = genFontMapToken;
 
-  // node_modules/antd/es/theme/themes/shared/genSizeMapToken.js
+  // ../node_modules/antd/es/theme/themes/shared/genSizeMapToken.js
   function genSizeMapToken(token2) {
     const {
       sizeUnit,
@@ -28948,14 +28948,14 @@ ${heightStyle}
     };
   }
 
-  // node_modules/antd/es/theme/themes/default/colorAlgorithm.js
+  // ../node_modules/antd/es/theme/themes/default/colorAlgorithm.js
   var getAlphaColor = (baseColor, alpha) => new FastColor(baseColor).setA(alpha).toRgbString();
   var getSolidColor = (baseColor, brightness) => {
     const instance = new FastColor(baseColor);
     return instance.darken(brightness).toHexString();
   };
 
-  // node_modules/antd/es/theme/themes/default/colors.js
+  // ../node_modules/antd/es/theme/themes/default/colors.js
   var generateColorPalettes = (baseColor) => {
     const colors = generate(baseColor);
     return {
@@ -28999,7 +28999,7 @@ ${heightStyle}
     };
   };
 
-  // node_modules/antd/es/theme/themes/default/index.js
+  // ../node_modules/antd/es/theme/themes/default/index.js
   function derivative(token2) {
     presetPrimaryColors.pink = presetPrimaryColors.magenta;
     presetPalettes.pink = presetPalettes.magenta;
@@ -29038,11 +29038,11 @@ ${heightStyle}
     };
   }
 
-  // node_modules/antd/es/theme/themes/default/theme.js
+  // ../node_modules/antd/es/theme/themes/default/theme.js
   var defaultTheme = createTheme(derivative);
   var theme_default = defaultTheme;
 
-  // node_modules/antd/es/theme/context.js
+  // ../node_modules/antd/es/theme/context.js
   var defaultConfig = {
     token: seed_default,
     override: {
@@ -29052,7 +29052,7 @@ ${heightStyle}
   };
   var DesignTokenContext = /* @__PURE__ */ import_react12.default.createContext(defaultConfig);
 
-  // node_modules/antd/es/theme/util/getAlphaColor.js
+  // ../node_modules/antd/es/theme/util/getAlphaColor.js
   function isStableColor(color) {
     return color >= 0 && color <= 255;
   }
@@ -29093,7 +29093,7 @@ ${heightStyle}
   }
   var getAlphaColor_default = getAlphaColor2;
 
-  // node_modules/antd/es/theme/util/alias.js
+  // ../node_modules/antd/es/theme/util/alias.js
   function formatToken(derivativeToken) {
     const {
       override,
@@ -29265,7 +29265,7 @@ ${heightStyle}
     return aliasToken;
   }
 
-  // node_modules/antd/es/theme/useToken.js
+  // ../node_modules/antd/es/theme/useToken.js
   var unitless = {
     lineHeight: true,
     lineHeightSM: true,
@@ -29364,7 +29364,7 @@ ${heightStyle}
     return [mergedTheme, realToken, hashed ? hashId : "", token2, cssVar, !!zeroRuntime];
   }
 
-  // node_modules/antd/es/style/index.js
+  // ../node_modules/antd/es/style/index.js
   var resetIcon = () => ({
     display: "inline-flex",
     alignItems: "center",
@@ -29394,7 +29394,7 @@ ${heightStyle}
     }
   });
 
-  // node_modules/antd/es/theme/util/useResetIconStyle.js
+  // ../node_modules/antd/es/theme/util/useResetIconStyle.js
   var useResetIconStyle = (iconPrefixCls, csp) => {
     const [theme, token2] = useToken();
     return useStyleRegister({
@@ -29410,21 +29410,21 @@ ${heightStyle}
   };
   var useResetIconStyle_default = useResetIconStyle;
 
-  // node_modules/@ant-design/icons/es/components/AntdIconLight.js
+  // ../node_modules/@ant-design/icons/es/components/AntdIconLight.js
   var React23 = __toESM(require_react());
 
-  // node_modules/@ant-design/icons/es/components/Context.js
+  // ../node_modules/@ant-design/icons/es/components/Context.js
   var import_react14 = __toESM(require_react());
   var IconContext = /* @__PURE__ */ (0, import_react14.createContext)({});
   var Context_default = IconContext;
 
-  // node_modules/@ant-design/icons/es/components/IconBase.js
+  // ../node_modules/@ant-design/icons/es/components/IconBase.js
   var React22 = __toESM(require_react());
 
-  // node_modules/@ant-design/icons/es/renderUtils.js
+  // ../node_modules/@ant-design/icons/es/renderUtils.js
   var import_react15 = __toESM(require_react());
 
-  // node_modules/@ant-design/icons/es/cssUtils.js
+  // ../node_modules/@ant-design/icons/es/cssUtils.js
   var APPEND_ORDER2 = "data-rc-order";
   var APPEND_PRIORITY2 = "data-rc-priority";
   var MARK_KEY2 = "rc-util-key";
@@ -29580,7 +29580,7 @@ ${heightStyle}
     warned2[message] = true;
   }
 
-  // node_modules/@ant-design/icons/es/renderUtils.js
+  // ../node_modules/@ant-design/icons/es/renderUtils.js
   function camelCase(input) {
     return input.replace(/-(.)/g, (match2, g) => g.toUpperCase());
   }
@@ -29703,7 +29703,7 @@ ${mergedStyleStr}
     }, []);
   };
 
-  // node_modules/@ant-design/icons/es/components/IconBase.js
+  // ../node_modules/@ant-design/icons/es/components/IconBase.js
   var IconBase = (props) => {
     const {
       icon,
@@ -29737,7 +29737,7 @@ ${mergedStyleStr}
   IconBase.displayName = "IconReact";
   var IconBase_default = IconBase;
 
-  // node_modules/@ant-design/icons/es/components/AntdIconLight.js
+  // ../node_modules/@ant-design/icons/es/components/AntdIconLight.js
   function _extends2() {
     _extends2 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -29804,11 +29804,11 @@ ${mergedStyleStr}
   }
   var AntdIconLight_default = Icon;
 
-  // node_modules/@rc-component/motion/es/CSSMotion.js
+  // ../node_modules/@rc-component/motion/es/CSSMotion.js
   var React29 = __toESM(require_react());
   var import_react19 = __toESM(require_react());
 
-  // node_modules/@rc-component/motion/es/context.js
+  // ../node_modules/@rc-component/motion/es/context.js
   var React24 = __toESM(require_react());
   var Context = /* @__PURE__ */ React24.createContext({});
   var MotionProvider = (props) => {
@@ -29827,11 +29827,11 @@ ${mergedStyleStr}
   };
   var context_default = MotionProvider;
 
-  // node_modules/@rc-component/motion/es/hooks/useStatus.js
+  // ../node_modules/@rc-component/motion/es/hooks/useStatus.js
   var React28 = __toESM(require_react());
   var import_react18 = __toESM(require_react());
 
-  // node_modules/@rc-component/motion/es/interface.js
+  // ../node_modules/@rc-component/motion/es/interface.js
   var STATUS_NONE = "none";
   var STATUS_APPEAR = "appear";
   var STATUS_ENTER = "enter";
@@ -29843,11 +29843,11 @@ ${mergedStyleStr}
   var STEP_ACTIVATED = "end";
   var STEP_PREPARED = "prepared";
 
-  // node_modules/@rc-component/motion/es/hooks/useDomMotionEvents.js
+  // ../node_modules/@rc-component/motion/es/hooks/useDomMotionEvents.js
   var React25 = __toESM(require_react());
   var import_react16 = __toESM(require_react());
 
-  // node_modules/@rc-component/motion/es/util/motion.js
+  // ../node_modules/@rc-component/motion/es/util/motion.js
   function makePrefixMap(styleProp, eventName) {
     const prefixes = {};
     prefixes[styleProp.toLowerCase()] = eventName.toLowerCase();
@@ -29912,7 +29912,7 @@ ${mergedStyleStr}
     return `${transitionName}-${transitionType}`;
   }
 
-  // node_modules/@rc-component/motion/es/hooks/useDomMotionEvents.js
+  // ../node_modules/@rc-component/motion/es/hooks/useDomMotionEvents.js
   var useDomMotionEvents_default = ((onInternalMotionEnd) => {
     const cacheElementRef = (0, import_react16.useRef)();
     function removeMotionEvents(element) {
@@ -29938,15 +29938,15 @@ ${mergedStyleStr}
     return [patchMotionEvents, removeMotionEvents];
   });
 
-  // node_modules/@rc-component/motion/es/hooks/useIsomorphicLayoutEffect.js
+  // ../node_modules/@rc-component/motion/es/hooks/useIsomorphicLayoutEffect.js
   var import_react17 = __toESM(require_react());
   var useIsomorphicLayoutEffect = canUseDom() ? import_react17.useLayoutEffect : import_react17.useEffect;
   var useIsomorphicLayoutEffect_default = useIsomorphicLayoutEffect;
 
-  // node_modules/@rc-component/motion/es/hooks/useStepQueue.js
+  // ../node_modules/@rc-component/motion/es/hooks/useStepQueue.js
   var React27 = __toESM(require_react());
 
-  // node_modules/@rc-component/motion/es/hooks/useNextFrame.js
+  // ../node_modules/@rc-component/motion/es/hooks/useNextFrame.js
   var React26 = __toESM(require_react());
   var useNextFrame_default = (() => {
     const nextFrameRef = React26.useRef(null);
@@ -29972,7 +29972,7 @@ ${mergedStyleStr}
     return [nextFrame, cancelNextFrame];
   });
 
-  // node_modules/@rc-component/motion/es/hooks/useStepQueue.js
+  // ../node_modules/@rc-component/motion/es/hooks/useStepQueue.js
   var FULL_STEP_QUEUE = [STEP_PREPARE, STEP_START, STEP_ACTIVE, STEP_ACTIVATED];
   var SIMPLE_STEP_QUEUE = [STEP_PREPARE, STEP_PREPARED];
   var SkipStep = false;
@@ -30015,7 +30015,7 @@ ${mergedStyleStr}
     return [startQueue, step2];
   });
 
-  // node_modules/@rc-component/motion/es/hooks/useStatus.js
+  // ../node_modules/@rc-component/motion/es/hooks/useStatus.js
   function useStatus(supportMotion, visible, getElement, {
     motionEnter = true,
     motionAppear = true,
@@ -30201,7 +30201,7 @@ ${mergedStyleStr}
     ];
   }
 
-  // node_modules/@rc-component/motion/es/CSSMotion.js
+  // ../node_modules/@rc-component/motion/es/CSSMotion.js
   function isRefNotConsumed(children) {
     return children?.length < 2;
   }
@@ -30330,10 +30330,10 @@ ${mergedStyleStr}
   }
   var CSSMotion_default = genCSSMotion(supportTransition);
 
-  // node_modules/@rc-component/motion/es/CSSMotionList.js
+  // ../node_modules/@rc-component/motion/es/CSSMotionList.js
   var React30 = __toESM(require_react());
 
-  // node_modules/@rc-component/motion/es/util/diff.js
+  // ../node_modules/@rc-component/motion/es/util/diff.js
   var STATUS_ADD = "add";
   var STATUS_KEEP = "keep";
   var STATUS_REMOVE = "remove";
@@ -30416,7 +30416,7 @@ ${mergedStyleStr}
     return list;
   }
 
-  // node_modules/@rc-component/motion/es/CSSMotionList.js
+  // ../node_modules/@rc-component/motion/es/CSSMotionList.js
   function _extends3() {
     _extends3 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -30533,13 +30533,13 @@ ${mergedStyleStr}
   }
   var CSSMotionList_default = genCSSMotionList(supportTransition);
 
-  // node_modules/@rc-component/motion/es/index.js
+  // ../node_modules/@rc-component/motion/es/index.js
   var es_default2 = CSSMotion_default;
 
-  // node_modules/antd/es/locale/index.js
+  // ../node_modules/antd/es/locale/index.js
   var React31 = __toESM(require_react());
 
-  // node_modules/@rc-component/pagination/es/locale/en_US.js
+  // ../node_modules/@rc-component/pagination/es/locale/en_US.js
   var locale = {
     // Options
     items_per_page: "/ page",
@@ -30557,7 +30557,7 @@ ${mergedStyleStr}
   };
   var en_US_default = locale;
 
-  // node_modules/@rc-component/picker/es/locale/common.js
+  // ../node_modules/@rc-component/picker/es/locale/common.js
   var commonLocale = {
     yearFormat: "YYYY",
     dayFormat: "D",
@@ -30565,7 +30565,7 @@ ${mergedStyleStr}
     monthBeforeYear: true
   };
 
-  // node_modules/@rc-component/picker/es/locale/en_US.js
+  // ../node_modules/@rc-component/picker/es/locale/en_US.js
   function _typeof2(o) {
     "@babel/helpers - typeof";
     return _typeof2 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
@@ -30645,14 +30645,14 @@ ${mergedStyleStr}
   });
   var en_US_default2 = locale2;
 
-  // node_modules/antd/es/time-picker/locale/en_US.js
+  // ../node_modules/antd/es/time-picker/locale/en_US.js
   var locale3 = {
     placeholder: "Select time",
     rangePlaceholder: ["Start time", "End time"]
   };
   var en_US_default3 = locale3;
 
-  // node_modules/antd/es/date-picker/locale/en_US.js
+  // ../node_modules/antd/es/date-picker/locale/en_US.js
   var locale4 = {
     lang: {
       placeholder: "Select date",
@@ -30673,10 +30673,10 @@ ${mergedStyleStr}
   };
   var en_US_default4 = locale4;
 
-  // node_modules/antd/es/calendar/locale/en_US.js
+  // ../node_modules/antd/es/calendar/locale/en_US.js
   var en_US_default5 = en_US_default4;
 
-  // node_modules/antd/es/locale/en_US.js
+  // ../node_modules/antd/es/locale/en_US.js
   var typeTemplate = "${label} is not a valid ${type}";
   var localeValues = {
     locale: "en",
@@ -30819,7 +30819,7 @@ ${mergedStyleStr}
   };
   var en_US_default6 = localeValues;
 
-  // node_modules/antd/es/modal/locale.js
+  // ../node_modules/antd/es/modal/locale.js
   var runtimeLocale = {
     ...en_US_default6.Modal
   };
@@ -30845,12 +30845,12 @@ ${mergedStyleStr}
     };
   }
 
-  // node_modules/antd/es/locale/context.js
+  // ../node_modules/antd/es/locale/context.js
   var import_react20 = __toESM(require_react());
   var LocaleContext = /* @__PURE__ */ (0, import_react20.createContext)(void 0);
   var context_default2 = LocaleContext;
 
-  // node_modules/antd/es/locale/index.js
+  // ../node_modules/antd/es/locale/index.js
   var ANT_MARK = "internalMark";
   var LocaleProvider = (props) => {
     const {
@@ -30879,26 +30879,26 @@ ${mergedStyleStr}
   }
   var locale_default = LocaleProvider;
 
-  // node_modules/antd/es/config-provider/index.js
+  // ../node_modules/antd/es/config-provider/index.js
   var React56 = __toESM(require_react());
 
-  // node_modules/antd/es/form/validateMessagesContext.js
+  // ../node_modules/antd/es/form/validateMessagesContext.js
   var import_react21 = __toESM(require_react());
   var validateMessagesContext_default = /* @__PURE__ */ (0, import_react21.createContext)(void 0);
 
-  // node_modules/antd/es/tooltip/UniqueProvider/index.js
+  // ../node_modules/antd/es/tooltip/UniqueProvider/index.js
   var import_react27 = __toESM(require_react());
 
-  // node_modules/@rc-component/portal/es/Portal.js
+  // ../node_modules/@rc-component/portal/es/Portal.js
   var React35 = __toESM(require_react());
   var import_react_dom2 = __toESM(require_react_dom());
 
-  // node_modules/@rc-component/portal/es/Context.js
+  // ../node_modules/@rc-component/portal/es/Context.js
   var React32 = __toESM(require_react());
   var OrderContext = /* @__PURE__ */ React32.createContext(null);
   var Context_default2 = OrderContext;
 
-  // node_modules/@rc-component/portal/es/mock.js
+  // ../node_modules/@rc-component/portal/es/mock.js
   var inline = false;
   function inlineMock(nextInline) {
     if (typeof nextInline === "boolean") {
@@ -30907,7 +30907,7 @@ ${mergedStyleStr}
     return inline;
   }
 
-  // node_modules/@rc-component/portal/es/useDom.js
+  // ../node_modules/@rc-component/portal/es/useDom.js
   var React33 = __toESM(require_react());
   var EMPTY_LIST = [];
   function useDom(render3, debug) {
@@ -30961,15 +30961,15 @@ ${mergedStyleStr}
     return [ele, mergedQueueCreate];
   }
 
-  // node_modules/@rc-component/portal/es/useScrollLocker.js
+  // ../node_modules/@rc-component/portal/es/useScrollLocker.js
   var React34 = __toESM(require_react());
 
-  // node_modules/@rc-component/portal/es/util.js
+  // ../node_modules/@rc-component/portal/es/util.js
   function isBodyOverflowing() {
     return document.body.scrollHeight > (window.innerHeight || document.documentElement.clientHeight) && window.innerWidth > document.body.offsetWidth;
   }
 
-  // node_modules/@rc-component/portal/es/useScrollLocker.js
+  // ../node_modules/@rc-component/portal/es/useScrollLocker.js
   var UNIQUE_ID = `rc-util-locker-${Date.now()}`;
   var uuid3 = 0;
   function useScrollLocker(lock) {
@@ -30996,7 +30996,7 @@ html body {
     }, [mergedLock, id]);
   }
 
-  // node_modules/@rc-component/portal/es/useEscKeyDown.js
+  // ../node_modules/@rc-component/portal/es/useEscKeyDown.js
   var import_react22 = __toESM(require_react());
   var stack = [];
   var IME_LOCK_DURATION = 200;
@@ -31062,7 +31062,7 @@ html body {
     }, [open]);
   }
 
-  // node_modules/@rc-component/portal/es/Portal.js
+  // ../node_modules/@rc-component/portal/es/Portal.js
   var getPortalContainer = (getContainer3) => {
     if (getContainer3 === false) {
       return false;
@@ -31135,16 +31135,16 @@ html body {
   }
   var Portal_default2 = Portal;
 
-  // node_modules/@rc-component/portal/es/index.js
+  // ../node_modules/@rc-component/portal/es/index.js
   var es_default3 = Portal_default2;
 
-  // node_modules/@rc-component/trigger/es/index.js
+  // ../node_modules/@rc-component/trigger/es/index.js
   var React48 = __toESM(require_react());
 
-  // node_modules/@rc-component/trigger/es/Popup/index.js
+  // ../node_modules/@rc-component/trigger/es/Popup/index.js
   var React39 = __toESM(require_react());
 
-  // node_modules/@rc-component/trigger/es/Popup/Arrow.js
+  // ../node_modules/@rc-component/trigger/es/Popup/Arrow.js
   var React36 = __toESM(require_react());
   function Arrow(props) {
     const {
@@ -31201,7 +31201,7 @@ html body {
     }, content);
   }
 
-  // node_modules/@rc-component/trigger/es/Popup/Mask.js
+  // ../node_modules/@rc-component/trigger/es/Popup/Mask.js
   var React37 = __toESM(require_react());
   function _extends4() {
     _extends4 = Object.assign ? Object.assign.bind() : function(target) {
@@ -31243,7 +31243,7 @@ html body {
     }));
   }
 
-  // node_modules/@rc-component/trigger/es/Popup/PopupContent.js
+  // ../node_modules/@rc-component/trigger/es/Popup/PopupContent.js
   var React38 = __toESM(require_react());
   var PopupContent = /* @__PURE__ */ React38.memo(({
     children
@@ -31253,7 +31253,7 @@ html body {
   }
   var PopupContent_default = PopupContent;
 
-  // node_modules/@rc-component/trigger/es/hooks/useOffsetStyle.js
+  // ../node_modules/@rc-component/trigger/es/hooks/useOffsetStyle.js
   function useOffsetStyle(isMobile2, ready, open, align, offsetR, offsetB, offsetX, offsetY) {
     const AUTO = "auto";
     const offsetStyle = isMobile2 ? {} : {
@@ -31287,7 +31287,7 @@ html body {
     return offsetStyle;
   }
 
-  // node_modules/@rc-component/trigger/es/Popup/index.js
+  // ../node_modules/@rc-component/trigger/es/Popup/index.js
   function _extends5() {
     _extends5 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -31464,13 +31464,13 @@ html body {
   }
   var Popup_default = Popup;
 
-  // node_modules/@rc-component/trigger/es/context.js
+  // ../node_modules/@rc-component/trigger/es/context.js
   var React40 = __toESM(require_react());
   var TriggerContext = /* @__PURE__ */ React40.createContext(null);
   var context_default3 = TriggerContext;
   var UniqueContext = /* @__PURE__ */ React40.createContext(null);
 
-  // node_modules/@rc-component/trigger/es/hooks/useAction.js
+  // ../node_modules/@rc-component/trigger/es/hooks/useAction.js
   var React41 = __toESM(require_react());
   function toArray2(val) {
     return val ? Array.isArray(val) ? val : [val] : [];
@@ -31491,10 +31491,10 @@ html body {
     }, [action, showAction, hideAction]);
   }
 
-  // node_modules/@rc-component/trigger/es/hooks/useAlign.js
+  // ../node_modules/@rc-component/trigger/es/hooks/useAlign.js
   var React42 = __toESM(require_react());
 
-  // node_modules/@rc-component/trigger/es/util.js
+  // ../node_modules/@rc-component/trigger/es/util.js
   function isPointsEq(a1 = [], a2 = [], isAlignPoint) {
     const getVal = (a, index) => a[index] || "";
     if (isAlignPoint) {
@@ -31595,7 +31595,7 @@ html body {
     return visibleArea;
   }
 
-  // node_modules/@rc-component/trigger/es/hooks/useAlign.js
+  // ../node_modules/@rc-component/trigger/es/hooks/useAlign.js
   function getUnitOffset(size, offset = 0) {
     const offsetStr = `${offset}`;
     const cells = offsetStr.match(/^(.*)\%$/);
@@ -32037,7 +32037,7 @@ html body {
     return [offsetInfo.ready, offsetInfo.offsetX, offsetInfo.offsetY, offsetInfo.offsetR, offsetInfo.offsetB, offsetInfo.arrowX, offsetInfo.arrowY, offsetInfo.scaleX, offsetInfo.scaleY, offsetInfo.align, triggerAlign];
   }
 
-  // node_modules/@rc-component/trigger/es/hooks/useDelay.js
+  // ../node_modules/@rc-component/trigger/es/hooks/useDelay.js
   var React43 = __toESM(require_react());
   function useDelay() {
     const delayRef = React43.useRef(null);
@@ -32065,7 +32065,7 @@ html body {
     return delayInvoke;
   }
 
-  // node_modules/@rc-component/trigger/es/hooks/useWatch.js
+  // ../node_modules/@rc-component/trigger/es/hooks/useWatch.js
   function useWatch(open, target, popup, onAlign, onScroll) {
     useLayoutEffect_default(() => {
       if (open && target && popup) {
@@ -32098,7 +32098,7 @@ html body {
     }, [open, target, popup]);
   }
 
-  // node_modules/@rc-component/trigger/es/hooks/useWinClick.js
+  // ../node_modules/@rc-component/trigger/es/hooks/useWinClick.js
   var React44 = __toESM(require_react());
   function useWinClick(open, clickToHide, targetEle, popupEle, mask, maskClosable, inPopupOrChild, triggerOpen) {
     const openRef = React44.useRef(open);
@@ -32145,10 +32145,10 @@ html body {
     return onPopupPointerDown;
   }
 
-  // node_modules/@rc-component/trigger/es/UniqueProvider/index.js
+  // ../node_modules/@rc-component/trigger/es/UniqueProvider/index.js
   var React47 = __toESM(require_react());
 
-  // node_modules/@rc-component/trigger/es/UniqueProvider/useTargetState.js
+  // ../node_modules/@rc-component/trigger/es/UniqueProvider/useTargetState.js
   var import_react23 = __toESM(require_react());
   function useTargetState() {
     const [options, setOptions] = import_react23.default.useState(null);
@@ -32187,7 +32187,7 @@ html body {
     return [trigger, open, options, onVisibleChanged];
   }
 
-  // node_modules/@rc-component/trigger/es/UniqueProvider/UniqueContainer.js
+  // ../node_modules/@rc-component/trigger/es/UniqueProvider/UniqueContainer.js
   var import_react24 = __toESM(require_react());
   function _extends6() {
     _extends6 = Object.assign ? Object.assign.bind() : function(target) {
@@ -32265,7 +32265,7 @@ html body {
   };
   var UniqueContainer_default = UniqueContainer;
 
-  // node_modules/@rc-component/trigger/es/UniqueProvider/index.js
+  // ../node_modules/@rc-component/trigger/es/UniqueProvider/index.js
   var UniqueProvider = ({
     children,
     postTriggerProps
@@ -32426,7 +32426,7 @@ html body {
   };
   var UniqueProvider_default = UniqueProvider;
 
-  // node_modules/@rc-component/trigger/es/index.js
+  // ../node_modules/@rc-component/trigger/es/index.js
   var import_react_dom3 = __toESM(require_react_dom());
   function generateTrigger(PortalComponent = es_default3) {
     const Trigger = /* @__PURE__ */ React48.forwardRef((props, ref) => {
@@ -32841,10 +32841,10 @@ html body {
   }
   var es_default4 = generateTrigger(es_default3);
 
-  // node_modules/antd/es/tooltip/UniqueProvider/MotionContent.js
+  // ../node_modules/antd/es/tooltip/UniqueProvider/MotionContent.js
   var import_react26 = __toESM(require_react());
 
-  // node_modules/antd/es/_util/reactNode.js
+  // ../node_modules/antd/es/_util/reactNode.js
   var import_react25 = __toESM(require_react());
   var replaceElement = (element, replacement, props) => {
     if (!/* @__PURE__ */ import_react25.default.isValidElement(element)) {
@@ -32856,7 +32856,7 @@ html body {
     return replaceElement(element, element, props);
   }
 
-  // node_modules/antd/es/tooltip/UniqueProvider/MotionContent.js
+  // ../node_modules/antd/es/tooltip/UniqueProvider/MotionContent.js
   var MotionContent = ({
     children
   }) => {
@@ -32889,7 +32889,7 @@ html body {
   };
   var MotionContent_default = MotionContent;
 
-  // node_modules/antd/es/tooltip/UniqueProvider/index.js
+  // ../node_modules/antd/es/tooltip/UniqueProvider/index.js
   var cachedPlacements = [null, null];
   function uniqueBuiltinPlacements(ori) {
     if (cachedPlacements[0] !== ori) {
@@ -32932,7 +32932,7 @@ html body {
   };
   var UniqueProvider_default2 = UniqueProvider2;
 
-  // node_modules/antd/es/config-provider/DisabledContext.js
+  // ../node_modules/antd/es/config-provider/DisabledContext.js
   var React52 = __toESM(require_react());
   var DisabledContext = /* @__PURE__ */ React52.createContext(false);
   var DisabledContextProvider = ({
@@ -32946,10 +32946,10 @@ html body {
   };
   var DisabledContext_default = DisabledContext;
 
-  // node_modules/antd/es/config-provider/hooks/useConfig.js
+  // ../node_modules/antd/es/config-provider/hooks/useConfig.js
   var import_react28 = __toESM(require_react());
 
-  // node_modules/antd/es/config-provider/SizeContext.js
+  // ../node_modules/antd/es/config-provider/SizeContext.js
   var React53 = __toESM(require_react());
   var SizeContext = /* @__PURE__ */ React53.createContext(void 0);
   var SizeContextProvider = ({
@@ -32963,7 +32963,7 @@ html body {
   };
   var SizeContext_default = SizeContext;
 
-  // node_modules/antd/es/config-provider/hooks/useConfig.js
+  // ../node_modules/antd/es/config-provider/hooks/useConfig.js
   function useConfig() {
     const componentDisabled = (0, import_react28.useContext)(DisabledContext_default);
     const componentSize = (0, import_react28.useContext)(SizeContext_default);
@@ -32974,7 +32974,7 @@ html body {
   }
   var useConfig_default = useConfig;
 
-  // node_modules/antd/es/config-provider/hooks/useTheme.js
+  // ../node_modules/antd/es/config-provider/hooks/useTheme.js
   var import_react29 = __toESM(require_react());
   function useTheme(theme, parentTheme, config) {
     const warning4 = devUseWarning("ConfigProvider");
@@ -33027,7 +33027,7 @@ html body {
     }));
   }
 
-  // node_modules/antd/es/config-provider/MotionWrapper.js
+  // ../node_modules/antd/es/config-provider/MotionWrapper.js
   var React54 = __toESM(require_react());
   var MotionCacheContext = /* @__PURE__ */ React54.createContext(true);
   if (true) {
@@ -33054,7 +33054,7 @@ html body {
     return children;
   }
 
-  // node_modules/antd/es/config-provider/PropWarning.js
+  // ../node_modules/antd/es/config-provider/PropWarning.js
   var React55 = __toESM(require_react());
   var PropWarning = /* @__PURE__ */ React55.memo(({
     dropdownMatchSelectWidth
@@ -33068,7 +33068,7 @@ html body {
   }
   var PropWarning_default = true ? PropWarning : () => null;
 
-  // node_modules/antd/es/config-provider/index.js
+  // ../node_modules/antd/es/config-provider/index.js
   var IconStyle = ({
     iconPrefixCls,
     csp
@@ -33447,14 +33447,14 @@ html body {
   }
   var config_provider_default = ConfigProvider;
 
-  // node_modules/@ant-design/icons/es/icons/ReloadOutlined.js
+  // ../node_modules/@ant-design/icons/es/icons/ReloadOutlined.js
   var React57 = __toESM(require_react());
 
-  // node_modules/@ant-design/icons-svg/es/asn/ReloadOutlined.js
+  // ../node_modules/@ant-design/icons-svg/es/asn/ReloadOutlined.js
   var ReloadOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M909.1 209.3l-56.4 44.1C775.8 155.1 656.2 92 521.9 92 290 92 102.3 279.5 102 511.5 101.7 743.7 289.8 932 521.9 932c181.3 0 335.8-115 394.6-276.1 1.5-4.2-.7-8.9-4.9-10.3l-56.7-19.5a8 8 0 00-10.1 4.8c-1.8 5-3.8 10-5.9 14.9-17.3 41-42.1 77.8-73.7 109.4A344.77 344.77 0 01655.9 829c-42.3 17.9-87.4 27-133.8 27-46.5 0-91.5-9.1-133.8-27A341.5 341.5 0 01279 755.2a342.16 342.16 0 01-73.7-109.4c-17.9-42.4-27-87.4-27-133.9s9.1-91.5 27-133.9c17.3-41 42.1-77.8 73.7-109.4 31.6-31.6 68.4-56.4 109.3-73.8 42.3-17.9 87.4-27 133.8-27 46.5 0 91.5 9.1 133.8 27a341.5 341.5 0 01109.3 73.8c9.9 9.9 19.2 20.4 27.8 31.4l-60.2 47a8 8 0 003 14.1l175.6 43c5 1.2 9.9-2.6 9.9-7.7l.8-180.9c-.1-6.6-7.8-10.3-13-6.2z" } }] }, "name": "reload", "theme": "outlined" };
   var ReloadOutlined_default = ReloadOutlined;
 
-  // node_modules/@ant-design/icons/es/icons/ReloadOutlined.js
+  // ../node_modules/@ant-design/icons/es/icons/ReloadOutlined.js
   function _extends7() {
     _extends7 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -33479,7 +33479,7 @@ html body {
   }
   var ReloadOutlined_default2 = RefIcon;
 
-  // node_modules/antd/es/theme/getDesignToken.js
+  // ../node_modules/antd/es/theme/getDesignToken.js
   var getDesignToken = (config) => {
     const theme = config?.algorithm ? createTheme(config.algorithm) : theme_default;
     const mergedToken = {
@@ -33492,7 +33492,7 @@ html body {
   };
   var getDesignToken_default = getDesignToken;
 
-  // node_modules/antd/es/theme/themes/compact/genCompactSizeMapToken.js
+  // ../node_modules/antd/es/theme/themes/compact/genCompactSizeMapToken.js
   function genSizeMapToken2(token2) {
     const {
       sizeUnit,
@@ -33512,7 +33512,7 @@ html body {
     };
   }
 
-  // node_modules/antd/es/theme/themes/compact/index.js
+  // ../node_modules/antd/es/theme/themes/compact/index.js
   var derivative2 = (token2, mapToken) => {
     const mergedMapToken = mapToken ?? derivative(token2);
     const fontSize = mergedMapToken.fontSizeSM;
@@ -33532,14 +33532,14 @@ html body {
   };
   var compact_default = derivative2;
 
-  // node_modules/antd/es/theme/themes/dark/colorAlgorithm.js
+  // ../node_modules/antd/es/theme/themes/dark/colorAlgorithm.js
   var getAlphaColor3 = (baseColor, alpha) => new FastColor(baseColor).setA(alpha).toRgbString();
   var getSolidColor2 = (baseColor, brightness) => {
     const instance = new FastColor(baseColor);
     return instance.lighten(brightness).toHexString();
   };
 
-  // node_modules/antd/es/theme/themes/dark/colors.js
+  // ../node_modules/antd/es/theme/themes/dark/colors.js
   var generateColorPalettes2 = (baseColor) => {
     const colors = generate(baseColor, {
       theme: "dark"
@@ -33585,7 +33585,7 @@ html body {
     };
   };
 
-  // node_modules/antd/es/theme/themes/dark/index.js
+  // ../node_modules/antd/es/theme/themes/dark/index.js
   var derivative3 = (token2, mapToken) => {
     const colorPalettes = Object.keys(defaultPresetColors).map((colorKey) => {
       const colors = generate(token2[colorKey], {
@@ -33634,7 +33634,7 @@ html body {
   };
   var dark_default = derivative3;
 
-  // node_modules/antd/es/theme/index.js
+  // ../node_modules/antd/es/theme/index.js
   function useToken2() {
     const [theme, token2, hashId, cssVar] = useToken();
     return {
@@ -33664,13 +33664,13 @@ html body {
     _internalContext: DesignTokenContext
   };
 
-  // node_modules/antd/es/index.js
+  // ../node_modules/antd/es/index.js
   if (true) {
     const majorVersion = getReactMajorVersion();
     true ? warning_default2(majorVersion >= 18, "version", `antd v6 no longer supports React versions below 18. Please upgrade to React 18 or higher.`) : void 0;
   }
 
-  // node_modules/tslib/tslib.es6.mjs
+  // ../node_modules/tslib/tslib.es6.mjs
   var extendStatics = function(d, b) {
     extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
       d2.__proto__ = b2;
@@ -33719,16 +33719,16 @@ html body {
     return to.concat(ar || Array.prototype.slice.call(from2));
   }
 
-  // node_modules/react-intl/lib/src/components/createFormattedComponent.js
+  // ../node_modules/react-intl/lib/src/components/createFormattedComponent.js
   var React61 = __toESM(require_react());
 
-  // node_modules/react-intl/lib/src/components/useIntl.js
+  // ../node_modules/react-intl/lib/src/components/useIntl.js
   var React60 = __toESM(require_react());
 
-  // node_modules/react-intl/lib/src/utils.js
+  // ../node_modules/react-intl/lib/src/utils.js
   var React58 = __toESM(require_react());
 
-  // node_modules/@formatjs/fast-memoize/lib/index.js
+  // ../node_modules/@formatjs/fast-memoize/lib/index.js
   function memoize(fn, options) {
     var cache = options && options.cache ? options.cache : cacheDefault;
     var serializer = options && options.serializer ? options.serializer : serializerDefault;
@@ -33795,7 +33795,7 @@ html body {
     monadic: strategyMonadic
   };
 
-  // node_modules/@formatjs/ecma402-abstract/lib/utils.js
+  // ../node_modules/@formatjs/ecma402-abstract/lib/utils.js
   function invariant(condition, message, Err) {
     if (Err === void 0) {
       Err = Error;
@@ -33855,7 +33855,7 @@ html body {
     strategy: strategies.variadic
   });
 
-  // node_modules/@formatjs/icu-messageformat-parser/lib/error.js
+  // ../node_modules/@formatjs/icu-messageformat-parser/lib/error.js
   var ErrorKind;
   (function(ErrorKind2) {
     ErrorKind2[ErrorKind2["EXPECT_ARGUMENT_CLOSING_BRACE"] = 1] = "EXPECT_ARGUMENT_CLOSING_BRACE";
@@ -33886,7 +33886,7 @@ html body {
     ErrorKind2[ErrorKind2["UNCLOSED_TAG"] = 27] = "UNCLOSED_TAG";
   })(ErrorKind || (ErrorKind = {}));
 
-  // node_modules/@formatjs/icu-messageformat-parser/lib/types.js
+  // ../node_modules/@formatjs/icu-messageformat-parser/lib/types.js
   var TYPE;
   (function(TYPE2) {
     TYPE2[TYPE2["literal"] = 0] = "literal";
@@ -33938,10 +33938,10 @@ html body {
     return !!(el && typeof el === "object" && el.type === SKELETON_TYPE.dateTime);
   }
 
-  // node_modules/@formatjs/icu-messageformat-parser/lib/regex.generated.js
+  // ../node_modules/@formatjs/icu-messageformat-parser/lib/regex.generated.js
   var SPACE_SEPARATOR_REGEX = /[ \xA0\u1680\u2000-\u200A\u202F\u205F\u3000]/;
 
-  // node_modules/@formatjs/icu-skeleton-parser/lib/date-time.js
+  // ../node_modules/@formatjs/icu-skeleton-parser/lib/date-time.js
   var DATE_TIME_REGEX = /(?:[Eec]{1,6}|G{1,5}|[Qq]{1,5}|(?:[yYur]+|U{1,5})|[ML]{1,5}|d{1,2}|D{1,3}|F{1}|[abB]{1,5}|[hkHK]{1,2}|w{1,2}|W{1}|m{1,2}|s{1,2}|[zZOvVxX]{1,4})(?=([^']*'[^']*')*[^']*$)/g;
   function parseDateTimeSkeleton(skeleton) {
     var result = {};
@@ -34059,10 +34059,10 @@ html body {
     return result;
   }
 
-  // node_modules/@formatjs/icu-skeleton-parser/lib/regex.generated.js
+  // ../node_modules/@formatjs/icu-skeleton-parser/lib/regex.generated.js
   var WHITE_SPACE_REGEX = /[\t-\r \x85\u200E\u200F\u2028\u2029]/i;
 
-  // node_modules/@formatjs/icu-skeleton-parser/lib/number.js
+  // ../node_modules/@formatjs/icu-skeleton-parser/lib/number.js
   function parseNumberSkeletonFromString(skeleton) {
     if (skeleton.length === 0) {
       throw new Error("Number skeleton cannot be empty");
@@ -34351,7 +34351,7 @@ html body {
     return result;
   }
 
-  // node_modules/@formatjs/icu-messageformat-parser/lib/time-data.generated.js
+  // ../node_modules/@formatjs/icu-messageformat-parser/lib/time-data.generated.js
   var timeData = {
     "001": [
       "H",
@@ -35768,7 +35768,7 @@ html body {
     ]
   };
 
-  // node_modules/@formatjs/icu-messageformat-parser/lib/date-time-pattern-generator.js
+  // ../node_modules/@formatjs/icu-messageformat-parser/lib/date-time-pattern-generator.js
   function getBestPattern(skeleton, locale5) {
     var skeletonCopy = "";
     for (var patternPos = 0; patternPos < skeleton.length; patternPos++) {
@@ -35830,7 +35830,7 @@ html body {
     return hourCycles[0];
   }
 
-  // node_modules/@formatjs/icu-messageformat-parser/lib/parser.js
+  // ../node_modules/@formatjs/icu-messageformat-parser/lib/parser.js
   var _a;
   var SPACE_SEPARATOR_START_REGEX = new RegExp("^".concat(SPACE_SEPARATOR_REGEX.source, "*"));
   var SPACE_SEPARATOR_END_REGEX = new RegExp("".concat(SPACE_SEPARATOR_REGEX.source, "*$"));
@@ -36638,7 +36638,7 @@ html body {
     return c >= 33 && c <= 35 || c === 36 || c >= 37 && c <= 39 || c === 40 || c === 41 || c === 42 || c === 43 || c === 44 || c === 45 || c >= 46 && c <= 47 || c >= 58 && c <= 59 || c >= 60 && c <= 62 || c >= 63 && c <= 64 || c === 91 || c === 92 || c === 93 || c === 94 || c === 96 || c === 123 || c === 124 || c === 125 || c === 126 || c === 161 || c >= 162 && c <= 165 || c === 166 || c === 167 || c === 169 || c === 171 || c === 172 || c === 174 || c === 176 || c === 177 || c === 182 || c === 187 || c === 191 || c === 215 || c === 247 || c >= 8208 && c <= 8213 || c >= 8214 && c <= 8215 || c === 8216 || c === 8217 || c === 8218 || c >= 8219 && c <= 8220 || c === 8221 || c === 8222 || c === 8223 || c >= 8224 && c <= 8231 || c >= 8240 && c <= 8248 || c === 8249 || c === 8250 || c >= 8251 && c <= 8254 || c >= 8257 && c <= 8259 || c === 8260 || c === 8261 || c === 8262 || c >= 8263 && c <= 8273 || c === 8274 || c === 8275 || c >= 8277 && c <= 8286 || c >= 8592 && c <= 8596 || c >= 8597 && c <= 8601 || c >= 8602 && c <= 8603 || c >= 8604 && c <= 8607 || c === 8608 || c >= 8609 && c <= 8610 || c === 8611 || c >= 8612 && c <= 8613 || c === 8614 || c >= 8615 && c <= 8621 || c === 8622 || c >= 8623 && c <= 8653 || c >= 8654 && c <= 8655 || c >= 8656 && c <= 8657 || c === 8658 || c === 8659 || c === 8660 || c >= 8661 && c <= 8691 || c >= 8692 && c <= 8959 || c >= 8960 && c <= 8967 || c === 8968 || c === 8969 || c === 8970 || c === 8971 || c >= 8972 && c <= 8991 || c >= 8992 && c <= 8993 || c >= 8994 && c <= 9e3 || c === 9001 || c === 9002 || c >= 9003 && c <= 9083 || c === 9084 || c >= 9085 && c <= 9114 || c >= 9115 && c <= 9139 || c >= 9140 && c <= 9179 || c >= 9180 && c <= 9185 || c >= 9186 && c <= 9254 || c >= 9255 && c <= 9279 || c >= 9280 && c <= 9290 || c >= 9291 && c <= 9311 || c >= 9472 && c <= 9654 || c === 9655 || c >= 9656 && c <= 9664 || c === 9665 || c >= 9666 && c <= 9719 || c >= 9720 && c <= 9727 || c >= 9728 && c <= 9838 || c === 9839 || c >= 9840 && c <= 10087 || c === 10088 || c === 10089 || c === 10090 || c === 10091 || c === 10092 || c === 10093 || c === 10094 || c === 10095 || c === 10096 || c === 10097 || c === 10098 || c === 10099 || c === 10100 || c === 10101 || c >= 10132 && c <= 10175 || c >= 10176 && c <= 10180 || c === 10181 || c === 10182 || c >= 10183 && c <= 10213 || c === 10214 || c === 10215 || c === 10216 || c === 10217 || c === 10218 || c === 10219 || c === 10220 || c === 10221 || c === 10222 || c === 10223 || c >= 10224 && c <= 10239 || c >= 10240 && c <= 10495 || c >= 10496 && c <= 10626 || c === 10627 || c === 10628 || c === 10629 || c === 10630 || c === 10631 || c === 10632 || c === 10633 || c === 10634 || c === 10635 || c === 10636 || c === 10637 || c === 10638 || c === 10639 || c === 10640 || c === 10641 || c === 10642 || c === 10643 || c === 10644 || c === 10645 || c === 10646 || c === 10647 || c === 10648 || c >= 10649 && c <= 10711 || c === 10712 || c === 10713 || c === 10714 || c === 10715 || c >= 10716 && c <= 10747 || c === 10748 || c === 10749 || c >= 10750 && c <= 11007 || c >= 11008 && c <= 11055 || c >= 11056 && c <= 11076 || c >= 11077 && c <= 11078 || c >= 11079 && c <= 11084 || c >= 11085 && c <= 11123 || c >= 11124 && c <= 11125 || c >= 11126 && c <= 11157 || c === 11158 || c >= 11159 && c <= 11263 || c >= 11776 && c <= 11777 || c === 11778 || c === 11779 || c === 11780 || c === 11781 || c >= 11782 && c <= 11784 || c === 11785 || c === 11786 || c === 11787 || c === 11788 || c === 11789 || c >= 11790 && c <= 11798 || c === 11799 || c >= 11800 && c <= 11801 || c === 11802 || c === 11803 || c === 11804 || c === 11805 || c >= 11806 && c <= 11807 || c === 11808 || c === 11809 || c === 11810 || c === 11811 || c === 11812 || c === 11813 || c === 11814 || c === 11815 || c === 11816 || c === 11817 || c >= 11818 && c <= 11822 || c === 11823 || c >= 11824 && c <= 11833 || c >= 11834 && c <= 11835 || c >= 11836 && c <= 11839 || c === 11840 || c === 11841 || c === 11842 || c >= 11843 && c <= 11855 || c >= 11856 && c <= 11857 || c === 11858 || c >= 11859 && c <= 11903 || c >= 12289 && c <= 12291 || c === 12296 || c === 12297 || c === 12298 || c === 12299 || c === 12300 || c === 12301 || c === 12302 || c === 12303 || c === 12304 || c === 12305 || c >= 12306 && c <= 12307 || c === 12308 || c === 12309 || c === 12310 || c === 12311 || c === 12312 || c === 12313 || c === 12314 || c === 12315 || c === 12316 || c === 12317 || c >= 12318 && c <= 12319 || c === 12320 || c === 12336 || c === 64830 || c === 64831 || c >= 65093 && c <= 65094;
   }
 
-  // node_modules/@formatjs/icu-messageformat-parser/lib/index.js
+  // ../node_modules/@formatjs/icu-messageformat-parser/lib/index.js
   function pruneLocation(els) {
     els.forEach(function(el) {
       delete el.location;
@@ -36674,7 +36674,7 @@ html body {
     return result.val;
   }
 
-  // node_modules/intl-messageformat/lib/src/error.js
+  // ../node_modules/intl-messageformat/lib/src/error.js
   var ErrorCode;
   (function(ErrorCode2) {
     ErrorCode2["MISSING_VALUE"] = "MISSING_VALUE";
@@ -36728,7 +36728,7 @@ html body {
     })(FormatError)
   );
 
-  // node_modules/intl-messageformat/lib/src/formatters.js
+  // ../node_modules/intl-messageformat/lib/src/formatters.js
   var PART_TYPE;
   (function(PART_TYPE2) {
     PART_TYPE2[PART_TYPE2["literal"] = 0] = "literal";
@@ -36868,7 +36868,7 @@ html body {
     return mergeLiteral(result);
   }
 
-  // node_modules/intl-messageformat/lib/src/core.js
+  // ../node_modules/intl-messageformat/lib/src/core.js
   function mergeConfig(c1, c2) {
     if (!c2) {
       return c1;
@@ -37091,7 +37091,7 @@ html body {
     })()
   );
 
-  // node_modules/@formatjs/intl/lib/src/error.js
+  // ../node_modules/@formatjs/intl/lib/src/error.js
   var IntlErrorCode;
   (function(IntlErrorCode2) {
     IntlErrorCode2["FORMAT_ERROR"] = "FORMAT_ERROR";
@@ -37188,7 +37188,7 @@ html body {
     })(IntlError)
   );
 
-  // node_modules/@formatjs/intl/lib/src/utils.js
+  // ../node_modules/@formatjs/intl/lib/src/utils.js
   function filterProps(props, allowlist, defaults) {
     if (defaults === void 0) {
       defaults = {};
@@ -37345,7 +37345,7 @@ html body {
     onError(new UnsupportedFormatterError("No ".concat(type, " format named: ").concat(name)));
   }
 
-  // node_modules/@formatjs/intl/lib/src/message.js
+  // ../node_modules/@formatjs/intl/lib/src/message.js
   function setTimeZoneInOptions(opts, timeZone) {
     return Object.keys(opts).reduce(function(all, k) {
       all[k] = __assign({ timeZone }, opts[k]);
@@ -37430,7 +37430,7 @@ html body {
     return id;
   };
 
-  // node_modules/@formatjs/intl/lib/src/dateTime.js
+  // ../node_modules/@formatjs/intl/lib/src/dateTime.js
   var DATE_TIME_FORMAT_OPTIONS = [
     "formatMatcher",
     "timeZone",
@@ -37537,7 +37537,7 @@ html body {
     return [];
   }
 
-  // node_modules/@formatjs/intl/lib/src/displayName.js
+  // ../node_modules/@formatjs/intl/lib/src/displayName.js
   var DISPLAY_NAMES_OPTONS = [
     "style",
     "type",
@@ -37558,7 +37558,7 @@ html body {
     }
   }
 
-  // node_modules/@formatjs/intl/lib/src/list.js
+  // ../node_modules/@formatjs/intl/lib/src/list.js
   var LIST_FORMAT_OPTIONS = [
     "type",
     "style"
@@ -37613,7 +37613,7 @@ html body {
     return values;
   }
 
-  // node_modules/@formatjs/intl/lib/src/plural.js
+  // ../node_modules/@formatjs/intl/lib/src/plural.js
   var PLURAL_FORMAT_OPTIONS = ["type"];
   function formatPlural(_a2, getPluralRules, value, options) {
     var locale5 = _a2.locale, onError = _a2.onError;
@@ -37632,7 +37632,7 @@ html body {
     return "other";
   }
 
-  // node_modules/@formatjs/intl/lib/src/relativeTime.js
+  // ../node_modules/@formatjs/intl/lib/src/relativeTime.js
   var RELATIVE_TIME_FORMAT_OPTIONS = ["numeric", "style"];
   function getFormatter2(_a2, getRelativeTimeFormat, options) {
     var locale5 = _a2.locale, formats = _a2.formats, onError = _a2.onError;
@@ -37663,7 +37663,7 @@ html body {
     return String(value);
   }
 
-  // node_modules/@formatjs/intl/lib/src/number.js
+  // ../node_modules/@formatjs/intl/lib/src/number.js
   var NUMBER_FORMAT_OPTIONS = [
     "style",
     "currency",
@@ -37723,7 +37723,7 @@ html body {
     return [];
   }
 
-  // node_modules/@formatjs/intl/lib/src/create-intl.js
+  // ../node_modules/@formatjs/intl/lib/src/create-intl.js
   function messagesContainString(messages) {
     var firstMessage = messages ? messages[Object.keys(messages)[0]] : void 0;
     return typeof firstMessage === "string";
@@ -37769,7 +37769,7 @@ html body {
     });
   }
 
-  // node_modules/react-intl/lib/src/utils.js
+  // ../node_modules/react-intl/lib/src/utils.js
   function invariantIntlContext(intl) {
     invariant(intl, "[React Intl] Could not find required `intl` object. <IntlProvider> needs to exist in the component ancestry.");
   }
@@ -37801,7 +37801,7 @@ html body {
     return true;
   }
 
-  // node_modules/react-intl/lib/src/components/injectIntl.js
+  // ../node_modules/react-intl/lib/src/components/injectIntl.js
   var import_hoist_non_react_statics = __toESM(require_hoist_non_react_statics_cjs());
   var React59 = __toESM(require_react());
   var IntlContext = typeof window !== "undefined" && !window.__REACT_INTL_BYPASS_GLOBAL_CONTEXT__ ? window.__REACT_INTL_CONTEXT__ || (window.__REACT_INTL_CONTEXT__ = React59.createContext(null)) : React59.createContext(null);
@@ -37810,14 +37810,14 @@ html body {
   var Provider = IntlProvider;
   var Context2 = IntlContext;
 
-  // node_modules/react-intl/lib/src/components/useIntl.js
+  // ../node_modules/react-intl/lib/src/components/useIntl.js
   function useIntl() {
     var intl = React60.useContext(Context2);
     invariantIntlContext(intl);
     return intl;
   }
 
-  // node_modules/react-intl/lib/src/components/createFormattedComponent.js
+  // ../node_modules/react-intl/lib/src/components/createFormattedComponent.js
   var DisplayName;
   (function(DisplayName2) {
     DisplayName2["formatDate"] = "FormattedDate";
@@ -37869,10 +37869,10 @@ html body {
     return Component2;
   }
 
-  // node_modules/react-intl/lib/src/components/provider.js
+  // ../node_modules/react-intl/lib/src/components/provider.js
   var React63 = __toESM(require_react());
 
-  // node_modules/react-intl/lib/src/components/createIntl.js
+  // ../node_modules/react-intl/lib/src/components/createIntl.js
   var React62 = __toESM(require_react());
   function assignUniqueKeysToFormatXMLElementFnArgument(values) {
     if (!values) {
@@ -37928,7 +37928,7 @@ html body {
     });
   };
 
-  // node_modules/react-intl/lib/src/components/provider.js
+  // ../node_modules/react-intl/lib/src/components/provider.js
   function processIntlConfig(config) {
     return {
       locale: config.locale,
@@ -37981,7 +37981,7 @@ html body {
   );
   var provider_default = IntlProvider2;
 
-  // node_modules/react-intl/lib/index.js
+  // ../node_modules/react-intl/lib/index.js
   var FormattedDate = createFormattedComponent("formatDate");
   var FormattedTime = createFormattedComponent("formatTime");
   var FormattedNumber = createFormattedComponent("formatNumber");
@@ -37990,7 +37990,7 @@ html body {
   var FormattedDateParts = createFormattedDateTimePartsComponent("formatDate");
   var FormattedTimeParts = createFormattedDateTimePartsComponent("formatTime");
 
-  // src/locales/common/zh_CN.ts
+  // ../src/locales/common/zh_CN.ts
   var zh_CN_default = {
     "common.ok": "\u786E\u5B9A",
     "common.cancel": "\u53D6\u6D88",
@@ -38046,6 +38046,8 @@ html body {
     "game.backfire.desc": "\u9A7E\u9A76\u8F70\u70B8\u673A\uFF0C\u6295\u5F39\u6467\u6BC1\u5730\u9762\u76EE\u6807",
     "game.sliding.title": "\u6570\u5B57\u534E\u5BB9\u9053",
     "game.sliding.desc": "\u6ED1\u52A8\u6570\u5B57\u65B9\u5757\uFF0C\u6309\u5E8F\u8FD8\u539F",
+    "game.match.title": "\u5FEB\u4E50\u6D88\u6D88",
+    "game.match.desc": "\u4EA4\u6362\u76F8\u90BB\u65B9\u5757\uFF0C\u4E09\u8FDE\u6D88\u9664\uFF0C\u9650\u65F6\u51B2\u9AD8\u5206",
     "game.scores.title": "\u6392\u884C\u699C",
     "game.scores.desc": "\u67E5\u770B\u5404\u6E38\u620F\u6210\u7EE9\u8BB0\u5F55\u4E0E\u7EDF\u8BA1",
     "game.2048.score": "\u5F53\u524D\u5206\u6570",
@@ -38314,6 +38316,78 @@ html body {
     "game.pool3d.viewTop": "\u4FEF\u89C6",
     "game.pool3d.viewHint": "\u53F3\u952E\u62D6\u62FD\u65CB\u8F6C\u89C6\u89D2 \xB7 \u6EDA\u8F6E\u7F29\u653E",
     "game.pool3d.help": "\u64CD\u4F5C\uFF1A\u79FB\u52A8\u9F20\u6807\u7784\u51C6\uFF08\u865A\u7EBF\u4E3A\u7784\u51C6\u7EBF\uFF09\uFF1B\u6309\u4F4F\u5DE6\u952E\u62D6\u52A8\u84C4\u529B\u3001\u677E\u5F00\u51FB\u7403\uFF1B\u7A7A\u683C\u76F4\u63A5\u51FB\u7403\uFF08\u7528\u5F53\u524D\u529B\u5EA6\uFF09\uFF0CR \u91CD\u65B0\u5F00\u7403\u3002\u53F3\u952E\u62D6\u62FD\u53EF\u81EA\u7531\u65CB\u8F6C\u89C6\u89D2\u3001\u6EDA\u8F6E\u7F29\u653E\uFF0C\u6216\u70B9\u51FB\u300C\u9ED8\u8BA4\u89C6\u89D2 / \u4FEF\u89C6\u300D\u4E00\u952E\u5207\u6362\u2014\u2014\u4FEF\u89C6\u89C6\u89D2\u66F4\u65B9\u4FBF\u7784\u76F4\u7EBF\u7403\u3002\u628A 15 \u9897\u7403\u5168\u90E8\u6253\u8FDB\u888B\u5373\u6E05\u53F0\u6210\u529F\uFF0C\u6746\u6570\u8D8A\u5C11\u5F97\u5206\u8D8A\u9AD8\uFF1B\u767D\u7403\u843D\u888B\u4F1A\u81EA\u52A8\u590D\u4F4D\u3002",
+    "game.match.score": "\u5F97\u5206",
+    "game.match.best": "\u6700\u4F73",
+    "game.match.time": "\u65F6\u95F4",
+    "game.match.combo": "\u8FDE\u51FB",
+    "game.match.start": "\u5F00\u59CB\u6E38\u620F",
+    "game.match.restart": "\u91CD\u65B0\u5F00\u59CB",
+    "game.match.hint": "\u63D0\u793A",
+    "game.match.noMove": "\u65E0\u6B65\u53EF\u8D70\uFF0C\u5DF2\u81EA\u52A8\u6D17\u724C",
+    "game.match.idleTitle": "\u9650\u65F6 60 \u79D2 \xB7 \u4E09\u8FDE\u6D88\u9664",
+    "game.match.idleDesc": "\u4EA4\u6362\u76F8\u90BB\u65B9\u5757\u51D1\u9F50\u4E09\u8FDE\u5373\u53EF\u6D88\u9664\uFF0C\u7EA7\u8054\u8FDE\u51FB\u5206\u6570\u7FFB\u500D",
+    "game.match.over.title": "\u65F6\u95F4\u5230\uFF01",
+    "game.match.over.score": "\u5F97\u5206 {score}",
+    "game.match.over.best": "\u6700\u4F73 {best}",
+    "game.match.again": "\u518D\u6765\u4E00\u5C40",
+    "game.match.help": "\u64CD\u4F5C\uFF1A\u70B9\u51FB\u9009\u4E2D\u65B9\u5757\uFF0C\u518D\u70B9\u51FB\u76F8\u90BB\u65B9\u5757\u4EA4\u6362\uFF1B\u6A2A\u5411\u6216\u7EB5\u5411\u51D1\u9F50 3 \u4E2A\u53CA\u4EE5\u4E0A\u540C\u8272\u65B9\u5757\u5373\u53EF\u6D88\u9664\uFF0C\u7EA7\u8054\u6D88\u9664\u8FDE\u51FB\u52A0\u500D\u300260 \u79D2\u5185\u5F97\u5206\u8D8A\u9AD8\u8D8A\u597D\u3002",
+    "game.hawk.title": "\u8001\u9E70\u6293\u5C0F\u9E21",
+    "game.hawk.desc": "\u64CD\u63A7\u6BCD\u9E21\u4FDD\u62A4\u5C0F\u9E21\uFF0C\u62B5\u6321\u8001\u9E70\u4FEF\u51B2",
+    "game.hawk.score": "\u5F97\u5206",
+    "game.hawk.time": "\u65F6\u95F4",
+    "game.hawk.chicks": "\u5C0F\u9E21",
+    "game.hawk.caught": "\u88AB\u6293",
+    "game.hawk.start": "\u5F00\u59CB",
+    "game.hawk.pause": "\u6682\u505C",
+    "game.hawk.restart": "\u91CD\u65B0\u5F00\u59CB",
+    "game.hawk.again": "\u518D\u6765\u4E00\u5C40",
+    "game.hawk.idle": "\u70B9\u51FB\u300C\u5F00\u59CB\u300D\u6216\u6309\u7A7A\u683C\u5B88\u62A4\u5C0F\u9E21",
+    "game.hawk.win": "\u5B88\u62A4\u6210\u529F\uFF01",
+    "game.hawk.winDetail": "\u575A\u6301 {seconds} \u79D2 \xB7 \u5269\u4F59 {chicks} \u53EA\u5C0F\u9E21",
+    "game.hawk.lose": "\u5C0F\u9E21\u88AB\u6293\u5149",
+    "game.hawk.loseDetail": "\u575A\u6301 {seconds} \u79D2 \xB7 \u5F97\u5206 {score} \xB7 \u6551\u56DE {rescued} \u53EA",
+    "game.hawk.overScore": "\u5F97\u5206 {score}",
+    "game.hawk.rescue": "\u6551\u63F4 +{points}",
+    "game.hawk.egg": "\u91D1\u86CB +{points}",
+    "game.hawk.eggFull": "\u961F\u5217\u5DF2\u6EE1 +{points}",
+    "game.hawk.help": "\u64CD\u4F5C\uFF1A\u65B9\u5411\u952E / WASD \u6216\u9F20\u6807\u6307\u6325\u6BCD\u9E21\uFF0C\u8001\u9E70\u4FEF\u51B2\u65F6\u8FCE\u4E0A\u53BB\u628A\u5B83\u5544\u6655\uFF0C\u53EF\u6551\u56DE\u88AB\u6293\u7684\u5C0F\u9E21\uFF1B\u63A5\u5230\u91D1\u86CB\u8865\u4E00\u53EA\u5C0F\u9E21\u3002\u575A\u6301 60 \u79D2\u4E14\u4ECD\u6709\u5C0F\u9E21\u5B58\u6D3B\u83B7\u80DC\uFF0C\u5C0F\u9E21\u88AB\u6293\u5149\u5219\u5931\u8D25\u3002\u7A7A\u683C \u5F00\u59CB/\u6682\u505C\uFF0CP \u6682\u505C\u3002",
+    "game.race.title": "\u9F9F\u5154\u8D5B\u8DD1",
+    "game.race.desc": "\u6309\u4F4F\u5954\u8DD1\u522B\u8BA9\u5154\u5B50\u7761\u7740\uFF0C\u7528\u9053\u5177\u8D62\u8FC7\u4E4C\u9F9F",
+    "game.race.dist": "\u8DDD\u79BB",
+    "game.race.time": "\u7528\u65F6",
+    "game.race.lead": "\u9886\u5148",
+    "game.race.energy": "\u80FD\u91CF",
+    "game.race.state": "\u72B6\u6001",
+    "game.race.state.run": "\u5954\u8DD1",
+    "game.race.state.walk": "\u6162\u8D70",
+    "game.race.state.sleep": "\u7761\u89C9",
+    "game.race.start": "\u5F00\u59CB",
+    "game.race.pause": "\u6682\u505C",
+    "game.race.restart": "\u91CD\u65B0\u5F00\u59CB",
+    "game.race.again": "\u518D\u6765\u4E00\u5C40",
+    "game.race.win": "\u5154\u5B50\u7387\u5148\u51B2\u7EBF\uFF01",
+    "game.race.lose": "\u4E4C\u9F9F\u8D62\u4E86\u2026",
+    "game.race.winDetail": "\u7528\u65F6 {time} \u79D2 \xB7 \u5F97\u5206 {score}",
+    "game.race.item.carrot": "\u80E1\u841D\u535C\u51B2\u523A",
+    "game.race.item.banana": "\u9999\u8549\u76AE",
+    "game.race.item.provoke": "\u6FC0\u5C06\u6CD5",
+    "game.race.itemTip": "\u9053\u5177\u5FEB\u6377\u952E\uFF1A1 \u80E1\u841D\u535C\u51B2\u523A \xB7 2 \u9999\u8549\u76AE \xB7 3 \u6FC0\u5C06\u6CD5\uFF1B\u7761\u7740\u65F6\u65E0\u6CD5\u4F7F\u7528\u9053\u5177",
+    "game.race.sleepTip": "\u5154\u5B50\u7761\u7740\u4E86\uFF01\u5FEB\u901F\u8FDE\u70B9\u5524\u9192\uFF01",
+    "game.race.terrain.plain": "\u8349\u5730",
+    "game.race.terrain.hill": "\u4E0B\u5761",
+    "game.race.terrain.mud": "\u6CE5\u6CDE",
+    "game.race.terrain.shade": "\u6811\u836B",
+    "game.race.terrain.carrot": "\u841D\u535C\u5730",
+    "game.race.toast.sleep": "\u7761\u610F\u6765\u88AD\u2026",
+    "game.race.toast.wake": "\u9192\u8FC7\u6765\u4E86\uFF01",
+    "game.race.toast.roll": "\u4E4C\u9F9F\u7F29\u58F3\u6EDA\u52A8\uFF01",
+    "game.race.toast.eat": "\u4E4C\u9F9F\u505C\u4E0B\u6765\u5403\u8349",
+    "game.race.toast.banana": "\u8E29\u5230\u9999\u8549\u76AE\uFF01",
+    "game.race.toast.bananaMiss": "\u6EDA\u8FC7\u53BB\u4E86\uFF01",
+    "game.race.toast.provoke": "\u4E4C\u9F9F\u88AB\u6FC0\u6012\u4E86\uFF01",
+    "game.race.toast.provokeMiss": "\u5B83\u61D2\u5F97\u7406\u4F60\u2026",
+    "game.race.toast.burst": "\u80E1\u841D\u535C\u51B2\u523A\uFF01",
+    "game.race.help": "\u64CD\u4F5C\uFF1A\u6309\u4F4F\u7A7A\u683C / \u9F20\u6807\u5DE6\u952E\u8BA9\u5154\u5B50\u5954\u8DD1\uFF08\u6D88\u8017\u4F53\u529B\uFF09\uFF0C\u677E\u624B\u6162\u8D70\uFF08\u6062\u590D\u4F53\u529B\u3001\u79EF\u7D2F\u7761\u610F\uFF09\u2014\u2014\u7761\u610F\u6EE1\u4E86\u5154\u5B50\u4F1A\u539F\u5730\u7761\u7740\uFF0C\u5FEB\u901F\u8FDE\u70B9\u5524\u9192\uFF01\u5954\u8DD1\u4F1A\u6512\u80FD\u91CF\uFF08\u6BCF 12 \u7C73 +1\uFF09\uFF0C\u53EF\u5151\u6362\u9053\u5177\uFF1A\u{1F955} \u80E1\u841D\u535C\u51B2\u523A\uFF083 \u80FD\u91CF\uFF0C\u8D85\u9AD8\u901F 2 \u79D2\uFF09\u3001\u{1F34C} \u9999\u8549\u76AE\uFF082 \u80FD\u91CF\uFF0C\u8BA9\u4E4C\u9F9F\u6ED1\u5012\uFF0C\u7F29\u58F3\u6EDA\u884C\u65F6\u514D\u75AB\uFF09\u3001\u{1F4E3} \u6FC0\u5C06\u6CD5\uFF081 \u80FD\u91CF\uFF0C\u4E4C\u9F9F\u66B4\u6012\u51B2\u523A\u540E\u7B4B\u75B2\u529B\u7AED\uFF09\u3002\u8D5B\u9053\u5730\u5F62\u5F71\u54CD\u53CC\u65B9\uFF1A\u4E0B\u5761\u52A0\u901F\u3001\u6CE5\u6CDE\u51CF\u901F\u3001\u6811\u836B\u50AC\u7761\u3001\u841D\u535C\u5730\u56DE\u4F53\u529B\u3002\u5148\u5230\u7EC8\u70B9\u8005\u80DC\uFF0C\u7528\u65F6\u8D8A\u77ED\u5F97\u5206\u8D8A\u9AD8\u3002\u7A7A\u683C \u5F00\u59CB\uFF0CP \u6682\u505C\uFF0CR \u91CD\u5F00\u3002",
     "game.hurdle.title": "\u8DE8\u680F\u51B2\u523A",
     "game.hurdle.desc": "\u84C4\u529B\u8D77\u8DF3\uFF0C\u7CBE\u51C6\u8DE8\u680F\uFF0C\u9014\u4E2D\u6536\u96C6\u4F53\u529B\u4E0E\u751F\u547D\u8865\u7ED9",
     "game.hurdle.score": "\u5F97\u5206",
@@ -38384,12 +38458,12 @@ html body {
     "category.record": "\u8BB0\u5F55"
   };
 
-  // src/locales/zh_CN.ts
+  // ../src/locales/zh_CN.ts
   var zh_CN_default2 = {
     ...zh_CN_default
   };
 
-  // src/locales/common/en_US.ts
+  // ../src/locales/common/en_US.ts
   var en_US_default7 = {
     "common.ok": "OK",
     "common.cancel": "Cancel",
@@ -38445,6 +38519,8 @@ html body {
     "game.backfire.desc": "Bomb ground targets from your bomber",
     "game.sliding.title": "Number Slide",
     "game.sliding.desc": "Slide tiles back into order",
+    "game.match.title": "Happy Match",
+    "game.match.desc": "Swap adjacent tiles, match three, score high in 60s",
     "game.scores.title": "Leaderboard",
     "game.scores.desc": "View game scores and statistics",
     "game.2048.score": "Score",
@@ -38738,6 +38814,78 @@ html body {
     "game.hurdle.lifeUp": "Life +1",
     "game.hurdle.staminaFull": "Stamina full",
     "game.hurdle.help": 'Controls: Space / \u2191 / W (or click) to jump \u2014 hold to jump higher, press again mid-air for a double jump; jumps and double jumps cost stamina, which slowly recovers on the ground. Clearing a hurdle just above the bar scores "Perfect" for more points; jumping too high only counts as a clean pass. Grab golden rings for bonus points. Hurdle heights vary randomly and hurdles keep getting denser \u2014 tall hurdles need a fuller charge. Life packs and stamina packs drift high in the sky: grab them for +1 life / full stamina. Hitting a hurdle trips you, resets your combo and costs a life. The pace keeps rising. P to pause.',
+    "game.match.score": "Score",
+    "game.match.best": "Best",
+    "game.match.time": "Time",
+    "game.match.combo": "Combo",
+    "game.match.start": "Start",
+    "game.match.restart": "Restart",
+    "game.match.hint": "Hint",
+    "game.match.noMove": "No moves left \u2014 auto reshuffle",
+    "game.match.idleTitle": "60s Challenge \xB7 Match 3",
+    "game.match.idleDesc": "Swap adjacent tiles to match 3 or more; cascades multiply your score",
+    "game.match.over.title": "Time's up!",
+    "game.match.over.score": "Score {score}",
+    "game.match.over.best": "Best {best}",
+    "game.match.again": "Play Again",
+    "game.match.help": "Controls: click a tile to select it, then click an adjacent tile to swap; match 3+ of the same kind in a row or column to clear them \u2014 cascading clears multiply your score. Score as high as possible in 60 seconds.",
+    "game.hawk.title": "Eagle & Chicks",
+    "game.hawk.desc": "Guard your chicks from swooping eagles",
+    "game.hawk.score": "Score",
+    "game.hawk.time": "Time",
+    "game.hawk.chicks": "Chicks",
+    "game.hawk.caught": "Caught",
+    "game.hawk.start": "Start",
+    "game.hawk.pause": "Pause",
+    "game.hawk.restart": "Restart",
+    "game.hawk.again": "Play Again",
+    "game.hawk.idle": "Press Space or click Start",
+    "game.hawk.win": "Well Guarded!",
+    "game.hawk.winDetail": "Survived {seconds}s \xB7 {chicks} chicks left",
+    "game.hawk.lose": "All chicks caught",
+    "game.hawk.loseDetail": "Survived {seconds}s \xB7 Score {score} \xB7 {rescued} rescued",
+    "game.hawk.overScore": "Score {score}",
+    "game.hawk.rescue": "Rescue +{points}",
+    "game.hawk.egg": "Golden egg +{points}",
+    "game.hawk.eggFull": "Line full +{points}",
+    "game.hawk.help": "Move the hen with Arrow keys / WASD or the mouse. Bump a swooping eagle to peck it dizzy and rescue a caught chick; catch a golden egg to add a chick. Survive 60 seconds with chicks left to win; lose when all chicks are caught. Space starts/pauses, P pauses.",
+    "game.race.title": "Tortoise & Hare",
+    "game.race.desc": "Hold to sprint, don't let the hare nap \u2014 beat the tortoise",
+    "game.race.dist": "Distance",
+    "game.race.time": "Time",
+    "game.race.lead": "Lead",
+    "game.race.energy": "Energy",
+    "game.race.state": "State",
+    "game.race.state.run": "Sprinting",
+    "game.race.state.walk": "Walking",
+    "game.race.state.sleep": "Napping!",
+    "game.race.start": "Start",
+    "game.race.pause": "Pause",
+    "game.race.restart": "Restart",
+    "game.race.again": "Play Again",
+    "game.race.win": "The hare crosses first!",
+    "game.race.lose": "The tortoise wins\u2026",
+    "game.race.winDetail": "{time}s \xB7 Score {score}",
+    "game.race.item.carrot": "Carrot Sprint",
+    "game.race.item.banana": "Banana Peel",
+    "game.race.item.provoke": "Provoke",
+    "game.race.itemTip": "Item keys: 1 Carrot \xB7 2 Banana \xB7 3 Provoke; items are locked while napping",
+    "game.race.sleepTip": "The hare fell asleep \u2014 tap rapidly to wake it!",
+    "game.race.terrain.plain": "Grassland",
+    "game.race.terrain.hill": "Downhill",
+    "game.race.terrain.mud": "Mud",
+    "game.race.terrain.shade": "Shade",
+    "game.race.terrain.carrot": "Carrot Field",
+    "game.race.toast.sleep": "Drowsiness hits\u2026",
+    "game.race.toast.wake": "Wide awake!",
+    "game.race.toast.roll": "Shell roll!",
+    "game.race.toast.eat": "Stopped to graze",
+    "game.race.toast.banana": "Slipped on the peel!",
+    "game.race.toast.bananaMiss": "Rolled right over!",
+    "game.race.toast.provoke": "The tortoise is provoked!",
+    "game.race.toast.provokeMiss": "It ignores you\u2026",
+    "game.race.toast.burst": "Carrot boost!",
+    "game.race.help": "Controls: hold Space / left mouse to sprint (burns stamina); release to walk (recovers stamina but builds drowsiness). Full drowsiness makes the hare nap on the spot \u2014 tap rapidly to wake it! Sprinting earns energy (+1 per 12m) to spend on items: \u{1F955} Carrot Sprint (3, ultra-fast for 2s), \u{1F34C} Banana Peel (2, makes the tortoise slip \u2014 immune while shell-rolling), \u{1F4E3} Provoke (1, the tortoise rages then collapses from exhaustion). Terrain affects both racers: downhill speeds up, mud slows down, shade makes the hare drowsier, carrot fields restore stamina. First across the finish wins; shorter time means a higher score. Space starts, P pauses, R restarts.",
     "game.archery.title": "Ricochet Archery",
     "game.archery.desc": "Draw the bow, bank off walls and wind to hit the mark",
     "game.archery.score": "Score",
@@ -38783,12 +38931,12 @@ html body {
     "category.record": "Records"
   };
 
-  // src/locales/en_US.ts
+  // ../src/locales/en_US.ts
   var en_US_default8 = {
     ...en_US_default7
   };
 
-  // src/ThemeShell.tsx
+  // ../src/ThemeShell.tsx
   var import_jsx_runtime = __toESM(require_jsx_runtime());
   var DEFAULT_LOCALE = "zh_CN";
   var normalizeLocale = (locale5) => {
@@ -38871,17 +39019,17 @@ html body {
   };
   var ThemeShell_default = ThemeShell;
 
-  // src/games/HurdleGame.tsx
+  // ../src/games/HurdleGame.tsx
   var import_react33 = __toESM(require_react());
 
-  // node_modules/@ant-design/icons/es/icons/PauseOutlined.js
+  // ../node_modules/@ant-design/icons/es/icons/PauseOutlined.js
   var React65 = __toESM(require_react());
 
-  // node_modules/@ant-design/icons-svg/es/asn/PauseOutlined.js
+  // ../node_modules/@ant-design/icons-svg/es/asn/PauseOutlined.js
   var PauseOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M304 176h80v672h-80zm408 0h-64c-4.4 0-8 3.6-8 8v656c0 4.4 3.6 8 8 8h64c4.4 0 8-3.6 8-8V184c0-4.4-3.6-8-8-8z" } }] }, "name": "pause", "theme": "outlined" };
   var PauseOutlined_default = PauseOutlined;
 
-  // node_modules/@ant-design/icons/es/icons/PauseOutlined.js
+  // ../node_modules/@ant-design/icons/es/icons/PauseOutlined.js
   function _extends8() {
     _extends8 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -38906,14 +39054,14 @@ html body {
   }
   var PauseOutlined_default2 = RefIcon2;
 
-  // node_modules/@ant-design/icons/es/icons/PlayCircleOutlined.js
+  // ../node_modules/@ant-design/icons/es/icons/PlayCircleOutlined.js
   var React66 = __toESM(require_react());
 
-  // node_modules/@ant-design/icons-svg/es/asn/PlayCircleOutlined.js
+  // ../node_modules/@ant-design/icons-svg/es/asn/PlayCircleOutlined.js
   var PlayCircleOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z" } }, { "tag": "path", "attrs": { "d": "M719.4 499.1l-296.1-215A15.9 15.9 0 00398 297v430c0 13.1 14.8 20.5 25.3 12.9l296.1-215a15.9 15.9 0 000-25.8zm-257.6 134V390.9L628.5 512 461.8 633.1z" } }] }, "name": "play-circle", "theme": "outlined" };
   var PlayCircleOutlined_default = PlayCircleOutlined;
 
-  // node_modules/@ant-design/icons/es/icons/PlayCircleOutlined.js
+  // ../node_modules/@ant-design/icons/es/icons/PlayCircleOutlined.js
   function _extends9() {
     _extends9 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -38938,7 +39086,7 @@ html body {
   }
   var PlayCircleOutlined_default2 = RefIcon3;
 
-  // src/scoreClient.ts
+  // ../src/scoreClient.ts
   var LS_KEY = "fat-games.scores";
   var LS_MAX = 200;
   var sdkRef = null;
@@ -38997,7 +39145,7 @@ html body {
     })();
   }
 
-  // src/hooks/useI18n.ts
+  // ../src/hooks/useI18n.ts
   var import_react31 = __toESM(require_react());
   var useI18n = () => {
     try {
@@ -39034,10 +39182,10 @@ html body {
   };
   var useI18n_default = useI18n;
 
-  // src/games/GameFrame.tsx
+  // ../src/games/GameFrame.tsx
   var import_react32 = __toESM(require_react());
 
-  // src/games/gameTheme.ts
+  // ../src/games/gameTheme.ts
   var STAGE_BG_LIGHT = "radial-gradient(120% 140% at 20% 0%, #fdfbf7 0%, #f5f1ea 45%, #ede6da 100%)";
   var STAGE_BG_DARK = "radial-gradient(120% 140% at 20% 0%, #23272e 0%, #1b1e24 55%, #14161b 100%)";
   var STAGE_BORDER_LIGHT = "rgba(120, 100, 70, 0.18)";
@@ -39069,7 +39217,7 @@ html body {
     value: "#ffffff"
   };
 
-  // src/games/sound.ts
+  // ../src/games/sound.ts
   var LS_KEY2 = "fat-games.sound";
   var lastPlayed = {};
   var ctx = null;
@@ -39204,7 +39352,7 @@ html body {
     tone(2093, 0.2, { type: "triangle", vol: 0.1, decay: 0.17, delay: 0.1 });
   }
 
-  // src/games/GameFrame.tsx
+  // ../src/games/GameFrame.tsx
   var import_jsx_runtime2 = __toESM(require_jsx_runtime());
   function StatChip({
     label,
@@ -39453,7 +39601,7 @@ html body {
   };
   var GameFrame_default = GameFrame;
 
-  // src/games/HurdleGame.tsx
+  // ../src/games/HurdleGame.tsx
   var import_jsx_runtime3 = __toESM(require_jsx_runtime());
   var W = 560;
   var H = 320;
@@ -40381,7 +40529,7 @@ html body {
   };
   var HurdleGame_default = HurdleGame;
 
-  // preview/hurdle-preview.tsx
+  // hurdle-preview.tsx
   var import_jsx_runtime4 = __toESM(require_jsx_runtime());
   var mockSdk = {
     ui: {
