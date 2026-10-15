@@ -34,6 +34,7 @@ import {
   IconMatch,
   IconHawkChicken,
   IconTortoiseHare,
+  IconOrange,
 } from "./gameIcons";
 
 import Game2048 from "./Game2048";
@@ -59,6 +60,7 @@ import ArcheryGame from "./ArcheryGame";
 import MatchGame from "./MatchGame";
 import HawkChickenGame from "./HawkChickenGame";
 import RaceGame from "./RaceGame";
+import OrangePeelGame from "./OrangePeelGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -335,6 +337,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.casual",
     icon: IconTortoiseHare,
     component: RaceGame,
+  },
+  {
+    id: "orange",
+    title: "剥橘子",
+    desc: "快而稳地撕下橘皮，别划伤果肉",
+    category: "休闲",
+    titleKey: "game.orange.title",
+    descKey: "game.orange.desc",
+    categoryKey: "category.casual",
+    icon: IconOrange,
+    component: OrangePeelGame,
   },
   {
     id: "scores",

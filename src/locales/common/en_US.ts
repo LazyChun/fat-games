@@ -472,6 +472,23 @@ export default {
   "game.race.help":
     "Controls: hold Space / left mouse to sprint (burns stamina); release to walk (recovers stamina but builds drowsiness). Full drowsiness makes the hare nap on the spot — tap rapidly to wake it! Sprinting earns energy (+1 per 12m) to spend on items: 🥕 Carrot Sprint (3, ultra-fast for 2s), 🍌 Banana Peel (2, makes the tortoise slip — immune while shell-rolling), 📣 Provoke (1, the tortoise rages then collapses from exhaustion). Terrain affects both racers: downhill speeds up, mud slows down, shade makes the hare drowsier, carrot fields restore stamina. First across the finish wins; shorter time means a higher score. Space starts, P pauses, R restarts.",
 
+  "game.orange.title": "Peel the Orange",
+  "game.orange.desc": "Peel fast and steady — don't slice the flesh",
+  "game.orange.score": "Score",
+  "game.orange.combo": "Combo",
+  "game.orange.progress": "Peeled",
+  "game.orange.time": "Time",
+  "game.orange.start": "Start Peeling",
+  "game.orange.restart": "Restart",
+  "game.orange.again": "Play Again",
+  "game.orange.idleSub":
+    "Press and drag across the peel to tear it off. Peel fast AND steady to build combos; too fast and you'll cut the flesh!",
+  "game.orange.over.peeled": "{peeled} blocks peeled · {cuts} cuts",
+  "game.orange.over.timeUp": "Time's up — the orange wasn't fully peeled",
+  "game.orange.over.detail": "Max combo {combo} · Rating {rating}",
+  "game.orange.help":
+    "Controls: press and drag across the peel (or click) to tear off blocks; consecutive peels build a combo multiplier up to ×5. Dragging too fast cuts the flesh: only 2 pts, combo reset, flesh stays bruised. Clear a whole slice for +25; peel the entire orange without a single cut for an S rating (+200 plus the remaining-time bonus)!",
+
   "game.archery.title": "Ricochet Archery",
   "game.archery.desc": "Draw the bow, bank off walls and wind to hit the mark",
   "game.archery.score": "Score",

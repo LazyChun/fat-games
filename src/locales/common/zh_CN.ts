@@ -445,6 +445,23 @@ export default {
   "game.race.help":
     "操作：按住空格 / 鼠标左键让兔子奔跑（消耗体力），松手慢走（恢复体力、积累睡意）——睡意满了兔子会原地睡着，快速连点唤醒！奔跑会攒能量（每 12 米 +1），可兑换道具：🥕 胡萝卜冲刺（3 能量，超高速 2 秒）、🍌 香蕉皮（2 能量，让乌龟滑倒，缩壳滚行时免疫）、📣 激将法（1 能量，乌龟暴怒冲刺后筋疲力竭）。赛道地形影响双方：下坡加速、泥泞减速、树荫催睡、萝卜地回体力。先到终点者胜，用时越短得分越高。空格 开始，P 暂停，R 重开。",
 
+  "game.orange.title": "剥橘子",
+  "game.orange.desc": "快而稳地撕下橘皮，别划伤果肉",
+  "game.orange.score": "得分",
+  "game.orange.combo": "连击",
+  "game.orange.progress": "进度",
+  "game.orange.time": "时间",
+  "game.orange.start": "开始剥皮",
+  "game.orange.restart": "重新开始",
+  "game.orange.again": "再来一局",
+  "game.orange.idleSub":
+    "按住拖动撕下橘皮，撕得又快又稳才能叠加连击；拖太快会划伤果肉哦！",
+  "game.orange.over.peeled": "剥下 {peeled} 块 · 划伤 {cuts} 处",
+  "game.orange.over.timeUp": "时间到！没来得及剥完",
+  "game.orange.over.detail": "最高连击 {combo} · 评级 {rating}",
+  "game.orange.help":
+    "操作：在橘皮上按住拖动，划过的皮块会被撕下（点击也可）；连续撕皮叠加连击倍率，最高 ×5。拖得太快会划伤果肉：只拿 2 分、连击清零、果肉破损。整瓣剥完 +25；完整剥完整颗且零划伤可得 S 评级，+200 分并享剩余时间加成！",
+
   "game.hurdle.title": "跨栏冲刺",
   "game.hurdle.desc": "蓄力起跳，精准跨栏，途中收集体力与生命补给",
   "game.hurdle.score": "得分",

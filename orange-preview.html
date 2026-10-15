@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>剥橘子 · 独立预览（fat-games 插件内置同款）</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 20px 10px;
+    font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: radial-gradient(120% 140% at 20% 0%, #fdfbf7 0%, #f5f1ea 45%, #ede6da 100%);
+    color: rgba(0,0,0,0.85);
+  }
+  .frame {
+    width: 500px;
+    max-width: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgba(120,100,70,0.18);
+    box-shadow: 0 10px 30px rgba(90,70,40,0.14);
+  }
+  .bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .bar .emoji { font-size: 22px; }
+  .bar .title { font-size: 16px; font-weight: 800; }
+  .bar .spacer { flex: 1; }
+  .bar button {
+    border: 1px solid rgba(0,0,0,0.18); background: rgba(255,255,255,0.9);
+    color: rgba(0,0,0,0.75); border-radius: 20px; padding: 6px 16px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  .bar button.primary {
+    background: linear-gradient(135deg, #4facfe 0%, #1677ff 100%);
+    color: #fff; border: none; box-shadow: 0 3px 10px rgba(22,119,255,0.28);
+  }
+  .stats {
+    display: flex; flex-wrap: wrap; gap: 10px; padding: 12px 16px 0;
+  }
+  .chip {
+    min-width: 100px; padding: 7px 14px; border-radius: 14px;
+    display: flex; flex-direction: column; gap: 1px; line-height: 1.25;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.14);
+  }
+  .chip .lbl { font-size: 11px; }
+  .chip .val { font-size: 19px; font-weight: 800; }
+  .stage {
+    position: relative; margin: 16px;
+    border-radius: 14px; overflow: visible;
+    border: 2px solid rgba(230,140,60,0.35);
+    box-shadow: 0 10px 30px rgba(180,100,30,0.25);
+  }
+  .stage svg.main { display: block; width: 100%; height: auto; cursor: crosshair; touch-action: none; user-select: none; }
+  .fx-layer {
+    position: absolute; inset: 0; pointer-events: none; z-index: 5; overflow: visible;
+  }
+  .fx {
+    position: absolute; transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; gap: 8px;
+    align-items: center; justify-content: center;
+    text-align: center; color: #fff;
+    pointer-events: none;
+    border-radius: 50%;
+    animation: win-in .4s cubic-bezier(.22,1,.36,1) both;
+  }
+  .overlay .big { font-size: 30px; font-weight: 900; }
+  .overlay .mid { font-size: 18px; font-weight: 800; }
+  .overlay .sub { font-size: 12.5px; opacity: .92; max-width: 280px; line-height: 1.6; padding: 0 14px; }
+  .overlay button {
+    pointer-events: auto; cursor: pointer; border: none;
+    background: linear-gradient(135deg, #4facfe 0%, #1677ff 100%);
+    color: #fff; border-radius: 20px; padding: 8px 22px;
+    font-size: 14px; font-weight: 700;
+    box-shadow: 0 3px 10px rgba(22,119,255,0.28);
+  }
+  .idle-bg { background: rgba(255,140,50,0.9); box-shadow: inset 0 0 60px rgba(140,60,0,0.35); }
+  .over-bg { background: rgba(24,26,32,0.78); backdrop-filter: blur(2px); }
+  .help {
+    font-size: 12px; color: rgba(0,0,0,0.5);
+    text-align: center; max-width: 500px; line-height: 1.7; padding: 0 12px;
+  }
+  @keyframes win-in {
+    0% { opacity: 0; transform: scale(.85); }
+    60% { opacity: 1; transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-7px); }
+    40% { transform: translateX(7px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+  }
+  .shaking { animation: shake .45s ease both; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="bar">
+      <span class="emoji">🍊</span>
+      <span class="title">剥橘子</span>
+      <div class="spacer"></div>
+      <button id="btnHead" class="primary">开始剥皮</button>
+    </div>
+    <div class="stats">
+      <div class="chip" style="background:linear-gradient(135deg,#ffd86b,#f6a821)"><span class="lbl" style="color:rgba(90,55,0,.75)">得分</span><span class="val" id="stScore" style="color:#5a3400">0</span></div>
+      <div class="chip" style="background:linear-gradient(135deg,#b48bff,#7b3ff2)"><span class="lbl" style="color:rgba(255,255,255,.85)">连击</span><span class="val" id="stCombo" style="color:#fff">—</span></div>
+      <div class="chip" style="background:linear-gradient(135deg,#6bb6ff,#2b7de9)"><span class="lbl" style="color:rgba(255,255,255,.85)">进度</span><span class="val" id="stProgress" style="color:#fff">0/24</span></div>
+      <div class="chip" style="background:linear-gradient(135deg,#ff9a8b,#f2554a)"><span class="lbl" style="color:rgba(255,255,255,.9)">时间</span><span class="val" id="stTime" style="color:#fff">60s</span></div>
+    </div>
+    <div class="stage" id="stage">
+      <div class="fx-layer" id="fxLayer"></div>
+      <svg class="main" id="svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="orange-flesh" cx="40%" cy="35%" r="80%">
+            <stop offset="0%" stop-color="#ffbd5e"/>
+            <stop offset="70%" stop-color="#ff9a2c"/>
+            <stop offset="100%" stop-color="#f7821c"/>
+          </radialGradient>
+          <linearGradient id="orange-pith" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#fdf3da"/>
+            <stop offset="100%" stop-color="#f2e0b4"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="150" cy="247" rx="96" ry="13" fill="rgba(0,0,0,0.16)"/>
+        <circle id="fleshBase" cx="150" cy="150" r="128" fill="url(#orange-flesh)" stroke="#e6781a" stroke-width="2"/>
+        <g id="pithLayer"></g>
+        <g id="cutLayer"></g>
+        <g id="peelLayer"></g>
+        <circle cx="150" cy="150" r="22" fill="#e8851d" stroke="#cf6a12" stroke-width="1.4"/>
+        <circle cx="150" cy="150" r="10" fill="#f0a03a" opacity="0.85"/>
+        <g id="navelDots"></g>
+        <ellipse cx="112" cy="92" rx="50" ry="27" fill="#fff" opacity="0.30" transform="rotate(-16 112 92)" pointer-events="none"/>
+      </svg>
+      <div class="overlay idle-bg" id="ovIdle" style="display:flex">
+        <div class="big">🍊</div>
+        <div class="mid">剥橘子</div>
+        <div class="sub">按住拖动撕下橘皮，撕得又快又稳才能叠加连击；拖太快会划伤果肉哦！</div>
+        <div><button id="btnIdle">开始剥皮</button></div>
+      </div>
+      <div class="overlay over-bg" id="ovOver" style="display:none">
+        <div class="big" id="ovRating">S</div>
+        <div class="mid" id="ovScore">0</div>
+        <div class="sub" id="ovDetail"></div>
+        <div style="margin-top:6px"><button id="btnAgain">再来一局</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="help">
+    操作：在橘皮上按住拖动，划过的皮块会被撕下（点击也可）；连续撕皮叠加连击倍率，最高 ×5。拖得太快会划伤果肉：只拿 2 分、连击清零、果肉破损。整瓣剥完 +25；完整剥完整颗且零划伤可得 S 评级，+200 分并享剩余时间加成！空格：开始 / 再来一局。
+  </div>
+<script>
+"use strict";
+/* ═══ 常量与纯逻辑（与插件内 orangeLogic 同款） ═══ */
+const SLICES = 8, SEGS = 3, PEEL_TOTAL = SLICES * SEGS;
+const R_IN = 78, R_OUT = 128;
+const SEG_EDGES = [128, 112, 96, 78];
+const START_ANGLE = -90, SLICE_ANGLE = 360 / SLICES;
+const ROUND_SECONDS = 60, COMBO_WINDOW = 900, SPEED_CUT = 1.5;
+const SLICE_BONUS = 25, PERFECT_BONUS = 200, TIME_BONUS_RATE = 5;
+
+const NS = "http://www.w3.org/2000/svg";
+const normAngle = (d) => ((d % 360) + 360) % 360;
+const polar = (cx, cy, r, deg) => {
+  const rad = (normAngle(deg) * Math.PI) / 180;
+  return [cx + r * Math.cos(rad), cy + r * Math.sin(rad)];
+};
+function blockPath(idx) {
+  const slice = Math.floor(idx / SEGS), seg = idx % SEGS;
+  const r0 = SEG_EDGES[seg + 1], r1 = SEG_EDGES[seg];
+  const a0 = START_ANGLE + slice * SLICE_ANGLE, a1 = a0 + SLICE_ANGLE;
+  const [x0, y0] = polar(150, 150, r1, a0), [x1, y1] = polar(150, 150, r1, a1);
+  const [x2, y2] = polar(150, 150, r0, a1), [x3, y3] = polar(150, 150, r0, a0);
+  return `M ${x0.toFixed(2)} ${y0.toFixed(2)} A ${r1} ${r1} 0 0 1 ${x1.toFixed(2)} ${y1.toFixed(2)} L ${x2.toFixed(2)} ${y2.toFixed(2)} A ${r0} ${r0} 0 0 0 ${x3.toFixed(2)} ${y3.toFixed(2)} Z`;
+}
+function slicePath(slice) {
+  const a0 = START_ANGLE + slice * SLICE_ANGLE, a1 = a0 + SLICE_ANGLE;
+  const [x0, y0] = polar(150, 150, R_OUT, a0), [x1, y1] = polar(150, 150, R_OUT, a1);
+  const [x2, y2] = polar(150, 150, R_IN, a1), [x3, y3] = polar(150, 150, R_IN, a0);
+  return `M ${x0.toFixed(2)} ${y0.toFixed(2)} A ${R_OUT} ${R_OUT} 0 0 1 ${x1.toFixed(2)} ${y1.toFixed(2)} L ${x2.toFixed(2)} ${y2.toFixed(2)} A ${R_IN} ${R_IN} 0 0 0 ${x3.toFixed(2)} ${y3.toFixed(2)} Z`;
+}
+function segArc(slice, seg) {
+  const r = SEG_EDGES[seg], a0 = START_ANGLE + slice * SLICE_ANGLE, a1 = a0 + SLICE_ANGLE;
+  const [x0, y0] = polar(150, 150, r, a0), [x1, y1] = polar(150, 150, r, a1);
+  return `M ${x0.toFixed(2)} ${y0.toFixed(2)} A ${r} ${r} 0 0 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`;
+}
+function hitTest(x, y) {
+  const dx = x - 150, dy = y - 150;
+  const r = Math.hypot(dx, dy);
+  if (r > R_OUT + 4 || r < R_IN - 4) return null;
+  let seg = -1;
+  for (let s = 0; s < SEGS; s++) {
+    if (r >= SEG_EDGES[s + 1] - 0.01 && r <= SEG_EDGES[s] + 0.01) { seg = s; break; }
+  }
+  if (seg < 0) return null;
+  const ang = normAngle((Math.atan2(dy, dx) * 180) / Math.PI - START_ANGLE);
+  const slice = Math.min(SLICES - 1, Math.floor(ang / SLICE_ANGLE));
+  return { idx: slice * SEGS + seg, slice, seg };
+}
+const sliceComplete = (slice, peeled) =>
+  peeled.has(slice * 3) && peeled.has(slice * 3 + 1) && peeled.has(slice * 3 + 2);
+function ratingFor(peeledCount, cuts) {
+  if (peeledCount >= PEEL_TOTAL) return cuts === 0 ? "S" : "A";
+  if (peeledCount / PEEL_TOTAL >= 0.6) return "B";
+  return "C";
+}
+const comboMultiplier = (combo) => Math.min(5, 1 + Math.max(0, combo - 1) * 0.5);
+const blockGain = (combo, cut) => (cut ? 2 : Math.round(10 * comboMultiplier(combo)));
+
+/* ═══ 音效（Web Audio 合成，与插件 sound.ts 同款思路） ═══ */
+let AC = null;
+function tone(freq, dur, opts) {
+  try {
+    if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)();
+    if (AC.state === "suspended") AC.resume();
+    opts = opts || {};
+    const t0 = AC.currentTime + (opts.delay || 0);
+    const o = AC.createOscillator(), g = AC.createGain();
+    o.type = opts.type || "sine";
+    o.frequency.setValueAtTime(freq, t0);
+    if (opts.slideTo) o.frequency.exponentialRampToValueAtTime(Math.max(20, opts.slideTo), t0 + dur);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(opts.vol || 0.15, t0 + (opts.attack || 0.005));
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + (opts.attack || 0.005) + (opts.decay || 0.15));
+    o.connect(g); g.connect(AC.destination);
+    o.start(t0); o.stop(t0 + dur + 0.05);
+  } catch (e) { /* 忽略音频不可用 */ }
+}
+const sfxClick = () => tone(420, 0.09, { type: "triangle", vol: 0.16, decay: 0.08, slideTo: 300 });
+const sfxEat = () => { tone(440, 0.09, { type: "triangle", vol: 0.16, decay: 0.08, slideTo: 660 }); tone(660, 0.12, { type: "sine", vol: 0.1, decay: 0.1, delay: 0.06 }); };
+const sfxScore = () => { tone(880, 0.1, { type: "sine", vol: 0.15, decay: 0.09 }); tone(1320, 0.14, { type: "sine", vol: 0.12, decay: 0.12, delay: 0.05 }); };
+const sfxHurt = () => { tone(280, 0.16, { type: "square", vol: 0.1, decay: 0.14, slideTo: 110 }); };
+const sfxPerfect = () => { tone(1319, 0.1, { type: "sine", vol: 0.15, decay: 0.09 }); tone(1760, 0.16, { type: "sine", vol: 0.12, decay: 0.13, delay: 0.05 }); };
+const sfxWin = () => { [523, 659, 784, 1047].forEach((f, i) => tone(f, 0.16, { type: "triangle", vol: 0.16, decay: 0.13, delay: i * 0.09 })); tone(1319, 0.3, { type: "sine", vol: 0.12, decay: 0.26, delay: 0.36 }); };
+const sfxLose = () => { [392, 330, 262, 196].forEach((f, i) => tone(f, 0.2, { type: "triangle", vol: 0.14, decay: 0.18, delay: i * 0.11 })); };
+
+/* ═══ DOM 构建 ═══ */
+const $ = (id) => document.getElementById(id);
+const svg = $("svg"), fxLayer = $("fxLayer"), stage = $("stage");
+const peelLayer = $("peelLayer"), pithLayer = $("pithLayer"), cutLayer = $("cutLayer"), navelDots = $("navelDots");
+
+const peelEls = [];
+for (let i = 0; i < PEEL_TOTAL; i++) {
+  const slice = Math.floor(i / 3), seg = i % 3;
+  const warm = slice % 2 === 0;
+  const fill = seg === 0 ? (warm ? "#ffa63e" : "#ffb04e")
+    : seg === 1 ? (warm ? "#f8932c" : "#fa9a33")
+    : (warm ? "#f08724" : "#f59a2c");
+  const p = document.createElementNS(NS, "path");
+  p.setAttribute("d", blockPath(i));
+  p.setAttribute("fill", fill);
+  p.setAttribute("stroke", "#d97b1f");
+  p.setAttribute("stroke-width", "1.2");
+  p.setAttribute("stroke-linejoin", "round");
+  peelLayer.appendChild(p);
+  peelEls.push(p);
+}
+
+const pithEls = [];
+for (let s = 0; s < SLICES; s++) {
+  const g = document.createElementNS(NS, "g");
+  const p = document.createElementNS(NS, "path");
+  p.setAttribute("d", slicePath(s));
+  p.setAttribute("fill", "url(#orange-pith)");
+  p.setAttribute("stroke", "#ecd5a0");
+  p.setAttribute("stroke-width", "1");
+  p.setAttribute("opacity", "0.92");
+  g.appendChild(p);
+  g.style.display = "none";
+  pithLayer.appendChild(g);
+  pithEls.push({ g, p });
+}
+for (let i = 0; i < 6; i++) {
+  const a = ((i * 60 + 30) * Math.PI) / 180;
+  const c = document.createElementNS(NS, "circle");
+  c.setAttribute("cx", (150 + 15 * Math.cos(a)).toFixed(1));
+  c.setAttribute("cy", (150 + 15 * Math.sin(a)).toFixed(1));
+  c.setAttribute("r", "1.6");
+  c.setAttribute("fill", "#b95a0e");
+  navelDots.appendChild(c);
+}
+
+/* ═══ 游戏状态 ═══ */
+let phase = "idle"; // idle | playing | over
+let peeled = new Set(), cuts = new Set();
+let score = 0, combo = 0, comboMax = 0, timeLeft = ROUND_SECONDS;
+let lastPeelAt = 0, lastPoint = null, timerId = null, best = 0;
+let fxSeq = 0;
+
+try { best = Number(localStorage.getItem("fat-games.orange.best") || 0); } catch (e) { best = 0; }
+
+function setScore(v) { score = v; $("stScore").textContent = score; }
+function setCombo(v) {
+  combo = v;
+  $("stCombo").textContent = combo > 0 ? `${combo} ×${comboMultiplier(combo).toFixed(1)}` : "—";
+}
+function setProgress() {
+  $("stProgress").textContent = `${peeled.size}/${PEEL_TOTAL}`;
+}
+function setTime() { $("stTime").textContent = `${timeLeft}s`; }
+
+function refreshStage() {
+  // 白络层：触瓣显示，整瓣完成后切果肉 + 纹理
+  for (let s = 0; s < SLICES; s++) {
+    const touched = peeled.has(s * 3) || peeled.has(s * 3 + 1) || peeled.has(s * 3 + 2);
+    const done = sliceComplete(s, peeled);
+    const { g, p } = pithEls[s];
+    g.style.display = touched ? "" : "none";
+    p.setAttribute("fill", done ? "url(#orange-flesh)" : "url(#orange-pith)");
+    p.setAttribute("stroke", done ? "#ffb354" : "#ecd5a0");
+    p.setAttribute("stroke-width", done ? "1.4" : "1");
+    p.setAttribute("opacity", done ? "1" : "0.92");
+    let tex = g.querySelector(".tex");
+    if (done && !tex) {
+      tex = document.createElementNS(NS, "g");
+      tex.setAttribute("class", "tex");
+      tex.setAttribute("stroke", "#f5851f");
+      tex.setAttribute("stroke-width", "1.1");
+      tex.setAttribute("opacity", "0.65");
+      tex.setAttribute("fill", "none");
+      const a0 = START_ANGLE + s * SLICE_ANGLE, a1 = a0 + SLICE_ANGLE;
+      const [ix0, iy0] = polar(150, 150, R_IN, a0), [ox0, oy0] = polar(150, 150, R_OUT, a0);
+      const [ix1, iy1] = polar(150, 150, R_IN, a1), [ox1, oy1] = polar(150, 150, R_OUT, a1);
+      const [mx, my] = polar(150, 150, R_OUT, a0 + SLICE_ANGLE / 2);
+      const lines = [
+        `M ${ix0.toFixed(2)} ${iy0.toFixed(2)} L ${ox0.toFixed(2)} ${oy0.toFixed(2)}`,
+        `M ${ix1.toFixed(2)} ${iy1.toFixed(2)} L ${ox1.toFixed(2)} ${oy1.toFixed(2)}`,
+        `M 150 150 L ${mx.toFixed(2)} ${my.toFixed(2)}`,
+        segArc(s, 1), segArc(s, 2),
+      ];
+      for (const d of lines) {
+        const ln = document.createElementNS(NS, "path");
+        ln.setAttribute("d", d);
+        tex.appendChild(ln);
+      }
+      g.appendChild(tex);
+    }
+  }
+  // 皮块显示
+  for (let i = 0; i < PEEL_TOTAL; i++) {
+    peelEls[i].style.display = peeled.has(i) ? "none" : "";
+  }
+  // 划伤破损
+  while (cutLayer.firstChild) cutLayer.removeChild(cutLayer.firstChild);
+  for (const idx of cuts) {
+    const p = document.createElementNS(NS, "path");
+    p.setAttribute("d", blockPath(idx));
+    p.setAttribute("fill", "#e8732a");
+    p.setAttribute("opacity", "0.85");
+    p.setAttribute("stroke", "#c95d18");
+    p.setAttribute("stroke-width", "0.8");
+    cutLayer.appendChild(p);
+  }
+}
+
+/* ═══ 特效 ═══ */
+let particleCleanups = new Map();
+function spawnFx(x, y, kind, angle) {
+  const el = document.createElement("div");
+  el.className = "fx";
+  el.style.left = (x / 300 * 100) + "%";
+  el.style.top = (y / 300 * 100) + "%";
+  el.style.width = (kind === "slice" ? 30 : kind === "juice" ? 7 : 12) + "px";
+  el.style.height = (kind === "slice" ? 44 : kind === "juice" ? 7 : 16) + "px";
+  el.style.borderRadius = kind === "juice" ? "50%" : "6px";
+  el.style.background = kind === "juice"
+    ? "radial-gradient(circle at 35% 30%, #ffd07a 0%, #ff9a2c 70%)"
+    : "linear-gradient(160deg, #ffc06a 0%, #ff9a33 55%, #f0781c 100%)";
+  el.style.border = kind === "juice" ? "none" : "1px solid #d97116";
+  el.style.boxShadow = "0 2px 6px rgba(120,60,0,0.3)";
+  fxLayer.appendChild(el);
+  const id = ++fxSeq;
+  const dist = kind === "slice" ? 74 : kind === "juice" ? 26 : 52;
+  const dur = kind === "slice" ? 900 : kind === "juice" ? 520 : 640;
+  const rad = (angle * Math.PI) / 180;
+  const x0 = Math.cos(rad) * dist, y0 = Math.sin(rad) * dist + (kind === "peel" ? 18 : 0);
+  const rotEnd = kind === "slice" ? 480 : kind === "juice" ? 160 : 320;
+  const anim = el.animate([
+    { transform: "translate(-50%,-50%) translate(0,0) rotate(0deg) scale(0.7)", opacity: 1 },
+    { transform: `translate(-50%,-50%) translate(${x0}px, ${y0}px) rotate(${rotEnd}deg) scale(1)`, opacity: 0, offset: 0.75 },
+    { transform: `translate(-50%,-50%) translate(${x0 * 1.25}px, ${y0 * 1.25 + 26}px) rotate(${rotEnd + 160}deg) scale(0.85)`, opacity: 0 },
+  ], { duration: dur, easing: "cubic-bezier(0.22,1,0.36,1)" });
+  anim.onfinish = () => { el.remove(); particleCleanups.delete(id); };
+  particleCleanups.set(id, () => anim.cancel());
+}
+function spawnFloat(x, y, text, kind) {
+  const el = document.createElement("div");
+  el.className = "fx";
+  el.style.left = (x / 300 * 100) + "%";
+  el.style.top = (y / 300 * 100) + "%";
+  el.style.fontSize = (kind === "great" ? 20 : 17) + "px";
+  el.style.fontWeight = "800";
+  el.style.color = kind === "good" ? "#ffd45e" : kind === "bad" ? "#ff7a6b" : "#7dffb0";
+  el.style.textShadow = "0 2px 8px rgba(0,0,0,0.45)";
+  el.style.whiteSpace = "nowrap";
+  el.textContent = text;
+  fxLayer.appendChild(el);
+  const id = ++fxSeq;
+  const anim = el.animate([
+    { transform: "translate(-50%,-50%) translateY(0)", opacity: 1 },
+    { transform: "translate(-50%,-50%) translateY(-44px)", opacity: 0, offset: 0.8 },
+    { transform: "translate(-50%,-50%) translateY(-58px)", opacity: 0 },
+  ], { duration: 1150, easing: "cubic-bezier(0.22,1,0.36,1)" });
+  anim.onfinish = () => { el.remove(); particleCleanups.delete(id); };
+  particleCleanups.set(id, () => anim.cancel());
+}
+
+/* ═══ 核心玩法 ═══ */
+function finishGame(perfect, peeledAll, elapsed) {
+  phase = "over";
+  if (perfect) { setScore(score + PERFECT_BONUS); sfxWin(); } else sfxLose();
+  if (peeledAll) setScore(score + elapsed * TIME_BONUS_RATE);
+  const rating = ratingFor(peeled.size, cuts.size);
+  const ov = $("ovOver");
+  $("ovRating").textContent = rating;
+  $("ovRating").style.color =
+    rating === "S" ? "#ffd45e" : rating === "A" ? "#7dffb0" : rating === "B" ? "#8ec9ff" : "#d8dce2";
+  $("ovRating").style.textShadow =
+    rating === "S" ? "0 0 26px rgba(255,190,60,.9)"
+    : rating === "A" ? "0 0 26px rgba(90,230,150,.85)"
+    : rating === "B" ? "0 0 26px rgba(90,170,255,.8)"
+    : "0 0 26px rgba(180,185,195,.8)";
+  $("ovScore").textContent = score;
+  $("ovDetail").textContent = peeledAll
+    ? `剥下 ${peeled.size} 块 · 划伤 ${cuts.size} 处`
+    : `时间到！没来得及剥完（${peeled.size}/24）`;
+  const sub = document.createElement("div");
+  sub.className = "sub";
+  sub.textContent = `最高连击 ${comboMax} · 评级 ${rating}`;
+  ov.querySelector(".sub") && ov.querySelector(".sub").remove();
+  ov.insertBefore(sub, ov.querySelector("button"));
+  ov.style.display = "flex";
+  if (score > best) {
+    best = score;
+    try { localStorage.setItem("fat-games.orange.best", String(best)); } catch (e) { }
+  }
+}
+
+function peelAt(x, y, fast) {
+  if (phase !== "playing") return;
+  const hit = hitTest(x, y);
+  if (!hit || peeled.has(hit.idx)) return;
+  const now = performance.now();
+  const isCut = fast;
+  const nextCombo = (!isCut && now - lastPeelAt <= COMBO_WINDOW) ? combo + 1 : 1;
+  lastPeelAt = now;
+  const gain = blockGain(nextCombo, isCut);
+
+  peeled.add(hit.idx);
+  if (isCut) cuts.add(hit.idx);
+  setCombo(nextCombo);
+  if (!isCut && nextCombo > comboMax) comboMax = nextCombo;
+  setScore(score + gain);
+  setProgress();
+  refreshStage();
+
+  if (isCut) {
+    sfxHurt();
+    stage.classList.remove("shaking");
+    void stage.offsetWidth;
+    stage.classList.add("shaking");
+    for (let i = 0; i < 5; i++) spawnFx(x, y, "juice", 120 + Math.random() * 120);
+    spawnFloat(x, y, `划伤 -${gain}`, "bad");
+  } else {
+    if (nextCombo >= 3) sfxScore(); else sfxEat();
+    spawnFx(x, y, "peel", -100 + Math.random() * 40);
+    spawnFx(x, y, "peel", -40 + Math.random() * 30);
+    spawnFloat(x, y, `+${gain}`, "good");
+  }
+
+  if (sliceComplete(hit.slice, peeled)) {
+    setScore(score + SLICE_BONUS);
+    sfxPerfect();
+    spawnFx(x, y, "slice", -90 + Math.random() * 60);
+    spawnFloat(x, y, `整瓣 +${SLICE_BONUS}`, "great");
+  }
+
+  if (peeled.size >= PEEL_TOTAL) {
+    spawnFloat(150, 90, `完美剥皮 +${PERFECT_BONUS}`, "great");
+    finishGame(true, true, ROUND_SECONDS - timeLeft);
+  }
+}
+
+function startGame() {
+  peeled = new Set(); cuts = new Set();
+  score = 0; combo = 0; comboMax = 0; timeLeft = ROUND_SECONDS;
+  lastPeelAt = 0; lastPoint = null;
+  for (const [_, cleanup] of particleCleanups) cleanup();
+  particleCleanups.clear();
+  fxLayer.innerHTML = "";
+  setScore(0); setCombo(0); setProgress(); setTime();
+  refreshStage();
+  $("ovIdle").style.display = "none";
+  $("ovOver").style.display = "none";
+  $("btnHead").textContent = "重新开始";
+  phase = "playing";
+  sfxClick();
+  clearInterval(timerId);
+  timerId = setInterval(() => {
+    timeLeft--;
+    setTime();
+    if (timeLeft <= 0) {
+      clearInterval(timerId);
+      finishGame(false, false, 0);
+    }
+  }, 1000);
+}
+
+/* ═══ 交互 ═══ */
+const toSvg = (e) => {
+  const rect = svg.getBoundingClientRect();
+  return {
+    x: (e.clientX - rect.left) / rect.width * 300,
+    y: (e.clientY - rect.top) / rect.height * 300,
+  };
+};
+svg.addEventListener("pointerdown", (e) => {
+  if (phase !== "playing") return;
+  svg.setPointerCapture(e.pointerId);
+  const pt = toSvg(e);
+  lastPoint = { x: pt.x, y: pt.y, t: performance.now() };
+  peelAt(pt.x, pt.y, false);
+});
+svg.addEventListener("pointermove", (e) => {
+  if (phase !== "playing") return;
+  const pt = toSvg(e);
+  const now = performance.now();
+  let fast = false;
+  if (lastPoint) {
+    const dt = now - lastPoint.t;
+    const dist = Math.hypot(pt.x - lastPoint.x, pt.y - lastPoint.y);
+    if (dt > 0 && dist / dt > SPEED_CUT) fast = true;
+  }
+  lastPoint = { x: pt.x, y: pt.y, t: now };
+  peelAt(pt.x, pt.y, fast);
+});
+const up = () => { lastPoint = null; };
+svg.addEventListener("pointerup", up);
+svg.addEventListener("pointercancel", up);
+svg.addEventListener("pointerleave", up);
+
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space") {
+    e.preventDefault();
+    if (phase !== "playing") startGame();
+  }
+});
+$("btnHead").addEventListener("click", startGame);
+$("btnIdle").addEventListener("click", startGame);
+$("btnAgain").addEventListener("click", startGame);
+</script>
+</body>
+</html>

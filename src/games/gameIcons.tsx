@@ -333,3 +333,19 @@ export const IconTortoiseHare: React.FC<GameIconProps> = (props) => (
     <path d="M4.5 16 L4.5 18.4 M8.1 16 L8.1 18.4" />
   </svg>
 );
+
+/** 剥橘子：圆形橘子 + 顶部掀起的一角卷皮 + 瓣缝与果脐 */
+export const IconOrange: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    {/* 橘子本体 */}
+    <circle cx="12" cy="13.4" r="7.6" />
+    {/* 瓣缝 */}
+    <path d="M12 5.8 V21 M6.9 8.6 L17.1 18.2 M17.1 8.6 L6.9 18.2" opacity="0.5" />
+    {/* 果脐 */}
+    <circle cx="12" cy="13.4" r="1.8" fill="currentColor" stroke="none" opacity="0.5" />
+    {/* 顶部掀起的一角皮（向左卷起）+ 果柄 */}
+    <path d="M12 5.8 Q8.4 2.2 5.6 4.4 Q6 8.6 9.4 9.4" />
+    <path d="M9.4 9.4 Q10.4 7.2 8.4 6.4" />
+    <path d="M12 5.8 V3.4" />
+  </svg>
+);
