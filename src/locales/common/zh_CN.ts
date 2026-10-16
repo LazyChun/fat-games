@@ -542,6 +542,25 @@ export default {
   "game.archery.help":
     "操作：在弓手处按住鼠标向外拖弓蓄力（向左下拖 → 向右上射），虚线为弹道预览，松开发射；重力 + 每箭随机风力影响弹道。箭撞砖墙/冰面会反弹，每次反弹命中 +50%；木箱一碰即碎、炸药桶引爆清障；苹果头靶 +15，误伤射手 -20。连续命中（2.2 秒内）连击最高 ×4。每关 5 支箭达到目标分晋级，风力随关卡增强！",
 
+  "game.piglook.title": "猪猪的远望",
+  "game.piglook.desc": "弹弓把小猪弹上天空，看它飞多远",
+  "game.piglook.last": "本次",
+  "game.piglook.bestDist": "最远",
+  "game.piglook.tosses": "剩余投掷",
+  "game.piglook.coins": "金币",
+  "game.piglook.record": "历史最远",
+  "game.piglook.start": "开始弹射",
+  "game.piglook.restart": "重新开始",
+  "game.piglook.again": "再飞一次",
+  "game.piglook.idleTitle": "向后拖拽 · 松开放飞小猪",
+  "game.piglook.idleDesc":
+    "小猪坐在悬崖边的弹弓上，按住它向左下拖蓄力（虚线是弹道预览），松开把小猪弹出去。重力与随机风会改变抛物线；碰到空中的云朵会再向上托一把；路上的金币每枚 +25。落地后小猪会在草地上滚一段距离。共 5 次机会，飞得最远的一次算成绩！",
+  "game.piglook.overTitle": "五投完毕！",
+  "game.piglook.stats": "最远 {best} m · 金币 {coins}",
+  "game.piglook.newRecord": "新纪录！",
+  "game.piglook.help":
+    "操作：小猪在弹弓上时按住向左下拖蓄力（虚线为弹道预览），松开发射；重力 + 随机风影响弹道，云朵会把小猪再托起，金币每枚 +25。落地后按草地摩擦滚停，距离（米）即成绩。共 5 次机会，取最远一次！",
+
   "game.scores.total": "总记录数",  "game.scores.games": "游戏种类",
   "game.scores.recordsSuffix": "条",
   "game.scores.title2": "成绩榜",

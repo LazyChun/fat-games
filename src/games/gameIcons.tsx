@@ -370,3 +370,21 @@ export const IconCatDog: React.FC<GameIconProps> = (props) => (
     <path d="M12.1 9.6 L11.1 12.2 L12.3 12.2 L11.5 14.6" strokeWidth={1.5} />
   </svg>
 );
+
+/** 猪猪的远望：圆脸小猪 + 三角耳 + 椭圆猪鼻双鼻孔 */
+export const IconPig: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    {/* 圆脸 */}
+    <circle cx="12" cy="13.4" r="6.6" />
+    {/* 三角耳 */}
+    <path d="M7.4 9.6 L6.6 5.6 L10 7.6" />
+    <path d="M16.6 9.6 L17.4 5.6 L14 7.6" />
+    {/* 猪鼻 */}
+    <ellipse cx="12" cy="14.6" rx="2.6" ry="1.8" />
+    <circle cx="11.1" cy="14.6" r="0.45" fill="currentColor" stroke="none" />
+    <circle cx="12.9" cy="14.6" r="0.45" fill="currentColor" stroke="none" />
+    {/* 眼睛 */}
+    <circle cx="9.6" cy="11.6" r="0.6" fill="currentColor" stroke="none" />
+    <circle cx="14.4" cy="11.6" r="0.6" fill="currentColor" stroke="none" />
+  </svg>
+);

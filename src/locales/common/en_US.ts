@@ -542,6 +542,25 @@ export default {
   "game.archery.help":
     "Controls: press and drag outward from the archer (drag down-left → shoot up-right), dotted line = trajectory preview, release to fire. Gravity plus a random wind per shot shape the path. Arrows bounce off brick/ice walls — every bounce adds +50% on a hit; crates shatter on contact and barrels explode to clear the way. The apple target is worth +15, but hitting the man costs -20. Consecutive hits within 2.2s build a combo up to ×4. 5 arrows per level; hit the goal to advance — wind rises with each level!",
 
+  "game.piglook.title": "Piggy's Lookout",
+  "game.piglook.desc": "Slingshot the pig into the sky — how far can it fly?",
+  "game.piglook.last": "This toss",
+  "game.piglook.bestDist": "Farthest",
+  "game.piglook.tosses": "Tosses left",
+  "game.piglook.coins": "Coins",
+  "game.piglook.record": "Best ever",
+  "game.piglook.start": "Start Launch",
+  "game.piglook.restart": "Restart",
+  "game.piglook.again": "Fly Again",
+  "game.piglook.idleTitle": "Drag back · release to launch the pig",
+  "game.piglook.idleDesc":
+    "The pig sits on a slingshot at the cliff edge. Press and drag down-left to charge (dotted line = trajectory preview), then release to fling it. Gravity and a random wind bend the path; clouds bump the pig upward again; coins along the way are worth +25 each. On landing the pig skids across the grass. You get 5 tosses — the farthest one counts!",
+  "game.piglook.overTitle": "All 5 tosses done!",
+  "game.piglook.stats": "Farthest {best} m · coins {coins}",
+  "game.piglook.newRecord": "New record!",
+  "game.piglook.help":
+    "Controls: while the pig is on the slingshot, press and drag down-left to charge (dotted line = trajectory preview), release to fire. Gravity plus a random wind shape the arc; clouds give an extra boost upward; each coin is +25. On landing the pig skids to a stop on the grass. 5 tosses total — the farthest distance in meters is your score!",
+
   "game.scores.total": "Total Records",
   "game.scores.games": "Game Types",
   "game.scores.recordsSuffix": "",

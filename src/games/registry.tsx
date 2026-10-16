@@ -36,6 +36,7 @@ import {
   IconTortoiseHare,
   IconOrange,
   IconCatDog,
+  IconPig,
 } from "./gameIcons";
 
 import Game2048 from "./Game2048";
@@ -63,6 +64,7 @@ import HawkChickenGame from "./HawkChickenGame";
 import RaceGame from "./RaceGame";
 import OrangePeelGame from "./OrangePeelGame";
 import CatDogGame from "./CatDogGame";
+import PigLookoutGame from "./PigLookoutGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -361,6 +363,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.casual",
     icon: IconCatDog,
     component: CatDogGame,
+  },
+  {
+    id: "piglook",
+    title: "猪猪的远望",
+    desc: "弹弓把小猪弹上天空，看它飞多远",
+    category: "休闲",
+    titleKey: "game.piglook.title",
+    descKey: "game.piglook.desc",
+    categoryKey: "category.casual",
+    icon: IconPig,
+    component: PigLookoutGame,
   },
   {
     id: "scores",
