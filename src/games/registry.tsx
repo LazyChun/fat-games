@@ -38,6 +38,7 @@ import {
   IconCatDog,
   IconPig,
   IconDetective,
+  IconWukong,
 } from "./gameIcons";
 
 import Game2048 from "./Game2048";
@@ -67,6 +68,7 @@ import OrangePeelGame from "./OrangePeelGame";
 import CatDogGame from "./CatDogGame";
 import PigLookoutGame from "./PigLookoutGame";
 import DetectiveTyperGame from "./DetectiveTyperGame";
+import WukongGame from "./WukongGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -387,6 +389,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.casual",
     icon: IconDetective,
     component: DetectiveTyperGame,
+  },
+  {
+    id: "wukong",
+    title: "大圣闹天宫",
+    desc: "挥金箍棒横扫天兵天将，横版闯关格斗",
+    category: "休闲",
+    titleKey: "game.wukong.title",
+    descKey: "game.wukong.desc",
+    categoryKey: "category.casual",
+    icon: IconWukong,
+    component: WukongGame,
   },
   {
     id: "scores",

@@ -403,3 +403,22 @@ export const IconPig: React.FC<GameIconProps> = (props) => (
     <circle cx="14.4" cy="11.6" r="0.6" fill="currentColor" stroke="none" />
   </svg>
 );
+
+/** 大圣闹天宫：猴脸（紧箍 + 圆眼）+ 斜挎金箍棒 */
+export const IconWukong: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    {/* 金箍棒（斜） */}
+    <path d="M4.5 19.5 L19.5 4.5" strokeWidth={2.4} />
+    <path d="M3.8 20.2 L5.2 18.8 M18.8 5.2 L20.2 3.8" strokeWidth={2.6} />
+    {/* 猴脸 */}
+    <circle cx="12" cy="13" r="5.4" />
+    {/* 紧箍 */}
+    <path d="M7.6 10.2 Q12 7.6 16.4 10.2" strokeWidth={1.8} />
+    <circle cx="12" cy="8.6" r="0.8" fill="currentColor" stroke="none" />
+    {/* 眼睛 */}
+    <circle cx="10" cy="13" r="1" fill="currentColor" stroke="none" />
+    <circle cx="14" cy="13" r="1" fill="currentColor" stroke="none" />
+    {/* 嘴 */}
+    <path d="M10.8 15.4 Q12 16.2 13.2 15.4" strokeWidth={1.4} />
+  </svg>
+);

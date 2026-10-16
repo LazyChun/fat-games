@@ -582,6 +582,23 @@ export default {
   "game.detective.help":
     "操作：直接按键盘字母，嫌犯身上的拼音逐个点亮；拼完整词即逮捕。按字母自动锁定最危险（最靠左）的嫌犯；拼错清空连击。空格 开始 / 再来一局。嫌犯越跑越快、越出越密！",
 
+  "game.wukong.title": "大圣闹天宫",
+  "game.wukong.desc": "挥金箍棒横扫天兵天将，横版闯关格斗",
+  "game.wukong.score": "得分",
+  "game.wukong.hp": "气血",
+  "game.wukong.mp": "气力",
+  "game.wukong.kills": "击倒",
+  "game.wukong.start": "开打",
+  "game.wukong.pause": "暂停",
+  "game.wukong.restart": "重整旗鼓",
+  "game.wukong.over.title": "大圣被擒…",
+  "game.wukong.over.score": "得分 {score}",
+  "game.wukong.over.kills": "击倒天兵 {kills} 名",
+  "game.wukong.again": "再战天宫",
+  "game.wukong.idle": "点击「开打」，挥棒大闹天宫",
+  "game.wukong.help":
+    "操作：A/D 或 ←/→ 移动，W/↑/空格 跳跃（可二段跳）；J 普通棍击，K 旋转棍舞（耗 35 气力，范围攻击）。天兵会近身砍杀，天将重锤高伤，弓箭手远程掷矛；连击越高得分越多，气力随时间恢复。气血耗尽则闹天宫失败！",
+
   "game.scores.total": "总记录数",  "game.scores.games": "游戏种类",
   "game.scores.recordsSuffix": "条",
   "game.scores.title2": "成绩榜",

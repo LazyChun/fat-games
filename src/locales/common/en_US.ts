@@ -582,6 +582,23 @@ export default {
   "game.detective.help":
     "Controls: just type letters — the pinyin above a suspect lights up as you go; finish a word to bust them. Typing locks onto the leftmost (most dangerous) suspect starting with that letter; a wrong key resets your combo. Space starts / restarts. Suspects speed up and spawn faster as time goes on!",
 
+  "game.wukong.title": "Havoc in Heaven",
+  "game.wukong.desc": "Swing the golden staff through heavenly soldiers — a side-scrolling brawler",
+  "game.wukong.score": "Score",
+  "game.wukong.hp": "HP",
+  "game.wukong.mp": "Qi",
+  "game.wukong.kills": "KOs",
+  "game.wukong.start": "Fight",
+  "game.wukong.pause": "Pause",
+  "game.wukong.restart": "Restart",
+  "game.wukong.over.title": "The Great Sage is down…",
+  "game.wukong.over.score": "Score {score}",
+  "game.wukong.over.kills": "{kills} heavenly soldiers downed",
+  "game.wukong.again": "Fight Again",
+  "game.wukong.idle": "Hit \"Fight\" to raise hell in heaven",
+  "game.wukong.help":
+    "Controls: A/D or ←/→ move, W/↑/Space jump (double jump allowed); J staff strike, K spinning staff dance (costs 35 Qi, area attack). Soldiers slash up close, generals hit hard, archers throw spears from range; higher combos multiply your score, Qi regenerates over time. Lose all HP and the havoc ends!",
+
   "game.scores.total": "Total Records",
   "game.scores.games": "Game Types",
   "game.scores.recordsSuffix": "",
