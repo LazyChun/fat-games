@@ -561,6 +561,27 @@ export default {
   "game.piglook.help":
     "Controls: while the pig is on the slingshot, press and drag down-left to charge (dotted line = trajectory preview), release to fire. Gravity plus a random wind shape the arc; clouds give an extra boost upward; each coin is +25. On landing the pig skids to a stop on the grass. 5 tosses total — the farthest distance in meters is your score!",
 
+  "game.detective.title": "Detective Typer",
+  "game.detective.desc": "Type pinyin to cuff fleeing suspects",
+  "game.detective.score": "Bounty",
+  "game.detective.arrested": "Busted",
+  "game.detective.combo": "Combo",
+  "game.detective.lives": "Lives",
+  "game.detective.start": "Start",
+  "game.detective.restart": "Restart",
+  "game.detective.again": "Play Again",
+  "game.detective.escapeLine": "Escape Line",
+  "game.detective.escaped": "Escaped!",
+  "game.detective.chasing": "Chasing",
+  "game.detective.idleTitle": "Police Wanted Board",
+  "game.detective.idleDesc":
+    "Suspects flee from the right carrying their charges. Just type — spell the full pinyin of the charge to cuff them on the spot. Chain arrests to build a combo for higher bounties. If a suspect slips past the red-and-white escape line on the left, you lose a life — run out of 3 and the shift ends!",
+  "game.detective.overTitle": "Shift Over",
+  "game.detective.overDetail":
+    "Bounty {score} · {arrested} suspects busted · max combo {maxCombo}",
+  "game.detective.help":
+    "Controls: just type letters — the pinyin above a suspect lights up as you go; finish a word to bust them. Typing locks onto the leftmost (most dangerous) suspect starting with that letter; a wrong key resets your combo. Space starts / restarts. Suspects speed up and spawn faster as time goes on!",
+
   "game.scores.total": "Total Records",
   "game.scores.games": "Game Types",
   "game.scores.recordsSuffix": "",

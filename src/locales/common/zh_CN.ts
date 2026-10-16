@@ -561,6 +561,27 @@ export default {
   "game.piglook.help":
     "操作：小猪在弹弓上时按住向左下拖蓄力（虚线为弹道预览），松开发射；重力 + 随机风影响弹道，云朵会把小猪再托起，金币每枚 +25。落地后按草地摩擦滚停，距离（米）即成绩。共 5 次机会，取最远一次！",
 
+  "game.detective.title": "逍遥警探",
+  "game.detective.desc": "敲拼音抓逃犯，别让嫌犯溜过逃逸线",
+  "game.detective.score": "赏金",
+  "game.detective.arrested": "逮捕",
+  "game.detective.combo": "连击",
+  "game.detective.lives": "生命",
+  "game.detective.start": "开始",
+  "game.detective.restart": "重开",
+  "game.detective.again": "再抓一局",
+  "game.detective.escapeLine": "逃逸线",
+  "game.detective.escaped": "跑了！",
+  "game.detective.chasing": "正在追捕",
+  "game.detective.idleTitle": "警局通缉令",
+  "game.detective.idleDesc":
+    "嫌犯举着罪名标签从右侧潜逃。直接敲键盘，拼出罪名的全拼就能当场逮捕；连续逮捕叠加连击，赏金更高。让嫌犯溜过左侧红白条逃逸线会扣一条命，3 条命耗尽任务结束！",
+  "game.detective.overTitle": "任务结束",
+  "game.detective.overDetail":
+    "赏金 {score} · 逮捕 {arrested} 名嫌犯 · 最高连击 {maxCombo}",
+  "game.detective.help":
+    "操作：直接按键盘字母，嫌犯身上的拼音逐个点亮；拼完整词即逮捕。按字母自动锁定最危险（最靠左）的嫌犯；拼错清空连击。空格 开始 / 再来一局。嫌犯越跑越快、越出越密！",
+
   "game.scores.total": "总记录数",  "game.scores.games": "游戏种类",
   "game.scores.recordsSuffix": "条",
   "game.scores.title2": "成绩榜",

@@ -37,6 +37,7 @@ import {
   IconOrange,
   IconCatDog,
   IconPig,
+  IconDetective,
 } from "./gameIcons";
 
 import Game2048 from "./Game2048";
@@ -65,6 +66,7 @@ import RaceGame from "./RaceGame";
 import OrangePeelGame from "./OrangePeelGame";
 import CatDogGame from "./CatDogGame";
 import PigLookoutGame from "./PigLookoutGame";
+import DetectiveTyperGame from "./DetectiveTyperGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -374,6 +376,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.casual",
     icon: IconPig,
     component: PigLookoutGame,
+  },
+  {
+    id: "detective",
+    title: "逍遥警探",
+    desc: "敲拼音抓逃犯，别让嫌犯溜过逃逸线",
+    category: "休闲",
+    titleKey: "game.detective.title",
+    descKey: "game.detective.desc",
+    categoryKey: "category.casual",
+    icon: IconDetective,
+    component: DetectiveTyperGame,
   },
   {
     id: "scores",

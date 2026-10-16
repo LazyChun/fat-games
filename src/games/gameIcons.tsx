@@ -371,6 +371,21 @@ export const IconCatDog: React.FC<GameIconProps> = (props) => (
   </svg>
 );
 
+/** 逍遥警探：侦探费多拉帽 + 放大镜 */
+export const IconDetective: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    {/* 帽顶 */}
+    <path d="M6.6 10.6 Q7.2 5.6 12 5.6 Q16.8 5.6 17.4 10.6" />
+    {/* 帽檐 */}
+    <path d="M3.4 11.6 Q12 9.2 20.6 11.6 Q12 14 3.4 11.6 Z" />
+    {/* 帽带 */}
+    <path d="M6.9 9.4 H17.1" strokeWidth={1.2} />
+    {/* 放大镜 */}
+    <circle cx="16.4" cy="16.6" r="3.1" />
+    <path d="M18.7 18.9 L21.2 21.4" strokeWidth={2} />
+  </svg>
+);
+
 /** 猪猪的远望：圆脸小猪 + 三角耳 + 椭圆猪鼻双鼻孔 */
 export const IconPig: React.FC<GameIconProps> = (props) => (
   <svg {...svgProps(props)}>

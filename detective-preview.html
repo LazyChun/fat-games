@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>逍遥警探 · 独立预览（fat-games 插件内同款）</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; padding: 20px 10px;
+    font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: radial-gradient(120% 140% at 20% 0%, #fdfbf7 0%, #f5f1ea 45%, #ede6da 100%);
+    color: rgba(0,0,0,0.85);
+  }
+  .frame {
+    width: 640px; border-radius: 18px; overflow: hidden;
+    background: #fff; border: 1px solid rgba(120,100,70,0.18);
+    box-shadow: 0 10px 30px rgba(90,70,40,0.14);
+  }
+  .bar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .bar .emoji { font-size: 22px; }
+  .bar .title { font-size: 16px; font-weight: 800; }
+  .bar .spacer { flex: 1; }
+  .bar button {
+    border: 1px solid rgba(0,0,0,0.18); background: rgba(255,255,255,0.9);
+    color: rgba(0,0,0,0.75); border-radius: 20px; padding: 6px 16px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  .bar button.primary {
+    background: linear-gradient(135deg, #4facfe 0%, #1677ff 100%);
+    color: #fff; border: none; box-shadow: 0 3px 10px rgba(22,119,255,0.28);
+  }
+  .stats { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px 16px 0; }
+  .chip {
+    min-width: 96px; padding: 7px 14px; border-radius: 14px;
+    display: flex; flex-direction: column; gap: 1px; line-height: 1.25;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.14);
+  }
+  .chip .lbl { font-size: 11px; }
+  .chip .val { font-size: 19px; font-weight: 800; }
+  .stage {
+    position: relative; margin: 16px;
+    width: 568px; height: 340px;
+    border-radius: 14px; overflow: hidden;
+    background: linear-gradient(180deg, #1c2745 0%, #131b31 55%, #0d1324 100%);
+    border: 2px solid rgba(90,120,180,0.35);
+    box-shadow: 0 10px 26px rgba(8,14,30,0.45);
+  }
+  .ground { position: absolute; left: 0; right: 0; bottom: 0; height: 18px;
+    background: linear-gradient(180deg, #2a3552 0%, #1c2440 100%); }
+  .escape { position: absolute; left: 0; top: 0; bottom: 0; width: 10px;
+    background: repeating-linear-gradient(45deg, #ff4d4f 0 8px, #ffd6d6 8px 16px);
+    box-shadow: 0 0 12px rgba(255,77,79,0.55); }
+  .escape-label { position: absolute; left: 16px; top: 6px; font-size: 10px; font-weight: 700; color: #ff8a80; letter-spacing: 1px; }
+  .sus {
+    position: absolute; width: 96px; display: flex; flex-direction: column;
+    align-items: center; gap: 2px; transition: none;
+  }
+  .sus .word {
+    background: rgba(255,255,255,0.94); color: #222; border-radius: 10px;
+    padding: 3px 10px; font-size: 13px; font-weight: 800; line-height: 1.2;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.35); white-space: nowrap;
+  }
+  .sus.active .word { background: #ffd34d; }
+  .sus .face { font-size: 30px; line-height: 1.1; }
+  .sus .py { font-size: 12px; font-weight: 700; letter-spacing: 0.5px; font-family: Consolas, monospace; }
+  .sus .py .done { color: #7ee8a2; }
+  .sus .py .todo { color: rgba(255,255,255,0.95); }
+  .sus .py.idle { color: rgba(255,255,255,0.35); }
+  .sus.active { filter: drop-shadow(0 0 8px rgba(255,211,77,0.8)); }
+  .float { position: absolute; color: #ffd34d; font-size: 16px; font-weight: 900;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6); pointer-events: none; }
+  .chasing { position: absolute; left: 0; right: 0; bottom: 22px; text-align: center;
+    color: rgba(255,255,255,0.85); font-size: 13px; font-weight: 600; pointer-events: none; }
+  .overlay {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 10px; color: #fff;
+    text-align: center; padding: 0 24px;
+  }
+  .overlay.idle { background: rgba(10,16,32,0.72); }
+  .overlay.over { background: rgba(40,14,14,0.78); }
+  .overlay .big { font-size: 44px; }
+  .overlay .mid { font-size: 18px; font-weight: 900; }
+  .overlay .sub { font-size: 12.5px; opacity: 0.85; line-height: 1.8; max-width: 420px; }
+  .overlay button {
+    border: none; cursor: pointer;
+    background: linear-gradient(135deg, #4facfe 0%, #1677ff 100%);
+    color: #fff; border-radius: 20px; padding: 8px 22px; font-size: 14px; font-weight: 700;
+    box-shadow: 0 3px 10px rgba(22,119,255,0.28);
+  }
+  .flash { position: absolute; inset: 0; background: rgba(255,60,60,0.22); pointer-events: none;
+    animation: flashout 0.35s ease-out both; }
+  @keyframes flashout { from { opacity: 1; } to { opacity: 0; } }
+  .help { font-size: 12px; color: rgba(0,0,0,0.5); text-align: center; max-width: 620px; line-height: 1.7; padding: 0 12px; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="bar">
+      <span class="emoji">🕵️</span>
+      <span class="title">逍遥警探</span>
+      <div class="spacer"></div>
+      <button id="btnHead">开始</button>
+    </div>
+    <div class="stats">
+      <div class="chip" style="background:linear-gradient(135deg,#ffd86b,#f6a821)"><span class="lbl">赏金</span><span class="val" id="stScore">0</span></div>
+      <div class="chip" style="background:linear-gradient(135deg,#7ee8a2,#2e9e5b)"><span class="lbl">逮捕</span><span class="val" id="stArrested">0</span></div>
+      <div class="chip" style="background:linear-gradient(135deg,#b48bff,#7b3ff2)"><span class="lbl">连击</span><span class="val" id="stCombo">—</span></div>
+      <div class="chip" style="background:linear-gradient(135deg,#ff9a8b,#f2554a)"><span class="lbl">生命</span><span class="val" id="stLives">❤️❤️❤️</span></div>
+    </div>
+    <div class="stage" id="stage">
+      <div class="ground"></div>
+      <div class="escape"></div>
+      <div class="escape-label">🚨 逃逸线</div>
+      <div id="susLayer" style="position:absolute;inset:0"></div>
+      <div id="floatLayer" style="position:absolute;inset:0;pointer-events:none"></div>
+      <div class="chasing" id="chasing" style="display:none"></div>
+      <div class="overlay idle" id="ovIdle">
+        <div class="big">🕵️</div>
+        <div class="mid">警局通缉令</div>
+        <div class="sub">嫌犯举着罪名标签从右侧潜逃。直接敲键盘，拼出罪名的全拼就能当场逮捕；连续逮捕叠加连击，赏金更高。让嫌犯溜过左侧红白条逃逸线会扣一条命，3 条命耗尽任务结束！</div>
+        <div><button id="btnIdle">开始执勤</button></div>
+      </div>
+      <div class="overlay over" id="ovOver" style="display:none">
+        <div class="big">🚔</div>
+        <div class="mid">任务结束</div>
+        <div class="sub" id="ovStats"></div>
+        <div><button id="btnAgain">再抓一局</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="help">
+    操作：直接按键盘字母，嫌犯身上的拼音逐个点亮；拼完整词即逮捕。按字母自动锁定最危险（最靠左）的嫌犯；拼错清空连击。空格 开始 / 再来一局。嫌犯越跑越快、越出越密！
+  </div>
+
+<script>
+"use strict";
+/* ═══ 词库（与插件内 detectiveLogic 同款，拼音手写对照） ═══ */
+const WORDS = [
+  ["警察","jingcha"],["侦探","zhentan"],["凶手","xiongshou"],["盗窃","daoqie"],
+  ["诈骗","zhapian"],["抢劫","qiangjie"],["指纹","zhiwen"],["证据","zhengju"],
+  ["线索","suoxian"],["手铐","shoukao"],["监狱","jianyu"],["法庭","fating"],
+  ["证人","zhengren"],["目击","muji"],["追捕","zhuibu"],["逃犯","taofan"],
+  ["罪犯","zuifan"],["脚印","jiaoyin"],["监控","jiankong"],["审讯","shenxun"],
+  ["卧底","wodi"],["通缉","tongji"],["赃款","zangkuan"],["凶器","xiongqi"],
+  ["走私","zousi"],["贩毒","fandu"],["越狱","yueyu"],["绑架","bangjia"],
+  ["勒索","lesuo"],["伪造","weizao"],["间谍","jiandie"],["笔录","bilu"],
+  ["警笛","jingdi"],["警车","jingche"],["警徽","jinghui"],["鉴定","jianding"],
+  ["取证","quzheng"],["蹲守","dunshou"],["伏击","fuji"],["线人","xianren"],
+  ["黑帮","heibang"],["赃物","zangwu"],["销赃","xiaozang"],["入室","rushi"],
+  ["动机","dongji"],["作案","zuoan"],["逮捕","daibu"],["拘留","juliu"],
+  ["悬案","xuanan"],["结案","jiean"],["串供","chuangong"],["翻供","fangong"],
+  ["嫌疑人","xianyiren"],["被害人","beihairen"],["保险箱","baoxiangui"],
+  ["通缉令","tongjiling"],["逮捕令","daibuling"],["连环案","lianhuanan"],
+  ["不在场","buzaichang"],["监控头","jiankongtou"],
+];
+const FACES = ["🥷","👺","🕴️","🧑‍🦯","👤","🕵️"];
+const LANE_Y = [52, 146, 240];
+const STAGE_W = 568, ESCAPE_X = 16, MAX_SUSPECTS = 4;
+
+/* ═══ 状态 ═══ */
+let suspects = [], activeId = null, typedLen = 0;
+let score = 0, arrested = 0, lives = 3, combo = 0, maxCombo = 0;
+let running = false, over = false;
+let elapsed = 0, spawnAcc = 0, nextId = 1, used = new Set();
+let lastT = 0, floats = [];
+
+const $ = (id) => document.getElementById(id);
+
+function speedAt(t){ return Math.min(48, 16 + t * 0.5); }
+function spawnIntervalAt(t){ return Math.max(1100, 2300 - t * 22); }
+
+function pickWord(){
+  let avail = WORDS.filter(w => !used.has(w[0]));
+  if (!avail.length) { used = new Set(); avail = WORDS; } // 一轮用完，重置
+  const w = avail[Math.floor(Math.random()*avail.length)];
+  used.add(w[0]);
+  return w;
+}
+
+function spawn(){
+  const [word, py] = pickWord();
+  const cnt = [0,0,0];
+  suspects.forEach(s => cnt[s.lane]++);
+  let lane = 0, min = Infinity;
+  for (let i=0;i<3;i++) if (cnt[i]<min){ min=cnt[i]; lane=i; }
+  suspects.push({ id: nextId++, word, py, face: FACES[Math.floor(Math.random()*FACES.length)], x: STAGE_W + 20, lane });
+}
+
+/* ═══ 轻量音效 ═══ */
+let acx = null;
+function ac(){ if(!acx){ try{ acx = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} }
+  if (acx && acx.state==="suspended") acx.resume(); return acx; }
+function tone(freq, dur, type, vol, slideTo, delay){
+  const c = ac(); if(!c) return;
+  const o = c.createOscillator(), g = c.createGain();
+  o.type = type||"square";
+  o.frequency.setValueAtTime(freq, c.currentTime + (delay||0));
+  if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, c.currentTime + (delay||0) + dur);
+  g.gain.setValueAtTime(vol||0.12, c.currentTime + (delay||0));
+  g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + (delay||0) + dur);
+  o.connect(g); g.connect(c.destination); o.start(c.currentTime + (delay||0)); o.stop(c.currentTime + (delay||0) + dur);
+}
+const sfx = {
+  click: () => tone(420, 0.06, "triangle", 0.08),
+  coin:  () => { tone(988, 0.09, "sine", 0.12); setTimeout(()=>tone(1319,0.14,"sine",0.1),60); },
+  hurt:  () => { tone(280, 0.16, "square", 0.1, 110); },
+  err:   () => tone(190, 0.14, "square", 0.08, 130),
+  lose:  () => [392,330,262,196].forEach((f,i)=>setTimeout(()=>tone(f,0.2,"triangle",0.12), i*110)),
+};
+
+/* ═══ 键盘匹配（与插件 handleKey 同款） ═══ */
+function onLetter(c){
+  if (!running) return;
+  let fail = () => {
+    combo = 0; activeId = null; typedLen = 0;
+    sfx.err(); flash();
+  };
+  if (activeId !== null) {
+    const cur = suspects.find(s => s.id === activeId);
+    if (!cur) { activeId = null; typedLen = 0; return onLetter(c); }
+    if (cur.py[typedLen] === c) {
+      typedLen++;
+      if (typedLen >= cur.py.length) return bust(cur);
+      sfx.click(); return;
+    }
+    const prefix = cur.py.slice(0, typedLen);
+    const takers = suspects
+      .filter(s => s.id !== cur.id && s.py.length > typedLen && s.py.startsWith(prefix) && s.py[typedLen] === c)
+      .sort((a,b)=>a.x-b.x);
+    if (takers.length) {
+      activeId = takers[0].id; typedLen++; sfx.click(); return;
+    }
+    return fail();
+  }
+  const starters = suspects.filter(s => s.py[0] === c).sort((a,b)=>a.x-b.x);
+  if (!starters.length) return fail();
+  activeId = starters[0].id; typedLen = 1;
+  sfx.click();
+}
+
+function bust(s){
+  const points = s.py.length * 10 + combo * 5;
+  combo++; maxCombo = Math.max(maxCombo, combo);
+  score += points; arrested++;
+  float(s.x + 40, LANE_Y[s.lane] + 6, "+" + points, "#ffd34d");
+  suspects = suspects.filter(x => x.id !== s.id);
+  if (activeId === s.id) { activeId = null; typedLen = 0; }
+  sfx.coin();
+}
+
+/* ═══ 渲染 ═══ */
+function flash(){
+  const f = document.createElement("div");
+  f.className = "flash"; $("stage").appendChild(f);
+  setTimeout(()=>f.remove(), 360);
+}
+function float(x, y, text, color){
+  const d = document.createElement("div");
+  d.className = "float"; d.style.left = x+"px"; d.style.top = y+"px";
+  d.style.color = color; d.textContent = text;
+  $("floatLayer").appendChild(d);
+  setTimeout(()=>d.remove(), 900);
+}
+
+function render(){
+  const layer = $("susLayer");
+  layer.innerHTML = "";
+  for (const s of suspects) {
+    const el = document.createElement("div");
+    el.className = "sus" + (s.id === activeId ? " active" : "");
+    el.style.left = s.x + "px";
+    el.style.top = LANE_Y[s.lane] + "px";
+    const done = s.id === activeId ? typedLen : 0;
+    const pyHtml = s.id === activeId
+      ? `<span class="done">${s.py.slice(0,done)}</span><span class="todo">${s.py.slice(done)}</span>`
+      : `<span class="idle">${s.py}</span>`;
+    el.innerHTML = `<div class="word">${s.word}</div><div class="face">${s.face}</div><div class="py">${pyHtml}</div>`;
+    layer.appendChild(el);
+  }
+  $("stScore").textContent = score;
+  $("stArrested").textContent = arrested;
+  $("stCombo").textContent = combo > 1 ? "×" + combo : "—";
+  $("stLives").textContent = "❤️".repeat(Math.max(0,lives)) || "💔";
+
+  const act = suspects.find(s => s.id === activeId);
+  const ch = $("chasing");
+  if (running && act) {
+    ch.style.display = "block";
+    ch.innerHTML = `正在追捕：${act.word}（<span style="color:#7ee8a2">${act.py.slice(0,typedLen)}</span>${act.py.slice(typedLen)}）`;
+  } else ch.style.display = "none";
+
+  $("ovIdle").style.display = running || over ? "none" : "flex";
+  $("ovOver").style.display = over ? "flex" : "none";
+  const head = $("btnHead");
+  head.textContent = over ? "再抓一局" : running ? "重开" : "开始";
+  head.className = over ? "primary" : "";
+  if (over) $("ovStats").textContent = `赏金 ${score} · 逮捕 ${arrested} 名嫌犯 · 最高连击 ${maxCombo}`;
+}
+
+/* ═══ 主循环 ═══ */
+function tick(t){
+  if (!running) return;
+  const dt = Math.min(0.05, lastT ? (t-lastT)/1000 : 0.016);
+  lastT = t;
+  elapsed += dt;
+  const speed = speedAt(elapsed);
+  for (const s of suspects) s.x -= speed * dt;
+  spawnAcc += dt * 1000;
+  if (spawnAcc >= spawnIntervalAt(elapsed) && suspects.length < MAX_SUSPECTS) {
+    spawnAcc = 0; spawn();
+  }
+  const escaped = suspects.filter(s => s.x <= ESCAPE_X);
+  if (escaped.length) {
+    suspects = suspects.filter(s => s.x > ESCAPE_X);
+    lives -= escaped.length; combo = 0;
+    if (activeId !== null && escaped.some(e => e.id === activeId)) { activeId = null; typedLen = 0; }
+    for (const e of escaped) float(ESCAPE_X + 30, LANE_Y[e.lane]+10, "跑了！", "#ff8a80");
+    sfx.hurt();
+    if (lives <= 0) {
+      running = false; over = true; sfx.lose();
+    }
+  }
+  render();
+  requestAnimationFrame(tick);
+}
+
+function startGame(){
+  suspects = []; activeId = null; typedLen = 0;
+  score = 0; arrested = 0; lives = 3; combo = 0; maxCombo = 0;
+  elapsed = 0; spawnAcc = 0; used = new Set(); lastT = 0;
+  over = false; running = true;
+  render();
+  requestAnimationFrame(tick);
+}
+
+window.addEventListener("keydown", (e) => {
+  const k = e.key.toLowerCase();
+  if (k === " ") { e.preventDefault(); if (!running) startGame(); return; }
+  if (!/^[a-z]$/.test(k)) return;
+  e.preventDefault();
+  onLetter(k);
+});
+$("btnHead").onclick = startGame;
+$("btnIdle").onclick = startGame;
+$("btnAgain").onclick = startGame;
+
+render();
+</script>
+</body>
+</html>
