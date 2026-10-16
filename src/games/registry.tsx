@@ -35,6 +35,7 @@ import {
   IconHawkChicken,
   IconTortoiseHare,
   IconOrange,
+  IconCatDog,
 } from "./gameIcons";
 
 import Game2048 from "./Game2048";
@@ -61,6 +62,7 @@ import MatchGame from "./MatchGame";
 import HawkChickenGame from "./HawkChickenGame";
 import RaceGame from "./RaceGame";
 import OrangePeelGame from "./OrangePeelGame";
+import CatDogGame from "./CatDogGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -348,6 +350,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.casual",
     icon: IconOrange,
     component: OrangePeelGame,
+  },
+  {
+    id: "catdog",
+    title: "猫狗大战",
+    desc: "召唤猫咪守城，抵挡狗狗军团",
+    category: "休闲",
+    titleKey: "game.catdog.title",
+    descKey: "game.catdog.desc",
+    categoryKey: "category.casual",
+    icon: IconCatDog,
+    component: CatDogGame,
   },
   {
     id: "scores",

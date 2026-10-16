@@ -349,3 +349,24 @@ export const IconOrange: React.FC<GameIconProps> = (props) => (
     <path d="M12 5.8 V3.4" />
   </svg>
 );
+
+/** 猫狗大战：猫咪（尖耳 + 胡须）与狗狗（垂耳）对峙，中间一记闪电 */
+export const IconCatDog: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    {/* 猫（左）：圆脸 + 尖耳 + 胡须 */}
+    <circle cx="8.4" cy="13.4" r="4.6" />
+    <path d="M5.2 10.2 L5.8 5.6 L8.6 8.4" />
+    <path d="M11.6 10.2 L11 5.6 L8.2 8.4" />
+    <circle cx="6.9" cy="12.8" r="0.75" fill="currentColor" stroke="none" />
+    <circle cx="9.9" cy="12.8" r="0.75" fill="currentColor" stroke="none" />
+    <path d="M4.4 14.8 L6.4 15.4 M12.4 15.4 L10.4 14.8" strokeWidth={1.2} />
+    {/* 狗（右）：圆脸 + 垂耳 + 鼻 */}
+    <circle cx="15.8" cy="13.4" r="4.6" />
+    <path d="M11.9 10.6 Q10.4 6.8 12.6 6.4 Q14.2 6.4 13.6 9.4" />
+    <path d="M19.7 10.6 Q21.2 6.8 19 6.4 Q17.4 6.4 18 9.4" />
+    <circle cx="15.8" cy="14.6" r="0.95" fill="currentColor" stroke="none" />
+    <path d="M15.8 15.5 Q15.8 16.4 16.9 16.4" strokeWidth={1.2} />
+    {/* 中间闪电 */}
+    <path d="M12.1 9.6 L11.1 12.2 L12.3 12.2 L11.5 14.6" strokeWidth={1.5} />
+  </svg>
+);
