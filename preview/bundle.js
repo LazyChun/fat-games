@@ -26,9 +26,9 @@
     mod
   ));
 
-  // ../node_modules/react/cjs/react.development.js
+  // node_modules/react/cjs/react.development.js
   var require_react_development = __commonJS({
-    "../node_modules/react/cjs/react.development.js"(exports, module2) {
+    "node_modules/react/cjs/react.development.js"(exports, module2) {
       "use strict";
       if (true) {
         (function() {
@@ -1899,9 +1899,9 @@
     }
   });
 
-  // ../node_modules/react/index.js
+  // node_modules/react/index.js
   var require_react = __commonJS({
-    "../node_modules/react/index.js"(exports, module2) {
+    "node_modules/react/index.js"(exports, module2) {
       "use strict";
       if (false) {
         module2.exports = null;
@@ -1911,9 +1911,9 @@
     }
   });
 
-  // ../node_modules/scheduler/cjs/scheduler.development.js
+  // node_modules/scheduler/cjs/scheduler.development.js
   var require_scheduler_development = __commonJS({
-    "../node_modules/scheduler/cjs/scheduler.development.js"(exports) {
+    "node_modules/scheduler/cjs/scheduler.development.js"(exports) {
       "use strict";
       if (true) {
         (function() {
@@ -2361,9 +2361,9 @@
     }
   });
 
-  // ../node_modules/scheduler/index.js
+  // node_modules/scheduler/index.js
   var require_scheduler = __commonJS({
-    "../node_modules/scheduler/index.js"(exports, module2) {
+    "node_modules/scheduler/index.js"(exports, module2) {
       "use strict";
       if (false) {
         module2.exports = null;
@@ -2373,9 +2373,9 @@
     }
   });
 
-  // ../node_modules/react-dom/cjs/react-dom.development.js
+  // node_modules/react-dom/cjs/react-dom.development.js
   var require_react_dom_development = __commonJS({
-    "../node_modules/react-dom/cjs/react-dom.development.js"(exports) {
+    "node_modules/react-dom/cjs/react-dom.development.js"(exports) {
       "use strict";
       if (true) {
         (function() {
@@ -23493,9 +23493,9 @@
     }
   });
 
-  // ../node_modules/react-dom/index.js
+  // node_modules/react-dom/index.js
   var require_react_dom = __commonJS({
-    "../node_modules/react-dom/index.js"(exports, module2) {
+    "node_modules/react-dom/index.js"(exports, module2) {
       "use strict";
       if (false) {
         checkDCE();
@@ -23506,9 +23506,9 @@
     }
   });
 
-  // ../node_modules/react-dom/client.js
+  // node_modules/react-dom/client.js
   var require_client = __commonJS({
-    "../node_modules/react-dom/client.js"(exports) {
+    "node_modules/react-dom/client.js"(exports) {
       "use strict";
       var m = require_react_dom();
       if (false) {
@@ -23537,9 +23537,9 @@
     }
   });
 
-  // ../node_modules/react-is/cjs/react-is.development.js
+  // node_modules/react-is/cjs/react-is.development.js
   var require_react_is_development = __commonJS({
-    "../node_modules/react-is/cjs/react-is.development.js"(exports) {
+    "node_modules/react-is/cjs/react-is.development.js"(exports) {
       "use strict";
       (function() {
         function typeOf(object) {
@@ -23630,9 +23630,9 @@
     }
   });
 
-  // ../node_modules/react-is/index.js
+  // node_modules/react-is/index.js
   var require_react_is = __commonJS({
-    "../node_modules/react-is/index.js"(exports, module2) {
+    "node_modules/react-is/index.js"(exports, module2) {
       "use strict";
       if (false) {
         module2.exports = null;
@@ -23642,9 +23642,9 @@
     }
   });
 
-  // ../node_modules/is-mobile/index.js
+  // node_modules/is-mobile/index.js
   var require_is_mobile = __commonJS({
-    "../node_modules/is-mobile/index.js"(exports, module2) {
+    "node_modules/is-mobile/index.js"(exports, module2) {
       "use strict";
       module2.exports = isMobile2;
       module2.exports.isMobile = isMobile2;
@@ -23669,9 +23669,9 @@
     }
   });
 
-  // ../node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.development.js
+  // node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.development.js
   var require_react_is_development2 = __commonJS({
-    "../node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.development.js"(exports) {
+    "node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.development.js"(exports) {
       "use strict";
       if (true) {
         (function() {
@@ -23824,9 +23824,9 @@
     }
   });
 
-  // ../node_modules/hoist-non-react-statics/node_modules/react-is/index.js
+  // node_modules/hoist-non-react-statics/node_modules/react-is/index.js
   var require_react_is2 = __commonJS({
-    "../node_modules/hoist-non-react-statics/node_modules/react-is/index.js"(exports, module2) {
+    "node_modules/hoist-non-react-statics/node_modules/react-is/index.js"(exports, module2) {
       "use strict";
       if (false) {
         module2.exports = null;
@@ -23836,9 +23836,9 @@
     }
   });
 
-  // ../node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js
+  // node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js
   var require_hoist_non_react_statics_cjs = __commonJS({
-    "../node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js"(exports, module2) {
+    "node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js"(exports, module2) {
       "use strict";
       var reactIs = require_react_is2();
       var REACT_STATICS = {
@@ -23924,9 +23924,9 @@
     }
   });
 
-  // ../node_modules/react/cjs/react-jsx-runtime.development.js
+  // node_modules/react/cjs/react-jsx-runtime.development.js
   var require_react_jsx_runtime_development = __commonJS({
-    "../node_modules/react/cjs/react-jsx-runtime.development.js"(exports) {
+    "node_modules/react/cjs/react-jsx-runtime.development.js"(exports) {
       "use strict";
       if (true) {
         (function() {
@@ -24802,9 +24802,9 @@
     }
   });
 
-  // ../node_modules/react/jsx-runtime.js
+  // node_modules/react/jsx-runtime.js
   var require_jsx_runtime = __commonJS({
-    "../node_modules/react/jsx-runtime.js"(exports, module2) {
+    "node_modules/react/jsx-runtime.js"(exports, module2) {
       "use strict";
       if (false) {
         module2.exports = null;
@@ -24814,23 +24814,23 @@
     }
   });
 
-  // hurdle-preview.tsx
+  // preview/carp-preview.tsx
   var import_client2 = __toESM(require_client());
 
-  // ../src/ThemeShell.tsx
+  // src/ThemeShell.tsx
   var import_react30 = __toESM(require_react());
 
-  // ../node_modules/antd/es/_util/getReactMajorVersionCanDelMe.js
+  // node_modules/antd/es/_util/getReactMajorVersionCanDelMe.js
   var import_react = __toESM(require_react());
   function getReactMajorVersion() {
     const majorVersion = Number.parseInt(import_react.version.split(".")[0], 10);
     return majorVersion;
   }
 
-  // ../node_modules/antd/es/_util/warning.js
+  // node_modules/antd/es/_util/warning.js
   var React9 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/util/es/hooks/useEvent.js
+  // node_modules/@rc-component/util/es/hooks/useEvent.js
   var React = __toESM(require_react());
   var useEvent = (callback) => {
     const fnRef = React.useRef(callback);
@@ -24840,15 +24840,15 @@
   };
   var useEvent_default = useEvent;
 
-  // ../node_modules/@rc-component/util/es/hooks/useLayoutEffect.js
+  // node_modules/@rc-component/util/es/hooks/useLayoutEffect.js
   var React2 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/util/es/Dom/canUseDom.js
+  // node_modules/@rc-component/util/es/Dom/canUseDom.js
   function canUseDom() {
     return !!(typeof window !== "undefined" && window.document && window.document.createElement);
   }
 
-  // ../node_modules/@rc-component/util/es/hooks/useLayoutEffect.js
+  // node_modules/@rc-component/util/es/hooks/useLayoutEffect.js
   var useInternalLayoutEffect = canUseDom() ? React2.useLayoutEffect : React2.useEffect;
   var useLayoutEffect2 = (callback, deps) => {
     const firstMountRef = React2.useRef(true);
@@ -24864,7 +24864,7 @@
   };
   var useLayoutEffect_default = useLayoutEffect2;
 
-  // ../node_modules/@rc-component/util/es/hooks/useState.js
+  // node_modules/@rc-component/util/es/hooks/useState.js
   var React3 = __toESM(require_react());
   var useSafeState = (defaultValue) => {
     const destroyRef = React3.useRef(false);
@@ -24885,7 +24885,7 @@
   };
   var useState_default = useSafeState;
 
-  // ../node_modules/@rc-component/util/es/hooks/useControlledState.js
+  // node_modules/@rc-component/util/es/hooks/useControlledState.js
   var import_react2 = __toESM(require_react());
   function useControlledState(defaultStateValue, value) {
     const [innerValue, setInnerValue] = (0, import_react2.useState)(defaultStateValue);
@@ -24903,10 +24903,10 @@
     ];
   }
 
-  // ../node_modules/@rc-component/util/es/hooks/useDelayState.js
+  // node_modules/@rc-component/util/es/hooks/useDelayState.js
   var React4 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/util/es/raf.js
+  // node_modules/@rc-component/util/es/raf.js
   var raf = (callback) => +setTimeout(callback, 16);
   var caf = (num) => clearTimeout(num);
   if (typeof window !== "undefined" && "requestAnimationFrame" in window) {
@@ -24945,7 +24945,7 @@
   }
   var raf_default = wrapperRaf;
 
-  // ../node_modules/@rc-component/util/es/hooks/useId.js
+  // node_modules/@rc-component/util/es/hooks/useId.js
   var React5 = __toESM(require_react());
   function getUseId() {
     const fullClone = {
@@ -24986,7 +24986,7 @@
     }
   );
 
-  // ../node_modules/@rc-component/util/es/hooks/useMemo.js
+  // node_modules/@rc-component/util/es/hooks/useMemo.js
   var React6 = __toESM(require_react());
   function useMemo(getValue2, condition, shouldUpdate) {
     const cacheRef = React6.useRef({});
@@ -24997,7 +24997,7 @@
     return cacheRef.current.value;
   }
 
-  // ../node_modules/@rc-component/util/es/hooks/useSyncState.js
+  // node_modules/@rc-component/util/es/hooks/useSyncState.js
   var React7 = __toESM(require_react());
   function useSyncState(defaultValue) {
     const [, forceUpdate] = React7.useReducer((x) => x + 1, 0);
@@ -25013,11 +25013,11 @@
   }
   var useSyncState_default = useSyncState;
 
-  // ../node_modules/@rc-component/util/es/ref.js
+  // node_modules/@rc-component/util/es/ref.js
   var import_react3 = __toESM(require_react());
   var import_react_is = __toESM(require_react_is());
 
-  // ../node_modules/@rc-component/util/es/React/isFragment.js
+  // node_modules/@rc-component/util/es/React/isFragment.js
   var REACT_ELEMENT_TYPE_18 = Symbol.for("react.element");
   var REACT_ELEMENT_TYPE_19 = Symbol.for("react.transitional.element");
   var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -25030,7 +25030,7 @@
     );
   }
 
-  // ../node_modules/@rc-component/util/es/ref.js
+  // node_modules/@rc-component/util/es/ref.js
   var ReactMajorVersion = Number(import_react3.version.split(".")[0]);
   var fillRef = (ref, node2) => {
     if (typeof ref === "function") {
@@ -25088,7 +25088,7 @@
     return null;
   };
 
-  // ../node_modules/@rc-component/util/es/Dom/contains.js
+  // node_modules/@rc-component/util/es/Dom/contains.js
   function contains(root, n) {
     if (!root) {
       return false;
@@ -25106,7 +25106,7 @@
     return false;
   }
 
-  // ../node_modules/@rc-component/util/es/Dom/dynamicCSS.js
+  // node_modules/@rc-component/util/es/Dom/dynamicCSS.js
   var APPEND_ORDER = "data-rc-order";
   var APPEND_PRIORITY = "data-rc-priority";
   var MARK_KEY = `rc-util-key`;
@@ -25227,7 +25227,7 @@
     return newNode;
   }
 
-  // ../node_modules/@rc-component/util/es/Dom/findDOMNode.js
+  // node_modules/@rc-component/util/es/Dom/findDOMNode.js
   function isDOM(node2) {
     return node2 instanceof HTMLElement || node2 instanceof SVGElement;
   }
@@ -25241,10 +25241,10 @@
     return null;
   }
 
-  // ../node_modules/@rc-component/util/es/Dom/focus.js
+  // node_modules/@rc-component/util/es/Dom/focus.js
   var import_react4 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/util/es/Dom/isVisible.js
+  // node_modules/@rc-component/util/es/Dom/isVisible.js
   var isVisible_default = ((element) => {
     if (!element) {
       return false;
@@ -25275,7 +25275,7 @@
     return false;
   });
 
-  // ../node_modules/@rc-component/util/es/Dom/shadow.js
+  // node_modules/@rc-component/util/es/Dom/shadow.js
   function getRoot(ele) {
     return ele?.getRootNode?.();
   }
@@ -25286,7 +25286,7 @@
     return inShadow(ele) ? getRoot(ele) : null;
   }
 
-  // ../node_modules/@rc-component/util/es/getScrollBarSize.js
+  // node_modules/@rc-component/util/es/getScrollBarSize.js
   function measureScrollbarSize(ele) {
     const randomId = `rc-scrollbar-measure-${Math.random().toString(36).substring(7)}`;
     const measureEle = document.createElement("div");
@@ -25341,7 +25341,7 @@ ${heightStyle}
     return measureScrollbarSize(target);
   }
 
-  // ../node_modules/@rc-component/util/es/warning.js
+  // node_modules/@rc-component/util/es/warning.js
   var warned = {};
   var preWarningFns = [];
   var preMessage = (fn) => {
@@ -25383,7 +25383,7 @@ ${heightStyle}
   warningOnce.noteOnce = noteOnce;
   var warning_default = warningOnce;
 
-  // ../node_modules/@rc-component/util/es/isEqual.js
+  // node_modules/@rc-component/util/es/isEqual.js
   function isEqual(obj1, obj2, shallow = false) {
     const refSet = /* @__PURE__ */ new Set();
     function deepEqual(a, b, level = 1) {
@@ -25424,10 +25424,10 @@ ${heightStyle}
   }
   var isEqual_default = isEqual;
 
-  // ../node_modules/@rc-component/util/es/isMobile.js
+  // node_modules/@rc-component/util/es/isMobile.js
   var import_is_mobile = __toESM(require_is_mobile());
 
-  // ../node_modules/@rc-component/util/es/pickAttrs.js
+  // node_modules/@rc-component/util/es/pickAttrs.js
   var attributes = `accept acceptCharset accessKey action allowFullScreen allowTransparency
     alt async autoComplete autoFocus autoPlay capture cellPadding cellSpacing challenge
     charSet checked classID className colSpan cols content contentEditable contextMenu
@@ -25454,7 +25454,7 @@ ${heightStyle}
     onAuxClick onToggle onBeforeToggle onCancel onClose onResize onScrollEnd`;
   var propList = `${attributes} ${eventsName}`.split(/[\s\n]+/);
 
-  // ../node_modules/@rc-component/util/es/Children/toArray.js
+  // node_modules/@rc-component/util/es/Children/toArray.js
   var import_react5 = __toESM(require_react());
   function toArray(children, option = {}) {
     let ret = [];
@@ -25473,7 +25473,7 @@ ${heightStyle}
     return ret;
   }
 
-  // ../node_modules/@rc-component/util/es/utils/get.js
+  // node_modules/@rc-component/util/es/utils/get.js
   function get(entity, path) {
     let current = entity;
     for (let i = 0; i < path.length; i += 1) {
@@ -25485,7 +25485,7 @@ ${heightStyle}
     return current;
   }
 
-  // ../node_modules/@rc-component/util/es/utils/set.js
+  // node_modules/@rc-component/util/es/utils/set.js
   function internalSet(entity, paths, value, removeIfUndefined) {
     if (!paths.length) {
       return value;
@@ -25559,14 +25559,14 @@ ${heightStyle}
     return mergeWith(sources);
   }
 
-  // ../node_modules/@rc-component/util/es/React/render.js
+  // node_modules/@rc-component/util/es/React/render.js
   var import_client = __toESM(require_client());
 
-  // ../node_modules/@rc-component/util/es/Portal.js
+  // node_modules/@rc-component/util/es/Portal.js
   var import_react6 = __toESM(require_react());
   var import_react_dom = __toESM(require_react_dom());
 
-  // ../node_modules/antd/es/_util/warning.js
+  // node_modules/antd/es/_util/warning.js
   function noop() {
   }
   var {
@@ -25619,13 +25619,13 @@ ${heightStyle}
   };
   var warning_default2 = warning2;
 
-  // ../node_modules/@rc-component/resize-observer/es/index.js
+  // node_modules/@rc-component/resize-observer/es/index.js
   var React13 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/resize-observer/es/SingleObserver/index.js
+  // node_modules/@rc-component/resize-observer/es/SingleObserver/index.js
   var React12 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/resize-observer/es/Collection.js
+  // node_modules/@rc-component/resize-observer/es/Collection.js
   var React10 = __toESM(require_react());
   var CollectionContext = /* @__PURE__ */ React10.createContext(null);
   function Collection({
@@ -25656,10 +25656,10 @@ ${heightStyle}
     }, children);
   }
 
-  // ../node_modules/@rc-component/resize-observer/es/useResizeObserver.js
+  // node_modules/@rc-component/resize-observer/es/useResizeObserver.js
   var React11 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/resize-observer/es/utils/observerUtil.js
+  // node_modules/@rc-component/resize-observer/es/utils/observerUtil.js
   var elementListeners = /* @__PURE__ */ new Map();
   function onResize(entities) {
     entities.forEach((entity) => {
@@ -25693,7 +25693,7 @@ ${heightStyle}
     }
   }
 
-  // ../node_modules/@rc-component/resize-observer/es/useResizeObserver.js
+  // node_modules/@rc-component/resize-observer/es/useResizeObserver.js
   function useResizeObserver(enabled, getTarget, onDelayResize, onSyncResize) {
     const sizeRef = React11.useRef({
       width: -1,
@@ -25755,7 +25755,7 @@ ${heightStyle}
     ]);
   }
 
-  // ../node_modules/@rc-component/resize-observer/es/SingleObserver/index.js
+  // node_modules/@rc-component/resize-observer/es/SingleObserver/index.js
   function SingleObserver(props, ref) {
     const {
       children,
@@ -25787,7 +25787,7 @@ ${heightStyle}
   }
   var SingleObserver_default = RefSingleObserver;
 
-  // ../node_modules/@rc-component/resize-observer/es/index.js
+  // node_modules/@rc-component/resize-observer/es/index.js
   function _extends() {
     _extends = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -25830,7 +25830,7 @@ ${heightStyle}
   RefResizeObserver.Collection = Collection;
   var es_default = RefResizeObserver;
 
-  // ../node_modules/clsx/dist/clsx.mjs
+  // node_modules/clsx/dist/clsx.mjs
   function r(e) {
     var t, f, n = "";
     if ("string" == typeof e || "number" == typeof e) n += e;
@@ -25845,7 +25845,7 @@ ${heightStyle}
     return n;
   }
 
-  // ../node_modules/antd/es/config-provider/context.js
+  // node_modules/antd/es/config-provider/context.js
   var React14 = __toESM(require_react());
   var defaultPrefixCls = "ant";
   var defaultIconPrefixCls = "anticon";
@@ -25864,7 +25864,7 @@ ${heightStyle}
     Consumer: ConfigConsumer
   } = ConfigContext;
 
-  // ../node_modules/@emotion/hash/dist/hash.browser.esm.js
+  // node_modules/@emotion/hash/dist/hash.browser.esm.js
   function murmur2(str) {
     var h = 0;
     var k, i = 0, len = str.length;
@@ -25895,13 +25895,13 @@ ${heightStyle}
   }
   var hash_browser_esm_default = murmur2;
 
-  // ../node_modules/@ant-design/cssinjs/es/hooks/useCacheToken.js
+  // node_modules/@ant-design/cssinjs/es/hooks/useCacheToken.js
   var import_react8 = __toESM(require_react());
 
-  // ../node_modules/@ant-design/cssinjs/es/StyleContext.js
+  // node_modules/@ant-design/cssinjs/es/StyleContext.js
   var React15 = __toESM(require_react());
 
-  // ../node_modules/@ant-design/cssinjs/es/Cache.js
+  // node_modules/@ant-design/cssinjs/es/Cache.js
   var SPLIT = "%";
   function pathKey(keys2) {
     return keys2.join(SPLIT);
@@ -25943,7 +25943,7 @@ ${heightStyle}
   };
   var Cache_default = Entity;
 
-  // ../node_modules/@ant-design/cssinjs/es/StyleContext.js
+  // node_modules/@ant-design/cssinjs/es/StyleContext.js
   var ATTR_TOKEN = "data-token-hash";
   var ATTR_MARK = "data-css-hash";
   var ATTR_CACHE_PATH = "data-cache-path";
@@ -25983,11 +25983,11 @@ ${heightStyle}
   });
   var StyleContext_default = StyleContext;
 
-  // ../node_modules/@ant-design/cssinjs/es/theme/calc/CSSCalculator.js
+  // node_modules/@ant-design/cssinjs/es/theme/calc/CSSCalculator.js
   var CALC_UNIT = "CALC_UNIT";
   var regexp = new RegExp(CALC_UNIT, "g");
 
-  // ../node_modules/@ant-design/cssinjs/es/theme/ThemeCache.js
+  // node_modules/@ant-design/cssinjs/es/theme/ThemeCache.js
   function sameDerivativeOption(left, right) {
     if (left.length !== right.length) {
       return false;
@@ -26095,7 +26095,7 @@ ${heightStyle}
     }
   };
 
-  // ../node_modules/@ant-design/cssinjs/es/theme/Theme.js
+  // node_modules/@ant-design/cssinjs/es/theme/Theme.js
   var uuid2 = 0;
   var Theme = class {
     derivatives;
@@ -26113,7 +26113,7 @@ ${heightStyle}
     }
   };
 
-  // ../node_modules/@ant-design/cssinjs/es/theme/createTheme.js
+  // node_modules/@ant-design/cssinjs/es/theme/createTheme.js
   var cacheThemes = new ThemeCache();
   function createTheme(derivatives) {
     const derivativeArr = Array.isArray(derivatives) ? derivatives : [derivatives];
@@ -26123,7 +26123,7 @@ ${heightStyle}
     return cacheThemes.get(derivativeArr);
   }
 
-  // ../node_modules/@ant-design/cssinjs/es/util/index.js
+  // node_modules/@ant-design/cssinjs/es/util/index.js
   var resultCache = /* @__PURE__ */ new WeakMap();
   var RESULT_VALUE = {};
   function memoResult(callback, deps) {
@@ -26208,7 +26208,7 @@ ${heightStyle}
     return config;
   }
 
-  // ../node_modules/@ant-design/cssinjs/es/util/css-variables.js
+  // node_modules/@ant-design/cssinjs/es/util/css-variables.js
   var token2CSSVar = (token2, prefix2 = "") => {
     return `--${prefix2 ? `${prefix2}-` : ""}${token2}`.replace(/([a-z0-9])([A-Z])/g, "$1-$2").replace(/([A-Z]+)([A-Z][a-z0-9]+)/g, "$1-$2").replace(/([a-z])([A-Z0-9])/g, "$1-$2").toLowerCase();
   };
@@ -26256,11 +26256,11 @@ ${heightStyle}
     })];
   };
 
-  // ../node_modules/@ant-design/cssinjs/es/hooks/useGlobalCache.js
+  // node_modules/@ant-design/cssinjs/es/hooks/useGlobalCache.js
   var React16 = __toESM(require_react());
   var import_react7 = __toESM(require_react());
 
-  // ../node_modules/@ant-design/cssinjs/es/hooks/useHMR.js
+  // node_modules/@ant-design/cssinjs/es/hooks/useHMR.js
   var webpackHMR = false;
   function useDevHMR() {
     return webpackHMR;
@@ -26280,7 +26280,7 @@ ${heightStyle}
     }
   }
 
-  // ../node_modules/@ant-design/cssinjs/es/hooks/useGlobalCache.js
+  // node_modules/@ant-design/cssinjs/es/hooks/useGlobalCache.js
   var effectMap = /* @__PURE__ */ new Map();
   function useGlobalCache(prefix2, keyPath, cacheFn, onCacheRemove, onCacheEffect) {
     const {
@@ -26341,7 +26341,7 @@ ${heightStyle}
     return cacheContent;
   }
 
-  // ../node_modules/@ant-design/cssinjs/es/hooks/useCacheToken.js
+  // node_modules/@ant-design/cssinjs/es/hooks/useCacheToken.js
   var EMPTY_OVERRIDE = {};
   var hashPrefix = true ? "css-dev-only-do-not-override" : "css";
   var tokenKeys = /* @__PURE__ */ new Map();
@@ -26461,13 +26461,13 @@ ${heightStyle}
     return [order, styleId, styleText];
   };
 
-  // ../node_modules/@ant-design/cssinjs/es/hooks/useCSSVarRegister.js
+  // node_modules/@ant-design/cssinjs/es/hooks/useCSSVarRegister.js
   var import_react9 = __toESM(require_react());
 
-  // ../node_modules/@ant-design/cssinjs/es/hooks/useStyleRegister.js
+  // node_modules/@ant-design/cssinjs/es/hooks/useStyleRegister.js
   var React17 = __toESM(require_react());
 
-  // ../node_modules/@emotion/unitless/dist/unitless.browser.esm.js
+  // node_modules/@emotion/unitless/dist/unitless.browser.esm.js
   var unitlessKeys = {
     animationIterationCount: 1,
     borderImageOutset: 1,
@@ -26518,7 +26518,7 @@ ${heightStyle}
   };
   var unitless_browser_esm_default = unitlessKeys;
 
-  // ../node_modules/stylis/src/Enum.js
+  // node_modules/stylis/src/Enum.js
   var MS = "-ms-";
   var MOZ = "-moz-";
   var WEBKIT = "-webkit-";
@@ -26530,7 +26530,7 @@ ${heightStyle}
   var KEYFRAMES = "@keyframes";
   var LAYER = "@layer";
 
-  // ../node_modules/stylis/src/Utility.js
+  // node_modules/stylis/src/Utility.js
   var abs = Math.abs;
   var from = String.fromCharCode;
   var assign = Object.assign;
@@ -26573,7 +26573,7 @@ ${heightStyle}
     });
   }
 
-  // ../node_modules/stylis/src/Tokenizer.js
+  // node_modules/stylis/src/Tokenizer.js
   var line = 1;
   var column = 1;
   var length = 0;
@@ -26714,7 +26714,7 @@ ${heightStyle}
     return slice(index, position);
   }
 
-  // ../node_modules/stylis/src/Parser.js
+  // node_modules/stylis/src/Parser.js
   function compile(value) {
     return dealloc(parse("", null, null, null, [""], value = alloc(value), 0, [0], value));
   }
@@ -26882,7 +26882,7 @@ ${heightStyle}
     return node(value, root, parent, DECLARATION, substr(value, 0, length2), substr(value, length2 + 1, -1), length2, siblings);
   }
 
-  // ../node_modules/stylis/src/Prefixer.js
+  // node_modules/stylis/src/Prefixer.js
   function prefix(value, length2, children) {
     switch (hash(value, length2)) {
       // color-adjust
@@ -27071,7 +27071,7 @@ ${heightStyle}
     return value;
   }
 
-  // ../node_modules/stylis/src/Serializer.js
+  // node_modules/stylis/src/Serializer.js
   function serialize(children, callback) {
     var output = "";
     for (var i = 0; i < children.length; i++)
@@ -27096,7 +27096,7 @@ ${heightStyle}
     return strlen(children = serialize(element.children, callback)) ? element.return = element.value + "{" + children + "}" : "";
   }
 
-  // ../node_modules/stylis/src/Middleware.js
+  // node_modules/stylis/src/Middleware.js
   function middleware(collection) {
     var length2 = sizeof(collection);
     return function(element, index, children, callback) {
@@ -27141,7 +27141,7 @@ ${heightStyle}
     }
   }
 
-  // ../node_modules/@ant-design/cssinjs/es/linters/utils.js
+  // node_modules/@ant-design/cssinjs/es/linters/utils.js
   function lintWarning(message, info) {
     const {
       path,
@@ -27150,7 +27150,7 @@ ${heightStyle}
     warning_default(false, `[Ant Design CSS-in-JS] ${path ? `Error in ${path}: ` : ""}${message}${parentSelectors.length ? ` Selector: ${parentSelectors.join(" | ")}` : ""}`);
   }
 
-  // ../node_modules/@ant-design/cssinjs/es/linters/contentQuotesLinter.js
+  // node_modules/@ant-design/cssinjs/es/linters/contentQuotesLinter.js
   var linter = (key, value, info) => {
     if (key === "content") {
       const contentValuePattern = /(attr|counters?|url|(((repeating-)?(linear|radial))|conic)-gradient)\(|(no-)?(open|close)-quote/;
@@ -27162,7 +27162,7 @@ ${heightStyle}
   };
   var contentQuotesLinter_default = linter;
 
-  // ../node_modules/@ant-design/cssinjs/es/linters/hashedAnimationLinter.js
+  // node_modules/@ant-design/cssinjs/es/linters/hashedAnimationLinter.js
   var linter2 = (key, value, info) => {
     if (key === "animation") {
       if (info.hashId && value !== "none") {
@@ -27172,7 +27172,7 @@ ${heightStyle}
   };
   var hashedAnimationLinter_default = linter2;
 
-  // ../node_modules/@ant-design/cssinjs/es/util/cacheMapUtil.js
+  // node_modules/@ant-design/cssinjs/es/util/cacheMapUtil.js
   var ATTR_CACHE_MAP = "data-ant-cssinjs-cache-path";
   var CSS_FILE_STYLE = "_FILE_STYLE__";
   var cachePathMap;
@@ -27224,7 +27224,7 @@ ${heightStyle}
     return [styleStr, hash2];
   }
 
-  // ../node_modules/@ant-design/cssinjs/es/hooks/useStyleRegister.js
+  // node_modules/@ant-design/cssinjs/es/hooks/useStyleRegister.js
   var SKIP_CHECK = "_skip_check_";
   var MULTI_VALUE = "_multi_value_";
   function normalizeStyle(styleStr, autoPrefix) {
@@ -27510,7 +27510,7 @@ ${heightStyle}
     return [order, styleId, keyStyleText];
   };
 
-  // ../node_modules/@ant-design/cssinjs/es/hooks/useCSSVarRegister.js
+  // node_modules/@ant-design/cssinjs/es/hooks/useCSSVarRegister.js
   var CSS_VAR_PREFIX = "cssVar";
   var extract3 = (cache, effectStyles, options) => {
     const [, styleStr, styleId, cssVarKey] = cache;
@@ -27529,14 +27529,14 @@ ${heightStyle}
     return [order, styleId, styleText];
   };
 
-  // ../node_modules/@ant-design/cssinjs/es/extractStyle.js
+  // node_modules/@ant-design/cssinjs/es/extractStyle.js
   var ExtractStyleFns = {
     [STYLE_PREFIX]: extract2,
     [TOKEN_PREFIX]: extract,
     [CSS_VAR_PREFIX]: extract3
   };
 
-  // ../node_modules/@ant-design/cssinjs/es/transformers/legacyLogicalProperties.js
+  // node_modules/@ant-design/cssinjs/es/transformers/legacyLogicalProperties.js
   function noSplit(list) {
     list.notSplit = true;
     return list;
@@ -27599,7 +27599,7 @@ ${heightStyle}
     borderEndEndRadius: ["borderBottomRightRadius"]
   };
 
-  // ../node_modules/@babel/runtime/helpers/esm/typeof.js
+  // node_modules/@babel/runtime/helpers/esm/typeof.js
   function _typeof(o) {
     "@babel/helpers - typeof";
     return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
@@ -27609,7 +27609,7 @@ ${heightStyle}
     }, _typeof(o);
   }
 
-  // ../node_modules/@babel/runtime/helpers/esm/toPrimitive.js
+  // node_modules/@babel/runtime/helpers/esm/toPrimitive.js
   function toPrimitive(t, e) {
     if ("object" != _typeof(t) || !t) return t;
     var r2;
@@ -27621,13 +27621,13 @@ ${heightStyle}
     return ("string" === e ? String : Number)(t);
   }
 
-  // ../node_modules/@babel/runtime/helpers/esm/toPropertyKey.js
+  // node_modules/@babel/runtime/helpers/esm/toPropertyKey.js
   function toPropertyKey(t) {
     var i = toPrimitive(t, "string");
     return "symbol" == _typeof(i) ? i : i + "";
   }
 
-  // ../node_modules/@babel/runtime/helpers/esm/defineProperty.js
+  // node_modules/@babel/runtime/helpers/esm/defineProperty.js
   function _defineProperty(e, r2, t) {
     return (r2 = toPropertyKey(r2)) in e ? Object.defineProperty(e, r2, {
       value: t,
@@ -27637,15 +27637,15 @@ ${heightStyle}
     }) : e[r2] = t, e;
   }
 
-  // ../node_modules/@ant-design/cssinjs-utils/es/util/genStyleUtils.js
+  // node_modules/@ant-design/cssinjs-utils/es/util/genStyleUtils.js
   var import_react11 = __toESM(require_react());
 
-  // ../node_modules/@babel/runtime/helpers/esm/classCallCheck.js
+  // node_modules/@babel/runtime/helpers/esm/classCallCheck.js
   function _classCallCheck(a, n) {
     if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
   }
 
-  // ../node_modules/@babel/runtime/helpers/esm/createClass.js
+  // node_modules/@babel/runtime/helpers/esm/createClass.js
   function _defineProperties(e, r2) {
     for (var t = 0; t < r2.length; t++) {
       var o = r2[t];
@@ -27658,11 +27658,11 @@ ${heightStyle}
     }), e;
   }
 
-  // ../node_modules/@ant-design/cssinjs-utils/es/util/calc/CSSCalculator.js
+  // node_modules/@ant-design/cssinjs-utils/es/util/calc/CSSCalculator.js
   var CALC_UNIT2 = "CALC_UNIT";
   var regexp2 = new RegExp(CALC_UNIT2, "g");
 
-  // ../node_modules/@ant-design/cssinjs-utils/es/_util/hooks/useUniqueMemo.js
+  // node_modules/@ant-design/cssinjs-utils/es/_util/hooks/useUniqueMemo.js
   var import_react10 = __toESM(require_react());
   var BEAT_LIMIT = 1e3 * 60 * 10;
   var ArrayKeyMap = /* @__PURE__ */ (function() {
@@ -27734,10 +27734,10 @@ ${heightStyle}
   })();
   var uniqueMap = new ArrayKeyMap();
 
-  // ../node_modules/antd/es/theme/interface/presetColors.js
+  // node_modules/antd/es/theme/interface/presetColors.js
   var PresetColors = ["blue", "purple", "cyan", "green", "magenta", "pink", "red", "orange", "yellow", "volcano", "geekblue", "lime", "gold"];
 
-  // ../node_modules/antd/es/theme/themes/shared/genFontSizes.js
+  // node_modules/antd/es/theme/themes/shared/genFontSizes.js
   function getLineHeight(fontSize) {
     return (fontSize + 8) / fontSize;
   }
@@ -27757,19 +27757,19 @@ ${heightStyle}
     }));
   }
 
-  // ../node_modules/antd/es/theme/useToken.js
+  // node_modules/antd/es/theme/useToken.js
   var import_react13 = __toESM(require_react());
 
-  // ../node_modules/antd/es/version/version.js
+  // node_modules/antd/es/version/version.js
   var version_default = "6.3.1";
 
-  // ../node_modules/antd/es/version/index.js
+  // node_modules/antd/es/version/index.js
   var version_default2 = version_default;
 
-  // ../node_modules/antd/es/theme/context.js
+  // node_modules/antd/es/theme/context.js
   var import_react12 = __toESM(require_react());
 
-  // ../node_modules/antd/es/theme/themes/seed.js
+  // node_modules/antd/es/theme/themes/seed.js
   var defaultPresetColors = {
     blue: "#1677FF",
     purple: "#722ED1",
@@ -27840,7 +27840,7 @@ ${heightStyle}
   };
   var seed_default = seedToken;
 
-  // ../node_modules/@ant-design/fast-color/es/presetColors.js
+  // node_modules/@ant-design/fast-color/es/presetColors.js
   var presetColors_default = {
     aliceblue: "9ehhb",
     antiquewhite: "9sgk7",
@@ -27992,7 +27992,7 @@ ${heightStyle}
     yellowgreen: "61fzm"
   };
 
-  // ../node_modules/@ant-design/fast-color/es/FastColor.js
+  // node_modules/@ant-design/fast-color/es/FastColor.js
   var round = Math.round;
   function splitColorStr(str, parseNum) {
     const match2 = str.replace(/^[^(]*\((.*)/, "$1").replace(/\).*/, "").match(/\d*\.?\d+%?/g) || [];
@@ -28512,7 +28512,7 @@ ${heightStyle}
     }
   };
 
-  // ../node_modules/@ant-design/colors/es/generate.js
+  // node_modules/@ant-design/colors/es/generate.js
   var hueStep = 2;
   var saturationStep = 0.16;
   var saturationStep2 = 0.05;
@@ -28628,7 +28628,7 @@ ${heightStyle}
     return patterns.map((c) => c.toHexString());
   }
 
-  // ../node_modules/@ant-design/colors/es/presets.js
+  // node_modules/@ant-design/colors/es/presets.js
   var presetPrimaryColors = {
     "red": "#F5222D",
     "volcano": "#FA541C",
@@ -28712,7 +28712,7 @@ ${heightStyle}
   var greyDark = ["#151515", "#1f1f1f", "#2d2d2d", "#393939", "#494949", "#5a5a5a", "#6a6a6a", "#7b7b7b", "#888888", "#969696"];
   greyDark.primary = greyDark[5];
 
-  // ../node_modules/antd/es/theme/themes/shared/genColorMapToken.js
+  // node_modules/antd/es/theme/themes/shared/genColorMapToken.js
   function genColorMapToken(seed, {
     generateColorPalettes: generateColorPalettes3,
     generateNeutralColorPalettes: generateNeutralColorPalettes3
@@ -28807,7 +28807,7 @@ ${heightStyle}
     };
   }
 
-  // ../node_modules/antd/es/theme/themes/shared/genRadius.js
+  // node_modules/antd/es/theme/themes/shared/genRadius.js
   var genRadius = (radiusBase) => {
     let radiusLG = radiusBase;
     let radiusSM = radiusBase;
@@ -28851,7 +28851,7 @@ ${heightStyle}
   };
   var genRadius_default = genRadius;
 
-  // ../node_modules/antd/es/theme/themes/shared/genCommonMapToken.js
+  // node_modules/antd/es/theme/themes/shared/genCommonMapToken.js
   function genCommonMapToken(token2) {
     const {
       motionUnit,
@@ -28871,7 +28871,7 @@ ${heightStyle}
     };
   }
 
-  // ../node_modules/antd/es/theme/themes/shared/genControlHeight.js
+  // node_modules/antd/es/theme/themes/shared/genControlHeight.js
   var genControlHeight = (token2) => {
     const {
       controlHeight
@@ -28884,7 +28884,7 @@ ${heightStyle}
   };
   var genControlHeight_default = genControlHeight;
 
-  // ../node_modules/antd/es/theme/themes/shared/genFontMapToken.js
+  // node_modules/antd/es/theme/themes/shared/genFontMapToken.js
   var genFontMapToken = (fontSize) => {
     const fontSizePairs = getFontSizes(fontSize);
     const fontSizes = fontSizePairs.map((pair) => pair.size);
@@ -28920,7 +28920,7 @@ ${heightStyle}
   };
   var genFontMapToken_default = genFontMapToken;
 
-  // ../node_modules/antd/es/theme/themes/shared/genSizeMapToken.js
+  // node_modules/antd/es/theme/themes/shared/genSizeMapToken.js
   function genSizeMapToken(token2) {
     const {
       sizeUnit,
@@ -28948,14 +28948,14 @@ ${heightStyle}
     };
   }
 
-  // ../node_modules/antd/es/theme/themes/default/colorAlgorithm.js
+  // node_modules/antd/es/theme/themes/default/colorAlgorithm.js
   var getAlphaColor = (baseColor, alpha) => new FastColor(baseColor).setA(alpha).toRgbString();
   var getSolidColor = (baseColor, brightness) => {
     const instance = new FastColor(baseColor);
     return instance.darken(brightness).toHexString();
   };
 
-  // ../node_modules/antd/es/theme/themes/default/colors.js
+  // node_modules/antd/es/theme/themes/default/colors.js
   var generateColorPalettes = (baseColor) => {
     const colors = generate(baseColor);
     return {
@@ -28999,7 +28999,7 @@ ${heightStyle}
     };
   };
 
-  // ../node_modules/antd/es/theme/themes/default/index.js
+  // node_modules/antd/es/theme/themes/default/index.js
   function derivative(token2) {
     presetPrimaryColors.pink = presetPrimaryColors.magenta;
     presetPalettes.pink = presetPalettes.magenta;
@@ -29038,11 +29038,11 @@ ${heightStyle}
     };
   }
 
-  // ../node_modules/antd/es/theme/themes/default/theme.js
+  // node_modules/antd/es/theme/themes/default/theme.js
   var defaultTheme = createTheme(derivative);
   var theme_default = defaultTheme;
 
-  // ../node_modules/antd/es/theme/context.js
+  // node_modules/antd/es/theme/context.js
   var defaultConfig = {
     token: seed_default,
     override: {
@@ -29052,7 +29052,7 @@ ${heightStyle}
   };
   var DesignTokenContext = /* @__PURE__ */ import_react12.default.createContext(defaultConfig);
 
-  // ../node_modules/antd/es/theme/util/getAlphaColor.js
+  // node_modules/antd/es/theme/util/getAlphaColor.js
   function isStableColor(color) {
     return color >= 0 && color <= 255;
   }
@@ -29093,7 +29093,7 @@ ${heightStyle}
   }
   var getAlphaColor_default = getAlphaColor2;
 
-  // ../node_modules/antd/es/theme/util/alias.js
+  // node_modules/antd/es/theme/util/alias.js
   function formatToken(derivativeToken) {
     const {
       override,
@@ -29265,7 +29265,7 @@ ${heightStyle}
     return aliasToken;
   }
 
-  // ../node_modules/antd/es/theme/useToken.js
+  // node_modules/antd/es/theme/useToken.js
   var unitless = {
     lineHeight: true,
     lineHeightSM: true,
@@ -29364,7 +29364,7 @@ ${heightStyle}
     return [mergedTheme, realToken, hashed ? hashId : "", token2, cssVar, !!zeroRuntime];
   }
 
-  // ../node_modules/antd/es/style/index.js
+  // node_modules/antd/es/style/index.js
   var resetIcon = () => ({
     display: "inline-flex",
     alignItems: "center",
@@ -29394,7 +29394,7 @@ ${heightStyle}
     }
   });
 
-  // ../node_modules/antd/es/theme/util/useResetIconStyle.js
+  // node_modules/antd/es/theme/util/useResetIconStyle.js
   var useResetIconStyle = (iconPrefixCls, csp) => {
     const [theme, token2] = useToken();
     return useStyleRegister({
@@ -29410,21 +29410,21 @@ ${heightStyle}
   };
   var useResetIconStyle_default = useResetIconStyle;
 
-  // ../node_modules/@ant-design/icons/es/components/AntdIconLight.js
+  // node_modules/@ant-design/icons/es/components/AntdIconLight.js
   var React23 = __toESM(require_react());
 
-  // ../node_modules/@ant-design/icons/es/components/Context.js
+  // node_modules/@ant-design/icons/es/components/Context.js
   var import_react14 = __toESM(require_react());
   var IconContext = /* @__PURE__ */ (0, import_react14.createContext)({});
   var Context_default = IconContext;
 
-  // ../node_modules/@ant-design/icons/es/components/IconBase.js
+  // node_modules/@ant-design/icons/es/components/IconBase.js
   var React22 = __toESM(require_react());
 
-  // ../node_modules/@ant-design/icons/es/renderUtils.js
+  // node_modules/@ant-design/icons/es/renderUtils.js
   var import_react15 = __toESM(require_react());
 
-  // ../node_modules/@ant-design/icons/es/cssUtils.js
+  // node_modules/@ant-design/icons/es/cssUtils.js
   var APPEND_ORDER2 = "data-rc-order";
   var APPEND_PRIORITY2 = "data-rc-priority";
   var MARK_KEY2 = "rc-util-key";
@@ -29580,7 +29580,7 @@ ${heightStyle}
     warned2[message] = true;
   }
 
-  // ../node_modules/@ant-design/icons/es/renderUtils.js
+  // node_modules/@ant-design/icons/es/renderUtils.js
   function camelCase(input) {
     return input.replace(/-(.)/g, (match2, g) => g.toUpperCase());
   }
@@ -29703,7 +29703,7 @@ ${mergedStyleStr}
     }, []);
   };
 
-  // ../node_modules/@ant-design/icons/es/components/IconBase.js
+  // node_modules/@ant-design/icons/es/components/IconBase.js
   var IconBase = (props) => {
     const {
       icon,
@@ -29737,7 +29737,7 @@ ${mergedStyleStr}
   IconBase.displayName = "IconReact";
   var IconBase_default = IconBase;
 
-  // ../node_modules/@ant-design/icons/es/components/AntdIconLight.js
+  // node_modules/@ant-design/icons/es/components/AntdIconLight.js
   function _extends2() {
     _extends2 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -29804,11 +29804,11 @@ ${mergedStyleStr}
   }
   var AntdIconLight_default = Icon;
 
-  // ../node_modules/@rc-component/motion/es/CSSMotion.js
+  // node_modules/@rc-component/motion/es/CSSMotion.js
   var React29 = __toESM(require_react());
   var import_react19 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/motion/es/context.js
+  // node_modules/@rc-component/motion/es/context.js
   var React24 = __toESM(require_react());
   var Context = /* @__PURE__ */ React24.createContext({});
   var MotionProvider = (props) => {
@@ -29827,11 +29827,11 @@ ${mergedStyleStr}
   };
   var context_default = MotionProvider;
 
-  // ../node_modules/@rc-component/motion/es/hooks/useStatus.js
+  // node_modules/@rc-component/motion/es/hooks/useStatus.js
   var React28 = __toESM(require_react());
   var import_react18 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/motion/es/interface.js
+  // node_modules/@rc-component/motion/es/interface.js
   var STATUS_NONE = "none";
   var STATUS_APPEAR = "appear";
   var STATUS_ENTER = "enter";
@@ -29843,11 +29843,11 @@ ${mergedStyleStr}
   var STEP_ACTIVATED = "end";
   var STEP_PREPARED = "prepared";
 
-  // ../node_modules/@rc-component/motion/es/hooks/useDomMotionEvents.js
+  // node_modules/@rc-component/motion/es/hooks/useDomMotionEvents.js
   var React25 = __toESM(require_react());
   var import_react16 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/motion/es/util/motion.js
+  // node_modules/@rc-component/motion/es/util/motion.js
   function makePrefixMap(styleProp, eventName) {
     const prefixes = {};
     prefixes[styleProp.toLowerCase()] = eventName.toLowerCase();
@@ -29912,7 +29912,7 @@ ${mergedStyleStr}
     return `${transitionName}-${transitionType}`;
   }
 
-  // ../node_modules/@rc-component/motion/es/hooks/useDomMotionEvents.js
+  // node_modules/@rc-component/motion/es/hooks/useDomMotionEvents.js
   var useDomMotionEvents_default = ((onInternalMotionEnd) => {
     const cacheElementRef = (0, import_react16.useRef)();
     function removeMotionEvents(element) {
@@ -29938,15 +29938,15 @@ ${mergedStyleStr}
     return [patchMotionEvents, removeMotionEvents];
   });
 
-  // ../node_modules/@rc-component/motion/es/hooks/useIsomorphicLayoutEffect.js
+  // node_modules/@rc-component/motion/es/hooks/useIsomorphicLayoutEffect.js
   var import_react17 = __toESM(require_react());
   var useIsomorphicLayoutEffect = canUseDom() ? import_react17.useLayoutEffect : import_react17.useEffect;
   var useIsomorphicLayoutEffect_default = useIsomorphicLayoutEffect;
 
-  // ../node_modules/@rc-component/motion/es/hooks/useStepQueue.js
+  // node_modules/@rc-component/motion/es/hooks/useStepQueue.js
   var React27 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/motion/es/hooks/useNextFrame.js
+  // node_modules/@rc-component/motion/es/hooks/useNextFrame.js
   var React26 = __toESM(require_react());
   var useNextFrame_default = (() => {
     const nextFrameRef = React26.useRef(null);
@@ -29972,7 +29972,7 @@ ${mergedStyleStr}
     return [nextFrame, cancelNextFrame];
   });
 
-  // ../node_modules/@rc-component/motion/es/hooks/useStepQueue.js
+  // node_modules/@rc-component/motion/es/hooks/useStepQueue.js
   var FULL_STEP_QUEUE = [STEP_PREPARE, STEP_START, STEP_ACTIVE, STEP_ACTIVATED];
   var SIMPLE_STEP_QUEUE = [STEP_PREPARE, STEP_PREPARED];
   var SkipStep = false;
@@ -30015,7 +30015,7 @@ ${mergedStyleStr}
     return [startQueue, step2];
   });
 
-  // ../node_modules/@rc-component/motion/es/hooks/useStatus.js
+  // node_modules/@rc-component/motion/es/hooks/useStatus.js
   function useStatus(supportMotion, visible, getElement, {
     motionEnter = true,
     motionAppear = true,
@@ -30201,7 +30201,7 @@ ${mergedStyleStr}
     ];
   }
 
-  // ../node_modules/@rc-component/motion/es/CSSMotion.js
+  // node_modules/@rc-component/motion/es/CSSMotion.js
   function isRefNotConsumed(children) {
     return children?.length < 2;
   }
@@ -30330,10 +30330,10 @@ ${mergedStyleStr}
   }
   var CSSMotion_default = genCSSMotion(supportTransition);
 
-  // ../node_modules/@rc-component/motion/es/CSSMotionList.js
+  // node_modules/@rc-component/motion/es/CSSMotionList.js
   var React30 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/motion/es/util/diff.js
+  // node_modules/@rc-component/motion/es/util/diff.js
   var STATUS_ADD = "add";
   var STATUS_KEEP = "keep";
   var STATUS_REMOVE = "remove";
@@ -30416,7 +30416,7 @@ ${mergedStyleStr}
     return list;
   }
 
-  // ../node_modules/@rc-component/motion/es/CSSMotionList.js
+  // node_modules/@rc-component/motion/es/CSSMotionList.js
   function _extends3() {
     _extends3 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -30533,13 +30533,13 @@ ${mergedStyleStr}
   }
   var CSSMotionList_default = genCSSMotionList(supportTransition);
 
-  // ../node_modules/@rc-component/motion/es/index.js
+  // node_modules/@rc-component/motion/es/index.js
   var es_default2 = CSSMotion_default;
 
-  // ../node_modules/antd/es/locale/index.js
+  // node_modules/antd/es/locale/index.js
   var React31 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/pagination/es/locale/en_US.js
+  // node_modules/@rc-component/pagination/es/locale/en_US.js
   var locale = {
     // Options
     items_per_page: "/ page",
@@ -30557,7 +30557,7 @@ ${mergedStyleStr}
   };
   var en_US_default = locale;
 
-  // ../node_modules/@rc-component/picker/es/locale/common.js
+  // node_modules/@rc-component/picker/es/locale/common.js
   var commonLocale = {
     yearFormat: "YYYY",
     dayFormat: "D",
@@ -30565,7 +30565,7 @@ ${mergedStyleStr}
     monthBeforeYear: true
   };
 
-  // ../node_modules/@rc-component/picker/es/locale/en_US.js
+  // node_modules/@rc-component/picker/es/locale/en_US.js
   function _typeof2(o) {
     "@babel/helpers - typeof";
     return _typeof2 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
@@ -30645,14 +30645,14 @@ ${mergedStyleStr}
   });
   var en_US_default2 = locale2;
 
-  // ../node_modules/antd/es/time-picker/locale/en_US.js
+  // node_modules/antd/es/time-picker/locale/en_US.js
   var locale3 = {
     placeholder: "Select time",
     rangePlaceholder: ["Start time", "End time"]
   };
   var en_US_default3 = locale3;
 
-  // ../node_modules/antd/es/date-picker/locale/en_US.js
+  // node_modules/antd/es/date-picker/locale/en_US.js
   var locale4 = {
     lang: {
       placeholder: "Select date",
@@ -30673,10 +30673,10 @@ ${mergedStyleStr}
   };
   var en_US_default4 = locale4;
 
-  // ../node_modules/antd/es/calendar/locale/en_US.js
+  // node_modules/antd/es/calendar/locale/en_US.js
   var en_US_default5 = en_US_default4;
 
-  // ../node_modules/antd/es/locale/en_US.js
+  // node_modules/antd/es/locale/en_US.js
   var typeTemplate = "${label} is not a valid ${type}";
   var localeValues = {
     locale: "en",
@@ -30819,7 +30819,7 @@ ${mergedStyleStr}
   };
   var en_US_default6 = localeValues;
 
-  // ../node_modules/antd/es/modal/locale.js
+  // node_modules/antd/es/modal/locale.js
   var runtimeLocale = {
     ...en_US_default6.Modal
   };
@@ -30845,12 +30845,12 @@ ${mergedStyleStr}
     };
   }
 
-  // ../node_modules/antd/es/locale/context.js
+  // node_modules/antd/es/locale/context.js
   var import_react20 = __toESM(require_react());
   var LocaleContext = /* @__PURE__ */ (0, import_react20.createContext)(void 0);
   var context_default2 = LocaleContext;
 
-  // ../node_modules/antd/es/locale/index.js
+  // node_modules/antd/es/locale/index.js
   var ANT_MARK = "internalMark";
   var LocaleProvider = (props) => {
     const {
@@ -30879,26 +30879,26 @@ ${mergedStyleStr}
   }
   var locale_default = LocaleProvider;
 
-  // ../node_modules/antd/es/config-provider/index.js
+  // node_modules/antd/es/config-provider/index.js
   var React56 = __toESM(require_react());
 
-  // ../node_modules/antd/es/form/validateMessagesContext.js
+  // node_modules/antd/es/form/validateMessagesContext.js
   var import_react21 = __toESM(require_react());
   var validateMessagesContext_default = /* @__PURE__ */ (0, import_react21.createContext)(void 0);
 
-  // ../node_modules/antd/es/tooltip/UniqueProvider/index.js
+  // node_modules/antd/es/tooltip/UniqueProvider/index.js
   var import_react27 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/portal/es/Portal.js
+  // node_modules/@rc-component/portal/es/Portal.js
   var React35 = __toESM(require_react());
   var import_react_dom2 = __toESM(require_react_dom());
 
-  // ../node_modules/@rc-component/portal/es/Context.js
+  // node_modules/@rc-component/portal/es/Context.js
   var React32 = __toESM(require_react());
   var OrderContext = /* @__PURE__ */ React32.createContext(null);
   var Context_default2 = OrderContext;
 
-  // ../node_modules/@rc-component/portal/es/mock.js
+  // node_modules/@rc-component/portal/es/mock.js
   var inline = false;
   function inlineMock(nextInline) {
     if (typeof nextInline === "boolean") {
@@ -30907,7 +30907,7 @@ ${mergedStyleStr}
     return inline;
   }
 
-  // ../node_modules/@rc-component/portal/es/useDom.js
+  // node_modules/@rc-component/portal/es/useDom.js
   var React33 = __toESM(require_react());
   var EMPTY_LIST = [];
   function useDom(render3, debug) {
@@ -30961,15 +30961,15 @@ ${mergedStyleStr}
     return [ele, mergedQueueCreate];
   }
 
-  // ../node_modules/@rc-component/portal/es/useScrollLocker.js
+  // node_modules/@rc-component/portal/es/useScrollLocker.js
   var React34 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/portal/es/util.js
+  // node_modules/@rc-component/portal/es/util.js
   function isBodyOverflowing() {
     return document.body.scrollHeight > (window.innerHeight || document.documentElement.clientHeight) && window.innerWidth > document.body.offsetWidth;
   }
 
-  // ../node_modules/@rc-component/portal/es/useScrollLocker.js
+  // node_modules/@rc-component/portal/es/useScrollLocker.js
   var UNIQUE_ID = `rc-util-locker-${Date.now()}`;
   var uuid3 = 0;
   function useScrollLocker(lock) {
@@ -30996,7 +30996,7 @@ html body {
     }, [mergedLock, id]);
   }
 
-  // ../node_modules/@rc-component/portal/es/useEscKeyDown.js
+  // node_modules/@rc-component/portal/es/useEscKeyDown.js
   var import_react22 = __toESM(require_react());
   var stack = [];
   var IME_LOCK_DURATION = 200;
@@ -31062,7 +31062,7 @@ html body {
     }, [open]);
   }
 
-  // ../node_modules/@rc-component/portal/es/Portal.js
+  // node_modules/@rc-component/portal/es/Portal.js
   var getPortalContainer = (getContainer3) => {
     if (getContainer3 === false) {
       return false;
@@ -31135,16 +31135,16 @@ html body {
   }
   var Portal_default2 = Portal;
 
-  // ../node_modules/@rc-component/portal/es/index.js
+  // node_modules/@rc-component/portal/es/index.js
   var es_default3 = Portal_default2;
 
-  // ../node_modules/@rc-component/trigger/es/index.js
+  // node_modules/@rc-component/trigger/es/index.js
   var React48 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/trigger/es/Popup/index.js
+  // node_modules/@rc-component/trigger/es/Popup/index.js
   var React39 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/trigger/es/Popup/Arrow.js
+  // node_modules/@rc-component/trigger/es/Popup/Arrow.js
   var React36 = __toESM(require_react());
   function Arrow(props) {
     const {
@@ -31201,7 +31201,7 @@ html body {
     }, content);
   }
 
-  // ../node_modules/@rc-component/trigger/es/Popup/Mask.js
+  // node_modules/@rc-component/trigger/es/Popup/Mask.js
   var React37 = __toESM(require_react());
   function _extends4() {
     _extends4 = Object.assign ? Object.assign.bind() : function(target) {
@@ -31243,7 +31243,7 @@ html body {
     }));
   }
 
-  // ../node_modules/@rc-component/trigger/es/Popup/PopupContent.js
+  // node_modules/@rc-component/trigger/es/Popup/PopupContent.js
   var React38 = __toESM(require_react());
   var PopupContent = /* @__PURE__ */ React38.memo(({
     children
@@ -31253,7 +31253,7 @@ html body {
   }
   var PopupContent_default = PopupContent;
 
-  // ../node_modules/@rc-component/trigger/es/hooks/useOffsetStyle.js
+  // node_modules/@rc-component/trigger/es/hooks/useOffsetStyle.js
   function useOffsetStyle(isMobile2, ready, open, align, offsetR, offsetB, offsetX, offsetY) {
     const AUTO = "auto";
     const offsetStyle = isMobile2 ? {} : {
@@ -31287,7 +31287,7 @@ html body {
     return offsetStyle;
   }
 
-  // ../node_modules/@rc-component/trigger/es/Popup/index.js
+  // node_modules/@rc-component/trigger/es/Popup/index.js
   function _extends5() {
     _extends5 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -31464,13 +31464,13 @@ html body {
   }
   var Popup_default = Popup;
 
-  // ../node_modules/@rc-component/trigger/es/context.js
+  // node_modules/@rc-component/trigger/es/context.js
   var React40 = __toESM(require_react());
   var TriggerContext = /* @__PURE__ */ React40.createContext(null);
   var context_default3 = TriggerContext;
   var UniqueContext = /* @__PURE__ */ React40.createContext(null);
 
-  // ../node_modules/@rc-component/trigger/es/hooks/useAction.js
+  // node_modules/@rc-component/trigger/es/hooks/useAction.js
   var React41 = __toESM(require_react());
   function toArray2(val) {
     return val ? Array.isArray(val) ? val : [val] : [];
@@ -31491,10 +31491,10 @@ html body {
     }, [action, showAction, hideAction]);
   }
 
-  // ../node_modules/@rc-component/trigger/es/hooks/useAlign.js
+  // node_modules/@rc-component/trigger/es/hooks/useAlign.js
   var React42 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/trigger/es/util.js
+  // node_modules/@rc-component/trigger/es/util.js
   function isPointsEq(a1 = [], a2 = [], isAlignPoint) {
     const getVal = (a, index) => a[index] || "";
     if (isAlignPoint) {
@@ -31595,7 +31595,7 @@ html body {
     return visibleArea;
   }
 
-  // ../node_modules/@rc-component/trigger/es/hooks/useAlign.js
+  // node_modules/@rc-component/trigger/es/hooks/useAlign.js
   function getUnitOffset(size, offset = 0) {
     const offsetStr = `${offset}`;
     const cells = offsetStr.match(/^(.*)\%$/);
@@ -32037,7 +32037,7 @@ html body {
     return [offsetInfo.ready, offsetInfo.offsetX, offsetInfo.offsetY, offsetInfo.offsetR, offsetInfo.offsetB, offsetInfo.arrowX, offsetInfo.arrowY, offsetInfo.scaleX, offsetInfo.scaleY, offsetInfo.align, triggerAlign];
   }
 
-  // ../node_modules/@rc-component/trigger/es/hooks/useDelay.js
+  // node_modules/@rc-component/trigger/es/hooks/useDelay.js
   var React43 = __toESM(require_react());
   function useDelay() {
     const delayRef = React43.useRef(null);
@@ -32065,7 +32065,7 @@ html body {
     return delayInvoke;
   }
 
-  // ../node_modules/@rc-component/trigger/es/hooks/useWatch.js
+  // node_modules/@rc-component/trigger/es/hooks/useWatch.js
   function useWatch(open, target, popup, onAlign, onScroll) {
     useLayoutEffect_default(() => {
       if (open && target && popup) {
@@ -32098,7 +32098,7 @@ html body {
     }, [open, target, popup]);
   }
 
-  // ../node_modules/@rc-component/trigger/es/hooks/useWinClick.js
+  // node_modules/@rc-component/trigger/es/hooks/useWinClick.js
   var React44 = __toESM(require_react());
   function useWinClick(open, clickToHide, targetEle, popupEle, mask, maskClosable, inPopupOrChild, triggerOpen) {
     const openRef = React44.useRef(open);
@@ -32145,10 +32145,10 @@ html body {
     return onPopupPointerDown;
   }
 
-  // ../node_modules/@rc-component/trigger/es/UniqueProvider/index.js
+  // node_modules/@rc-component/trigger/es/UniqueProvider/index.js
   var React47 = __toESM(require_react());
 
-  // ../node_modules/@rc-component/trigger/es/UniqueProvider/useTargetState.js
+  // node_modules/@rc-component/trigger/es/UniqueProvider/useTargetState.js
   var import_react23 = __toESM(require_react());
   function useTargetState() {
     const [options, setOptions] = import_react23.default.useState(null);
@@ -32187,7 +32187,7 @@ html body {
     return [trigger, open, options, onVisibleChanged];
   }
 
-  // ../node_modules/@rc-component/trigger/es/UniqueProvider/UniqueContainer.js
+  // node_modules/@rc-component/trigger/es/UniqueProvider/UniqueContainer.js
   var import_react24 = __toESM(require_react());
   function _extends6() {
     _extends6 = Object.assign ? Object.assign.bind() : function(target) {
@@ -32265,7 +32265,7 @@ html body {
   };
   var UniqueContainer_default = UniqueContainer;
 
-  // ../node_modules/@rc-component/trigger/es/UniqueProvider/index.js
+  // node_modules/@rc-component/trigger/es/UniqueProvider/index.js
   var UniqueProvider = ({
     children,
     postTriggerProps
@@ -32426,7 +32426,7 @@ html body {
   };
   var UniqueProvider_default = UniqueProvider;
 
-  // ../node_modules/@rc-component/trigger/es/index.js
+  // node_modules/@rc-component/trigger/es/index.js
   var import_react_dom3 = __toESM(require_react_dom());
   function generateTrigger(PortalComponent = es_default3) {
     const Trigger = /* @__PURE__ */ React48.forwardRef((props, ref) => {
@@ -32841,10 +32841,10 @@ html body {
   }
   var es_default4 = generateTrigger(es_default3);
 
-  // ../node_modules/antd/es/tooltip/UniqueProvider/MotionContent.js
+  // node_modules/antd/es/tooltip/UniqueProvider/MotionContent.js
   var import_react26 = __toESM(require_react());
 
-  // ../node_modules/antd/es/_util/reactNode.js
+  // node_modules/antd/es/_util/reactNode.js
   var import_react25 = __toESM(require_react());
   var replaceElement = (element, replacement, props) => {
     if (!/* @__PURE__ */ import_react25.default.isValidElement(element)) {
@@ -32856,7 +32856,7 @@ html body {
     return replaceElement(element, element, props);
   }
 
-  // ../node_modules/antd/es/tooltip/UniqueProvider/MotionContent.js
+  // node_modules/antd/es/tooltip/UniqueProvider/MotionContent.js
   var MotionContent = ({
     children
   }) => {
@@ -32889,7 +32889,7 @@ html body {
   };
   var MotionContent_default = MotionContent;
 
-  // ../node_modules/antd/es/tooltip/UniqueProvider/index.js
+  // node_modules/antd/es/tooltip/UniqueProvider/index.js
   var cachedPlacements = [null, null];
   function uniqueBuiltinPlacements(ori) {
     if (cachedPlacements[0] !== ori) {
@@ -32932,7 +32932,7 @@ html body {
   };
   var UniqueProvider_default2 = UniqueProvider2;
 
-  // ../node_modules/antd/es/config-provider/DisabledContext.js
+  // node_modules/antd/es/config-provider/DisabledContext.js
   var React52 = __toESM(require_react());
   var DisabledContext = /* @__PURE__ */ React52.createContext(false);
   var DisabledContextProvider = ({
@@ -32946,10 +32946,10 @@ html body {
   };
   var DisabledContext_default = DisabledContext;
 
-  // ../node_modules/antd/es/config-provider/hooks/useConfig.js
+  // node_modules/antd/es/config-provider/hooks/useConfig.js
   var import_react28 = __toESM(require_react());
 
-  // ../node_modules/antd/es/config-provider/SizeContext.js
+  // node_modules/antd/es/config-provider/SizeContext.js
   var React53 = __toESM(require_react());
   var SizeContext = /* @__PURE__ */ React53.createContext(void 0);
   var SizeContextProvider = ({
@@ -32963,7 +32963,7 @@ html body {
   };
   var SizeContext_default = SizeContext;
 
-  // ../node_modules/antd/es/config-provider/hooks/useConfig.js
+  // node_modules/antd/es/config-provider/hooks/useConfig.js
   function useConfig() {
     const componentDisabled = (0, import_react28.useContext)(DisabledContext_default);
     const componentSize = (0, import_react28.useContext)(SizeContext_default);
@@ -32974,7 +32974,7 @@ html body {
   }
   var useConfig_default = useConfig;
 
-  // ../node_modules/antd/es/config-provider/hooks/useTheme.js
+  // node_modules/antd/es/config-provider/hooks/useTheme.js
   var import_react29 = __toESM(require_react());
   function useTheme(theme, parentTheme, config) {
     const warning4 = devUseWarning("ConfigProvider");
@@ -33027,7 +33027,7 @@ html body {
     }));
   }
 
-  // ../node_modules/antd/es/config-provider/MotionWrapper.js
+  // node_modules/antd/es/config-provider/MotionWrapper.js
   var React54 = __toESM(require_react());
   var MotionCacheContext = /* @__PURE__ */ React54.createContext(true);
   if (true) {
@@ -33054,7 +33054,7 @@ html body {
     return children;
   }
 
-  // ../node_modules/antd/es/config-provider/PropWarning.js
+  // node_modules/antd/es/config-provider/PropWarning.js
   var React55 = __toESM(require_react());
   var PropWarning = /* @__PURE__ */ React55.memo(({
     dropdownMatchSelectWidth
@@ -33068,7 +33068,7 @@ html body {
   }
   var PropWarning_default = true ? PropWarning : () => null;
 
-  // ../node_modules/antd/es/config-provider/index.js
+  // node_modules/antd/es/config-provider/index.js
   var IconStyle = ({
     iconPrefixCls,
     csp
@@ -33447,14 +33447,14 @@ html body {
   }
   var config_provider_default = ConfigProvider;
 
-  // ../node_modules/@ant-design/icons/es/icons/ReloadOutlined.js
+  // node_modules/@ant-design/icons/es/icons/ReloadOutlined.js
   var React57 = __toESM(require_react());
 
-  // ../node_modules/@ant-design/icons-svg/es/asn/ReloadOutlined.js
+  // node_modules/@ant-design/icons-svg/es/asn/ReloadOutlined.js
   var ReloadOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M909.1 209.3l-56.4 44.1C775.8 155.1 656.2 92 521.9 92 290 92 102.3 279.5 102 511.5 101.7 743.7 289.8 932 521.9 932c181.3 0 335.8-115 394.6-276.1 1.5-4.2-.7-8.9-4.9-10.3l-56.7-19.5a8 8 0 00-10.1 4.8c-1.8 5-3.8 10-5.9 14.9-17.3 41-42.1 77.8-73.7 109.4A344.77 344.77 0 01655.9 829c-42.3 17.9-87.4 27-133.8 27-46.5 0-91.5-9.1-133.8-27A341.5 341.5 0 01279 755.2a342.16 342.16 0 01-73.7-109.4c-17.9-42.4-27-87.4-27-133.9s9.1-91.5 27-133.9c17.3-41 42.1-77.8 73.7-109.4 31.6-31.6 68.4-56.4 109.3-73.8 42.3-17.9 87.4-27 133.8-27 46.5 0 91.5 9.1 133.8 27a341.5 341.5 0 01109.3 73.8c9.9 9.9 19.2 20.4 27.8 31.4l-60.2 47a8 8 0 003 14.1l175.6 43c5 1.2 9.9-2.6 9.9-7.7l.8-180.9c-.1-6.6-7.8-10.3-13-6.2z" } }] }, "name": "reload", "theme": "outlined" };
   var ReloadOutlined_default = ReloadOutlined;
 
-  // ../node_modules/@ant-design/icons/es/icons/ReloadOutlined.js
+  // node_modules/@ant-design/icons/es/icons/ReloadOutlined.js
   function _extends7() {
     _extends7 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -33479,7 +33479,7 @@ html body {
   }
   var ReloadOutlined_default2 = RefIcon;
 
-  // ../node_modules/antd/es/theme/getDesignToken.js
+  // node_modules/antd/es/theme/getDesignToken.js
   var getDesignToken = (config) => {
     const theme = config?.algorithm ? createTheme(config.algorithm) : theme_default;
     const mergedToken = {
@@ -33492,7 +33492,7 @@ html body {
   };
   var getDesignToken_default = getDesignToken;
 
-  // ../node_modules/antd/es/theme/themes/compact/genCompactSizeMapToken.js
+  // node_modules/antd/es/theme/themes/compact/genCompactSizeMapToken.js
   function genSizeMapToken2(token2) {
     const {
       sizeUnit,
@@ -33512,7 +33512,7 @@ html body {
     };
   }
 
-  // ../node_modules/antd/es/theme/themes/compact/index.js
+  // node_modules/antd/es/theme/themes/compact/index.js
   var derivative2 = (token2, mapToken) => {
     const mergedMapToken = mapToken ?? derivative(token2);
     const fontSize = mergedMapToken.fontSizeSM;
@@ -33532,14 +33532,14 @@ html body {
   };
   var compact_default = derivative2;
 
-  // ../node_modules/antd/es/theme/themes/dark/colorAlgorithm.js
+  // node_modules/antd/es/theme/themes/dark/colorAlgorithm.js
   var getAlphaColor3 = (baseColor, alpha) => new FastColor(baseColor).setA(alpha).toRgbString();
   var getSolidColor2 = (baseColor, brightness) => {
     const instance = new FastColor(baseColor);
     return instance.lighten(brightness).toHexString();
   };
 
-  // ../node_modules/antd/es/theme/themes/dark/colors.js
+  // node_modules/antd/es/theme/themes/dark/colors.js
   var generateColorPalettes2 = (baseColor) => {
     const colors = generate(baseColor, {
       theme: "dark"
@@ -33585,7 +33585,7 @@ html body {
     };
   };
 
-  // ../node_modules/antd/es/theme/themes/dark/index.js
+  // node_modules/antd/es/theme/themes/dark/index.js
   var derivative3 = (token2, mapToken) => {
     const colorPalettes = Object.keys(defaultPresetColors).map((colorKey) => {
       const colors = generate(token2[colorKey], {
@@ -33634,7 +33634,7 @@ html body {
   };
   var dark_default = derivative3;
 
-  // ../node_modules/antd/es/theme/index.js
+  // node_modules/antd/es/theme/index.js
   function useToken2() {
     const [theme, token2, hashId, cssVar] = useToken();
     return {
@@ -33664,13 +33664,13 @@ html body {
     _internalContext: DesignTokenContext
   };
 
-  // ../node_modules/antd/es/index.js
+  // node_modules/antd/es/index.js
   if (true) {
     const majorVersion = getReactMajorVersion();
     true ? warning_default2(majorVersion >= 18, "version", `antd v6 no longer supports React versions below 18. Please upgrade to React 18 or higher.`) : void 0;
   }
 
-  // ../node_modules/tslib/tslib.es6.mjs
+  // node_modules/tslib/tslib.es6.mjs
   var extendStatics = function(d, b) {
     extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
       d2.__proto__ = b2;
@@ -33719,16 +33719,16 @@ html body {
     return to.concat(ar || Array.prototype.slice.call(from2));
   }
 
-  // ../node_modules/react-intl/lib/src/components/createFormattedComponent.js
+  // node_modules/react-intl/lib/src/components/createFormattedComponent.js
   var React61 = __toESM(require_react());
 
-  // ../node_modules/react-intl/lib/src/components/useIntl.js
+  // node_modules/react-intl/lib/src/components/useIntl.js
   var React60 = __toESM(require_react());
 
-  // ../node_modules/react-intl/lib/src/utils.js
+  // node_modules/react-intl/lib/src/utils.js
   var React58 = __toESM(require_react());
 
-  // ../node_modules/@formatjs/fast-memoize/lib/index.js
+  // node_modules/@formatjs/fast-memoize/lib/index.js
   function memoize(fn, options) {
     var cache = options && options.cache ? options.cache : cacheDefault;
     var serializer = options && options.serializer ? options.serializer : serializerDefault;
@@ -33795,7 +33795,7 @@ html body {
     monadic: strategyMonadic
   };
 
-  // ../node_modules/@formatjs/ecma402-abstract/lib/utils.js
+  // node_modules/@formatjs/ecma402-abstract/lib/utils.js
   function invariant(condition, message, Err) {
     if (Err === void 0) {
       Err = Error;
@@ -33855,7 +33855,7 @@ html body {
     strategy: strategies.variadic
   });
 
-  // ../node_modules/@formatjs/icu-messageformat-parser/lib/error.js
+  // node_modules/@formatjs/icu-messageformat-parser/lib/error.js
   var ErrorKind;
   (function(ErrorKind2) {
     ErrorKind2[ErrorKind2["EXPECT_ARGUMENT_CLOSING_BRACE"] = 1] = "EXPECT_ARGUMENT_CLOSING_BRACE";
@@ -33886,7 +33886,7 @@ html body {
     ErrorKind2[ErrorKind2["UNCLOSED_TAG"] = 27] = "UNCLOSED_TAG";
   })(ErrorKind || (ErrorKind = {}));
 
-  // ../node_modules/@formatjs/icu-messageformat-parser/lib/types.js
+  // node_modules/@formatjs/icu-messageformat-parser/lib/types.js
   var TYPE;
   (function(TYPE2) {
     TYPE2[TYPE2["literal"] = 0] = "literal";
@@ -33938,10 +33938,10 @@ html body {
     return !!(el && typeof el === "object" && el.type === SKELETON_TYPE.dateTime);
   }
 
-  // ../node_modules/@formatjs/icu-messageformat-parser/lib/regex.generated.js
+  // node_modules/@formatjs/icu-messageformat-parser/lib/regex.generated.js
   var SPACE_SEPARATOR_REGEX = /[ \xA0\u1680\u2000-\u200A\u202F\u205F\u3000]/;
 
-  // ../node_modules/@formatjs/icu-skeleton-parser/lib/date-time.js
+  // node_modules/@formatjs/icu-skeleton-parser/lib/date-time.js
   var DATE_TIME_REGEX = /(?:[Eec]{1,6}|G{1,5}|[Qq]{1,5}|(?:[yYur]+|U{1,5})|[ML]{1,5}|d{1,2}|D{1,3}|F{1}|[abB]{1,5}|[hkHK]{1,2}|w{1,2}|W{1}|m{1,2}|s{1,2}|[zZOvVxX]{1,4})(?=([^']*'[^']*')*[^']*$)/g;
   function parseDateTimeSkeleton(skeleton) {
     var result = {};
@@ -34059,10 +34059,10 @@ html body {
     return result;
   }
 
-  // ../node_modules/@formatjs/icu-skeleton-parser/lib/regex.generated.js
+  // node_modules/@formatjs/icu-skeleton-parser/lib/regex.generated.js
   var WHITE_SPACE_REGEX = /[\t-\r \x85\u200E\u200F\u2028\u2029]/i;
 
-  // ../node_modules/@formatjs/icu-skeleton-parser/lib/number.js
+  // node_modules/@formatjs/icu-skeleton-parser/lib/number.js
   function parseNumberSkeletonFromString(skeleton) {
     if (skeleton.length === 0) {
       throw new Error("Number skeleton cannot be empty");
@@ -34351,7 +34351,7 @@ html body {
     return result;
   }
 
-  // ../node_modules/@formatjs/icu-messageformat-parser/lib/time-data.generated.js
+  // node_modules/@formatjs/icu-messageformat-parser/lib/time-data.generated.js
   var timeData = {
     "001": [
       "H",
@@ -35768,7 +35768,7 @@ html body {
     ]
   };
 
-  // ../node_modules/@formatjs/icu-messageformat-parser/lib/date-time-pattern-generator.js
+  // node_modules/@formatjs/icu-messageformat-parser/lib/date-time-pattern-generator.js
   function getBestPattern(skeleton, locale5) {
     var skeletonCopy = "";
     for (var patternPos = 0; patternPos < skeleton.length; patternPos++) {
@@ -35830,7 +35830,7 @@ html body {
     return hourCycles[0];
   }
 
-  // ../node_modules/@formatjs/icu-messageformat-parser/lib/parser.js
+  // node_modules/@formatjs/icu-messageformat-parser/lib/parser.js
   var _a;
   var SPACE_SEPARATOR_START_REGEX = new RegExp("^".concat(SPACE_SEPARATOR_REGEX.source, "*"));
   var SPACE_SEPARATOR_END_REGEX = new RegExp("".concat(SPACE_SEPARATOR_REGEX.source, "*$"));
@@ -36638,7 +36638,7 @@ html body {
     return c >= 33 && c <= 35 || c === 36 || c >= 37 && c <= 39 || c === 40 || c === 41 || c === 42 || c === 43 || c === 44 || c === 45 || c >= 46 && c <= 47 || c >= 58 && c <= 59 || c >= 60 && c <= 62 || c >= 63 && c <= 64 || c === 91 || c === 92 || c === 93 || c === 94 || c === 96 || c === 123 || c === 124 || c === 125 || c === 126 || c === 161 || c >= 162 && c <= 165 || c === 166 || c === 167 || c === 169 || c === 171 || c === 172 || c === 174 || c === 176 || c === 177 || c === 182 || c === 187 || c === 191 || c === 215 || c === 247 || c >= 8208 && c <= 8213 || c >= 8214 && c <= 8215 || c === 8216 || c === 8217 || c === 8218 || c >= 8219 && c <= 8220 || c === 8221 || c === 8222 || c === 8223 || c >= 8224 && c <= 8231 || c >= 8240 && c <= 8248 || c === 8249 || c === 8250 || c >= 8251 && c <= 8254 || c >= 8257 && c <= 8259 || c === 8260 || c === 8261 || c === 8262 || c >= 8263 && c <= 8273 || c === 8274 || c === 8275 || c >= 8277 && c <= 8286 || c >= 8592 && c <= 8596 || c >= 8597 && c <= 8601 || c >= 8602 && c <= 8603 || c >= 8604 && c <= 8607 || c === 8608 || c >= 8609 && c <= 8610 || c === 8611 || c >= 8612 && c <= 8613 || c === 8614 || c >= 8615 && c <= 8621 || c === 8622 || c >= 8623 && c <= 8653 || c >= 8654 && c <= 8655 || c >= 8656 && c <= 8657 || c === 8658 || c === 8659 || c === 8660 || c >= 8661 && c <= 8691 || c >= 8692 && c <= 8959 || c >= 8960 && c <= 8967 || c === 8968 || c === 8969 || c === 8970 || c === 8971 || c >= 8972 && c <= 8991 || c >= 8992 && c <= 8993 || c >= 8994 && c <= 9e3 || c === 9001 || c === 9002 || c >= 9003 && c <= 9083 || c === 9084 || c >= 9085 && c <= 9114 || c >= 9115 && c <= 9139 || c >= 9140 && c <= 9179 || c >= 9180 && c <= 9185 || c >= 9186 && c <= 9254 || c >= 9255 && c <= 9279 || c >= 9280 && c <= 9290 || c >= 9291 && c <= 9311 || c >= 9472 && c <= 9654 || c === 9655 || c >= 9656 && c <= 9664 || c === 9665 || c >= 9666 && c <= 9719 || c >= 9720 && c <= 9727 || c >= 9728 && c <= 9838 || c === 9839 || c >= 9840 && c <= 10087 || c === 10088 || c === 10089 || c === 10090 || c === 10091 || c === 10092 || c === 10093 || c === 10094 || c === 10095 || c === 10096 || c === 10097 || c === 10098 || c === 10099 || c === 10100 || c === 10101 || c >= 10132 && c <= 10175 || c >= 10176 && c <= 10180 || c === 10181 || c === 10182 || c >= 10183 && c <= 10213 || c === 10214 || c === 10215 || c === 10216 || c === 10217 || c === 10218 || c === 10219 || c === 10220 || c === 10221 || c === 10222 || c === 10223 || c >= 10224 && c <= 10239 || c >= 10240 && c <= 10495 || c >= 10496 && c <= 10626 || c === 10627 || c === 10628 || c === 10629 || c === 10630 || c === 10631 || c === 10632 || c === 10633 || c === 10634 || c === 10635 || c === 10636 || c === 10637 || c === 10638 || c === 10639 || c === 10640 || c === 10641 || c === 10642 || c === 10643 || c === 10644 || c === 10645 || c === 10646 || c === 10647 || c === 10648 || c >= 10649 && c <= 10711 || c === 10712 || c === 10713 || c === 10714 || c === 10715 || c >= 10716 && c <= 10747 || c === 10748 || c === 10749 || c >= 10750 && c <= 11007 || c >= 11008 && c <= 11055 || c >= 11056 && c <= 11076 || c >= 11077 && c <= 11078 || c >= 11079 && c <= 11084 || c >= 11085 && c <= 11123 || c >= 11124 && c <= 11125 || c >= 11126 && c <= 11157 || c === 11158 || c >= 11159 && c <= 11263 || c >= 11776 && c <= 11777 || c === 11778 || c === 11779 || c === 11780 || c === 11781 || c >= 11782 && c <= 11784 || c === 11785 || c === 11786 || c === 11787 || c === 11788 || c === 11789 || c >= 11790 && c <= 11798 || c === 11799 || c >= 11800 && c <= 11801 || c === 11802 || c === 11803 || c === 11804 || c === 11805 || c >= 11806 && c <= 11807 || c === 11808 || c === 11809 || c === 11810 || c === 11811 || c === 11812 || c === 11813 || c === 11814 || c === 11815 || c === 11816 || c === 11817 || c >= 11818 && c <= 11822 || c === 11823 || c >= 11824 && c <= 11833 || c >= 11834 && c <= 11835 || c >= 11836 && c <= 11839 || c === 11840 || c === 11841 || c === 11842 || c >= 11843 && c <= 11855 || c >= 11856 && c <= 11857 || c === 11858 || c >= 11859 && c <= 11903 || c >= 12289 && c <= 12291 || c === 12296 || c === 12297 || c === 12298 || c === 12299 || c === 12300 || c === 12301 || c === 12302 || c === 12303 || c === 12304 || c === 12305 || c >= 12306 && c <= 12307 || c === 12308 || c === 12309 || c === 12310 || c === 12311 || c === 12312 || c === 12313 || c === 12314 || c === 12315 || c === 12316 || c === 12317 || c >= 12318 && c <= 12319 || c === 12320 || c === 12336 || c === 64830 || c === 64831 || c >= 65093 && c <= 65094;
   }
 
-  // ../node_modules/@formatjs/icu-messageformat-parser/lib/index.js
+  // node_modules/@formatjs/icu-messageformat-parser/lib/index.js
   function pruneLocation(els) {
     els.forEach(function(el) {
       delete el.location;
@@ -36674,7 +36674,7 @@ html body {
     return result.val;
   }
 
-  // ../node_modules/intl-messageformat/lib/src/error.js
+  // node_modules/intl-messageformat/lib/src/error.js
   var ErrorCode;
   (function(ErrorCode2) {
     ErrorCode2["MISSING_VALUE"] = "MISSING_VALUE";
@@ -36728,7 +36728,7 @@ html body {
     })(FormatError)
   );
 
-  // ../node_modules/intl-messageformat/lib/src/formatters.js
+  // node_modules/intl-messageformat/lib/src/formatters.js
   var PART_TYPE;
   (function(PART_TYPE2) {
     PART_TYPE2[PART_TYPE2["literal"] = 0] = "literal";
@@ -36868,7 +36868,7 @@ html body {
     return mergeLiteral(result);
   }
 
-  // ../node_modules/intl-messageformat/lib/src/core.js
+  // node_modules/intl-messageformat/lib/src/core.js
   function mergeConfig(c1, c2) {
     if (!c2) {
       return c1;
@@ -37091,7 +37091,7 @@ html body {
     })()
   );
 
-  // ../node_modules/@formatjs/intl/lib/src/error.js
+  // node_modules/@formatjs/intl/lib/src/error.js
   var IntlErrorCode;
   (function(IntlErrorCode2) {
     IntlErrorCode2["FORMAT_ERROR"] = "FORMAT_ERROR";
@@ -37188,7 +37188,7 @@ html body {
     })(IntlError)
   );
 
-  // ../node_modules/@formatjs/intl/lib/src/utils.js
+  // node_modules/@formatjs/intl/lib/src/utils.js
   function filterProps(props, allowlist, defaults) {
     if (defaults === void 0) {
       defaults = {};
@@ -37345,7 +37345,7 @@ html body {
     onError(new UnsupportedFormatterError("No ".concat(type, " format named: ").concat(name)));
   }
 
-  // ../node_modules/@formatjs/intl/lib/src/message.js
+  // node_modules/@formatjs/intl/lib/src/message.js
   function setTimeZoneInOptions(opts, timeZone) {
     return Object.keys(opts).reduce(function(all, k) {
       all[k] = __assign({ timeZone }, opts[k]);
@@ -37430,7 +37430,7 @@ html body {
     return id;
   };
 
-  // ../node_modules/@formatjs/intl/lib/src/dateTime.js
+  // node_modules/@formatjs/intl/lib/src/dateTime.js
   var DATE_TIME_FORMAT_OPTIONS = [
     "formatMatcher",
     "timeZone",
@@ -37537,7 +37537,7 @@ html body {
     return [];
   }
 
-  // ../node_modules/@formatjs/intl/lib/src/displayName.js
+  // node_modules/@formatjs/intl/lib/src/displayName.js
   var DISPLAY_NAMES_OPTONS = [
     "style",
     "type",
@@ -37558,7 +37558,7 @@ html body {
     }
   }
 
-  // ../node_modules/@formatjs/intl/lib/src/list.js
+  // node_modules/@formatjs/intl/lib/src/list.js
   var LIST_FORMAT_OPTIONS = [
     "type",
     "style"
@@ -37613,7 +37613,7 @@ html body {
     return values;
   }
 
-  // ../node_modules/@formatjs/intl/lib/src/plural.js
+  // node_modules/@formatjs/intl/lib/src/plural.js
   var PLURAL_FORMAT_OPTIONS = ["type"];
   function formatPlural(_a2, getPluralRules, value, options) {
     var locale5 = _a2.locale, onError = _a2.onError;
@@ -37632,7 +37632,7 @@ html body {
     return "other";
   }
 
-  // ../node_modules/@formatjs/intl/lib/src/relativeTime.js
+  // node_modules/@formatjs/intl/lib/src/relativeTime.js
   var RELATIVE_TIME_FORMAT_OPTIONS = ["numeric", "style"];
   function getFormatter2(_a2, getRelativeTimeFormat, options) {
     var locale5 = _a2.locale, formats = _a2.formats, onError = _a2.onError;
@@ -37663,7 +37663,7 @@ html body {
     return String(value);
   }
 
-  // ../node_modules/@formatjs/intl/lib/src/number.js
+  // node_modules/@formatjs/intl/lib/src/number.js
   var NUMBER_FORMAT_OPTIONS = [
     "style",
     "currency",
@@ -37723,7 +37723,7 @@ html body {
     return [];
   }
 
-  // ../node_modules/@formatjs/intl/lib/src/create-intl.js
+  // node_modules/@formatjs/intl/lib/src/create-intl.js
   function messagesContainString(messages) {
     var firstMessage = messages ? messages[Object.keys(messages)[0]] : void 0;
     return typeof firstMessage === "string";
@@ -37769,7 +37769,7 @@ html body {
     });
   }
 
-  // ../node_modules/react-intl/lib/src/utils.js
+  // node_modules/react-intl/lib/src/utils.js
   function invariantIntlContext(intl) {
     invariant(intl, "[React Intl] Could not find required `intl` object. <IntlProvider> needs to exist in the component ancestry.");
   }
@@ -37801,7 +37801,7 @@ html body {
     return true;
   }
 
-  // ../node_modules/react-intl/lib/src/components/injectIntl.js
+  // node_modules/react-intl/lib/src/components/injectIntl.js
   var import_hoist_non_react_statics = __toESM(require_hoist_non_react_statics_cjs());
   var React59 = __toESM(require_react());
   var IntlContext = typeof window !== "undefined" && !window.__REACT_INTL_BYPASS_GLOBAL_CONTEXT__ ? window.__REACT_INTL_CONTEXT__ || (window.__REACT_INTL_CONTEXT__ = React59.createContext(null)) : React59.createContext(null);
@@ -37810,14 +37810,14 @@ html body {
   var Provider = IntlProvider;
   var Context2 = IntlContext;
 
-  // ../node_modules/react-intl/lib/src/components/useIntl.js
+  // node_modules/react-intl/lib/src/components/useIntl.js
   function useIntl() {
     var intl = React60.useContext(Context2);
     invariantIntlContext(intl);
     return intl;
   }
 
-  // ../node_modules/react-intl/lib/src/components/createFormattedComponent.js
+  // node_modules/react-intl/lib/src/components/createFormattedComponent.js
   var DisplayName;
   (function(DisplayName2) {
     DisplayName2["formatDate"] = "FormattedDate";
@@ -37869,10 +37869,10 @@ html body {
     return Component2;
   }
 
-  // ../node_modules/react-intl/lib/src/components/provider.js
+  // node_modules/react-intl/lib/src/components/provider.js
   var React63 = __toESM(require_react());
 
-  // ../node_modules/react-intl/lib/src/components/createIntl.js
+  // node_modules/react-intl/lib/src/components/createIntl.js
   var React62 = __toESM(require_react());
   function assignUniqueKeysToFormatXMLElementFnArgument(values) {
     if (!values) {
@@ -37928,7 +37928,7 @@ html body {
     });
   };
 
-  // ../node_modules/react-intl/lib/src/components/provider.js
+  // node_modules/react-intl/lib/src/components/provider.js
   function processIntlConfig(config) {
     return {
       locale: config.locale,
@@ -37981,7 +37981,7 @@ html body {
   );
   var provider_default = IntlProvider2;
 
-  // ../node_modules/react-intl/lib/index.js
+  // node_modules/react-intl/lib/index.js
   var FormattedDate = createFormattedComponent("formatDate");
   var FormattedTime = createFormattedComponent("formatTime");
   var FormattedNumber = createFormattedComponent("formatNumber");
@@ -37990,7 +37990,7 @@ html body {
   var FormattedDateParts = createFormattedDateTimePartsComponent("formatDate");
   var FormattedTimeParts = createFormattedDateTimePartsComponent("formatTime");
 
-  // ../src/locales/common/zh_CN.ts
+  // src/locales/common/zh_CN.ts
   var zh_CN_default = {
     "common.ok": "\u786E\u5B9A",
     "common.cancel": "\u53D6\u6D88",
@@ -38388,6 +38388,45 @@ html body {
     "game.race.toast.provokeMiss": "\u5B83\u61D2\u5F97\u7406\u4F60\u2026",
     "game.race.toast.burst": "\u80E1\u841D\u535C\u51B2\u523A\uFF01",
     "game.race.help": "\u64CD\u4F5C\uFF1A\u6309\u4F4F\u7A7A\u683C / \u9F20\u6807\u5DE6\u952E\u8BA9\u5154\u5B50\u5954\u8DD1\uFF08\u6D88\u8017\u4F53\u529B\uFF09\uFF0C\u677E\u624B\u6162\u8D70\uFF08\u6062\u590D\u4F53\u529B\u3001\u79EF\u7D2F\u7761\u610F\uFF09\u2014\u2014\u7761\u610F\u6EE1\u4E86\u5154\u5B50\u4F1A\u539F\u5730\u7761\u7740\uFF0C\u5FEB\u901F\u8FDE\u70B9\u5524\u9192\uFF01\u5954\u8DD1\u4F1A\u6512\u80FD\u91CF\uFF08\u6BCF 12 \u7C73 +1\uFF09\uFF0C\u53EF\u5151\u6362\u9053\u5177\uFF1A\u{1F955} \u80E1\u841D\u535C\u51B2\u523A\uFF083 \u80FD\u91CF\uFF0C\u8D85\u9AD8\u901F 2 \u79D2\uFF09\u3001\u{1F34C} \u9999\u8549\u76AE\uFF082 \u80FD\u91CF\uFF0C\u8BA9\u4E4C\u9F9F\u6ED1\u5012\uFF0C\u7F29\u58F3\u6EDA\u884C\u65F6\u514D\u75AB\uFF09\u3001\u{1F4E3} \u6FC0\u5C06\u6CD5\uFF081 \u80FD\u91CF\uFF0C\u4E4C\u9F9F\u66B4\u6012\u51B2\u523A\u540E\u7B4B\u75B2\u529B\u7AED\uFF09\u3002\u8D5B\u9053\u5730\u5F62\u5F71\u54CD\u53CC\u65B9\uFF1A\u4E0B\u5761\u52A0\u901F\u3001\u6CE5\u6CDE\u51CF\u901F\u3001\u6811\u836B\u50AC\u7761\u3001\u841D\u535C\u5730\u56DE\u4F53\u529B\u3002\u5148\u5230\u7EC8\u70B9\u8005\u80DC\uFF0C\u7528\u65F6\u8D8A\u77ED\u5F97\u5206\u8D8A\u9AD8\u3002\u7A7A\u683C \u5F00\u59CB\uFF0CP \u6682\u505C\uFF0CR \u91CD\u5F00\u3002",
+    "game.orange.title": "\u5265\u6A58\u5B50",
+    "game.orange.desc": "\u5FEB\u800C\u7A33\u5730\u6495\u4E0B\u6A58\u76AE\uFF0C\u522B\u5212\u4F24\u679C\u8089",
+    "game.orange.score": "\u5F97\u5206",
+    "game.orange.combo": "\u8FDE\u51FB",
+    "game.orange.progress": "\u8FDB\u5EA6",
+    "game.orange.time": "\u65F6\u95F4",
+    "game.orange.start": "\u5F00\u59CB\u5265\u76AE",
+    "game.orange.restart": "\u91CD\u65B0\u5F00\u59CB",
+    "game.orange.again": "\u518D\u6765\u4E00\u5C40",
+    "game.orange.idleSub": "\u6309\u4F4F\u62D6\u52A8\u6495\u4E0B\u6A58\u76AE\uFF0C\u6495\u5F97\u53C8\u5FEB\u53C8\u7A33\u624D\u80FD\u53E0\u52A0\u8FDE\u51FB\uFF1B\u62D6\u592A\u5FEB\u4F1A\u5212\u4F24\u679C\u8089\u54E6\uFF01",
+    "game.orange.over.peeled": "\u5265\u4E0B {peeled} \u5757 \xB7 \u5212\u4F24 {cuts} \u5904",
+    "game.orange.over.timeUp": "\u65F6\u95F4\u5230\uFF01\u6CA1\u6765\u5F97\u53CA\u5265\u5B8C",
+    "game.orange.over.detail": "\u6700\u9AD8\u8FDE\u51FB {combo} \xB7 \u8BC4\u7EA7 {rating}",
+    "game.orange.help": "\u64CD\u4F5C\uFF1A\u5728\u6A58\u76AE\u4E0A\u6309\u4F4F\u62D6\u52A8\uFF0C\u5212\u8FC7\u7684\u76AE\u5757\u4F1A\u88AB\u6495\u4E0B\uFF08\u70B9\u51FB\u4E5F\u53EF\uFF09\uFF1B\u8FDE\u7EED\u6495\u76AE\u53E0\u52A0\u8FDE\u51FB\u500D\u7387\uFF0C\u6700\u9AD8 \xD75\u3002\u62D6\u5F97\u592A\u5FEB\u4F1A\u5212\u4F24\u679C\u8089\uFF1A\u53EA\u62FF 2 \u5206\u3001\u8FDE\u51FB\u6E05\u96F6\u3001\u679C\u8089\u7834\u635F\u3002\u6574\u74E3\u5265\u5B8C +25\uFF1B\u5B8C\u6574\u5265\u5B8C\u6574\u9897\u4E14\u96F6\u5212\u4F24\u53EF\u5F97 S \u8BC4\u7EA7\uFF0C+200 \u5206\u5E76\u4EAB\u5269\u4F59\u65F6\u95F4\u52A0\u6210\uFF01",
+    "game.catdog.title": "\u732B\u72D7\u5927\u6218",
+    "game.catdog.desc": "\u53EC\u5524\u732B\u54AA\u5B88\u57CE\uFF0C\u62B5\u6321\u72D7\u72D7\u519B\u56E2",
+    "game.catdog.castle": "\u57CE\u5821\u8840\u91CF",
+    "game.catdog.fish": "\u5C0F\u9C7C\u5E72",
+    "game.catdog.score": "\u5F97\u5206",
+    "game.catdog.wave": "\u6CE2\u6B21",
+    "game.catdog.start": "\u5F00\u59CB",
+    "game.catdog.pause": "\u6682\u505C",
+    "game.catdog.resume": "\u7EE7\u7EED",
+    "game.catdog.again": "\u518D\u6765\u4E00\u5C40",
+    "game.catdog.paused": "\u5DF2\u6682\u505C",
+    "game.catdog.idle": "\u70B9\u51FB\u300C\u5F00\u59CB\u300D\uFF0C\u53EC\u5524\u732B\u54AA\u5B88\u536B\u57CE\u5821",
+    "game.catdog.waveFloat": "\u7B2C {wave} \u6CE2",
+    "game.catdog.bossFloat": "Boss \u6765\u88AD\uFF01",
+    "game.catdog.winFloat": "\u901A\u5173\uFF01",
+    "game.catdog.winTitle": "\u901A\u5173\u5566\uFF01",
+    "game.catdog.winDetail": "\u6491\u8FC7 {wave} \u6CE2\uFF0C\u7EE7\u7EED\u65E0\u5C3D\u6311\u6218",
+    "game.catdog.continue": "\u7EE7\u7EED\u65E0\u5C3D",
+    "game.catdog.overTitle": "\u57CE\u5821\u5931\u5B88",
+    "game.catdog.overDetail": "\u575A\u6301 {wave} \u6CE2 \xB7 \u5F97\u5206 {score} \xB7 \u51FB\u9000 {kills} \u53EA\u72D7",
+    "game.catdog.insufficient": "\u5C0F\u9C7C\u5E72\u4E0D\u8DB3",
+    "game.catdog.unit.tabby": "\u5E03\u5076\u732B",
+    "game.catdog.unit.orange": "\u6A58\u732B",
+    "game.catdog.unit.black": "\u9ED1\u732B\u5C04\u624B",
+    "game.catdog.help": "\u64CD\u4F5C\uFF1A\u70B9\u51FB\u6218\u573A\u53EC\u5524\u9009\u4E2D\u7684\u732B\u54AA\uFF0C1/2/3 \u5207\u6362\u5175\u79CD\uFF1B\u732B\u54AA\u81EA\u52A8\u8FCE\u51FB\u540C\u9053\u654C\u4EBA\uFF0C\u72D7\u5543\u5230\u57CE\u5821\u4F1A\u6263\u8840\u3002\u5C0F\u9C7C\u5E72\u968F\u65F6\u95F4\u4E0E\u51FB\u6740\u589E\u957F\u3002\u575A\u6301\u5230\u7B2C 20 \u6CE2\u901A\u5173\uFF0C\u53EF\u7EE7\u7EED\u65E0\u5C3D\u6311\u6218\u3002\u7A7A\u683C \u5F00\u59CB/\u6682\u505C\uFF0CP \u6682\u505C\u3002",
     "game.hurdle.title": "\u8DE8\u680F\u51B2\u523A",
     "game.hurdle.desc": "\u84C4\u529B\u8D77\u8DF3\uFF0C\u7CBE\u51C6\u8DE8\u680F\uFF0C\u9014\u4E2D\u6536\u96C6\u4F53\u529B\u4E0E\u751F\u547D\u8865\u7ED9",
     "game.hurdle.score": "\u5F97\u5206",
@@ -38436,6 +38475,77 @@ html body {
     "game.archery.stats": "\u603B\u5206 {score} \xB7 \u95EF\u8FC7 {level} \u5173",
     "game.archery.bestLine": "\u5386\u53F2\u6700\u9AD8 {best} \u5206",
     "game.archery.help": "\u64CD\u4F5C\uFF1A\u5728\u5F13\u624B\u5904\u6309\u4F4F\u9F20\u6807\u5411\u5916\u62D6\u5F13\u84C4\u529B\uFF08\u5411\u5DE6\u4E0B\u62D6 \u2192 \u5411\u53F3\u4E0A\u5C04\uFF09\uFF0C\u865A\u7EBF\u4E3A\u5F39\u9053\u9884\u89C8\uFF0C\u677E\u5F00\u53D1\u5C04\uFF1B\u91CD\u529B + \u6BCF\u7BAD\u968F\u673A\u98CE\u529B\u5F71\u54CD\u5F39\u9053\u3002\u7BAD\u649E\u7816\u5899/\u51B0\u9762\u4F1A\u53CD\u5F39\uFF0C\u6BCF\u6B21\u53CD\u5F39\u547D\u4E2D +50%\uFF1B\u6728\u7BB1\u4E00\u78B0\u5373\u788E\u3001\u70B8\u836F\u6876\u5F15\u7206\u6E05\u969C\uFF1B\u82F9\u679C\u5934\u9776 +15\uFF0C\u8BEF\u4F24\u5C04\u624B -20\u3002\u8FDE\u7EED\u547D\u4E2D\uFF082.2 \u79D2\u5185\uFF09\u8FDE\u51FB\u6700\u9AD8 \xD74\u3002\u6BCF\u5173 5 \u652F\u7BAD\u8FBE\u5230\u76EE\u6807\u5206\u664B\u7EA7\uFF0C\u98CE\u529B\u968F\u5173\u5361\u589E\u5F3A\uFF01",
+    "game.piglook.title": "\u732A\u732A\u7684\u8FDC\u671B",
+    "game.piglook.desc": "\u5F39\u5F13\u628A\u5C0F\u732A\u5F39\u4E0A\u5929\u7A7A\uFF0C\u770B\u5B83\u98DE\u591A\u8FDC",
+    "game.piglook.last": "\u672C\u6B21",
+    "game.piglook.bestDist": "\u6700\u8FDC",
+    "game.piglook.tosses": "\u5269\u4F59\u6295\u63B7",
+    "game.piglook.coins": "\u91D1\u5E01",
+    "game.piglook.record": "\u5386\u53F2\u6700\u8FDC",
+    "game.piglook.start": "\u5F00\u59CB\u5F39\u5C04",
+    "game.piglook.restart": "\u91CD\u65B0\u5F00\u59CB",
+    "game.piglook.again": "\u518D\u98DE\u4E00\u6B21",
+    "game.piglook.idleTitle": "\u5411\u540E\u62D6\u62FD \xB7 \u677E\u5F00\u653E\u98DE\u5C0F\u732A",
+    "game.piglook.idleDesc": "\u5C0F\u732A\u5750\u5728\u60AC\u5D16\u8FB9\u7684\u5F39\u5F13\u4E0A\uFF0C\u6309\u4F4F\u5B83\u5411\u5DE6\u4E0B\u62D6\u84C4\u529B\uFF08\u865A\u7EBF\u662F\u5F39\u9053\u9884\u89C8\uFF09\uFF0C\u677E\u5F00\u628A\u5C0F\u732A\u5F39\u51FA\u53BB\u3002\u91CD\u529B\u4E0E\u968F\u673A\u98CE\u4F1A\u6539\u53D8\u629B\u7269\u7EBF\uFF1B\u78B0\u5230\u7A7A\u4E2D\u7684\u4E91\u6735\u4F1A\u518D\u5411\u4E0A\u6258\u4E00\u628A\uFF1B\u8DEF\u4E0A\u7684\u91D1\u5E01\u6BCF\u679A +25\u3002\u843D\u5730\u540E\u5C0F\u732A\u4F1A\u5728\u8349\u5730\u4E0A\u6EDA\u4E00\u6BB5\u8DDD\u79BB\u3002\u5171 5 \u6B21\u673A\u4F1A\uFF0C\u98DE\u5F97\u6700\u8FDC\u7684\u4E00\u6B21\u7B97\u6210\u7EE9\uFF01",
+    "game.piglook.overTitle": "\u4E94\u6295\u5B8C\u6BD5\uFF01",
+    "game.piglook.stats": "\u6700\u8FDC {best} m \xB7 \u91D1\u5E01 {coins}",
+    "game.piglook.newRecord": "\u65B0\u7EAA\u5F55\uFF01",
+    "game.piglook.help": "\u64CD\u4F5C\uFF1A\u5C0F\u732A\u5728\u5F39\u5F13\u4E0A\u65F6\u6309\u4F4F\u5411\u5DE6\u4E0B\u62D6\u84C4\u529B\uFF08\u865A\u7EBF\u4E3A\u5F39\u9053\u9884\u89C8\uFF09\uFF0C\u677E\u5F00\u53D1\u5C04\uFF1B\u91CD\u529B + \u968F\u673A\u98CE\u5F71\u54CD\u5F39\u9053\uFF0C\u4E91\u6735\u4F1A\u628A\u5C0F\u732A\u518D\u6258\u8D77\uFF0C\u91D1\u5E01\u6BCF\u679A +25\u3002\u843D\u5730\u540E\u6309\u8349\u5730\u6469\u64E6\u6EDA\u505C\uFF0C\u8DDD\u79BB\uFF08\u7C73\uFF09\u5373\u6210\u7EE9\u3002\u5171 5 \u6B21\u673A\u4F1A\uFF0C\u53D6\u6700\u8FDC\u4E00\u6B21\uFF01",
+    "game.detective.title": "\u900D\u9065\u8B66\u63A2",
+    "game.detective.desc": "\u6572\u62FC\u97F3\u6293\u9003\u72AF\uFF0C\u522B\u8BA9\u5ACC\u72AF\u6E9C\u8FC7\u9003\u9038\u7EBF",
+    "game.detective.score": "\u8D4F\u91D1",
+    "game.detective.arrested": "\u902E\u6355",
+    "game.detective.combo": "\u8FDE\u51FB",
+    "game.detective.lives": "\u751F\u547D",
+    "game.detective.start": "\u5F00\u59CB",
+    "game.detective.restart": "\u91CD\u5F00",
+    "game.detective.again": "\u518D\u6293\u4E00\u5C40",
+    "game.detective.escapeLine": "\u9003\u9038\u7EBF",
+    "game.detective.escaped": "\u8DD1\u4E86\uFF01",
+    "game.detective.chasing": "\u6B63\u5728\u8FFD\u6355",
+    "game.detective.idleTitle": "\u8B66\u5C40\u901A\u7F09\u4EE4",
+    "game.detective.idleDesc": "\u5ACC\u72AF\u4E3E\u7740\u7F6A\u540D\u6807\u7B7E\u4ECE\u53F3\u4FA7\u6F5C\u9003\u3002\u76F4\u63A5\u6572\u952E\u76D8\uFF0C\u62FC\u51FA\u7F6A\u540D\u7684\u5168\u62FC\u5C31\u80FD\u5F53\u573A\u902E\u6355\uFF1B\u8FDE\u7EED\u902E\u6355\u53E0\u52A0\u8FDE\u51FB\uFF0C\u8D4F\u91D1\u66F4\u9AD8\u3002\u8BA9\u5ACC\u72AF\u6E9C\u8FC7\u5DE6\u4FA7\u7EA2\u767D\u6761\u9003\u9038\u7EBF\u4F1A\u6263\u4E00\u6761\u547D\uFF0C3 \u6761\u547D\u8017\u5C3D\u4EFB\u52A1\u7ED3\u675F\uFF01",
+    "game.detective.overTitle": "\u4EFB\u52A1\u7ED3\u675F",
+    "game.detective.overDetail": "\u8D4F\u91D1 {score} \xB7 \u902E\u6355 {arrested} \u540D\u5ACC\u72AF \xB7 \u6700\u9AD8\u8FDE\u51FB {maxCombo}",
+    "game.detective.help": "\u64CD\u4F5C\uFF1A\u76F4\u63A5\u6309\u952E\u76D8\u5B57\u6BCD\uFF0C\u5ACC\u72AF\u8EAB\u4E0A\u7684\u62FC\u97F3\u9010\u4E2A\u70B9\u4EAE\uFF1B\u62FC\u5B8C\u6574\u8BCD\u5373\u902E\u6355\u3002\u6309\u5B57\u6BCD\u81EA\u52A8\u9501\u5B9A\u6700\u5371\u9669\uFF08\u6700\u9760\u5DE6\uFF09\u7684\u5ACC\u72AF\uFF1B\u62FC\u9519\u6E05\u7A7A\u8FDE\u51FB\u3002\u7A7A\u683C \u5F00\u59CB / \u518D\u6765\u4E00\u5C40\u3002\u5ACC\u72AF\u8D8A\u8DD1\u8D8A\u5FEB\u3001\u8D8A\u51FA\u8D8A\u5BC6\uFF01",
+    "game.wukong.title": "\u5927\u5723\u95F9\u5929\u5BAB",
+    "game.wukong.desc": "\u6325\u91D1\u7B8D\u68D2\u6A2A\u626B\u5929\u5175\u5929\u5C06\uFF0C\u6A2A\u7248\u95EF\u5173\u683C\u6597",
+    "game.wukong.score": "\u5F97\u5206",
+    "game.wukong.hp": "\u6C14\u8840",
+    "game.wukong.mp": "\u6C14\u529B",
+    "game.wukong.kills": "\u51FB\u5012",
+    "game.wukong.start": "\u5F00\u6253",
+    "game.wukong.pause": "\u6682\u505C",
+    "game.wukong.restart": "\u91CD\u6574\u65D7\u9F13",
+    "game.wukong.over.title": "\u5927\u5723\u88AB\u64D2\u2026",
+    "game.wukong.over.score": "\u5F97\u5206 {score}",
+    "game.wukong.over.kills": "\u51FB\u5012\u5929\u5175 {kills} \u540D",
+    "game.wukong.again": "\u518D\u6218\u5929\u5BAB",
+    "game.wukong.idle": "\u70B9\u51FB\u300C\u5F00\u6253\u300D\uFF0C\u6325\u68D2\u5927\u95F9\u5929\u5BAB",
+    "game.wukong.help": "\u64CD\u4F5C\uFF1AA/D \u6216 \u2190/\u2192 \u79FB\u52A8\uFF0CW/\u2191/\u7A7A\u683C \u8DF3\u8DC3\uFF08\u53EF\u4E8C\u6BB5\u8DF3\uFF09\uFF1BJ \u666E\u901A\u68CD\u51FB\uFF0CK \u65CB\u8F6C\u68CD\u821E\uFF08\u8017 35 \u6C14\u529B\uFF0C\u8303\u56F4\u653B\u51FB\uFF09\u3002\u5929\u5175\u4F1A\u8FD1\u8EAB\u780D\u6740\uFF0C\u5929\u5C06\u91CD\u9524\u9AD8\u4F24\uFF0C\u5F13\u7BAD\u624B\u8FDC\u7A0B\u63B7\u77DB\uFF1B\u8FDE\u51FB\u8D8A\u9AD8\u5F97\u5206\u8D8A\u591A\uFF0C\u6C14\u529B\u968F\u65F6\u95F4\u6062\u590D\u3002\u6C14\u8840\u8017\u5C3D\u5219\u95F9\u5929\u5BAB\u5931\u8D25\uFF01",
+    "game.carp.title": "\u9CA4\u9C7C\u8DF3\u9F99\u95E8",
+    "game.carp.desc": "\u9006\u6D41\u800C\u4E0A\uFF0C\u84C4\u529B\u8DC3\u8D77\uFF0C\u7A7F\u8FC7\u4E00\u9053\u9053\u9F99\u95E8",
+    "game.carp.score": "\u5F97\u5206",
+    "game.carp.gates": "\u9F99\u95E8",
+    "game.carp.combo": "\u8FDE\u51FB",
+    "game.carp.lives": "\u751F\u547D",
+    "game.carp.best": "\u6700\u9AD8\u5206",
+    "game.carp.start": "\u5F00\u59CB",
+    "game.carp.restart": "\u91CD\u65B0\u5F00\u59CB",
+    "game.carp.pause": "\u6682\u505C",
+    "game.carp.resume": "\u7EE7\u7EED",
+    "game.carp.again": "\u518D\u6765\u4E00\u5C40",
+    "game.carp.idle": "\u6309\u4F4F\u84C4\u529B\uFF0C\u677E\u5F00\u8DC3\u8D77\uFF1B\u7A7A\u4E2D\u518D\u6309\u4E00\u6B21\u6446\u5C3E\u817E\u8DC3\uFF0C\u9006\u6D41\u8DC3\u9F99\u95E8\uFF01",
+    "game.carp.paused": "\u5DF2\u6682\u505C",
+    "game.carp.resumeTip": "\u6309 P \u6216\u70B9\u51FB\u300C\u7EE7\u7EED\u300D",
+    "game.carp.over": "\u6E38\u620F\u7ED3\u675F",
+    "game.carp.overDetail": "\u5F97\u5206 {score} \xB7 \u8DC3\u8FC7 {gates} \u9053\u9F99\u95E8",
+    "game.carp.swept": "\u88AB\u6D6A\u51B2\u8D70\u4E86\uFF01",
+    "game.carp.hitGate": "\u649E\u4E0A\u9F99\u95E8\uFF01",
+    "game.carp.hitRock": "\u649E\u4E0A\u7901\u77F3\uFF01",
+    "game.carp.gatePass": "\u8DC3\u8FC7\u9F99\u95E8\uFF01",
+    "game.carp.speedUp": "\u6C34\u6D41\u52A0\u901F\uFF01",
+    "game.carp.help": "\u64CD\u4F5C\uFF1A\u6309\u4F4F \u7A7A\u683C / \u2191 / W \u6216\u6309\u4F4F\u753B\u9762\u84C4\u529B\uFF08\u60AC\u6D6E\uFF09\uFF0C\u677E\u5F00\u4E00\u8DC3\u800C\u8D77\uFF0C\u84C4\u6EE1\u81EA\u52A8\u8DC3\u8D77\uFF1B\u7A7A\u4E2D\u53EF\u518D\u6309\u4E00\u6B21\u6446\u5C3E\u817E\u8DC3\u3002\u88AB\u6D6A\u51B2\u8D70\u3001\u649E\u4E0A\u9F99\u95E8\u6A2A\u6881\u6216\u7901\u77F3\u90FD\u4F1A\u6263\u4E00\u6761\u547D\uFF1B\u7A7F\u8FC7\u7EA2\u8272\u9F99\u95E8\u5F97\u5206\u52A0\u500D\uFF08\u8FDE\u51FB\u8D8A\u9AD8\u500D\u7387\u8D8A\u9AD8\uFF09\u3002P \u6682\u505C\uFF0CR \u91CD\u5F00\u3002",
     "game.scores.total": "\u603B\u8BB0\u5F55\u6570",
     "game.scores.games": "\u6E38\u620F\u79CD\u7C7B",
     "game.scores.recordsSuffix": "\u6761",
@@ -38458,12 +38568,12 @@ html body {
     "category.record": "\u8BB0\u5F55"
   };
 
-  // ../src/locales/zh_CN.ts
+  // src/locales/zh_CN.ts
   var zh_CN_default2 = {
     ...zh_CN_default
   };
 
-  // ../src/locales/common/en_US.ts
+  // src/locales/common/en_US.ts
   var en_US_default7 = {
     "common.ok": "OK",
     "common.cancel": "Cancel",
@@ -38886,6 +38996,45 @@ html body {
     "game.race.toast.provokeMiss": "It ignores you\u2026",
     "game.race.toast.burst": "Carrot boost!",
     "game.race.help": "Controls: hold Space / left mouse to sprint (burns stamina); release to walk (recovers stamina but builds drowsiness). Full drowsiness makes the hare nap on the spot \u2014 tap rapidly to wake it! Sprinting earns energy (+1 per 12m) to spend on items: \u{1F955} Carrot Sprint (3, ultra-fast for 2s), \u{1F34C} Banana Peel (2, makes the tortoise slip \u2014 immune while shell-rolling), \u{1F4E3} Provoke (1, the tortoise rages then collapses from exhaustion). Terrain affects both racers: downhill speeds up, mud slows down, shade makes the hare drowsier, carrot fields restore stamina. First across the finish wins; shorter time means a higher score. Space starts, P pauses, R restarts.",
+    "game.orange.title": "Peel the Orange",
+    "game.orange.desc": "Peel fast and steady \u2014 don't slice the flesh",
+    "game.orange.score": "Score",
+    "game.orange.combo": "Combo",
+    "game.orange.progress": "Peeled",
+    "game.orange.time": "Time",
+    "game.orange.start": "Start Peeling",
+    "game.orange.restart": "Restart",
+    "game.orange.again": "Play Again",
+    "game.orange.idleSub": "Press and drag across the peel to tear it off. Peel fast AND steady to build combos; too fast and you'll cut the flesh!",
+    "game.orange.over.peeled": "{peeled} blocks peeled \xB7 {cuts} cuts",
+    "game.orange.over.timeUp": "Time's up \u2014 the orange wasn't fully peeled",
+    "game.orange.over.detail": "Max combo {combo} \xB7 Rating {rating}",
+    "game.orange.help": "Controls: press and drag across the peel (or click) to tear off blocks; consecutive peels build a combo multiplier up to \xD75. Dragging too fast cuts the flesh: only 2 pts, combo reset, flesh stays bruised. Clear a whole slice for +25; peel the entire orange without a single cut for an S rating (+200 plus the remaining-time bonus)!",
+    "game.catdog.title": "Cat vs Dog",
+    "game.catdog.desc": "Summon cats to hold the castle against the dog army",
+    "game.catdog.castle": "Castle",
+    "game.catdog.fish": "Fish",
+    "game.catdog.score": "Score",
+    "game.catdog.wave": "Wave",
+    "game.catdog.start": "Start",
+    "game.catdog.pause": "Pause",
+    "game.catdog.resume": "Resume",
+    "game.catdog.again": "Play Again",
+    "game.catdog.paused": "Paused",
+    "game.catdog.idle": 'Hit "Start" and summon cats to guard the castle',
+    "game.catdog.waveFloat": "Wave {wave}",
+    "game.catdog.bossFloat": "Boss incoming!",
+    "game.catdog.winFloat": "Victory!",
+    "game.catdog.winTitle": "Castle Saved!",
+    "game.catdog.winDetail": "Survived {wave} waves \u2014 keep going endless",
+    "game.catdog.continue": "Keep Going",
+    "game.catdog.overTitle": "Castle Lost",
+    "game.catdog.overDetail": "Survived {wave} waves \xB7 Score {score} \xB7 {kills} dogs repelled",
+    "game.catdog.insufficient": "Not enough fish",
+    "game.catdog.unit.tabby": "Tabby",
+    "game.catdog.unit.orange": "Ginger",
+    "game.catdog.unit.black": "Black Archer",
+    "game.catdog.help": "Controls: click the field to summon the selected cat (1/2/3 to switch). Cats fight automatically; a dog that reaches the castle bites it. Fish grows over time and from kills. Hold out to wave 20 to win, then keep going endless. Space starts/pauses, P pauses.",
     "game.archery.title": "Ricochet Archery",
     "game.archery.desc": "Draw the bow, bank off walls and wind to hit the mark",
     "game.archery.score": "Score",
@@ -38909,6 +39058,77 @@ html body {
     "game.archery.stats": "Score {score} \xB7 cleared {level} levels",
     "game.archery.bestLine": "Personal best {best}",
     "game.archery.help": "Controls: press and drag outward from the archer (drag down-left \u2192 shoot up-right), dotted line = trajectory preview, release to fire. Gravity plus a random wind per shot shape the path. Arrows bounce off brick/ice walls \u2014 every bounce adds +50% on a hit; crates shatter on contact and barrels explode to clear the way. The apple target is worth +15, but hitting the man costs -20. Consecutive hits within 2.2s build a combo up to \xD74. 5 arrows per level; hit the goal to advance \u2014 wind rises with each level!",
+    "game.piglook.title": "Piggy's Lookout",
+    "game.piglook.desc": "Slingshot the pig into the sky \u2014 how far can it fly?",
+    "game.piglook.last": "This toss",
+    "game.piglook.bestDist": "Farthest",
+    "game.piglook.tosses": "Tosses left",
+    "game.piglook.coins": "Coins",
+    "game.piglook.record": "Best ever",
+    "game.piglook.start": "Start Launch",
+    "game.piglook.restart": "Restart",
+    "game.piglook.again": "Fly Again",
+    "game.piglook.idleTitle": "Drag back \xB7 release to launch the pig",
+    "game.piglook.idleDesc": "The pig sits on a slingshot at the cliff edge. Press and drag down-left to charge (dotted line = trajectory preview), then release to fling it. Gravity and a random wind bend the path; clouds bump the pig upward again; coins along the way are worth +25 each. On landing the pig skids across the grass. You get 5 tosses \u2014 the farthest one counts!",
+    "game.piglook.overTitle": "All 5 tosses done!",
+    "game.piglook.stats": "Farthest {best} m \xB7 coins {coins}",
+    "game.piglook.newRecord": "New record!",
+    "game.piglook.help": "Controls: while the pig is on the slingshot, press and drag down-left to charge (dotted line = trajectory preview), release to fire. Gravity plus a random wind shape the arc; clouds give an extra boost upward; each coin is +25. On landing the pig skids to a stop on the grass. 5 tosses total \u2014 the farthest distance in meters is your score!",
+    "game.detective.title": "Detective Typer",
+    "game.detective.desc": "Type pinyin to cuff fleeing suspects",
+    "game.detective.score": "Bounty",
+    "game.detective.arrested": "Busted",
+    "game.detective.combo": "Combo",
+    "game.detective.lives": "Lives",
+    "game.detective.start": "Start",
+    "game.detective.restart": "Restart",
+    "game.detective.again": "Play Again",
+    "game.detective.escapeLine": "Escape Line",
+    "game.detective.escaped": "Escaped!",
+    "game.detective.chasing": "Chasing",
+    "game.detective.idleTitle": "Police Wanted Board",
+    "game.detective.idleDesc": "Suspects flee from the right carrying their charges. Just type \u2014 spell the full pinyin of the charge to cuff them on the spot. Chain arrests to build a combo for higher bounties. If a suspect slips past the red-and-white escape line on the left, you lose a life \u2014 run out of 3 and the shift ends!",
+    "game.detective.overTitle": "Shift Over",
+    "game.detective.overDetail": "Bounty {score} \xB7 {arrested} suspects busted \xB7 max combo {maxCombo}",
+    "game.detective.help": "Controls: just type letters \u2014 the pinyin above a suspect lights up as you go; finish a word to bust them. Typing locks onto the leftmost (most dangerous) suspect starting with that letter; a wrong key resets your combo. Space starts / restarts. Suspects speed up and spawn faster as time goes on!",
+    "game.wukong.title": "Havoc in Heaven",
+    "game.wukong.desc": "Swing the golden staff through heavenly soldiers \u2014 a side-scrolling brawler",
+    "game.wukong.score": "Score",
+    "game.wukong.hp": "HP",
+    "game.wukong.mp": "Qi",
+    "game.wukong.kills": "KOs",
+    "game.wukong.start": "Fight",
+    "game.wukong.pause": "Pause",
+    "game.wukong.restart": "Restart",
+    "game.wukong.over.title": "The Great Sage is down\u2026",
+    "game.wukong.over.score": "Score {score}",
+    "game.wukong.over.kills": "{kills} heavenly soldiers downed",
+    "game.wukong.again": "Fight Again",
+    "game.wukong.idle": 'Hit "Fight" to raise hell in heaven',
+    "game.wukong.help": "Controls: A/D or \u2190/\u2192 move, W/\u2191/Space jump (double jump allowed); J staff strike, K spinning staff dance (costs 35 Qi, area attack). Soldiers slash up close, generals hit hard, archers throw spears from range; higher combos multiply your score, Qi regenerates over time. Lose all HP and the havoc ends!",
+    "game.carp.title": "Carp Leaps the Dragon Gate",
+    "game.carp.desc": "Leap upstream and pass through the dragon gates",
+    "game.carp.score": "Score",
+    "game.carp.gates": "Gates",
+    "game.carp.combo": "Combo",
+    "game.carp.lives": "Lives",
+    "game.carp.best": "Best",
+    "game.carp.start": "Start",
+    "game.carp.restart": "Restart",
+    "game.carp.pause": "Pause",
+    "game.carp.resume": "Resume",
+    "game.carp.again": "Play Again",
+    "game.carp.idle": "Hold to charge, release to leap; tap once mid-air for a tail-flip. Leap up through the gates!",
+    "game.carp.paused": "Paused",
+    "game.carp.resumeTip": 'Press P or click "Resume"',
+    "game.carp.over": "Game Over",
+    "game.carp.overDetail": "Score {score} \xB7 {gates} gates cleared",
+    "game.carp.swept": "Washed away!",
+    "game.carp.hitGate": "Hit the gate!",
+    "game.carp.hitRock": "Hit a rock!",
+    "game.carp.gatePass": "Through the gate!",
+    "game.carp.speedUp": "Current speeding up!",
+    "game.carp.help": "Controls: hold Space / \u2191 / W or press & hold the canvas to charge, release to leap (auto-leap at full charge); tap once more mid-air for a tail-flip jump. Being washed away, hitting a gate beam or a rock costs a life. Pass through the red gates to score big \u2014 the higher the combo, the higher the multiplier. P pause, R restart.",
     "game.scores.total": "Total Records",
     "game.scores.games": "Game Types",
     "game.scores.recordsSuffix": "",
@@ -38931,12 +39151,12 @@ html body {
     "category.record": "Records"
   };
 
-  // ../src/locales/en_US.ts
+  // src/locales/en_US.ts
   var en_US_default8 = {
     ...en_US_default7
   };
 
-  // ../src/ThemeShell.tsx
+  // src/ThemeShell.tsx
   var import_jsx_runtime = __toESM(require_jsx_runtime());
   var DEFAULT_LOCALE = "zh_CN";
   var normalizeLocale = (locale5) => {
@@ -39019,17 +39239,17 @@ html body {
   };
   var ThemeShell_default = ThemeShell;
 
-  // ../src/games/HurdleGame.tsx
+  // src/games/CarpGateGame.tsx
   var import_react33 = __toESM(require_react());
 
-  // ../node_modules/@ant-design/icons/es/icons/PauseOutlined.js
+  // node_modules/@ant-design/icons/es/icons/PauseOutlined.js
   var React65 = __toESM(require_react());
 
-  // ../node_modules/@ant-design/icons-svg/es/asn/PauseOutlined.js
+  // node_modules/@ant-design/icons-svg/es/asn/PauseOutlined.js
   var PauseOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M304 176h80v672h-80zm408 0h-64c-4.4 0-8 3.6-8 8v656c0 4.4 3.6 8 8 8h64c4.4 0 8-3.6 8-8V184c0-4.4-3.6-8-8-8z" } }] }, "name": "pause", "theme": "outlined" };
   var PauseOutlined_default = PauseOutlined;
 
-  // ../node_modules/@ant-design/icons/es/icons/PauseOutlined.js
+  // node_modules/@ant-design/icons/es/icons/PauseOutlined.js
   function _extends8() {
     _extends8 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -39054,14 +39274,14 @@ html body {
   }
   var PauseOutlined_default2 = RefIcon2;
 
-  // ../node_modules/@ant-design/icons/es/icons/PlayCircleOutlined.js
+  // node_modules/@ant-design/icons/es/icons/PlayCircleOutlined.js
   var React66 = __toESM(require_react());
 
-  // ../node_modules/@ant-design/icons-svg/es/asn/PlayCircleOutlined.js
+  // node_modules/@ant-design/icons-svg/es/asn/PlayCircleOutlined.js
   var PlayCircleOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z" } }, { "tag": "path", "attrs": { "d": "M719.4 499.1l-296.1-215A15.9 15.9 0 00398 297v430c0 13.1 14.8 20.5 25.3 12.9l296.1-215a15.9 15.9 0 000-25.8zm-257.6 134V390.9L628.5 512 461.8 633.1z" } }] }, "name": "play-circle", "theme": "outlined" };
   var PlayCircleOutlined_default = PlayCircleOutlined;
 
-  // ../node_modules/@ant-design/icons/es/icons/PlayCircleOutlined.js
+  // node_modules/@ant-design/icons/es/icons/PlayCircleOutlined.js
   function _extends9() {
     _extends9 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -39086,7 +39306,7 @@ html body {
   }
   var PlayCircleOutlined_default2 = RefIcon3;
 
-  // ../src/scoreClient.ts
+  // src/scoreClient.ts
   var LS_KEY = "fat-games.scores";
   var LS_MAX = 200;
   var sdkRef = null;
@@ -39145,7 +39365,7 @@ html body {
     })();
   }
 
-  // ../src/hooks/useI18n.ts
+  // src/hooks/useI18n.ts
   var import_react31 = __toESM(require_react());
   var useI18n = () => {
     try {
@@ -39182,10 +39402,10 @@ html body {
   };
   var useI18n_default = useI18n;
 
-  // ../src/games/GameFrame.tsx
+  // src/games/GameFrame.tsx
   var import_react32 = __toESM(require_react());
 
-  // ../src/games/gameTheme.ts
+  // src/games/gameTheme.ts
   var STAGE_BG_LIGHT = "radial-gradient(120% 140% at 20% 0%, #fdfbf7 0%, #f5f1ea 45%, #ede6da 100%)";
   var STAGE_BG_DARK = "radial-gradient(120% 140% at 20% 0%, #23272e 0%, #1b1e24 55%, #14161b 100%)";
   var STAGE_BORDER_LIGHT = "rgba(120, 100, 70, 0.18)";
@@ -39201,11 +39421,6 @@ html body {
     label: "rgba(255,255,255,0.85)",
     value: "#ffffff"
   };
-  var CHIP_BLUE = {
-    bg: "linear-gradient(135deg, #6bb6ff 0%, #2b7de9 100%)",
-    label: "rgba(255,255,255,0.85)",
-    value: "#ffffff"
-  };
   var CHIP_PURPLE = {
     bg: "linear-gradient(135deg, #b48bff 0%, #7b3ff2 100%)",
     label: "rgba(255,255,255,0.85)",
@@ -39217,7 +39432,7 @@ html body {
     value: "#ffffff"
   };
 
-  // ../src/games/sound.ts
+  // src/games/sound.ts
   var LS_KEY2 = "fat-games.sound";
   var lastPlayed = {};
   var ctx = null;
@@ -39291,20 +39506,6 @@ html body {
     if (!throttle("click", 50)) return;
     tone(420, 0.09, { type: "triangle", vol: 0.16, decay: 0.08, slideTo: 300 });
   }
-  function sfxScore() {
-    if (!throttle("score", 90)) return;
-    tone(880, 0.1, { type: "sine", vol: 0.15, decay: 0.09 });
-    tone(1320, 0.14, { type: "sine", vol: 0.12, decay: 0.12, delay: 0.05 });
-  }
-  function sfxMatch() {
-    if (!throttle("match", 120)) return;
-    tone(660, 0.12, { type: "sine", vol: 0.15, decay: 0.1 });
-    tone(880, 0.16, { type: "sine", vol: 0.13, decay: 0.13, delay: 0.07 });
-  }
-  function sfxMismatch() {
-    if (!throttle("mismatch", 120)) return;
-    tone(190, 0.14, { type: "square", vol: 0.08, decay: 0.12, slideTo: 130 });
-  }
   function sfxLose() {
     if (!throttle("lose", 300)) return;
     const notes = [392, 330, 262, 196];
@@ -39318,16 +39519,6 @@ html body {
     notes.forEach((f, i) => {
       tone(f, 0.13, { type: "triangle", vol: 0.15, decay: 0.11, delay: i * 0.07 });
     });
-  }
-  function sfxLand() {
-    if (!throttle("land", 100)) return;
-    tone(200, 0.12, { type: "triangle", vol: 0.18, decay: 0.1, slideTo: 80 });
-    noise(0.12, 0.1, 0, 900);
-  }
-  function sfxRefuel() {
-    if (!throttle("refuel", 160)) return;
-    tone(520, 0.1, { type: "sine", vol: 0.14, decay: 0.09 });
-    tone(780, 0.16, { type: "sine", vol: 0.12, decay: 0.14, delay: 0.09 });
   }
   function sfxHurt() {
     if (!throttle("hurt", 120)) return;
@@ -39352,7 +39543,7 @@ html body {
     tone(2093, 0.2, { type: "triangle", vol: 0.1, decay: 0.17, delay: 0.1 });
   }
 
-  // ../src/games/GameFrame.tsx
+  // src/games/GameFrame.tsx
   var import_jsx_runtime2 = __toESM(require_jsx_runtime());
   function StatChip({
     label,
@@ -39601,62 +39792,57 @@ html body {
   };
   var GameFrame_default = GameFrame;
 
-  // ../src/games/HurdleGame.tsx
+  // src/games/CarpGateGame.tsx
   var import_jsx_runtime3 = __toESM(require_jsx_runtime());
   var W = 560;
   var H = 320;
-  var GROUND = 268;
-  var RUNNER_X = 92;
-  var RUNNER_HALF = 17;
-  var GRAVITY = 1650;
-  var BASE_SPEED = 250;
-  var MAX_SPEED = 560;
-  var SPEED_ACCEL = 7.5;
+  var CX = 92;
+  var CARP_R = 14;
+  var SWEEP_Y = 306;
+  var GRAVITY = 1500;
+  var V0 = 105;
+  var V_MAX = 230;
+  var V_ACCEL = 30;
+  var SPEED_UP_EVERY = 12;
   var JUMP_MIN = 500;
-  var JUMP_POWER = 380;
-  var CHARGE_MAX = 0.42;
-  var DOUBLE_JUMP_VY = 660;
-  var KNOCKDOWN = 1.3;
-  var LS_BEST = "fat-games.hurdle.best";
-  var STAMINA_MAX = 100;
-  var STAMINA_RECOVER = 22;
-  var JUMP_COST_MIN = 14;
-  var JUMP_COST_POWER = 34;
-  var DOUBLE_COST = 26;
-  var MIN_JUMP_STAMINA = 12;
-  var MAX_LIVES = 5;
-  var PACK_Y = GROUND - 148;
-  var PACK_COLLECT_Y = GROUND - 128;
+  var JUMP_POWER = 430;
+  var CHARGE_MAX = 0.38;
+  var DOUBLE_VY = 600;
+  var GATE_GAP0 = 96;
+  var GATE_GAP_MIN = 60;
+  var GATE_BEAM = 190;
+  var SPAWN0 = 250;
+  var SPAWN_MIN = 165;
+  var ROCK_R_MIN = 16;
+  var ROCK_R_MAX = 25;
+  var MAX_LIVES = 3;
+  var LS_BEST = "fat-games.carp.best";
   function newSim() {
     return {
       phase: "idle",
       time: 0,
-      dist: 0,
       score: 0,
+      v: V0,
+      speedUpAt: SPEED_UP_EVERY,
       combo: 0,
-      lives: 3,
-      speed: BASE_SPEED,
+      gates: 0,
+      lives: MAX_LIVES,
       best: loadBest(),
-      stamina: STAMINA_MAX,
-      y: GROUND,
+      y: 150,
       vy: 0,
-      airborne: false,
-      jumpsUsed: 0,
       charging: false,
       charge: 0,
-      runPhase: 0,
-      nextX: RUNNER_X + 340,
-      nextPackX: W + 220,
-      hurdles: [],
-      rings: [],
-      packs: [],
+      jumpsUsed: 0,
+      invincible: 0,
+      shake: 0,
+      spawnAcc: 0,
+      rockAcc: 40,
+      pearlAcc: 20,
+      gatesArr: [],
+      rocks: [],
+      pearls: [],
       popups: [],
       particles: [],
-      shake: 0,
-      invincible: 0,
-      knockdown: 0,
-      speedUpAt: 12,
-      cleared: 0,
       paused: false,
       recorded: false,
       lastTs: 0
@@ -39669,73 +39855,23 @@ html body {
       return 0;
     }
   }
-  function barTop(h) {
-    return GROUND - h.height;
+  function saveBest(v) {
+    try {
+      window.localStorage.setItem(LS_BEST, String(v));
+    } catch {
+    }
+  }
+  function carpCy(s) {
+    return s.y - CARP_R;
   }
   function multiplier(s) {
-    return Math.min(3, 1 + Math.floor(s.combo / 4));
+    return Math.min(3, 1 + Math.floor(s.combo / 3));
   }
-  function effectiveSpeed(s) {
-    return s.knockdown > 0 ? s.speed * 0.55 : s.speed;
+  function gateSpacing(s) {
+    return Math.max(SPAWN_MIN, SPAWN0 - Math.floor(s.time / SPEED_UP_EVERY) * 12);
   }
-  function mkHurdle(x, height) {
-    return { x, height, cleared: false, hit: false, fall: 0 };
-  }
-  function performGroundJump(s, t) {
-    const ratio = s.charge / CHARGE_MAX;
-    if (s.stamina < MIN_JUMP_STAMINA) {
-      addPopup(s, RUNNER_X, GROUND - 116, t("game.hurdle.noStamina"), "#ffb3a7", 0.7, 14);
-      sfxMismatch();
-      s.charging = false;
-      return false;
-    }
-    s.stamina = Math.max(0, s.stamina - (JUMP_COST_MIN + JUMP_COST_POWER * ratio));
-    s.vy = -(JUMP_MIN + JUMP_POWER * ratio);
-    s.airborne = true;
-    s.jumpsUsed = 1;
-    s.charging = false;
-    sfxJump();
-    puff(s, RUNNER_X, GROUND, 8, "#c8b49a");
-    return true;
-  }
-  function spawnPattern(s) {
-    const tier = Math.min(6, Math.floor(s.time / 8));
-    const bump = Math.min(16, tier * 3);
-    const r2 = Math.random();
-    let count = 1;
-    if (tier >= 4) {
-      if (r2 < 0.3) count = 2;
-      else if (r2 < 0.75) count = 3;
-      else if (r2 < 0.95) count = 4;
-    } else if (tier === 3) {
-      if (r2 < 0.4) count = 2;
-      else if (r2 < 0.9) count = 3;
-    } else if (tier === 2) {
-      if (r2 < 0.55) count = 2;
-      else if (r2 < 0.85) count = 3;
-    } else if (tier === 1) {
-      if (r2 < 0.65) count = 2;
-    }
-    const highChance = tier >= 1 ? Math.min(0.55, 0.12 + (tier - 1) * 0.09) : 0;
-    const x = s.nextX;
-    for (let i = 0; i < count; i++) {
-      const hx = x + i * (40 + Math.random() * 12);
-      const isHigh = Math.random() < highChance;
-      const h = isHigh ? 62 + Math.random() * 28 + bump : 28 + Math.random() * 26 + bump;
-      s.hurdles.push(mkHurdle(hx, h));
-    }
-    if (Math.random() < 0.55) {
-      s.rings.push({ x: x + count * 42 + 8, taken: false });
-    }
-    const gap = Math.max(130, 300 - tier * 32 - (s.speed - BASE_SPEED) * 0.16) + Math.random() * 45;
-    s.nextX = x + count * 42 + gap;
-  }
-  function spawnPack(s) {
-    s.packs.push({
-      x: W + 24,
-      kind: Math.random() < 0.5 ? "health" : "stamina",
-      taken: false
-    });
+  function gateGap(s) {
+    return Math.max(GATE_GAP_MIN, GATE_GAP0 - Math.floor(s.time / SPEED_UP_EVERY) * 4);
   }
   function addPopup(s, x, y, text, color, life, size) {
     s.popups.push({ x, y, text, color, age: 0, life, size });
@@ -39744,14 +39880,30 @@ html body {
   function puff(s, x, y, n, color) {
     for (let i = 0; i < n; i++) {
       s.particles.push({
-        x: x + (Math.random() - 0.5) * 18,
-        y: y - Math.random() * 6,
-        vx: (Math.random() - 0.5) * 160,
-        vy: -20 - Math.random() * 90,
+        x: x + (Math.random() - 0.5) * 20,
+        y: y + (Math.random() - 0.5) * 8,
+        vx: (Math.random() - 0.5) * 170,
+        vy: -20 - Math.random() * 100,
         age: 0,
-        life: 0.35 + Math.random() * 0.25,
-        size: 3 + Math.random() * 4,
+        life: 0.3 + Math.random() * 0.25,
+        size: 2.5 + Math.random() * 4,
         color
+      });
+    }
+  }
+  function splash(s, x, y, n) {
+    for (let i = 0; i < n; i++) {
+      const a = Math.PI + (Math.random() - 0.5) * 1.4;
+      const sp = 60 + Math.random() * 160;
+      s.particles.push({
+        x: x + (Math.random() - 0.5) * 24,
+        y: y + (Math.random() - 0.5) * 6,
+        vx: Math.cos(a) * sp,
+        vy: Math.sin(a) * sp * 0.7 - 30,
+        age: 0,
+        life: 0.4 + Math.random() * 0.3,
+        size: 2.5 + Math.random() * 3.5,
+        color: Math.random() < 0.5 ? "#cdeef7" : "#ffffff"
       });
     }
   }
@@ -39786,44 +39938,109 @@ html body {
     s.particles = s.particles.filter((p) => p.age < p.life);
     s.shake = Math.max(0, s.shake - 26 * dt);
   }
-  function hitHurdle(s, h, t) {
-    h.hit = true;
-    h.fall = 1e-3;
+  function performJump(s, t) {
+    const ratio = s.charge / CHARGE_MAX;
+    s.vy = -(JUMP_MIN + JUMP_POWER * ratio);
+    s.charging = false;
+    s.charge = 0;
+    s.jumpsUsed = 1;
+    splash(s, CX, s.y + 4, 8);
+    sfxJump();
+  }
+  function doubleJump(s) {
+    s.vy = -DOUBLE_VY;
+    s.jumpsUsed = 2;
+    puff(s, CX, s.y - 8, 6, "#cdeef7");
+    sfxJump();
+  }
+  function loseLife(s, t, reason) {
+    if (s.invincible > 0) return false;
     s.lives -= 1;
     s.combo = 0;
-    s.knockdown = KNOCKDOWN;
-    s.invincible = 1.5;
-    s.shake = 9;
-    addPopup(s, RUNNER_X, GROUND - 96, t("game.hurdle.trip"), "#ff8a80", 0.95, 18);
+    s.invincible = 1.4;
+    s.shake = 10;
+    if (reason === "swept") {
+      s.y = 110;
+      s.vy = -320;
+      s.charging = false;
+      s.charge = 0;
+      s.jumpsUsed = 0;
+      splash(s, CX, SWEEP_Y, 18);
+      addPopup(s, CX, 128, t("game.carp.swept"), "#ffb3a7", 1, 17);
+    } else if (reason === "gate") {
+      s.vy = -520;
+      addPopup(s, CX, s.y - 76, t("game.carp.hitGate"), "#ff8a80", 0.95, 16);
+    } else {
+      s.vy = -520;
+      addPopup(s, CX, s.y - 76, t("game.carp.hitRock"), "#ff8a80", 0.95, 16);
+    }
+    puff(s, CX, s.y + 2, 10, "#bfe8ee");
     sfxHurt();
-    puff(s, RUNNER_X, GROUND, 12, "#e8c9a0");
     if (s.lives <= 0) {
       s.phase = "over";
       s.charging = false;
-      s.airborne = false;
-      s.vy = 0;
-      s.y = GROUND;
       if (!s.recorded) {
         s.recorded = true;
         const finalScore = Math.floor(s.score);
         if (finalScore > s.best) {
           s.best = finalScore;
-          try {
-            window.localStorage.setItem(LS_BEST, String(finalScore));
-          } catch {
-          }
+          saveBest(finalScore);
         }
         recordScore({
-          gameId: "hurdle",
-          gameTitle: "\u8DE8\u680F\u51B2\u523A",
+          gameId: "carp",
+          gameTitle: "\u9CA4\u9C7C\u8DF3\u9F99\u95E8",
           score: finalScore,
-          detail: { cleared: s.cleared, dist: Math.floor(s.dist / 55) }
+          detail: { gates: s.gates, best: s.best }
         });
       }
       sfxLose();
       return true;
     }
     return false;
+  }
+  function passGate(s, g, t) {
+    g.passed = true;
+    s.gates += 1;
+    s.combo += 1;
+    const mult = multiplier(s);
+    const pts = 100 * mult;
+    s.score += pts;
+    addPopup(s, CX + 6, s.y - 86, `${t("game.carp.gatePass")} +${pts}`, "#ffd54a", 1, 18);
+    sparkle(s, CX, s.y - 30, 14);
+    sfxPerfect();
+  }
+  function spawnGate(s) {
+    s.gatesArr.push({
+      y: -160 - Math.random() * 60,
+      gap: gateGap(s),
+      passed: false
+    });
+  }
+  function spawnRock(s) {
+    let rx = 66 + Math.random() * 52;
+    let ry = 50 + Math.random() * (H - 100);
+    for (let i = 0; i < 5; i++) {
+      const clash = s.gatesArr.some(
+        (g) => ry > g.y - 16 && ry < g.y + g.gap + 16
+      );
+      if (!clash) break;
+      ry = 50 + Math.random() * (H - 100);
+      rx = 66 + Math.random() * 52;
+    }
+    s.rocks.push({
+      x: rx,
+      y: ry,
+      r: ROCK_R_MIN + Math.random() * (ROCK_R_MAX - ROCK_R_MIN),
+      seed: Math.random() * Math.PI * 2,
+      hit: false
+    });
+  }
+  function spawnPearl(s) {
+    s.pearls.push({
+      x: 70 + Math.random() * 44,
+      y: 40 + Math.random() * (H - 110),
+      taken: false
+    });
   }
   function step(s, dt, t) {
     if (s.phase === "over") {
@@ -39833,254 +40050,245 @@ html body {
     if (s.phase !== "running" || s.paused) return;
     tickFx(s, dt);
     s.time += dt;
-    const eff = effectiveSpeed(s);
-    s.dist += eff * dt;
-    s.score += eff * dt / 14;
-    s.speed = Math.min(MAX_SPEED, BASE_SPEED + SPEED_ACCEL * s.time);
+    const v = s.v;
+    s.score += v * dt / 18;
+    s.v = Math.min(V_MAX, V0 + V_ACCEL * Math.floor(s.time / SPEED_UP_EVERY));
     if (s.time >= s.speedUpAt) {
-      s.speedUpAt += 14;
-      addPopup(s, W / 2, 54, t("game.hurdle.speedUp"), "#8bf0a9", 1.1, 22);
+      s.speedUpAt += SPEED_UP_EVERY;
+      addPopup(s, W / 2, 46, t("game.carp.speedUp"), "#8bf0a9", 1.1, 20);
       sfxLevelUp();
     }
     if (s.charging) {
+      s.vy = 0;
+      s.y = Math.max(40, s.y - 26 * dt);
       s.charge += dt;
       if (s.charge >= CHARGE_MAX) {
         s.charge = CHARGE_MAX;
-        performGroundJump(s, t);
+        performJump(s, t);
       }
     }
-    if (!s.airborne && !s.charging) {
-      s.stamina = Math.min(STAMINA_MAX, s.stamina + STAMINA_RECOVER * dt);
+    s.vy += GRAVITY * dt;
+    s.y += s.vy * dt;
+    if (s.y < -30) {
+      s.y = -30;
+      s.vy = 0;
     }
-    if (s.airborne) {
-      s.vy += GRAVITY * dt;
-      s.y += s.vy * dt;
-      if (s.y >= GROUND) {
-        s.y = GROUND;
-        s.vy = 0;
-        s.airborne = false;
-        s.jumpsUsed = 0;
-        sfxLand();
-        puff(s, RUNNER_X, GROUND, 6, "#c8b49a");
-      }
+    if (s.y > SWEEP_Y) {
+      if (loseLife(s, t, "swept")) return;
     }
-    s.runPhase += eff * dt * 0.028;
-    for (const h of s.hurdles) {
-      h.x -= eff * dt;
-      if (h.fall > 0) h.fall = Math.min(0.6, h.fall + dt * 1.6);
+    for (const g of s.gatesArr) g.y += v * dt;
+    for (const r2 of s.rocks) r2.y += v * dt;
+    for (const p of s.pearls) p.y += v * dt;
+    s.gatesArr = s.gatesArr.filter((g) => g.y < H + 60);
+    s.rocks = s.rocks.filter((r2) => r2.y < H + 60);
+    s.pearls = s.pearls.filter((p) => p.y < H + 60);
+    s.spawnAcc += v * dt;
+    if (s.spawnAcc >= gateSpacing(s)) {
+      s.spawnAcc = 0;
+      spawnGate(s);
     }
-    for (const r2 of s.rings) r2.x -= eff * dt;
-    for (const p of s.packs) p.x -= eff * dt;
-    s.hurdles = s.hurdles.filter((h) => h.x > -100);
-    s.rings = s.rings.filter((r2) => r2.x > -60);
-    s.packs = s.packs.filter((p) => p.x > -60);
-    s.nextX -= eff * dt;
-    while (s.nextX < W + 180) spawnPattern(s);
-    s.nextPackX -= eff * dt;
-    if (s.nextPackX < W + 20) {
-      if (Math.random() < 0.85) spawnPack(s);
-      s.nextPackX = W + 180 + Math.random() * 220;
+    s.rockAcc += v * dt;
+    if (s.rockAcc >= 190 + Math.random() * 70) {
+      s.rockAcc = 0;
+      if (Math.random() < 0.75) spawnRock(s);
     }
-    if (s.knockdown > 0) s.knockdown -= dt;
+    s.pearlAcc += v * dt;
+    if (s.pearlAcc >= 140 + Math.random() * 80) {
+      s.pearlAcc = 0;
+      if (Math.random() < 0.6) spawnPearl(s);
+    }
     if (s.invincible > 0) s.invincible -= dt;
-    for (const h of s.hurdles) {
-      if (h.cleared || h.hit) continue;
-      if (Math.abs(h.x - RUNNER_X) > RUNNER_HALF + 6) continue;
-      const top = barTop(h);
-      if (s.airborne && s.y <= top - 2) {
-        h.cleared = true;
-        s.cleared += 1;
-        s.combo += 1;
-        const mult = multiplier(s);
-        const clear = top - s.y;
-        if (clear <= 26) {
-          const pts = 25 * mult;
-          s.score += pts;
-          addPopup(
-            s,
-            RUNNER_X + 4,
-            GROUND - 152,
-            `${t("game.hurdle.perfect")} +${pts}`,
-            "#ffd54a",
-            1,
-            19
-          );
-          sparkle(s, RUNNER_X, s.y - 26, 12);
-          sfxPerfect();
-        } else {
-          const pts = 10 * mult;
-          s.score += pts;
-          addPopup(s, RUNNER_X + 4, GROUND - 142, `+${pts}`, "#d5f5d8", 0.8, 16);
-          sfxScore();
-        }
-      } else if (s.invincible <= 0) {
-        if (hitHurdle(s, h, t)) break;
+    const cy = carpCy(s);
+    for (const g of s.gatesArr) {
+      if (g.passed) continue;
+      if (cy < g.y && cy > g.y - GATE_BEAM) {
+        g.passed = true;
+        if (loseLife(s, t, "gate")) return;
+      } else if (cy > g.y + g.gap) {
+        g.passed = true;
+        if (loseLife(s, t, "gate")) return;
+      } else if (g.y >= cy) {
+        passGate(s, g, t);
       }
     }
-    for (const r2 of s.rings) {
-      if (r2.taken) continue;
-      if (s.airborne && Math.abs(r2.x - RUNNER_X) < 19 && s.y < GROUND - 66) {
-        r2.taken = true;
-        const pts = 5 * multiplier(s);
-        s.score += pts;
-        addPopup(s, RUNNER_X, GROUND - 170, `+${pts}`, "#ffd54a", 0.8, 15);
-        sparkle(s, RUNNER_X, GROUND - 138, 8);
+    for (const r2 of s.rocks) {
+      if (r2.hit) continue;
+      const rx = r2.x + Math.sin(s.time * 0.8 + r2.seed * 2) * 14;
+      const dx = CX - rx;
+      const dy = cy - r2.y;
+      if (dx * dx + dy * dy < (CARP_R + r2.r) * (CARP_R + r2.r)) {
+        r2.hit = true;
+        if (loseLife(s, t, "rock")) return;
+      }
+    }
+    for (const p of s.pearls) {
+      if (p.taken) continue;
+      const dx = CX - p.x;
+      const dy = cy - p.y;
+      if (dx * dx + dy * dy < (CARP_R + 12) * (CARP_R + 12)) {
+        p.taken = true;
+        s.score += 15;
+        addPopup(s, CX + 6, s.y - 72, "+15", "#ffd54a", 0.8, 15);
+        sparkle(s, CX, cy - 10, 8);
         sfxCoin();
       }
     }
-    for (const p of s.packs) {
-      if (p.taken) continue;
-      if (s.airborne && Math.abs(p.x - RUNNER_X) < 21 && s.y < PACK_COLLECT_Y) {
-        p.taken = true;
-        if (p.kind === "health") {
-          if (s.lives < MAX_LIVES) {
-            s.lives += 1;
-            addPopup(s, RUNNER_X, GROUND - 195, t("game.hurdle.lifeUp"), "#ff8a80", 0.9, 17);
-            sfxMatch();
-          } else {
-            s.score += 25;
-            addPopup(s, RUNNER_X, GROUND - 195, "+25", "#ffd54a", 0.8, 16);
-            sfxCoin();
-          }
-        } else {
-          s.stamina = STAMINA_MAX;
-          addPopup(s, RUNNER_X, GROUND - 195, t("game.hurdle.staminaFull"), "#7cc7ff", 0.9, 16);
-          sfxRefuel();
-        }
-        sparkle(s, RUNNER_X, PACK_Y - 10, 10);
-      }
-    }
   }
-  function wrapX(x, span) {
-    const m = x % span;
+  function wrapY(y, span) {
+    const m = y % span;
     return m < 0 ? m + span : m;
   }
-  function cloud(ctx2, x, y, s) {
-    ctx2.beginPath();
-    ctx2.arc(x, y, 14 * s, 0, Math.PI * 2);
-    ctx2.arc(x + 14 * s, y - 5 * s, 11 * s, 0, Math.PI * 2);
-    ctx2.arc(x + 28 * s, y, 13 * s, 0, Math.PI * 2);
-    ctx2.fill();
+  function drawGate(ctx2, g) {
+    const beamTop = g.y - GATE_BEAM;
+    const gapBottom = g.y + g.gap;
+    const grad = ctx2.createLinearGradient(0, beamTop, 0, g.y);
+    grad.addColorStop(0, "#c62828");
+    grad.addColorStop(1, "#8e1b1b");
+    ctx2.fillStyle = grad;
+    ctx2.fillRect(0, beamTop, W, GATE_BEAM);
+    ctx2.fillStyle = "rgba(255,255,255,0.13)";
+    for (let x = 8; x < W; x += 34) ctx2.fillRect(x, beamTop + 10, 18, 4);
+    ctx2.fillStyle = "#ffd54a";
+    ctx2.fillRect(0, g.y - 3, W, 3);
+    ctx2.fillStyle = "#b23a3a";
+    ctx2.fillRect(0, gapBottom, W, H - gapBottom);
+    ctx2.fillStyle = "#ffd54a";
+    ctx2.fillRect(0, gapBottom, W, 3);
+    const mx = W / 2;
+    const my = g.y - 24;
+    ctx2.fillStyle = "rgba(120,10,10,0.92)";
+    ctx2.fillRect(mx - 34, my, 68, 19);
+    ctx2.strokeStyle = "#ffd54a";
+    ctx2.lineWidth = 2;
+    ctx2.strokeRect(mx - 34, my, 68, 19);
+    ctx2.font = "900 12px system-ui, -apple-system, sans-serif";
+    ctx2.textAlign = "center";
+    ctx2.fillStyle = "#ffd54a";
+    ctx2.fillText("\u9F99\u95E8", mx, my + 14.5);
   }
-  function drawRunner(ctx2, s, now2) {
-    const x = RUNNER_X;
-    const feetY = s.y;
-    const airH = Math.max(0, (GROUND - feetY) / 150);
-    const shAlpha = Math.max(0, 0.16 * (1 - airH * 0.6));
-    const shRx = Math.max(0, 15 * (1 - airH * 0.45));
-    ctx2.fillStyle = `rgba(0,0,0,${shAlpha})`;
+  function drawRock(ctx2, r2, now2) {
+    const x = r2.x + Math.sin(now2 * 0.8 + r2.seed * 2) * 14;
+    const y = r2.y + Math.sin(now2 * 1.2 + r2.seed) * 4;
+    ctx2.save();
+    ctx2.translate(x, y);
+    ctx2.fillStyle = "#64748b";
     ctx2.beginPath();
-    ctx2.ellipse(x, GROUND + 3, shRx, 4, 0, 0, Math.PI * 2);
+    const n = 7;
+    for (let i = 0; i < n; i++) {
+      const a = i / n * Math.PI * 2 + r2.seed;
+      const rr = r2.r * (0.82 + 0.18 * Math.sin(i * 3.7 + r2.seed));
+      const px = Math.cos(a) * rr;
+      const py = Math.sin(a) * rr;
+      if (i === 0) ctx2.moveTo(px, py);
+      else ctx2.lineTo(px, py);
+    }
+    ctx2.closePath();
     ctx2.fill();
-    if (s.invincible > 0 && s.phase === "running" && Math.floor(now2 * 18) % 2 === 0) {
+    ctx2.strokeStyle = "rgba(0,0,0,0.28)";
+    ctx2.lineWidth = 2;
+    ctx2.stroke();
+    ctx2.fillStyle = "rgba(255,255,255,0.55)";
+    ctx2.beginPath();
+    ctx2.ellipse(0, -r2.r * 0.65, r2.r * 0.72, r2.r * 0.3, 0, 0, Math.PI * 2);
+    ctx2.fill();
+    ctx2.restore();
+  }
+  function drawPearl(ctx2, p, now2) {
+    const y = p.y + Math.sin(now2 * 2.4 + p.x) * 5;
+    ctx2.save();
+    ctx2.translate(p.x, y);
+    ctx2.fillStyle = "rgba(255,215,74,0.3)";
+    ctx2.beginPath();
+    ctx2.arc(0, 0, 14, 0, Math.PI * 2);
+    ctx2.fill();
+    ctx2.fillStyle = "#ffd54a";
+    ctx2.beginPath();
+    ctx2.arc(0, 0, 8, 0, Math.PI * 2);
+    ctx2.fill();
+    ctx2.fillStyle = "#fff6d8";
+    ctx2.beginPath();
+    ctx2.arc(-2.4, -2.4, 2.6, 0, Math.PI * 2);
+    ctx2.fill();
+    ctx2.restore();
+  }
+  function drawCarp(ctx2, s, now2) {
+    const cy = s.y - CARP_R;
+    ctx2.fillStyle = "rgba(255,190,110,0.12)";
+    ctx2.beginPath();
+    ctx2.arc(CX, cy, CARP_R + 10, 0, Math.PI * 2);
+    ctx2.fill();
+    if (s.invincible > 0 && s.phase === "running" && Math.floor(now2 * 16) % 2 === 0) {
       return;
     }
     ctx2.save();
-    ctx2.translate(x, feetY);
-    ctx2.lineCap = "round";
-    const t = s.runPhase;
-    const swing = s.airborne ? 0 : Math.sin(t);
-    const fFootX = 11 * swing;
-    const rFootX = -11 * swing;
-    const fFootY = s.airborne ? -16 - Math.max(0, s.vy) * 0.012 : -2;
-    const rFootY = s.airborne ? -10 - Math.max(0, -s.vy) * 8e-3 : -2;
-    ctx2.strokeStyle = "#20242b";
-    ctx2.lineWidth = 6;
-    ctx2.beginPath();
-    ctx2.moveTo(1, -30);
-    ctx2.lineTo(rFootX, rFootY);
-    ctx2.stroke();
-    ctx2.strokeStyle = "#2f3542";
-    ctx2.beginPath();
-    ctx2.moveTo(1, -30);
-    ctx2.lineTo(fFootX, fFootY);
-    ctx2.stroke();
-    ctx2.fillStyle = "#ff6b6b";
-    ctx2.beginPath();
-    ctx2.ellipse(rFootX, rFootY + 1, 6, 3.2, 0, 0, Math.PI * 2);
-    ctx2.ellipse(fFootX, fFootY + 1, 6, 3.2, 0, 0, Math.PI * 2);
-    ctx2.fill();
-    ctx2.strokeStyle = "#3b82f6";
-    ctx2.lineWidth = 10;
-    ctx2.beginPath();
-    ctx2.moveTo(0, -28);
-    ctx2.lineTo(6, -50);
-    ctx2.stroke();
-    ctx2.strokeStyle = "#facc15";
-    ctx2.lineWidth = 6;
-    ctx2.beginPath();
-    ctx2.moveTo(0, -28);
-    ctx2.lineTo(1, -31);
-    ctx2.stroke();
-    const shX = 6;
-    const shY = -50;
-    let fAng;
-    let bAng;
-    if (s.airborne) {
-      fAng = -1.15;
-      bAng = -2.1;
-    } else {
-      const swingA = Math.sin(t);
-      fAng = 0.5 + swingA * 0.75;
-      bAng = Math.PI - 0.5 - swingA * 0.75;
+    ctx2.translate(CX, cy);
+    let tilt = Math.max(-0.32, Math.min(0.32, -s.vy * 22e-5));
+    if (s.charging) {
+      const wob = Math.sin(now2 * 22) * 0.05;
+      tilt = -0.22 + wob;
     }
-    const fHx = shX + Math.cos(fAng) * 13;
-    const fHy = shY + Math.sin(fAng) * 13;
-    const bHx = shX + Math.cos(bAng) * 13;
-    const bHy = shY + Math.sin(bAng) * 13;
-    ctx2.strokeStyle = "#1d4ed8";
-    ctx2.lineWidth = 4.5;
+    ctx2.rotate(tilt);
+    const tailSwing = Math.sin(now2 * 12) * 0.5;
+    ctx2.fillStyle = "#ff8a3d";
     ctx2.beginPath();
-    ctx2.moveTo(shX, shY);
-    ctx2.lineTo(bHx, bHy);
+    ctx2.moveTo(-2, CARP_R - 3);
+    ctx2.lineTo(-9 - tailSwing * 3, CARP_R + 11);
+    ctx2.lineTo(6 + tailSwing * 3, CARP_R + 11);
+    ctx2.closePath();
+    ctx2.fill();
+    const bodyGrad = ctx2.createLinearGradient(-CARP_R, 0, CARP_R, 0);
+    bodyGrad.addColorStop(0, "#ffb066");
+    bodyGrad.addColorStop(1, "#ff8a3d");
+    ctx2.fillStyle = bodyGrad;
+    ctx2.beginPath();
+    ctx2.ellipse(0, 0, CARP_R - 2, CARP_R + 2, 0, 0, Math.PI * 2);
+    ctx2.fill();
+    ctx2.strokeStyle = "rgba(170,70,10,0.5)";
+    ctx2.lineWidth = 1.8;
     ctx2.stroke();
-    ctx2.strokeStyle = "#2563eb";
+    ctx2.strokeStyle = "rgba(200,90,20,0.35)";
+    ctx2.lineWidth = 1;
+    for (let i = 0; i < 3; i++) {
+      ctx2.beginPath();
+      ctx2.arc(0, -4 + i * 8, 8, -0.9, 0.9);
+      ctx2.stroke();
+    }
+    ctx2.fillStyle = "#ff7a2e";
     ctx2.beginPath();
-    ctx2.moveTo(shX, shY);
-    ctx2.lineTo(fHx, fHy);
+    ctx2.moveTo(-CARP_R + 3, -CARP_R + 2);
+    ctx2.lineTo(-CARP_R - 4, -CARP_R + 10);
+    ctx2.lineTo(-CARP_R + 7, -CARP_R + 12);
+    ctx2.closePath();
+    ctx2.fill();
+    ctx2.fillStyle = "#ffffff";
+    ctx2.beginPath();
+    ctx2.arc(4, -CARP_R + 3, 3.4, 0, Math.PI * 2);
+    ctx2.fill();
+    ctx2.fillStyle = "#1f2937";
+    ctx2.beginPath();
+    ctx2.arc(5.2, -CARP_R + 3.4, 1.6, 0, Math.PI * 2);
+    ctx2.fill();
+    ctx2.strokeStyle = "#ff8a3d";
+    ctx2.lineWidth = 1.4;
+    ctx2.beginPath();
+    ctx2.moveTo(-1, -CARP_R + 1);
+    ctx2.quadraticCurveTo(-6, -CARP_R - 7, -4, -CARP_R - 13);
+    ctx2.moveTo(2, -CARP_R + 1);
+    ctx2.quadraticCurveTo(7, -CARP_R - 7, 5, -CARP_R - 13);
     ctx2.stroke();
-    ctx2.fillStyle = "#ffd7a8";
+    ctx2.strokeStyle = "rgba(170,70,10,0.8)";
     ctx2.beginPath();
-    ctx2.arc(fHx, fHy, 2.3, 0, Math.PI * 2);
-    ctx2.arc(bHx, bHy, 2.3, 0, Math.PI * 2);
-    ctx2.fill();
-    ctx2.fillStyle = "#ffd7a8";
-    ctx2.beginPath();
-    ctx2.arc(9, -58, 6.5, 0, Math.PI * 2);
-    ctx2.fill();
-    ctx2.fillStyle = "#ef4444";
-    ctx2.beginPath();
-    ctx2.arc(9, -60, 6.5, Math.PI, 0);
-    ctx2.fill();
-    ctx2.fillRect(9, -66, 8, 3.2);
-    ctx2.fillStyle = "#20242b";
-    ctx2.beginPath();
-    ctx2.arc(11.5, -58.5, 1.1, 0, Math.PI * 2);
-    ctx2.fill();
-    const stRatio = Math.max(0, s.stamina) / STAMINA_MAX;
-    const sbW = 44;
-    const sbY = -110;
-    ctx2.fillStyle = "rgba(0,0,0,0.3)";
-    ctx2.fillRect(-sbW / 2, sbY, sbW, 5);
-    ctx2.fillStyle = stRatio < 0.25 ? "#ff6b6b" : "#4facfe";
-    ctx2.fillRect(-sbW / 2, sbY, sbW * stRatio, 5);
+    ctx2.moveTo(-3, -CARP_R + 5);
+    ctx2.lineTo(3, -CARP_R + 5);
+    ctx2.stroke();
     if (s.charging) {
       const ratio = Math.min(1, s.charge / CHARGE_MAX);
-      const bw = 36;
-      const by = -96;
+      const bw = 40;
+      const by = -CARP_R - 18;
       ctx2.fillStyle = "rgba(0,0,0,0.28)";
       ctx2.fillRect(-bw / 2, by, bw, 5);
       ctx2.fillStyle = ratio >= 1 ? "#ff6b6b" : "#ffd54a";
       ctx2.fillRect(-bw / 2, by, bw * ratio, 5);
-    }
-    if (s.combo >= 2 && s.phase === "running") {
-      ctx2.font = "800 15px system-ui, -apple-system, sans-serif";
-      ctx2.textAlign = "center";
-      ctx2.lineWidth = 3;
-      ctx2.strokeStyle = "rgba(0,0,0,0.3)";
-      ctx2.strokeText(`\xD7${multiplier(s)}`, 28, -92);
-      ctx2.fillStyle = "#ffd54a";
-      ctx2.fillText(`\xD7${multiplier(s)}`, 28, -92);
     }
     ctx2.restore();
   }
@@ -40090,135 +40298,82 @@ html body {
       const m = Math.min(7, s.shake);
       ctx2.translate((Math.random() - 0.5) * m * 2, (Math.random() - 0.5) * m * 2);
     }
-    const sky = ctx2.createLinearGradient(0, 0, 0, H);
-    sky.addColorStop(0, "#7ec8f7");
-    sky.addColorStop(0.65, "#cdeafb");
-    sky.addColorStop(1, "#eef7fd");
-    ctx2.fillStyle = sky;
+    const bg = ctx2.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, "#0b3d4a");
+    bg.addColorStop(0.55, "#14606e");
+    bg.addColorStop(1, "#8fd3dc");
+    ctx2.fillStyle = bg;
     ctx2.fillRect(-12, -12, W + 24, H + 24);
-    ctx2.fillStyle = "rgba(255,236,160,0.35)";
-    ctx2.beginPath();
-    ctx2.arc(W - 70, 52, 30, 0, Math.PI * 2);
-    ctx2.fill();
-    ctx2.fillStyle = "#ffd65a";
-    ctx2.beginPath();
-    ctx2.arc(W - 70, 52, 20, 0, Math.PI * 2);
-    ctx2.fill();
-    ctx2.fillStyle = "rgba(255,255,255,0.85)";
-    for (let i = 0; i < 3; i++) {
-      const cx = wrapX(i * 240 + 60 - now2 * 26, W + 200) - 100;
-      cloud(ctx2, cx, 46 + i * 26, 0.9 + i * 0.15);
+    for (let i = 0; i < 7; i++) {
+      const x = 58 + i * 78 + i % 2 * 12;
+      const off = wrapY(now2 * s.v * (0.55 + i * 0.1) + i * 137, H + 90) - 45;
+      ctx2.strokeStyle = i % 2 === 0 ? "rgba(255,255,255,0.16)" : "rgba(255,255,255,0.1)";
+      ctx2.lineWidth = 1.8;
+      for (let y = -off; y < H + 24; y += 54) {
+        ctx2.beginPath();
+        ctx2.moveTo(x, y);
+        ctx2.lineTo(x + Math.sin(y * 0.05 + i) * 5, y + 26);
+        ctx2.stroke();
+      }
     }
-    ctx2.fillStyle = "rgba(96,116,148,0.35)";
-    ctx2.fillRect(0, 88, W, 26);
-    ctx2.fillStyle = "rgba(130,150,180,0.4)";
-    const bandOff = wrapX(s.dist * 0.35, 40);
-    for (let x = -bandOff; x < W; x += 40) {
-      ctx2.fillRect(x, 92, 22, 18);
-    }
-    const trackTop = 222;
-    ctx2.fillStyle = "#d6503f";
-    ctx2.fillRect(0, trackTop, W, GROUND - trackTop);
-    ctx2.strokeStyle = "rgba(255,255,255,0.5)";
-    ctx2.lineWidth = 2;
-    const lineOff = wrapX(s.dist, 52);
-    for (let x = -lineOff; x < W; x += 52) {
+    ctx2.fillStyle = "rgba(255,255,255,0.22)";
+    for (let i = 0; i < 10; i++) {
+      const bx = wrapY(i * 61 + now2 * s.v * 0.9, W + 20) - 10;
+      const by = wrapY(i * 47 + now2 * s.v * 1.15, H + 30) - 15;
       ctx2.beginPath();
-      ctx2.moveTo(x, 240);
-      ctx2.lineTo(x, 250);
-      ctx2.stroke();
-    }
-    ctx2.strokeStyle = "rgba(255,255,255,0.7)";
-    ctx2.setLineDash([16, 20]);
-    ctx2.lineDashOffset = -s.dist;
-    ctx2.beginPath();
-    ctx2.moveTo(0, 256);
-    ctx2.lineTo(W, 256);
-    ctx2.stroke();
-    ctx2.setLineDash([]);
-    ctx2.fillStyle = "#4c9e4f";
-    ctx2.fillRect(0, GROUND, W, H - GROUND);
-    ctx2.fillStyle = "rgba(255,255,255,0.08)";
-    const grassOff = wrapX(s.dist * 0.5, 60);
-    for (let x = -grassOff; x < W; x += 60) {
-      ctx2.fillRect(x, GROUND, 30, H - GROUND);
-    }
-    for (const r2 of s.rings) {
-      if (r2.taken) continue;
-      ctx2.save();
-      ctx2.translate(r2.x, GROUND - 138);
-      ctx2.rotate(now2 * 2 + r2.x * 0.02);
-      ctx2.strokeStyle = "#ffd54a";
-      ctx2.lineWidth = 5;
-      ctx2.beginPath();
-      ctx2.arc(0, 0, 11, 0, Math.PI * 2);
-      ctx2.stroke();
-      ctx2.strokeStyle = "#fff3c4";
-      ctx2.lineWidth = 2.5;
-      ctx2.beginPath();
-      ctx2.arc(0, 0, 11, 0, Math.PI * 2);
-      ctx2.stroke();
-      ctx2.restore();
-    }
-    for (const p of s.packs) {
-      if (p.taken) continue;
-      const bob = Math.sin(now2 * 3 + p.x * 0.03) * 4;
-      const py = PACK_Y + bob;
-      ctx2.save();
-      ctx2.translate(p.x, py);
-      ctx2.fillStyle = p.kind === "health" ? "rgba(255,120,110,0.28)" : "rgba(90,180,255,0.28)";
-      ctx2.beginPath();
-      ctx2.arc(0, 0, 16, 0, Math.PI * 2);
+      ctx2.arc(bx, by, 1.5 + i % 3, 0, Math.PI * 2);
       ctx2.fill();
-      if (p.kind === "health") {
-        ctx2.fillStyle = "#ffffff";
-        ctx2.fillRect(-11, -9, 22, 18);
-        ctx2.fillStyle = "#e5484d";
-        ctx2.fillRect(-3.5, -6, 7, 12);
-        ctx2.fillRect(-6, -3.5, 12, 7);
-      } else {
-        ctx2.fillStyle = "#4facfe";
-        ctx2.beginPath();
-        ctx2.arc(0, 0, 11, 0, Math.PI * 2);
-        ctx2.fill();
-        ctx2.fillStyle = "#ffffff";
-        ctx2.beginPath();
-        ctx2.moveTo(1.5, -6);
-        ctx2.lineTo(-3.5, 1.5);
-        ctx2.lineTo(0.5, 1.5);
-        ctx2.lineTo(-1.5, 6);
-        ctx2.lineTo(3.5, -1.5);
-        ctx2.lineTo(-0.5, -1.5);
-        ctx2.closePath();
-        ctx2.fill();
-      }
-      ctx2.restore();
     }
-    for (const h of s.hurdles) {
-      if (h.x < -40 || h.x > W + 40) continue;
-      const top = barTop(h);
-      ctx2.save();
-      if (h.fall > 0) {
-        ctx2.translate(h.x, GROUND);
-        ctx2.rotate(-Math.min(1.35, h.fall * 2.4));
-      } else {
-        ctx2.translate(h.x, 0);
-      }
-      ctx2.strokeStyle = "#f5f5f5";
-      ctx2.lineWidth = 4;
+    ctx2.fillStyle = "rgba(9,36,30,0.88)";
+    ctx2.beginPath();
+    ctx2.moveTo(-10, -10);
+    ctx2.lineTo(36, -10);
+    ctx2.lineTo(60, 118);
+    ctx2.lineTo(32, 200);
+    ctx2.lineTo(48, H);
+    ctx2.lineTo(-10, H);
+    ctx2.closePath();
+    ctx2.fill();
+    ctx2.beginPath();
+    ctx2.moveTo(W + 10, -10);
+    ctx2.lineTo(W - 36, -10);
+    ctx2.lineTo(W - 60, 108);
+    ctx2.lineTo(W - 32, 190);
+    ctx2.lineTo(W - 48, H);
+    ctx2.lineTo(W + 10, H);
+    ctx2.closePath();
+    ctx2.fill();
+    for (const g of s.gatesArr) {
+      if (g.y < -GATE_BEAM - 30 || g.y > H + 70) continue;
+      drawGate(ctx2, g);
+    }
+    for (const r2 of s.rocks) {
+      if (r2.hit || r2.y < -60 || r2.y > H + 60) continue;
+      drawRock(ctx2, r2, now2);
+    }
+    for (const p of s.pearls) {
+      if (p.taken || p.y < -40 || p.y > H + 40) continue;
+      drawPearl(ctx2, p, now2);
+    }
+    drawCarp(ctx2, s, now2);
+    ctx2.fillStyle = "rgba(228,250,252,0.8)";
+    ctx2.beginPath();
+    ctx2.moveTo(0, H);
+    for (let x = 0; x <= W; x += 8) {
+      const yy = H - 8 + Math.sin(x * 0.06 + now2 * 2.2) * 3 + Math.sin(x * 0.02 + now2 * 1.1) * 2;
+      ctx2.lineTo(x, yy);
+    }
+    ctx2.lineTo(W, H);
+    ctx2.closePath();
+    ctx2.fill();
+    ctx2.fillStyle = "rgba(255,255,255,0.45)";
+    for (let i = 0; i < 8; i++) {
+      const bx = wrapY(i * 97 + now2 * s.v * 0.6, W + 20) - 10;
+      const by = H - 14 + Math.sin(now2 * 3 + i) * 4;
       ctx2.beginPath();
-      ctx2.moveTo(-4, top);
-      ctx2.lineTo(-4, GROUND);
-      ctx2.moveTo(4, top);
-      ctx2.lineTo(4, GROUND);
-      ctx2.stroke();
-      ctx2.fillStyle = "#ffffff";
-      ctx2.fillRect(-16, top - 5, 32, 6);
-      ctx2.fillStyle = "#e5484d";
-      ctx2.fillRect(-16, top - 3, 32, 3);
-      ctx2.restore();
+      ctx2.arc(bx, by, 2.5 + i % 3, 0, Math.PI * 2);
+      ctx2.fill();
     }
-    drawRunner(ctx2, s, now2);
     for (const p of s.particles) {
       const a = Math.max(0, 1 - p.age / p.life);
       ctx2.globalAlpha = a;
@@ -40243,32 +40398,28 @@ html body {
     const next2 = {
       phase: s.phase,
       score: Math.floor(s.score),
-      dist: Math.floor(s.dist / 55),
+      gates: s.gates,
       combo: s.combo,
       lives: Math.max(0, s.lives),
-      stamina: Math.round(s.stamina),
-      cleared: s.cleared,
       best: s.best,
       paused: s.paused
     };
     const cur = lastUiRef.current;
-    if (next2.phase !== cur.phase || next2.score !== cur.score || next2.dist !== cur.dist || next2.combo !== cur.combo || next2.lives !== cur.lives || next2.stamina !== cur.stamina || next2.cleared !== cur.cleared || next2.best !== cur.best || next2.paused !== cur.paused) {
+    if (next2.phase !== cur.phase || next2.score !== cur.score || next2.gates !== cur.gates || next2.combo !== cur.combo || next2.lives !== cur.lives || next2.best !== cur.best || next2.paused !== cur.paused) {
       lastUiRef.current = next2;
       setUi(next2);
     }
   }
-  var HurdleGame = () => {
+  var CarpGateGame = () => {
     const i18n = useI18n_default();
     const simRef = (0, import_react33.useRef)(newSim());
     const canvasRef = (0, import_react33.useRef)(null);
     const lastUiRef = (0, import_react33.useRef)({
       phase: "idle",
       score: 0,
-      dist: 0,
+      gates: 0,
       combo: 0,
-      lives: 3,
-      stamina: STAMINA_MAX,
-      cleared: 0,
+      lives: MAX_LIVES,
       best: loadBest(),
       paused: false
     });
@@ -40280,11 +40431,9 @@ html body {
       const next2 = {
         phase: "idle",
         score: 0,
-        dist: 0,
+        gates: 0,
         combo: 0,
-        lives: 3,
-        stamina: STAMINA_MAX,
-        cleared: 0,
+        lives: MAX_LIVES,
         best: simRef.current.best,
         paused: false
       };
@@ -40309,33 +40458,19 @@ html body {
         return;
       }
       if (s.phase !== "running" || s.paused) return;
-      if (!s.airborne) {
-        s.charging = true;
-      } else if (s.jumpsUsed < 2) {
-        if (s.stamina < DOUBLE_COST) {
-          addPopup(
-            s,
-            RUNNER_X,
-            s.y - 66,
-            tRef.current("game.hurdle.noStamina"),
-            "#ffb3a7",
-            0.7,
-            14
-          );
-          sfxMismatch();
-          return;
-        }
-        s.stamina = Math.max(0, s.stamina - DOUBLE_COST);
-        s.vy = -DOUBLE_JUMP_VY;
-        s.jumpsUsed = 2;
-        sfxJump();
-        puff(s, RUNNER_X, s.y - 8, 6, "#e8e8e8");
+      if (s.charging) return;
+      if (s.jumpsUsed >= 2) return;
+      if (s.jumpsUsed >= 1) {
+        doubleJump(s);
+        return;
       }
+      s.charging = true;
+      s.charge = 0;
     }, [start]);
     const releaseJump = (0, import_react33.useCallback)(() => {
       const s = simRef.current;
       if (!s.charging || s.phase !== "running" || s.paused) return;
-      performGroundJump(s, tRef.current);
+      performJump(s, tRef.current);
     }, []);
     const togglePause = (0, import_react33.useCallback)(() => {
       const s = simRef.current;
@@ -40346,10 +40481,15 @@ html body {
     }, []);
     (0, import_react33.useEffect)(() => {
       const down = (e) => {
+        if (e.repeat) return;
         const k = e.key.toLowerCase();
-        if ([" ", "arrowup", "w", "p"].includes(k)) e.preventDefault();
+        if ([" ", "arrowup", "w", "p", "r"].includes(k)) e.preventDefault();
         if (k === "p") {
           togglePause();
+          return;
+        }
+        if (k === "r") {
+          reset();
           return;
         }
         if (k === " " || k === "arrowup" || k === "w") pressJump();
@@ -40364,11 +40504,11 @@ html body {
         window.removeEventListener("keydown", down);
         window.removeEventListener("keyup", up);
       };
-    }, [pressJump, releaseJump, togglePause]);
+    }, [pressJump, releaseJump, togglePause, reset]);
     (0, import_react33.useEffect)(() => {
       let raf2 = 0;
-      const loop = (ts) => {
-        raf2 = requestAnimationFrame(loop);
+      const loop2 = (ts) => {
+        raf2 = requestAnimationFrame(loop2);
         const canvas = canvasRef.current;
         const ctx2 = canvas?.getContext("2d");
         if (!canvas || !ctx2) return;
@@ -40382,45 +40522,36 @@ html body {
         render2(ctx2, s, ts / 1e3);
         syncUi(s, lastUiRef, setUi);
       };
-      raf2 = requestAnimationFrame(loop);
+      raf2 = requestAnimationFrame(loop2);
       return () => cancelAnimationFrame(raf2);
     }, []);
     const livesText = ui.lives > 0 ? "\u2764".repeat(ui.lives) : "\u2014";
     return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
       GameFrame_default,
       {
-        emoji: "\u{1F3C3}",
-        title: i18n.text("game.hurdle.title"),
+        emoji: "\u{1F41F}",
+        title: i18n.text("game.carp.title"),
         stats: [
-          { label: i18n.text("game.hurdle.score"), value: ui.score, colors: CHIP_GOLD },
+          { label: i18n.text("game.carp.score"), value: ui.score, colors: CHIP_GOLD },
+          { label: i18n.text("game.carp.gates"), value: ui.gates, colors: CHIP_RED },
           {
-            label: i18n.text("game.hurdle.dist"),
-            value: `${ui.dist}m`,
-            colors: CHIP_BLUE
-          },
-          {
-            label: i18n.text("game.hurdle.combo"),
-            value: ui.combo > 1 ? `${ui.combo} \xD7${Math.min(3, 1 + Math.floor(ui.combo / 4))}` : ui.combo,
+            label: i18n.text("game.carp.combo"),
+            value: ui.combo > 1 ? `${ui.combo} \xD7${Math.min(3, 1 + Math.floor(ui.combo / 3))}` : ui.combo,
             colors: CHIP_GREEN
           },
-          {
-            label: i18n.text("game.hurdle.stamina"),
-            value: `${ui.stamina}%`,
-            colors: ui.stamina < 25 ? CHIP_RED : CHIP_PURPLE
-          },
-          { label: i18n.text("game.hurdle.lives"), value: livesText, colors: CHIP_RED }
+          { label: i18n.text("game.carp.lives"), value: livesText, colors: CHIP_PURPLE }
         ],
         headerExtra: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(import_jsx_runtime3.Fragment, { children: [
           ui.phase === "running" && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(GhostBtn, { onClick: togglePause, children: [
             ui.paused ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(PlayCircleOutlined_default2, {}) : /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(PauseOutlined_default2, {}),
-            ui.paused ? i18n.text("game.hurdle.resume") : i18n.text("game.hurdle.pause")
+            ui.paused ? i18n.text("game.carp.resume") : i18n.text("game.carp.pause")
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(GhostBtn, { onClick: reset, children: [
             /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(ReloadOutlined_default2, {}),
-            i18n.text("game.hurdle.restart")
+            i18n.text("game.carp.restart")
           ] })
         ] }),
-        help: i18n.text("game.hurdle.help"),
+        help: i18n.text("game.carp.help"),
         maxWidth: 620,
         children: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
           "div",
@@ -40431,8 +40562,8 @@ html body {
               maxWidth: W,
               borderRadius: 14,
               overflow: "hidden",
-              boxShadow: "0 10px 26px rgba(30,60,110,0.35)",
-              border: "2px solid rgba(90,140,190,0.4)"
+              boxShadow: "0 10px 26px rgba(10,50,70,0.35)",
+              border: "2px solid rgba(40,140,160,0.4)"
             },
             children: [
               /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
@@ -40456,7 +40587,7 @@ html body {
                   style: {
                     position: "absolute",
                     inset: 0,
-                    background: "rgba(12,30,50,0.45)",
+                    background: "rgba(8,30,42,0.5)",
                     display: "flex",
                     flexDirection: "column",
                     gap: 12,
@@ -40465,9 +40596,9 @@ html body {
                     color: "#fff"
                   },
                   children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { style: { fontSize: 36, lineHeight: 1 }, children: "\u{1F3C3}" }),
-                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { style: { fontSize: 16, fontWeight: 800 }, children: i18n.text("game.hurdle.idle") }),
-                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(PrimaryBtn, { onClick: start, children: i18n.text("game.hurdle.start") })
+                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { style: { fontSize: 36, lineHeight: 1 }, children: "\u{1F41F}" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { style: { fontSize: 16, fontWeight: 800 }, children: i18n.text("game.carp.idle") }),
+                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(PrimaryBtn, { onClick: start, children: i18n.text("game.carp.start") })
                   ]
                 }
               ),
@@ -40486,8 +40617,8 @@ html body {
                     color: "#fff"
                   },
                   children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { style: { fontSize: 22, fontWeight: 800 }, children: i18n.text("game.hurdle.paused") }),
-                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { style: { fontSize: 13, opacity: 0.85 }, children: i18n.text("game.hurdle.resumeTip") })
+                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { style: { fontSize: 22, fontWeight: 800 }, children: i18n.text("game.carp.paused") }),
+                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { style: { fontSize: 13, opacity: 0.85 }, children: i18n.text("game.carp.resumeTip") })
                   ]
                 }
               ),
@@ -40497,7 +40628,7 @@ html body {
                   style: {
                     position: "absolute",
                     inset: 0,
-                    background: "rgba(10,14,20,0.55)",
+                    background: "rgba(8,22,30,0.58)",
                     display: "flex",
                     flexDirection: "column",
                     gap: 12,
@@ -40506,18 +40637,17 @@ html body {
                     color: "#fff"
                   },
                   children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { style: { fontSize: 24, fontWeight: 800 }, children: i18n.text("game.hurdle.over") }),
-                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { style: { fontSize: 14, opacity: 0.92 }, children: i18n.text("game.hurdle.overDetail", {
+                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { style: { fontSize: 24, fontWeight: 800 }, children: i18n.text("game.carp.over") }),
+                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { style: { fontSize: 14, opacity: 0.92 }, children: i18n.text("game.carp.overDetail", {
                       score: ui.score,
-                      cleared: ui.cleared,
-                      dist: ui.dist
+                      gates: ui.gates
                     }) }),
                     /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { style: { fontSize: 13, opacity: 0.8 }, children: [
-                      i18n.text("game.hurdle.best"),
+                      i18n.text("game.carp.best"),
                       ": ",
                       ui.best
                     ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(PrimaryBtn, { onClick: start, children: i18n.text("game.hurdle.again") })
+                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(PrimaryBtn, { onClick: start, children: i18n.text("game.carp.again") })
                   ]
                 }
               )
@@ -40527,9 +40657,9 @@ html body {
       }
     );
   };
-  var HurdleGame_default = HurdleGame;
+  var CarpGateGame_default = CarpGateGame;
 
-  // hurdle-preview.tsx
+  // preview/carp-preview.tsx
   var import_jsx_runtime4 = __toESM(require_jsx_runtime());
   var mockSdk = {
     ui: {
@@ -40549,57 +40679,27 @@ html body {
   var rootEl = document.getElementById("root");
   if (rootEl) {
     (0, import_client2.createRoot)(rootEl).render(
-      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(ThemeShell_default, { sdk: mockSdk, padding: 20, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(HurdleGame_default, { sdk: mockSdk }) })
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(ThemeShell_default, { sdk: mockSdk, padding: 20, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(CarpGateGame_default, { sdk: mockSdk }) })
     );
   }
-  setTimeout(() => {
-    window.dispatchEvent(new KeyboardEvent("keydown", { key: " " }));
-    window.dispatchEvent(new KeyboardEvent("keyup", { key: " " }));
-  }, 600);
-  var RUN = 92;
   function press(releaseAfter) {
     window.dispatchEvent(new KeyboardEvent("keydown", { key: " " }));
     setTimeout(() => {
       window.dispatchEvent(new KeyboardEvent("keyup", { key: " " }));
     }, releaseAfter);
   }
-  setInterval(() => {
-    const c = document.querySelector("canvas");
-    if (!c) return;
-    const ctx2 = c.getContext("2d");
-    let d;
-    try {
-      d = ctx2.getImageData(0, 0, c.width, c.height).data;
-    } catch {
-      return;
+  setTimeout(() => {
+    press(180);
+  }, 600);
+  function loop() {
+    const hold = 140 + Math.random() * 200;
+    press(hold);
+    if (Math.random() < 0.25) {
+      setTimeout(() => press(40), hold + 240);
     }
-    const W2 = c.width;
-    let nearX = -1;
-    let nearY = -1;
-    outer: for (let x = RUN + 14; x < RUN + 300; x++) {
-      for (let y = 150; y < 250; y++) {
-        const i = (y * W2 + x) * 4;
-        if (d[i] > 225 && d[i] - d[i + 1] > 145 && d[i] - d[i + 2] > 145) {
-          nearX = x;
-          nearY = y;
-          break outer;
-        }
-      }
-    }
-    if (nearX < 0) return;
-    const hip = (188 * W2 + RUN) * 4;
-    const inAir = !(d[hip] > 180 && d[hip] - d[hip + 1] > 60);
-    const dist = nearX - RUN;
-    const height = 268 - (nearY + 3);
-    if (inAir) {
-      if (dist < 70 && dist > 12) press(50);
-      return;
-    }
-    if (dist >= 60 && dist <= 150) {
-      if (height > 78) press(240);
-      else press(50);
-    }
-  }, 40);
+    setTimeout(loop, 320 + Math.random() * 520);
+  }
+  setTimeout(loop, 1600);
 })();
 /*! Bundled license information:
 

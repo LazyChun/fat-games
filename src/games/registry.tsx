@@ -39,6 +39,7 @@ import {
   IconPig,
   IconDetective,
   IconWukong,
+  IconCarp,
 } from "./gameIcons";
 
 import Game2048 from "./Game2048";
@@ -69,6 +70,7 @@ import CatDogGame from "./CatDogGame";
 import PigLookoutGame from "./PigLookoutGame";
 import DetectiveTyperGame from "./DetectiveTyperGame";
 import WukongGame from "./WukongGame";
+import CarpGateGame from "./CarpGateGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -400,6 +402,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.casual",
     icon: IconWukong,
     component: WukongGame,
+  },
+  {
+    id: "carp",
+    title: "鲤鱼跳龙门",
+    desc: "逆流而上，蓄力跃起，穿过一道道龙门",
+    category: "休闲",
+    titleKey: "game.carp.title",
+    descKey: "game.carp.desc",
+    categoryKey: "category.casual",
+    icon: IconCarp,
+    component: CarpGateGame,
   },
   {
     id: "scores",

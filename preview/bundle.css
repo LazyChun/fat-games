@@ -1,4 +1,4 @@
-/* ../src/games/gameAnimations.less */
+/* src/games/gameAnimations.less */
 :global {
   @keyframes gs-stage-in {
     from {
@@ -112,6 +112,22 @@
       transform: scale(1);
     }
   }
+  @keyframes gs-flesh-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes gs-wrong-flash {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
 }
 :global .gs-stage-in {
   animation: gs-stage-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -140,4 +156,10 @@
 }
 :global .gs-win-in {
   animation: gs-win-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+:global .gs-flesh-in {
+  animation: gs-flesh-in 0.42s ease both;
+}
+:global .gs-wrong-flash {
+  animation: gs-wrong-flash 0.35s ease-out both;
 }

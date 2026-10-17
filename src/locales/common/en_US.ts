@@ -599,6 +599,32 @@ export default {
   "game.wukong.help":
     "Controls: A/D or ←/→ move, W/↑/Space jump (double jump allowed); J staff strike, K spinning staff dance (costs 35 Qi, area attack). Soldiers slash up close, generals hit hard, archers throw spears from range; higher combos multiply your score, Qi regenerates over time. Lose all HP and the havoc ends!",
 
+  "game.carp.title": "Carp Leaps the Dragon Gate",
+  "game.carp.desc": "Leap upstream and pass through the dragon gates",
+  "game.carp.score": "Score",
+  "game.carp.gates": "Gates",
+  "game.carp.combo": "Combo",
+  "game.carp.lives": "Lives",
+  "game.carp.best": "Best",
+  "game.carp.start": "Start",
+  "game.carp.restart": "Restart",
+  "game.carp.pause": "Pause",
+  "game.carp.resume": "Resume",
+  "game.carp.again": "Play Again",
+  "game.carp.idle":
+    "Hold to charge, release to leap; tap once mid-air for a tail-flip. Leap up through the gates!",
+  "game.carp.paused": "Paused",
+  "game.carp.resumeTip": "Press P or click \"Resume\"",
+  "game.carp.over": "Game Over",
+  "game.carp.overDetail": "Score {score} · {gates} gates cleared",
+  "game.carp.swept": "Washed away!",
+  "game.carp.hitGate": "Hit the gate!",
+  "game.carp.hitRock": "Hit a rock!",
+  "game.carp.gatePass": "Through the gate!",
+  "game.carp.speedUp": "Current speeding up!",
+  "game.carp.help":
+    "Controls: hold Space / ↑ / W or press & hold the canvas to charge, release to leap (auto-leap at full charge); tap once more mid-air for a tail-flip jump. Being washed away, hitting a gate beam or a rock costs a life. Pass through the red gates to score big — the higher the combo, the higher the multiplier. P pause, R restart.",
+
   "game.scores.total": "Total Records",
   "game.scores.games": "Game Types",
   "game.scores.recordsSuffix": "",

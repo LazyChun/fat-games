@@ -422,3 +422,24 @@ export const IconWukong: React.FC<GameIconProps> = (props) => (
     <path d="M10.8 15.4 Q12 16.2 13.2 15.4" strokeWidth={1.4} />
   </svg>
 );
+
+/** 鲤鱼跳龙门：跃起的鲤鱼 + 龙门拱门（立柱 + 顶拱 + 水面） */
+export const IconCarp: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    {/* 龙门：立柱 + 顶拱 */}
+    <path d="M6.2 19.4 V11.6 M17.8 19.4 V11.6" />
+    <path d="M6.2 11.6 Q12 5.6 17.8 11.6" />
+    {/* 水面波浪 */}
+    <path d="M2.6 19.4 H21.4" strokeDasharray="3 2.2" opacity="0.6" />
+    {/* 跃起的鲤鱼（右上方） */}
+    <ellipse
+      cx="15"
+      cy="8.4"
+      rx="3.6"
+      ry="2.1"
+      transform="rotate(-32 15 8.4)"
+    />
+    <path d="M12.4 9.9 L9.4 8.4 L10.2 11 Z" />
+    <circle cx="17.4" cy="7" r="0.65" fill="currentColor" stroke="none" />
+  </svg>
+);
