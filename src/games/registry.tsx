@@ -40,6 +40,7 @@ import {
   IconDetective,
   IconWukong,
   IconCarp,
+  IconRacing,
 } from "./gameIcons";
 
 import Game2048 from "./Game2048";
@@ -71,6 +72,7 @@ import PigLookoutGame from "./PigLookoutGame";
 import DetectiveTyperGame from "./DetectiveTyperGame";
 import WukongGame from "./WukongGame";
 import CarpGateGame from "./CarpGateGame";
+import RacingGame from "./RacingGame";
 import ScoresView from "./ScoresView";
 
 export type GameCategory = "休闲" | "益智" | "记录";
@@ -413,6 +415,17 @@ export const GAMES: GameDef[] = [
     categoryKey: "category.casual",
     icon: IconCarp,
     component: CarpGateGame,
+  },
+  {
+    id: "racing",
+    title: "赛车竞速",
+    desc: "驾驶赛车绕场竞速，三圈跑出最高平均速度",
+    category: "休闲",
+    titleKey: "game.racing.title",
+    descKey: "game.racing.desc",
+    categoryKey: "category.casual",
+    icon: IconRacing,
+    component: RacingGame,
   },
   {
     id: "scores",

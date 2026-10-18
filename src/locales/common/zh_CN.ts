@@ -624,6 +624,28 @@ export default {
   "game.carp.help":
     "操作：按住 空格 / ↑ / W 或按住画面蓄力（悬浮），松开一跃而起，蓄满自动跃起；空中可再按一次摆尾腾跃。被浪冲走、撞上龙门横梁或礁石都会扣一条命；穿过红色龙门得分加倍（连击越高倍率越高）。P 暂停，R 重开。",
 
+  "game.racing.title": "赛车竞速",
+  "game.racing.desc": "驾驶赛车绕场竞速，三圈跑出最高平均速度",
+  "game.racing.speed": "速度",
+  "game.racing.lap": "圈数",
+  "game.racing.time": "用时",
+  "game.racing.score": "得分",
+  "game.racing.avgSpeed": "平均速度",
+  "game.racing.distance": "赛道全长",
+  "game.racing.bestLap": "最佳圈速",
+  "game.racing.best": "最佳成绩",
+  "game.racing.start": "开始",
+  "game.racing.restart": "重新开始",
+  "game.racing.resume": "继续",
+  "game.racing.again": "再来一局",
+  "game.racing.idle": "按 ↑ 出发 · ←→ 转向 · 跑完 {laps} 圈",
+  "game.racing.paused": "已暂停",
+  "game.racing.resumeTip": "按 P 或点击「继续」继续比赛",
+  "game.racing.finish": "比赛完成",
+  "game.racing.lapDone": "第 {lap} 圈完成",
+  "game.racing.help":
+    "操作：↑/W 油门，↓/S 刹车（可倒车），←/→/A/D 转向；过弯速度太快会被离心甩出赛道，压上草地明显减速，紧贴路肩走最稳。避开对手车，撞上会顿挫减速。跑完 {laps} 圈即完成，用时越短、平均速度越高成绩越好。P 暂停，R 重新开始。",
+
   "game.scores.total": "总记录数",  "game.scores.games": "游戏种类",
   "game.scores.recordsSuffix": "条",
   "game.scores.title2": "成绩榜",

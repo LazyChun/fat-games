@@ -443,3 +443,25 @@ export const IconCarp: React.FC<GameIconProps> = (props) => (
     <circle cx="17.4" cy="7" r="0.65" fill="currentColor" stroke="none" />
   </svg>
 );
+
+/** 赛车竞速：俯视赛车（车身 + 驾驶舱 + 四轮 + 尾翼）+ 终点格纹旗 */
+export const IconRacing: React.FC<GameIconProps> = (props) => (
+  <svg {...svgProps(props)}>
+    {/* 四轮（露出车身外） */}
+    <rect x="6" y="5.2" width="3.1" height="5.2" rx="1" />
+    <rect x="14.9" y="5.2" width="3.1" height="5.2" rx="1" />
+    <rect x="6" y="13.6" width="3.1" height="5.2" rx="1" />
+    <rect x="14.9" y="13.6" width="3.1" height="5.2" rx="1" />
+    {/* 车身 */}
+    <path d="M7.6 4.6 Q12 3 16.4 4.6 L17 9.8 Q12 11.6 7 9.8 Z" />
+    {/* 驾驶舱 */}
+    <path d="M9.2 6.4 Q12 5.4 14.8 6.4 L15.2 8.8 Q12 9.8 8.8 8.8 Z" />
+    {/* 尾翼 */}
+    <path d="M6.4 18.2 H17.6" />
+    {/* 尾灯 */}
+    <path d="M8.2 18.6 H10.4 M13.6 18.6 H15.8" strokeWidth={1.3} />
+    {/* 终点格纹旗（车尾右上方） */}
+    <path d="M18.6 6.4 L19.8 4.2 L21 6.4 L19.8 8.6 Z" strokeDasharray="1.3 1.1" />
+    <path d="M18.6 3.8 V1.4" />
+  </svg>
+);

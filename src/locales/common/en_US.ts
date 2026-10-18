@@ -625,6 +625,28 @@ export default {
   "game.carp.help":
     "Controls: hold Space / ↑ / W or press & hold the canvas to charge, release to leap (auto-leap at full charge); tap once more mid-air for a tail-flip jump. Being washed away, hitting a gate beam or a rock costs a life. Pass through the red gates to score big — the higher the combo, the higher the multiplier. P pause, R restart.",
 
+  "game.racing.title": "Turbo Rush",
+  "game.racing.desc": "Outrun rival racers for 3 laps at your highest average speed",
+  "game.racing.speed": "Speed",
+  "game.racing.lap": "Lap",
+  "game.racing.time": "Time",
+  "game.racing.score": "Score",
+  "game.racing.avgSpeed": "Avg Speed",
+  "game.racing.distance": "Track Length",
+  "game.racing.bestLap": "Best Lap",
+  "game.racing.best": "Best Score",
+  "game.racing.start": "Start",
+  "game.racing.restart": "Restart",
+  "game.racing.resume": "Resume",
+  "game.racing.again": "Race Again",
+  "game.racing.idle": "Press ↑ to go · ←→ to steer · {laps} laps to finish",
+  "game.racing.paused": "Paused",
+  "game.racing.resumeTip": "Press P or click “Resume” to keep racing",
+  "game.racing.finish": "Race Finished",
+  "game.racing.lapDone": "Lap {lap} cleared",
+  "game.racing.help":
+    "Controls: ↑/W throttle, ↓/S brake (reverse allowed), ←/→/A/D steer. Cornering too fast pulls you wide by centrifugal force; hitting the grass slows you down hard — hugging the racing line is safest. Avoid rival cars, a collision causes a heavy speed drop. Finish {laps} laps; the shorter your total time, the higher your average speed and score. P pause, R restart.",
+
   "game.scores.total": "Total Records",
   "game.scores.games": "Game Types",
   "game.scores.recordsSuffix": "",
