@@ -12,7 +12,7 @@
  * 其它贡献点：
  *   - 路由页注册（供宿主面包屑 / 全局导航识别）
  *   - 全局搜索注册（每个游戏注册为可搜索项，宿主全局搜索可直达）
- *   - 页脚状态、设置页
+ *   - 设置页
  *   - 命令：fat-games.ping / fat-games.openGame
  *   - 本插件页激活时隐藏右侧次侧栏与底部面板，让工作区更宽
  */
@@ -93,24 +93,7 @@ export async function activate(sdk: FatNotesPluginSDK): Promise<void> {
     );
   }
 
-  // 5. 页脚状态项（显示当前游戏）
-  safeRegister("footerItem", () =>
-    sdk.contributions.registerFooterItem({
-      id: "fat-games.footer",
-      align: "right",
-      render: () => {
-        const preferred = getPreferredGameId();
-        const game = GAMES.find((g) => g.id === preferred);
-        return React.createElement(
-          "span",
-          { style: { opacity: 0.75 }, title: "fat-games 游戏箱" },
-          `[fat-games] ${game ? game.title : "ready"}`,
-        );
-      },
-    }),
-  );
-
-  // 5.5 全局搜索注册：每个游戏注册为一个搜索项（宿主全局搜索可直达）
+  // 5. 全局搜索注册：每个游戏注册为一个搜索项（宿主全局搜索可直达）
   safeRegister("searchProvider", () =>
     sdk.contributions.registerSearchProvider({
       id: "fat-games.search",

@@ -11,7 +11,7 @@
     "activityBar": true,
     "primarySidebar": true,
     "panel": false,
-    "footer": true,
+    "footer": false,
     "routes": true,
     "widgetTypes": true
   },

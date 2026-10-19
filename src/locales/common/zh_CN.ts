@@ -17,7 +17,6 @@ export default {
   "games.search.count": "共 {count} 个游戏",
   "games.empty": "没有匹配的游戏",
   "games.loading": "正在打开游戏…",
-  "games.footer.ready": "ready",
   "games.settings.title": "fat-games 游戏箱",
   "games.settings.desc":
     "共内置 {count} 个休闲游戏。左侧菜单选择游戏，右侧工作区开始游玩；游戏成绩会自动记录到排行榜。",

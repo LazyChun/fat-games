@@ -17,7 +17,6 @@ export default {
   "games.search.count": "{count} games total",
   "games.empty": "No matching games",
   "games.loading": "Opening game…",
-  "games.footer.ready": "ready",
   "games.settings.title": "fat-games Game Box",
   "games.settings.desc":
     "{count} casual games built in. Pick a game from the left menu and start playing; scores are automatically recorded to the leaderboard.",
