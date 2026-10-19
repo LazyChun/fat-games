@@ -17,6 +17,49 @@ import type { FatNotesPluginSDK } from "fat-notes-sdk";
 import { GAMES } from "./games/registry";
 import { normalizeGameSwitcherConf } from "./GameSwitcherBlock";
 
+const PLAYABLE_GAMES = GAMES.filter((g) => g.id !== "scores");
+
+/** 按分类分组，打开下拉时能看到靠后的游戏 */
+function buildGameOptions(games: typeof PLAYABLE_GAMES) {
+  const groups: { label: string; options: { value: string; label: string }[] }[] =
+    [];
+  const index = new Map<string, number>();
+  for (const game of games) {
+    let at = index.get(game.category);
+    if (at === undefined) {
+      at = groups.length;
+      index.set(game.category, at);
+      groups.push({ label: game.category, options: [] });
+    }
+    groups[at].options.push({ value: game.id, label: game.title });
+  }
+  return groups;
+}
+
+/**
+ * antd 多选在未指定 optionFilterProp 时按 option.value（游戏 id）过滤。
+ * 输入「贪吃蛇」对不上 id「snake」，所以这里同时匹配标题和 id。
+ */
+function filterGameOption(
+  input: string,
+  option?: { label?: unknown; value?: unknown },
+) {
+  const q = input.trim().toLowerCase();
+  if (!q) return true;
+  const label = typeof option?.label === "string" ? option.label.toLowerCase() : "";
+  const value = option?.value == null ? "" : String(option.value).toLowerCase();
+  return label.includes(q) || value.includes(q);
+}
+
+const gameSelectPopup = {
+  showSearch: true,
+  filterOption: filterGameOption,
+  listHeight: 360,
+  virtual: false,
+  popupMatchSelectWidth: false,
+  getPopupContainer: () => document.body,
+};
+
 // 宿主编辑中的卡片（仅使用已知的 blockEdit 片段）
 interface HostBlockEditState {
   blockEdit?: {
@@ -61,8 +104,12 @@ const GameSwitcherDisplayConfig: React.FC<Props> = ({ sdk }) => {
   const selectedIds: string[] =
     Array.isArray(conf.games) && conf.games.length
       ? conf.games
-      : GAMES.filter((g) => g.id !== "scores").map((g) => g.id);
+      : PLAYABLE_GAMES.map((g) => g.id);
   const showSwitch = conf.showSwitch !== false;
+  const allGameOptions = buildGameOptions(PLAYABLE_GAMES);
+  const selectedGameOptions = buildGameOptions(
+    PLAYABLE_GAMES.filter((g) => selectedIds.includes(g.id)),
+  );
 
   // 宿主公共配置组件（外框等）；独立调试等场景可能缺失，缺失时降级为纯私有配置
   const common = (
@@ -131,10 +178,8 @@ const GameSwitcherDisplayConfig: React.FC<Props> = ({ sdk }) => {
           placeholder="不选时默认全部可玩游戏"
           value={Array.isArray(conf.games) ? conf.games : []}
           onChange={(v) => update("games", v)}
-          options={GAMES.filter((g) => g.id !== "scores").map((g) => ({
-            value: g.id,
-            label: g.title,
-          }))}
+          options={allGameOptions}
+          {...gameSelectPopup}
         />,
       )}
       {row(
@@ -144,10 +189,8 @@ const GameSwitcherDisplayConfig: React.FC<Props> = ({ sdk }) => {
           style={{ minWidth: 160, maxWidth: 280 }}
           value={conf.defaultGame || selectedIds[0]}
           onChange={(v) => update("defaultGame", v)}
-          options={GAMES.filter((g) => selectedIds.includes(g.id)).map((g) => ({
-            value: g.id,
-            label: g.title,
-          }))}
+          options={selectedGameOptions}
+          {...gameSelectPopup}
         />,
       )}
     </div>

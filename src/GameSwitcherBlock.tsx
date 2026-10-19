@@ -106,9 +106,23 @@ const GameSwitcherBlock: React.FC<Props> = ({ config, sdk }) => {
       return (
         <Select
           size="small"
+          showSearch
+          virtual={false}
+          listHeight={360}
+          popupMatchSelectWidth={false}
+          getPopupContainer={() => document.body}
           style={{ width: "100%" }}
           value={active?.id}
           onChange={(v) => setActiveId(v as string)}
+          filterOption={(input, option) => {
+            const q = input.trim().toLowerCase();
+            if (!q) return true;
+            const label =
+              typeof option?.label === "string" ? option.label.toLowerCase() : "";
+            const value =
+              option?.value == null ? "" : String(option.value).toLowerCase();
+            return label.includes(q) || value.includes(q);
+          }}
           options={available.map((g) => ({
             value: g.id,
             label: g.title,
