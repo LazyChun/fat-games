@@ -203,6 +203,8 @@ export async function activate(sdk: FatNotesPluginSDK): Promise<void> {
       category: "other",
       index: 101,
       defaultSize: { w: 6, h: 30, minW: 4, minH: 16 },
+      // 游戏卡片不依赖宿主查询配置，隐藏下方数据区
+      dataConfig: false,
       // 新建卡片写入 options 的默认值（宿主会深拷贝）
       defaultOptions: {
         gameSwitcher: {

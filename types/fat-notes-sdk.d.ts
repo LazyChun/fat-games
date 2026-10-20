@@ -216,6 +216,15 @@ export interface BlockRenderProps {
   onShowActions?: (params: BlockActionShowParams) => void;
 }
 
+/**
+ * 组件配置抽屉下方「数据/查询」区域的自定义渲染。
+ * 与 `BlockTypeDef.dataConfig === false`（隐藏）互斥：有 render 时替换宿主默认查询面板。
+ */
+export interface BlockDataConfigDef {
+  /** 渲染于配置抽屉预览区下方，替代默认 DataConfig */
+  render: () => ReactNode;
+}
+
 export interface BlockTypeDef {
   type: string;
   title: string;
@@ -240,6 +249,13 @@ export interface BlockTypeDef {
   defaultOptions?: Record<string, unknown>;
   /** 新建卡片时合并进 commonOptions 的默认值，调用方会深拷贝。 */
   defaultCommonOptions?: Record<string, unknown>;
+  /**
+   * 组件配置抽屉下方「数据/查询」区域：
+   * - 未设置：使用宿主默认查询配置
+   * - false：隐藏该区域
+   * - { render }：用插件自定义内容替换默认查询配置
+   */
+  dataConfig?: false | BlockDataConfigDef;
   /**
    * Event type ids shown in the event editor.
    * Built-in ids: relate, drill, update, filter, delete, linkTo.
